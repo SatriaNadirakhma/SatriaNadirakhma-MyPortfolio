@@ -10,14 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@coreui/coreui": "^5.4.3",
     "@coreui/icons": "^3.0.1",
-    "@coreui/icons-react": "^2.3.0",
-    "@coreui/react": "^5.9.1",
     "@tailwindcss/vite": "^4.1.16",
+    "autoprefixer": "^10.4.21",
+    "lucide-react": "^0.552.0",
+    "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.16"
+    "react-router-dom": "^7.9.5",
+    "tailwindcss": "^4.1.16",
+    "toaster": "^0.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
