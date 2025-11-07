@@ -1,6 +1,10 @@
 import { Home, User, Users, GraduationCap, Star, MessageCircle, BarChart3 } from "lucide-react";
 import { useState, useEffect } from "react";
 
+function cn(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
+
 const navItems = [
   { icon: Home, href: "#home", label: "Home" },
   { icon: User, href: "#profile", label: "Profile" },
