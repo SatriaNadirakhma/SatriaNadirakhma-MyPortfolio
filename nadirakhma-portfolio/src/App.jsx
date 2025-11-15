@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import Sidebar from './components/Sidebar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
+import Connect from './components/Connect';
+import Footer from './components/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex min-h-screen bg-indigo-950 text-gray-100">
+      {/* Sidebar - Tetap di kiri */}
+      <Sidebar />
+
+      {/* Konten Utama - Bisa di-scroll */}
+      {/* Kita beri margin kiri (ml-20) seukuran lebar sidebar 
+        agar konten tidak tertimpa 
+      */ }
+      <main className="flex-1 overflow-y-auto p-8 md:p-12 ml-20">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Connect />
+        <Footer />
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
