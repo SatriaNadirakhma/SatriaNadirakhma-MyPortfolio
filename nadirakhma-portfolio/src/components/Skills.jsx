@@ -50,7 +50,7 @@ const SkillSection = ({ title, icon: Icon, children }) => {
 const Skills = () => {
   return (
     <section id="skills" className="py-20">
-      <h2 className="text-4xl font-bold text-center mb-12 text-white">
+      <h2 className="text-6xl md:text-8xl font-stylish text-center mb-12 text-white">
         My Skills
       </h2>
       <div className="max-w-3xl mx-auto flex flex-col gap-6">

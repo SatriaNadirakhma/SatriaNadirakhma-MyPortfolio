@@ -11,19 +11,19 @@ import {
 
 // ❗ Ganti link '#' dengan URL Anda
 const socialLinks = [
-  { icon: FaGithub, href: "#", name: "GitHub" },
-  { icon: FaInstagram, href: "#", name: "Instagram" },
-  { icon: FaLinkedin, href: "#", name: "LinkedIn" },
-  { icon: FaDribbble, href: "#", name: "Dribbble" },
-  { icon: FaBehance, href: "#", name: "Behance" },
-  { icon: FaWhatsapp, href: "#", name: "WhatsApp" },
+  { icon: FaGithub, href: "https://github.com/SatriaNadirakhma", name: "GitHub" },
+  { icon: FaInstagram, href: "https://www.instagram.com/nadirakhma.svg/", name: "Instagram" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/satria-rakhmadani/", name: "LinkedIn" },
+  { icon: FaDribbble, href: "https://dribbble.com/Rakhmadani", name: "Dribbble" },
+  { icon: FaBehance, href: "https://www.behance.net/rakhmanadi2005", name: "Behance" },
+  { icon: FaWhatsapp, href: "https://wa.me/qr/QZZFNQE72CGXP1", name: "WhatsApp" },
 ];
 
 const Connect = () => {
   return (
     <section id="connect" className="py-20 text-center">
-      <h2 className="text-4xl font-bold text-white mb-4">Let's Connect</h2>
-      <p className="text-xl text-indigo-300 mb-10 max-w-lg mx-auto">
+      <h2 className="text-6xl md:text-8xl font-stylish text-white mb-4">Let's Connect</h2>
+      <p className="text-lg font-modern text-indigo-300 mb-10 max-w-lg mx-auto">
         Saya sedang mencari peluang baru. Jangan ragu untuk menghubungi saya!
       </p>
 

@@ -3,7 +3,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="text-center py-8 mt-12 border-t border-indigo-800/50">
-      <p className="text-indigo-400 text-sm">
+      <p className="text-indigo-400 text-sm font-modern">
         &copy; {currentYear} Satria Rakhmadani. All Rights Reserved.
       </p>
     </footer>
