@@ -1,60 +1,75 @@
-import React, { useState } from 'react';
-import ProjectGenesis from '../assets/project-genesis.jpg';
-import ProjectOther from '../assets/project-other.jpg';
-import { Code, Palette, ArrowRight } from 'lucide-react';
+import React, { useState } from "react";
+import ProjectGenesis from "../assets/project-genesis.jpg";
+import ProjectOther from "../assets/project-other.jpg";
+import { Code, Palette, ArrowRight } from "lucide-react";
 
 const projects = {
   development: [
     {
       title: "K3 Siantar Top",
-      description: "Developing a landing page web-based application project for K3 (Keselamatan dan Kesehatan Kerja) for PT Siantar Top. ",
+      description:
+        "Developing a landing page web-based application project for K3 (Keselamatan dan Kesehatan Kerja) for PT Siantar Top. ",
       image: ProjectOther,
       link: "https://k3-phi.vercel.app/",
       icon: Code,
-      color: 'from-emerald-700/80 to-emerald-900/60'
+      color: "from-emerald-700/80 to-emerald-900/60",
     },
     {
-      title: "Sistem Informasi Pendaftaran & Integrasi TOEIC Polinema (SIPINTA)",
-      description: "Developing a web-based system designed to simplify the TOEIC registration process for Polinema students while integrating user access across the entire academic community.",
+      title:
+        "Sistem Informasi Pendaftaran & Integrasi TOEIC Polinema (SIPINTA)",
+      description:
+        "Developing a web-based system designed to simplify the TOEIC registration process for Polinema students while integrating user access across the entire academic community.",
       image: ProjectOther,
       link: "https://github.com/SatriaNadirakhma/PBLSEM4",
       icon: Code,
-      color: 'from-blue-700 to-blue-900/80'
+      color: "from-blue-700 to-blue-900/80",
     },
     {
       title: "Sistem Informasi Tata Tertib",
-      description: "Developing a digital platform designed to simplify and improve campus regulation management. The system allows students, lecturers, and staff to access disciplinary information quickly and transparently. ",
+      description:
+        "Developing a digital platform designed to simplify and improve campus regulation management. The system allows students, lecturers, and staff to access disciplinary information quickly and transparently. ",
       image: ProjectOther,
       link: "https://github.com/aldofebryn/project",
       icon: Code,
-      color: 'from-yellow-700/80 to-yellow-900/60'
+      color: "from-yellow-700/80 to-yellow-900/60",
     },
     {
       title: "Sistem Ekspedisi (Terminal)",
-      description: "Developing a Java-based expedition management system operated via terminal to simulate the workflow of delivery services in Indonesia. ",
+      description:
+        "Developing a Java-based expedition management system operated via terminal to simulate the workflow of delivery services in Indonesia. ",
       image: ProjectOther,
       link: "https://github.com/zidnafaz/Sistem-Ekspedisi",
       icon: Code,
-      color: 'from-red-700/80 to-gray-500'
-    }
+      color: "from-red-700/80 to-gray-500",
+    },
   ],
   graphicDesign: [
     {
       title: "Oranji Studio x HMTI Polinema",
-      description: "Collaboration between Oranji Studio and the Information Technology Student Association (HMTI) to design and develop HMTI merchandise products",
+      description:
+        "Collaboration between Oranji Studio and the Information Technology Student Association (HMTI) to design and develop HMTI merchandise products",
       image: ProjectGenesis,
       link: "https://www.instagram.com/p/DDTd64kSFEY/?img_index=1",
       icon: Palette,
-      color: 'from-pink-700/80 to-pink-900/60'
-    }
-  ]
+      color: "from-pink-700/80 to-pink-900/60",
+    },
+  ],
 };
 
-const ProjectCard = ({ title, description, image, link, icon: Icon, color }) => {
+const ProjectCard = ({
+  title,
+  description,
+  image,
+  link,
+  icon: Icon,
+  color,
+}) => {
   const [flipped, setFlipped] = useState(false);
 
   // Teks panjang untuk bagian belakang kartu
-  const longText = Array.from({ length: 1 }).map(() => description).join(" ");
+  const longText = Array.from({ length: 1 })
+    .map(() => description)
+    .join(" ");
 
   return (
     <div className="w-[28rem] h-[26rem] perspective">
@@ -69,10 +84,10 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, color }) => 
           className="cardFace cardFront absolute inset-0 rounded-2xl overflow-hidden"
           aria-hidden={flipped ? "true" : "false"}
         >
-          <img 
-            src={image} 
-            alt={title} 
-            className="absolute inset-0 w-full h-full object-cover" 
+          <img
+            src={image}
+            alt={title}
+            className="absolute inset-0 w-full h-full object-cover"
           />
           <div
             className={`absolute inset-0 bg-gradient-to-t ${color} opacity-90`}
@@ -87,7 +102,9 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, color }) => 
           </div>
 
           <div className="absolute bottom-6 left-6 right-6 text-white flex flex-col gap-2">
-            <h3 className="text-3xl font-modern font-bold drop-shadow-sm">{title}</h3>
+            <h3 className="text-3xl font-modern font-bold drop-shadow-sm">
+              {title}
+            </h3>
             <p className="text-base font-modern text-white/90 line-clamp-3 leading-relaxed mt-2">
               {description}
             </p>
@@ -176,7 +193,9 @@ const Projects = () => {
 
         {/* Development Section */}
         <div className="mb-16">
-          <h3 className="text-4xl font-stylish text-white mb-8 pl-2">Development</h3>
+          <h3 className="text-4xl font-stylish text-white mb-8 pl-2">
+            Development
+          </h3>
           <div className="flex gap-6 overflow-x-auto no-scrollbar px-2 py-4 snap-x snap-mandatory">
             {projects.development.map((project, i) => (
               <div key={`dev-${i}`} className="snap-start">
@@ -188,7 +207,9 @@ const Projects = () => {
 
         {/* Graphic Design Section */}
         <div>
-          <h3 className="text-4xl font-stylish text-white mb-8 pl-2">Graphic Design</h3>
+          <h3 className="text-4xl font-stylish text-white mb-8 pl-2">
+            Graphic Design
+          </h3>
           <div className="flex gap-6 overflow-x-auto no-scrollbar px-2 py-4 snap-x snap-mandatory">
             {projects.graphicDesign.map((project, i) => (
               <div key={`gd-${i}`} className="snap-start">

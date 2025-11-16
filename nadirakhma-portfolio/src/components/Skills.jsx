@@ -1,8 +1,15 @@
 // src/components/Skills.jsx
-import { useState } from 'react';
-import { ChevronDown, Code, PenTool, Brain, CheckCircle } from 'lucide-react';
+import { useState } from "react";
+import { ChevronDown, Code, PenTool, Brain, CheckCircle } from "lucide-react";
 // Impor ikon skill dari react-icons
-import { FaReact, FaFigma, FaNodeJs, FaHtml5, FaCss3Alt, FaJs } from 'react-icons/fa';
+import {
+  FaReact,
+  FaFigma,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+} from "react-icons/fa";
 
 // Helper: Ikon Skill
 const SkillIcon = ({ icon: Icon, name }) => (
@@ -26,17 +33,15 @@ const SkillSection = ({ title, icon: Icon, children }) => {
           <h3 className="text-xl font-semibold text-white">{title}</h3>
         </div>
         <ChevronDown
-          className={`w-6 h-6 text-indigo-300 transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+          className={`w-6 h-6 text-indigo-300 transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
         />
       </button>
       <div
         className={`transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-screen' : 'max-h-0'
+          isOpen ? "max-h-screen" : "max-h-0"
         } overflow-hidden`}
       >
-        <div className="p-6 bg-indigo-950/50">
-          {children}
-        </div>
+        <div className="p-6 bg-indigo-950/50">{children}</div>
       </div>
     </div>
   );
@@ -45,9 +50,10 @@ const SkillSection = ({ title, icon: Icon, children }) => {
 const Skills = () => {
   return (
     <section id="skills" className="py-20">
-      <h2 className="text-4xl font-bold text-center mb-12 text-white">My Skills</h2>
+      <h2 className="text-4xl font-bold text-center mb-12 text-white">
+        My Skills
+      </h2>
       <div className="max-w-3xl mx-auto flex flex-col gap-6">
-        
         {/* Web Development */}
         <SkillSection title="Web Development" icon={Code}>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
@@ -86,7 +92,6 @@ const Skills = () => {
             </li>
           </ul>
         </SkillSection>
-
       </div>
     </section>
   );

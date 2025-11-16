@@ -1,4 +1,4 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
+import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,11 +9,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'serif': ['"Instrument Serif"', ...defaultTheme.fontFamily.serif],
-        
-        'sans': ['Inter', ...defaultTheme.fontFamily.sans],
-      }
+        serif: ['"Instrument Serif"', ...defaultTheme.fontFamily.serif],
+
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   plugins: [],
-}
+};

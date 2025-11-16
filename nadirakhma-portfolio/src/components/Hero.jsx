@@ -1,18 +1,23 @@
-import Profile1 from '../assets/profile1.jpg';
+import Profile1 from "../assets/profile1.jpg";
 
 const Hero = () => {
-  const stylishFont = "font-serif"; 
+  const stylishFont = "font-serif";
 
   return (
-    <section id="hero" className="min-h-screen flex flex-col justify-center items-center text-center py-20">
-      <div className='inline-block bg-white/80 rounded-full p-2 mb-6'>
+    <section
+      id="hero"
+      className="min-h-screen flex flex-col justify-center items-center text-center py-20"
+    >
+      <div className="inline-block bg-white/80 rounded-full p-2 mb-6">
         <div className="bg-gradient-to-r from-orange-500 to-orange-700 rounded-full px-8 py-2">
           <span className="text-white text-[28px] font-stylish font-medium">
             Nadi Rakhma
           </span>
         </div>
       </div>
-      <h1 className={`text-6xl md:text-8xl font-stylish text-white ${stylishFont} mb-10`}>
+      <h1
+        className={`text-6xl md:text-8xl font-stylish text-white ${stylishFont} mb-10`}
+      >
         This is <br /> Satria Rakhmadani.
         <br />
         Explore the work.

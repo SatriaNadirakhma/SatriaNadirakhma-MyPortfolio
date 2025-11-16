@@ -4,39 +4,51 @@ import { Building, ArrowRight } from "lucide-react";
 // ❗ Ganti dengan data pengalaman Anda
 const experiences = [
   {
-    title: 'Graphic Designer',
-    company: 'Oranji Studio',
-    date: 'May 2024 - Present',
+    title: "Graphic Designer",
+    company: "Oranji Studio",
+    date: "May 2024 - Present",
     description:
-      "Designing digital assets such as social media content, promotional materials, and brand visuals based on client and team collaboration." ,
-    image: 'https://images.unsplash.com/photo-1505238680356-667803448bb6?auto=format&fit=crop&w=1200&q=60',
-    color: 'from-orange-700/80 to-orange-900/60'
+      "Designing digital assets such as social media content, promotional materials, and brand visuals based on client and team collaboration.",
+    image:
+      "https://images.unsplash.com/photo-1505238680356-667803448bb6?auto=format&fit=crop&w=1200&q=60",
+    color: "from-orange-700/80 to-orange-900/60",
   },
   {
-    title: 'Creative Media Division Project Coordinator',
-    company: 'Information Technology Department English Community (ITDEC)',
-    date: 'Aug 2025 - Present',
+    title: "Creative Media Division Project Coordinator",
+    company: "Information Technology Department English Community (ITDEC)",
+    date: "Aug 2025 - Present",
     description:
       "Establishing communication between Creative Media teams to determine ITDEC's branding image",
-    image: 'https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60',
-    color: 'from-emerald-700/80 to-emerald-900/60'
+    image:
+      "https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60",
+    color: "from-emerald-700/80 to-emerald-900/60",
   },
   {
-    title: 'Pemimpin Redaksi (Editor-in-Chief)',
-    company: 'Lembaga Pers Mahasiswa (LPM) Kompen Polinema',
-    date: 'Mar 2025 - Present',
+    title: "Pemimpin Redaksi (Editor-in-Chief)",
+    company: "Lembaga Pers Mahasiswa (LPM) Kompen Polinema",
+    date: "Mar 2025 - Present",
     description:
-      'Lead the print media and online media division in managing campus journalistic activities, including media work program, content planning, article editing, and publication design. ',
-    image: 'https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60',
-    color: 'from-blue-700/80 to-blue-900/60'
-  }
+      "Lead the print media and online media division in managing campus journalistic activities, including media work program, content planning, article editing, and publication design. ",
+    image:
+      "https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60",
+    color: "from-blue-700/80 to-blue-900/60",
+  },
 ];
 
-const ExperienceCard = ({ title, company, date, description, image, color }) => {
+const ExperienceCard = ({
+  title,
+  company,
+  date,
+  description,
+  image,
+  color,
+}) => {
   const [flipped, setFlipped] = useState(false);
 
   // buat teks panjang (sesuaikan atau ganti dengan teks panjang asli Anda)
-  const longText = Array.from({ length: 1 }).map(() => description).join(" ");
+  const longText = Array.from({ length: 1 })
+    .map(() => description)
+    .join(" ");
 
   return (
     <div className="w-80 h-128 perspective">
@@ -52,7 +64,11 @@ const ExperienceCard = ({ title, company, date, description, image, color }) => 
           className="cardFace cardFront absolute inset-0 rounded-2xl overflow-hidden"
           aria-hidden={flipped ? "true" : "false"}
         >
-          <img src={image} alt={`${title} - ${company}`} className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={image}
+            alt={`${title} - ${company}`}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           <div
             className={`absolute inset-0 bg-gradient-to-t ${color} opacity-90`}
             style={{ mixBlendMode: "multiply" }}
@@ -66,11 +82,15 @@ const ExperienceCard = ({ title, company, date, description, image, color }) => 
           </div>
 
           <div className="absolute bottom-4 left-4 right-4 text-white flex flex-col gap-2">
-            <h3 className="text-2xl font-modern font-bold drop-shadow-sm">{title}</h3>
+            <h3 className="text-2xl font-modern font-bold drop-shadow-sm">
+              {title}
+            </h3>
             <p className="text-sm text-white/90">
               {company} • <span className="text-white/70">{date}</span>
             </p>
-            <p className="text-sm font-modern text-white/90 line-clamp-3 leading-relaxed mt-2">{description}</p>
+            <p className="text-sm font-modern text-white/90 line-clamp-3 leading-relaxed mt-2">
+              {description}
+            </p>
 
             <div className="mt-4 flex items-center justify-between gap-4">
               <button
@@ -124,8 +144,12 @@ const Experience = () => {
   return (
     <section id="experience" className="py-20 bg-000000/100">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-6xl md:text-8xl font-stylish text-white text-center mb-3">My Experience</h2>
-        <p className="text-center text-indigo-300 text-lg font-modern mb-8">Perjalanan profesional saya sejauh ini.</p>
+        <h2 className="text-6xl md:text-8xl font-stylish text-white text-center mb-3">
+          My Experience
+        </h2>
+        <p className="text-center text-indigo-300 text-lg font-modern mb-8">
+          Perjalanan profesional saya sejauh ini.
+        </p>
 
         <div className="flex gap-6 overflow-x-auto no-scrollbar px-2 py-4 snap-x snap-mandatory">
           {experiences.map((exp, i) => (

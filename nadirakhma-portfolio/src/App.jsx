@@ -1,12 +1,12 @@
 // src/App.jsx
-import Sidebar from './components/Sidebar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Connect from './components/Connect';
-import Footer from './components/Footer';
+import Sidebar from "./components/Sidebar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Connect from "./components/Connect";
+import Footer from "./components/Footer";
 
 function App() {
   return (

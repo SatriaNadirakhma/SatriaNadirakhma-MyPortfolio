@@ -1,6 +1,13 @@
 // src/components/Connect.jsx
 // Gunakan react-icons untuk ikon brand
-import { FaGithub, FaInstagram, FaLinkedin, FaDribbble, FaBehance, FaWhatsapp } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaDribbble,
+  FaBehance,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 // ❗ Ganti link '#' dengan URL Anda
 const socialLinks = [
@@ -19,7 +26,7 @@ const Connect = () => {
       <p className="text-xl text-indigo-300 mb-10 max-w-lg mx-auto">
         Saya sedang mencari peluang baru. Jangan ragu untuk menghubungi saya!
       </p>
-      
+
       <div className="flex justify-center flex-wrap gap-6 md:gap-8">
         {socialLinks.map((link, index) => (
           <a
