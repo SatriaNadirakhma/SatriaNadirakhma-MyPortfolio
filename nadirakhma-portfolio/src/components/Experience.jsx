@@ -39,7 +39,7 @@ const ExperienceCard = ({ title, company, date, description, image, color }) => 
   const longText = Array.from({ length: 1 }).map(() => description).join(" ");
 
   return (
-    <div className="w-80 h-96 perspective">
+    <div className="w-80 h-128 perspective">
       {/* inner wrapper mengontrol rotasi */}
       <div
         className={`cardInner relative w-full h-full rounded-2xl transition-transform duration-700 ${
