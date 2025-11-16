@@ -1,3 +1,5 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,7 +9,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // 'serif': ['Georgia', 'serif'],
+        'serif': ['"Instrument Serif"', ...defaultTheme.fontFamily.serif],
+        
+        'sans': ['Inter', ...defaultTheme.fontFamily.sans],
       }
     },
   },

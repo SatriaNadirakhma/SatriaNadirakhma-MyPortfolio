@@ -1,26 +1,22 @@
-// src/components/Hero.jsx
-// ❗ Impor 3 foto profil Anda dari folder assets
 import Profile1 from '../assets/profile1.jpg';
 import Profile2 from '../assets/profile2.jpg';
 import Profile3 from '../assets/profile3.jpg';
 
 const Hero = () => {
-  // Font serif stylish seperti di gambar
   const stylishFont = "font-serif"; 
 
   return (
     <section id="hero" className="min-h-screen flex flex-col justify-center items-center text-center py-20">
-      <h1 className={`text-5xl md:text-7xl font-bold text-white ${stylishFont} mb-6`}>
+      <h1 className={`text-5xl md:text-7xl font-stylish text-white ${stylishFont} mb-10`}>
         This is Satria Rakhmadani.
         <br />
         Explore the work.
       </h1>
-      <p className="text-xl md:text-2xl text-indigo-300 font-light mb-12">
+      <p className="text-xl md:text-2xl font-modern text-indigo-300 font-light mb-12">
         Graphic Designer / Front-End Developer
       </p>
 
       <div className="flex flex-col md:flex-row gap-6">
-        {/* ❗ Pastikan path gambar sudah benar */}
         <img
           src={Profile1}
           alt="Satria Rakhmadani 1"

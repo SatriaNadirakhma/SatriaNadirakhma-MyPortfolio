@@ -1,11 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "tailwindcss";
 
-/* src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Gaya dasar untuk mencocokkan desain Anda */
-/* body {
-  @apply bg-indigo-950 text-gray-100;
-} */
+@theme{
+  --font-stylish: 'Instrument Serif', serif;
+  --font-modern: 'Inter', sans-serif;
+}
