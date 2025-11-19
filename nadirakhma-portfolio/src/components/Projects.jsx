@@ -184,16 +184,17 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-000000/100">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-6xl md:text-8xl font-stylish text-white text-center mb-3">
+        <h2 className="text-6xl md:text-8xl font-stylish italic text-white text-center mb-3">
           Featured Projects
         </h2>
-        <p className="text-center text-indigo-300 text-lg font-modern mb-12">
-          Koleksi karya development dan desain grafis terbaik saya.
+        <p className="text-center text-gray-300 text-lg font-modern mb-12">
+          Collections of portfolio's best projects in development and graphic
+          design.
         </p>
 
         {/* Development Section */}
         <div className="mb-16">
-          <h3 className="text-4xl font-stylish text-white mb-8 pl-2">
+          <h3 className="text-4xl font-stylish italic text-white mb-8 pl-2">
             Development
           </h3>
           <div className="flex gap-6 overflow-x-auto no-scrollbar px-2 py-4 snap-x snap-mandatory">
@@ -207,7 +208,7 @@ const Projects = () => {
 
         {/* Graphic Design Section */}
         <div>
-          <h3 className="text-4xl font-stylish text-white mb-8 pl-2">
+          <h3 className="text-4xl font-stylish italic text-white mb-8 pl-2">
             Graphic Design
           </h3>
           <div className="flex gap-6 overflow-x-auto no-scrollbar px-2 py-4 snap-x snap-mandatory">

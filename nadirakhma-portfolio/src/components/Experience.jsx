@@ -144,14 +144,15 @@ const Experience = () => {
   return (
     <section id="experience" className="py-20 bg-000000/100">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-6xl md:text-8xl font-stylish text-white text-center mb-3">
+        <h2 className="text-6xl md:text-8xl font-stylish italic text-white text-center mb-3">
           My Experience
         </h2>
-        <p className="text-center text-indigo-300 text-lg font-modern mb-8">
-          Perjalanan profesional saya sejauh ini.
+        <p className="text-center text-gray-300 text-lg font-modern mb-8">
+          Make it through for the journey to do soft skills and hard skills
+          improvement.  
         </p>
 
-        <div className="flex gap-6 overflow-x-auto no-scrollbar px-2 py-4 snap-x snap-mandatory">
+        <div className="flex gap-6 overflow-x-auto no-scrollbar py-4 snap-x snap-mandatory">
           {experiences.map((exp, i) => (
             <div key={i} className="snap-start">
               <ExperienceCard {...exp} />
