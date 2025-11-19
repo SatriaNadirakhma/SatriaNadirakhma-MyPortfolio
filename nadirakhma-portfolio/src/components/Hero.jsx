@@ -8,7 +8,7 @@ const Hero = () => {
     <Element name="hero">
       <section
         id="hero"
-        className="relative min-h-screen flex items-center py-2 px-6 overflow-hidden"
+        className="relative min-h-screen flex items-center py-0 px-6 overflow-hidden"
       >
         {/* Main Container: Two Columns */}
         <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-16">

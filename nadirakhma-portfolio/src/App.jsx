@@ -48,15 +48,15 @@ function App() {
 
       {/* Mobile bottom nav (simple, accessible) */}
       <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-20 md:hidden bg-black/60 backdrop-blur rounded-full px-3 py-2 flex gap-4 items-center">
-        <a href="#hero" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5">Home</a>
-        <a href="#about" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5">About</a>
-        <a href="#experience" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5">Experience</a>
-        <a href="#projects" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5">Projects</a>
-        <a href="#connect" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5">Contact</a>
+        <a href="#hero" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Home</a>
+        <a href="#about" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">About</a>
+        <a href="#experience" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Experience</a>
+        <a href="#projects" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Projects</a>
+        <a href="#connect" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Contact</a>
       </nav>
 
-      <main className="relative z-10 flex-1 overflow-y-auto px-12 py-0 ml-0 md:ml-20">
-        <section id="hero" className="pt-4 md:pt-0 lg:pt-0 pb-8">
+      <main className="relative z-0 flex-1 overflow-y-auto px-20 py-0 ml-0 md:ml-0">
+        <section id="hero" className="pt- md:pt-0 lg:pt-0 pb-8">
           <Hero />
         </section>
 
@@ -64,19 +64,19 @@ function App() {
           <About />
         </section>
 
-        <section id="experience" className="pt-8 md:pt-12 pb-8">
+        <section id="experience" className="pt-16 md:pt-24 pb-8">
           <Experience />
         </section>
 
-        <section id="projects" className="pt-8 md:pt-12 pb-8">
+        <section id="projects" className="pt-16 md:pt-24 pb-8">
           <Projects />
         </section>
 
-        <section id="skills" className="pt-8 md:pt-12 pb-8">
+        <section id="skills" className="pt-16 md:pt-24 pb-8">
           <Skills />
         </section>
 
-        <section id="connect" className="pt-8 md:pt-12 pb-8">
+        <section id="connect" className="pt-16 md:pt-24 pb-8">
           <Connect />
         </section>
 
