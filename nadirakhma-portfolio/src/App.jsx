@@ -13,7 +13,7 @@ function App() {
     <div className="relative flex min-h-screen bg-black text-gray-100 overflow-hidden">
       {/* Aurora Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900"></div>
 
         {/* Aurora Layers (responsive heights) */}
         <div className="absolute top-0 left-0 right-0 h-[300px] md:h-[500px] bg-gradient-to-b from-purple-600/20 via-pink-600/10 to-transparent blur-3xl animate-aurora"></div>
@@ -55,8 +55,8 @@ function App() {
         <a href="#connect" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5">Contact</a>
       </nav>
 
-      <main className="relative z-10 flex-1 overflow-y-auto p-6 md:p-12 ml-0 md:ml-20">
-        <section id="hero" className="pt-8 md:pt-12 pb-8">
+      <main className="relative z-10 flex-1 overflow-y-auto px-12 py-0 ml-0 md:ml-20">
+        <section id="hero" className="pt-4 md:pt-0 lg:pt-0 pb-8">
           <Hero />
         </section>
 
