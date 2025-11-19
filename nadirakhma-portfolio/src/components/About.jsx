@@ -1,10 +1,9 @@
-// import Logo from "../assets/logo.png";
 import Sticker from "../assets/sticker.png";
 
 const About = () => {
   // Helper untuk teks bergaris bawah
   const HighlightText = ({ children }) => (
-    <span className="font-stylish italic relative inline-block text-orange-100">
+    <span className="font-modern font-semibold italic relative inline-block text-orange-100">
       {children}
       <span className="absolute left-0 -bottom-0 w-full h-0.5 bg-orange-100 opacity-50"></span>
     </span>
@@ -18,15 +17,6 @@ const About = () => {
         <h2 className="text-6xl md:text-8xl font-stylish text-white italic">
           About Me
         </h2>
-
-        {/* Logo */}
-        {/* <div className="flex justify-center items-center">
-          <img 
-            src={Logo} 
-            alt="Logo" 
-            className="w-full max-w-xs md:max-w-sm opacity-90 hover:opacity-100 transition-opacity duration-300" 
-          />
-        </div> */}
 
         {/* Deskripsi */}
         <p className="text-lg md:text-2xl font-modern text-gray-300 leading-relaxed">
