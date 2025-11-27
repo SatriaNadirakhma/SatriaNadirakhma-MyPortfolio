@@ -15,12 +15,12 @@ import {
 
 import { RiTailwindCssFill } from "react-icons/ri";
 
-import { 
+import {
   SiMysql,
   SiFramer,
   SiInkscape,
   SiAdobephotoshop,
-  SiAffinity
+  SiAffinity,
 } from "react-icons/si";
 
 import { FaGitAlt } from "react-icons/fa6";
@@ -44,7 +44,9 @@ const SkillSection = ({ title, icon: Icon, children }) => {
       >
         <div className="flex items-center gap-4">
           <Icon className="w-6 h-6 text-white" />
-          <h3 className="text-xl font-modern font-semibold text-white">{title}</h3>
+          <h3 className="text-xl font-modern font-semibold text-white">
+            {title}
+          </h3>
         </div>
         <ChevronDown
           className={`w-6 h-6 text-indigo-300 transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
@@ -68,7 +70,7 @@ const Skills = () => {
         My Skills
       </h2>
       <p className="text-center text-gray-300 text-lg font-modern mb-12">
-          Skills that I have acquired through learning and experience.
+        Skills that I have acquired through learning and experience.
       </p>
       <div className="max-w-3xl mx-auto flex flex-col gap-6">
         {/* Web Development */}

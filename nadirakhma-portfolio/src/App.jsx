@@ -35,7 +35,7 @@ function App() {
                               radial-gradient(2px 2px at 90% 60%, white, transparent),
                               radial-gradient(1px 1px at 33% 50%, white, transparent),
                               radial-gradient(1px 1px at 75% 80%, white, transparent)`,
-            backgroundSize: '200% 200%',
+            backgroundSize: "200% 200%",
             opacity: 0.08,
           }}
         />
@@ -48,11 +48,36 @@ function App() {
 
       {/* Mobile bottom nav (simple, accessible) */}
       <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-20 md:hidden bg-black/60 backdrop-blur rounded-full px-3 py-2 flex gap-4 items-center">
-        <a href="#hero" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Home</a>
-        <a href="#about" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">About</a>
-        <a href="#experience" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Experience</a>
-        <a href="#projects" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Projects</a>
-        <a href="#connect" className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern">Contact</a>
+        <a
+          href="#hero"
+          className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern"
+        >
+          Home
+        </a>
+        <a
+          href="#about"
+          className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern"
+        >
+          About
+        </a>
+        <a
+          href="#experience"
+          className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern"
+        >
+          Experience
+        </a>
+        <a
+          href="#projects"
+          className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern"
+        >
+          Projects
+        </a>
+        <a
+          href="#connect"
+          className="text-sm text-gray-200 px-3 py-2 rounded-full hover:bg-white/5 font-modern"
+        >
+          Contact
+        </a>
       </nav>
 
       <main className="relative z-0 flex-1 overflow-y-auto px-20 py-0 ml-0 md:ml-0">

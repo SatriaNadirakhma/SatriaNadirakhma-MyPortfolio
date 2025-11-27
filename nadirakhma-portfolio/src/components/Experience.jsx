@@ -149,7 +149,7 @@ const Experience = () => {
         </h2>
         <p className="text-center text-gray-300 text-lg font-modern mb-8">
           Make it through for the journey to do soft skills and hard skills
-          improvement.  
+          improvement.
         </p>
 
         <div className="flex gap-6 overflow-x-auto no-scrollbar py-4 snap-x snap-mandatory">

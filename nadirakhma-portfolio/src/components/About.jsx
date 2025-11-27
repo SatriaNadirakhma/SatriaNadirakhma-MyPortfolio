@@ -10,9 +10,11 @@ const About = () => {
   );
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center py-20 px-6">
+    <section
+      id="about"
+      className="min-h-screen flex items-center justify-center py-20 px-6"
+    >
       <div className="flex flex-col items-center text-center max-w-5xl gap-12">
-        
         {/* Heading */}
         <h2 className="text-6xl md:text-8xl font-stylish text-white italic">
           About Me
@@ -30,15 +32,13 @@ const About = () => {
           </HighlightText>
           . Driven by curiosity and innovation, I aim to contribute to a
           forward-thinking team where I can apply my{" "}
-          <HighlightText>design sense and technical expertise</HighlightText>{" "}
-          to create{" "}
-          <HighlightText>meaningful digital solutions</HighlightText>.
+          <HighlightText>design sense and technical expertise</HighlightText> to
+          create <HighlightText>meaningful digital solutions</HighlightText>.
         </p>
 
         <div className="w-24 md:w-36 mt-4 rotate-8">
           <img src={Sticker} alt="Sticker" />
         </div>
-
       </div>
     </section>
   );

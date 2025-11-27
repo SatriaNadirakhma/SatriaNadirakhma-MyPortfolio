@@ -57,11 +57,9 @@ const Sidebar = () => {
       const paddingY = 32; // jarak trigger vertikal di luar kotak
 
       const insideX =
-        e.clientX >= rect.left - paddingX &&
-        e.clientX <= rect.right + paddingX;
+        e.clientX >= rect.left - paddingX && e.clientX <= rect.right + paddingX;
       const insideY =
-        e.clientY >= rect.top - paddingY &&
-        e.clientY <= rect.bottom + paddingY;
+        e.clientY >= rect.top - paddingY && e.clientY <= rect.bottom + paddingY;
 
       setIsExpanded(insideX && insideY);
     };
