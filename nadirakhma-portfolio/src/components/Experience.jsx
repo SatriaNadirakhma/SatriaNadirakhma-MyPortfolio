@@ -152,13 +152,14 @@ const Experience = () => {
           improvement.
         </p>
 
-        <div className="flex gap-6 overflow-x-auto no-scrollbar py-4 snap-x snap-mandatory">
+        <div className="flex gap-6 overflow-x-auto no-scrollbar py-4 snap-x snap-mandatory justify-center">
           {experiences.map((exp, i) => (
-            <div key={i} className="snap-start">
-              <ExperienceCard {...exp} />
-            </div>
+          <div key={i} className="snap-start">
+            <ExperienceCard {...exp} />
+          </div>
           ))}
         </div>
+
 
         <style>{`
           .no-scrollbar::-webkit-scrollbar { display: none; }
