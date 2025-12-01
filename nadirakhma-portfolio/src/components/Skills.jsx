@@ -1,6 +1,6 @@
 // src/components/Skills.jsx
 import { useState } from "react";
-import { ChevronDown, Code, PenTool, Brain, CheckCircle } from "lucide-react";
+import { ChevronDown, Code, PenTool, Brain, CheckCircle, ExternalLink } from "lucide-react";
 // Impor ikon skill dari react-icons
 import {
   FaReact,
@@ -25,14 +25,23 @@ import {
 
 import { FaGitAlt } from "react-icons/fa6";
 
-// Helper: Ikon Skill - Responsive
-const SkillIcon = ({ icon: Icon, name }) => (
-  <div className="flex flex-col items-center gap-1.5 sm:gap-2 p-2.5 sm:p-3 md:p-4 bg-indigo-800/50 rounded-lg transform transition-transform hover:scale-105 sm:hover:scale-110">
-    <Icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white" />
+// Helper: Ikon Skill - Responsive dengan Link
+const SkillIcon = ({ icon: Icon, name, url }) => (
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group flex flex-col items-center gap-1.5 sm:gap-2 p-2.5 sm:p-3 md:p-4 bg-indigo-800/50 rounded-lg transform transition-all duration-300 hover:scale-105 sm:hover:scale-110 hover:bg-indigo-700/60 hover:shadow-lg cursor-pointer relative"
+    aria-label={`Visit ${name} website`}
+  >
+    <Icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white transition-transform duration-300 group-hover:scale-110" />
     <span className="text-xs sm:text-sm font-medium text-white text-center leading-tight">
       {name}
     </span>
-  </div>
+    
+    {/* External link indicator on hover */}
+    <ExternalLink className="absolute top-1 right-1 w-3 h-3 text-white/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  </a>
 );
 
 // Helper: Dropdown - Responsive
@@ -70,39 +79,52 @@ const SkillSection = ({ title, icon: Icon, children }) => {
 };
 
 const Skills = () => {
+  // Skill data dengan URL
+  const webDevSkills = [
+    { icon: FaHtml5, name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+    { icon: FaCss3Alt, name: "CSS3", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+    { icon: FaJs, name: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+    { icon: FaReact, name: "React", url: "https://react.dev/" },
+    { icon: FaNodeJs, name: "Node.js", url: "https://nodejs.org/" },
+    { icon: FaBootstrap, name: "Bootstrap", url: "https://getbootstrap.com/" },
+    { icon: FaLaravel, name: "Laravel", url: "https://laravel.com/" },
+    { icon: RiTailwindCssFill, name: "Tailwind CSS", url: "https://tailwindcss.com/" },
+    { icon: SiMysql, name: "MySQL", url: "https://www.mysql.com/" },
+    { icon: FaGitAlt, name: "Git", url: "https://git-scm.com/" },
+  ];
+
+  const designSkills = [
+    { icon: FaFigma, name: "Figma", url: "https://www.figma.com/" },
+    { icon: SiFramer, name: "Framer", url: "https://www.framer.com/" },
+    { icon: SiInkscape, name: "Inkscape", url: "https://inkscape.org/" },
+    { icon: SiAdobephotoshop, name: "Adobe Photoshop", url: "https://www.adobe.com/products/photoshop.html" },
+    { icon: SiAffinity, name: "Affinity", url: "https://affinity.serif.com/" },
+  ];
+
   return (
     <section id="skills" className="py-12 sm:py-16 md:py-20">
       <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-stylish italic text-center mb-2 sm:mb-3 text-white px-4">
         My Skills
       </h2>
       <p className="text-center text-gray-300 text-sm sm:text-base md:text-lg font-modern mb-8 sm:mb-10 md:mb-12 px-4">
-        Skills that I have acquired through learning and experience.
+        Skills that I have acquired through learning and experience. Click to learn more.
       </p>
       <div className="max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto flex flex-col gap-4 sm:gap-5 md:gap-6 px-4">
         {/* Web Development */}
         <SkillSection title="Web Development & Database" icon={Code}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-3 md:gap-4">
-            <SkillIcon icon={FaHtml5} name="HTML5" />
-            <SkillIcon icon={FaCss3Alt} name="CSS3" />
-            <SkillIcon icon={FaJs} name="JavaScript" />
-            <SkillIcon icon={FaReact} name="React" />
-            <SkillIcon icon={FaNodeJs} name="Node.js" />
-            <SkillIcon icon={FaBootstrap} name="Bootstrap" />
-            <SkillIcon icon={FaLaravel} name="Laravel" />
-            <SkillIcon icon={RiTailwindCssFill} name="Tailwind CSS" />
-            <SkillIcon icon={SiMysql} name="MySQL" />
-            <SkillIcon icon={FaGitAlt} name="Git" />
+            {webDevSkills.map((skill, index) => (
+              <SkillIcon key={index} {...skill} />
+            ))}
           </div>
         </SkillSection>
 
         {/* UI/UX Design */}
         <SkillSection title="Graphic & UI/UX Design" icon={PenTool}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-3 md:gap-4">
-            <SkillIcon icon={FaFigma} name="Figma" />
-            <SkillIcon icon={SiFramer} name="Framer" />
-            <SkillIcon icon={SiInkscape} name="Inkscape" />
-            <SkillIcon icon={SiAdobephotoshop} name="Adobe Photoshop" />
-            <SkillIcon icon={SiAffinity} name="Affinity" />
+            {designSkills.map((skill, index) => (
+              <SkillIcon key={index} {...skill} />
+            ))}
           </div>
         </SkillSection>
 

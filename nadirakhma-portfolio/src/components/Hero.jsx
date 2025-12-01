@@ -32,7 +32,7 @@ const Hero = () => {
               <span className="block bg-gradient-to-r from-gray-400 via-gray-500 to-orange-200 bg-clip-text text-transparent animate-gradient-x">
                 Satria Rakhmadani
               </span>
-              <span className="block text-gray-200 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+              <span className="block text-gray-200">
                 Explore the work.
               </span>
             </h1>

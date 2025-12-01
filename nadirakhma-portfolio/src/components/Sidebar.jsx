@@ -41,11 +41,6 @@ const NavItem = ({ icon: Icon, label, href, isExpanded, isActive }) => (
     >
       {label}
     </div>
-
-    {/* Indicator dot untuk active state */}
-    {isActive && !isExpanded && (
-      <div className="absolute left-0 w-1 h-8 bg-orange-300 rounded-r-lg"></div>
-    )}
   </a>
 );
 
