@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import ProjectGenesis from "../assets/project-genesis.jpg";
-import ProjectOther from "../assets/project-other.jpg";
+import Ekspedisi from "../assets/image/ekspedisi.jpg";
+import Tatib from "../assets/image/tatib.jpg";
+import Sipinta from "../assets/image/sipinta.jpg";
+import K3SiantarTop from "../assets/image/k3.jpg";
+import OranjixHMTI from "../assets/image/oranjixhmti.png";
 import { Code, Palette, ArrowRight } from "lucide-react";
 
 const projects = {
@@ -8,8 +11,8 @@ const projects = {
     {
       title: "K3 Siantar Top",
       description:
-        "Developing a landing page web-based application project for K3 (Keselamatan dan Kesehatan Kerja) for PT Siantar Top. ",
-      image: ProjectOther,
+        "Developing a landing page web-based application project for K3 (Keselamatan dan Kesehatan Kerja) for PT Siantar Top.",
+      image: K3SiantarTop,
       link: "https://k3-phi.vercel.app/",
       icon: Code,
       color: "from-emerald-700/80 to-emerald-900/60",
@@ -19,7 +22,7 @@ const projects = {
         "Sistem Informasi Pendaftaran & Integrasi TOEIC Polinema (SIPINTA)",
       description:
         "Developing a web-based system designed to simplify the TOEIC registration process for Polinema students while integrating user access across the entire academic community.",
-      image: ProjectOther,
+      image: Sipinta,
       link: "https://github.com/SatriaNadirakhma/PBLSEM4",
       icon: Code,
       color: "from-blue-700 to-blue-900/80",
@@ -28,7 +31,7 @@ const projects = {
       title: "Sistem Informasi Tata Tertib",
       description:
         "Developing a digital platform designed to simplify and improve campus regulation management. The system allows students, lecturers, and staff to access disciplinary information quickly and transparently. ",
-      image: ProjectOther,
+      image: Tatib,
       link: "https://github.com/aldofebryn/project",
       icon: Code,
       color: "from-yellow-700/80 to-yellow-900/60",
@@ -37,7 +40,7 @@ const projects = {
       title: "Sistem Ekspedisi (Terminal)",
       description:
         "Developing a Java-based expedition management system operated via terminal to simulate the workflow of delivery services in Indonesia. ",
-      image: ProjectOther,
+      image: Ekspedisi,
       link: "https://github.com/zidnafaz/Sistem-Ekspedisi",
       icon: Code,
       color: "from-red-700/80 to-gray-500",
@@ -47,8 +50,8 @@ const projects = {
     {
       title: "Oranji Studio x HMTI Polinema",
       description:
-        "Collaboration between Oranji Studio and the Information Technology Student Association (HMTI) to design and develop HMTI merchandise products",
-      image: ProjectGenesis,
+        "Collaboration between Oranji Studio and the Information Technology Student Association (HMTI) to design and develop HMTI merchandise products. (picture source: Instagram @hmtipolinema)",
+      image: OranjixHMTI,
       link: "https://www.instagram.com/p/DDTd64kSFEY/?img_index=1",
       icon: Palette,
       color: "from-pink-700/80 to-pink-900/60",

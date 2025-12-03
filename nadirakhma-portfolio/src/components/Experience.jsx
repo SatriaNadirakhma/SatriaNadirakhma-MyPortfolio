@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Building, ArrowRight } from "lucide-react";
+import Kompen from "../assets/image/kompen.jpg";
+import ITDEC from "../assets/image/itdecpeeps.jpeg";
+import Oranji from "../assets/image/oranjiteam.jpg";
 
 // ❗ Ganti dengan data pengalaman Anda
 const experiences = [
@@ -10,7 +13,7 @@ const experiences = [
     description:
       "Designing digital assets such as social media content, promotional materials, and brand visuals based on client and team collaboration.",
     image:
-      "https://images.unsplash.com/photo-1505238680356-667803448bb6?auto=format&fit=crop&w=1200&q=60",
+      Oranji,
     color: "from-orange-700/80 to-orange-900/60",
   },
   {
@@ -20,7 +23,7 @@ const experiences = [
     description:
       "Establishing communication between Creative Media teams to determine ITDEC's branding image",
     image:
-      "https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60",
+      ITDEC,
     color: "from-emerald-700/80 to-emerald-900/60",
   },
   {
@@ -30,7 +33,7 @@ const experiences = [
     description:
       "Lead the print media and online media division in managing campus journalistic activities, including media work program, content planning, article editing, and publication design. ",
     image:
-      "https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60",
+      Kompen,
     color: "from-blue-700/80 to-blue-900/60",
   },
 ];
