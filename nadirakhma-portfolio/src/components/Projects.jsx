@@ -117,7 +117,7 @@ const ProjectCard = ({
                 className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-modern transition hover:bg-white/20 cursor-pointer"
                 aria-label={`Learn more about ${title}`}
               >
-                Detail Proyek <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                Project Details <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
               </button>
               <a
                 href={link}
@@ -126,7 +126,7 @@ const ProjectCard = ({
                 className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/90 text-gray-900 text-xs sm:text-sm font-modern font-semibold transition hover:bg-white cursor-pointer"
                 aria-label={`Visit ${title}`}
               >
-                Lihat Proyek
+                Visit Project
               </a>
             </div>
           </div>

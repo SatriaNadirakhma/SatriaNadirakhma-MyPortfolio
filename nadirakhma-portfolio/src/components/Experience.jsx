@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Building, ArrowRight } from "lucide-react";
+import { Building, ArrowRight, Users } from "lucide-react";
 import Kompen from "../assets/image/kompen.jpg";
 import ITDEC from "../assets/image/itdecpeeps.jpeg";
 import Oranji from "../assets/image/oranjiteam.jpg";
 
-// ❗ Ganti dengan data pengalaman Anda
 const experiences = [
   {
     title: "Graphic Designer",
@@ -12,9 +11,10 @@ const experiences = [
     date: "May 2024 - Present",
     description:
       "Designing digital assets such as social media content, promotional materials, and brand visuals based on client and team collaboration.",
-    image:
-      Oranji,
+    image: Oranji,
     color: "from-orange-700/80 to-orange-900/60",
+    icon: "building",
+    link: "https://www.instagram.com/oranji.studio/",
   },
   {
     title: "Creative Media Division Project Coordinator",
@@ -22,19 +22,21 @@ const experiences = [
     date: "Aug 2025 - Present",
     description:
       "Establishing communication between Creative Media teams to determine ITDEC's branding image",
-    image:
-      ITDEC,
+    image: ITDEC,
     color: "from-emerald-700/80 to-emerald-900/60",
+    icon: "users",
+    link: "https://www.instagram.com/itdecpolinema/",
   },
   {
     title: "Pemimpin Redaksi (Editor-in-Chief)",
     company: "Lembaga Pers Mahasiswa (LPM) Kompen Polinema",
     date: "Mar 2025 - Present",
     description:
-      "Lead the print media and online media division in managing campus journalistic activities, including media work program, content planning, article editing, and publication design. ",
-    image:
-      Kompen,
+      "Lead the print media and online media division in managing campus journalistic activities, including media work program, content planning, article editing, and publication design.",
+    image: Kompen,
     color: "from-blue-700/80 to-blue-900/60",
+    icon: "users",
+    link: "https://www.instagram.com/lpmkompen/",
   },
 ];
 
@@ -45,13 +47,16 @@ const ExperienceCard = ({
   description,
   image,
   color,
+  icon,
+  link,
 }) => {
   const [flipped, setFlipped] = useState(false);
 
-  // buat teks panjang (sesuaikan atau ganti dengan teks panjang asli Anda)
   const longText = Array.from({ length: 1 })
     .map(() => description)
     .join(" ");
+
+  const IconComponent = icon === "users" ? Users : Building;
 
   return (
     <div className="w-[85vw] sm:w-80 md:w-96 h-[22rem] sm:h-[26rem] md:h-[28rem] perspective flex-shrink-0">
@@ -80,7 +85,7 @@ const ExperienceCard = ({
 
           <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-sm">
-              <Building className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
           </div>
 
@@ -103,6 +108,14 @@ const ExperienceCard = ({
               >
                 Learn More <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
               </button>
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/90 text-gray-900 text-xs sm:text-sm font-modern font-semibold transition hover:bg-white cursor-pointer"
+              >
+                Social Media
+              </a>
             </div>
           </div>
         </div>
