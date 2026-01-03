@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Champions from "./components/Champions";
 import Skills from "./components/Skills";
 import Connect from "./components/Connect";
 import Footer from "./components/Footer";
@@ -126,6 +127,13 @@ function App() {
             className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8"
           >
             <Projects />
+          </section>
+          
+          <section
+            id="champions"
+            className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8"
+          >
+            <Champions />
           </section>
 
           <section

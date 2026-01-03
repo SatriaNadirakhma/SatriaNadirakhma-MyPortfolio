@@ -4,6 +4,7 @@ import {
   User,
   BriefcaseBusiness,
   Sparkles,
+  CircleStar,
   Origami,
   MessageCircleMore,
 } from "lucide-react";
@@ -67,13 +68,9 @@ const Sidebar = () => {
   const navItems = [
     { icon: Home, label: "Home", href: "#hero", id: "hero" },
     { icon: User, label: "About Me", href: "#about", id: "about" },
-    {
-      icon: BriefcaseBusiness,
-      label: "Experience",
-      href: "#experience",
-      id: "experience",
-    },
+    { icon: BriefcaseBusiness, label: "Experience", href: "#experience", id: "experience" },
     { icon: Sparkles, label: "Projects", href: "#projects", id: "projects" },
+    { icon: CircleStar, label: "Champions", href: "#champions", id: "champions" },
     { icon: Origami, label: "Skills", href: "#skills", id: "skills" },
     { icon: MessageCircleMore, label: "Connect", href: "#connect", id: "connect" },
   ];
