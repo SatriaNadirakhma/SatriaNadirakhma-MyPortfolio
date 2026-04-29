@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Tambahkan useEffect
 import Sidebar from "./components/Sidebar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -10,252 +10,84 @@ import Skills from "./components/Skills";
 import Connect from "./components/Connect";
 import Footer from "./components/Footer";
 import LoadingScreen from "./components/LoadingScreen";
+import Marquee from "./components/Marquee";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
+  // Modern Fix: Mencegah user melakukan scroll saat loading screen aktif
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    
+    // Cleanup function untuk mencegah bug jika komponen unmount
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isLoading]);
+
   return (
     <>
-      {/* Loading Screen */}
       {isLoading && (
         <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
       )}
 
-      {/* Main App Content */}
-      {/* Fixed - no opacity changes */}
-<div className="relative flex min-h-screen bg-black text-gray-100 overflow-hidden">
+      {/* Tambahkan class bersyarat agar konten utama tidak transparan/glitch saat diload */}
+      <div className={`min-h-screen bg-[#080808] text-gray-100 relative transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        
+        {/* Subtle grain overlay for depth */}
+        <div
+          className="fixed inset-0 pointer-events-none z-[1] opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "180px 180px",
+          }}
+        />
 
-        {/* Aurora Background - Optimized for mobile */}
-        <div className="fixed inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900"></div>
+        {/* Very subtle radial accent — top right */}
+        <div
+          className="fixed top-0 right-0 w-[500px] h-[500px] pointer-events-none z-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at top right, rgba(255,140,50,0.04) 0%, transparent 70%)",
+          }}
+        />
 
-          {/* Aurora Layers - Responsive */}
-          <div className="absolute top-0 left-0 right-0 h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] bg-gradient-to-b from-purple-600/15 sm:from-purple-600/20 via-pink-600/8 sm:via-pink-600/10 to-transparent blur-2xl sm:blur-3xl animate-aurora"></div>
+        <Sidebar />
 
-          <div className="absolute bottom-0 left-0 right-0 h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] bg-gradient-to-t from-blue-600/15 sm:from-blue-600/20 via-cyan-600/8 sm:via-cyan-600/10 to-transparent blur-2xl sm:blur-3xl animate-aurora-reverse"></div>
-
-          {/* Radial Gradients - Responsive */}
-          <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-purple-500/15 sm:bg-purple-500/20 rounded-full blur-[60px] sm:blur-[80px] md:blur-[100px] animate-pulse-slow"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-blue-500/15 sm:bg-blue-500/20 rounded-full blur-[60px] sm:blur-[80px] md:blur-[100px] animate-pulse-slow animation-delay-3000"></div>
-
-          {/* Stars/Particles - Reduced opacity on mobile */}
-          <div
-            className="absolute inset-0 sm:opacity-[0.08]"
-            style={{
-              backgroundImage: `radial-gradient(2px 2px at 20% 30%, white, transparent),
-                                radial-gradient(2px 2px at 60% 70%, white, transparent),
-                                radial-gradient(1px 1px at 50% 50%, white, transparent),
-                                radial-gradient(1px 1px at 80% 10%, white, transparent),
-                                radial-gradient(2px 2px at 90% 60%, white, transparent),
-                                radial-gradient(1px 1px at 33% 50%, white, transparent),
-                                radial-gradient(1px 1px at 75% 80%, white, transparent)`,
-              backgroundSize: "200% 200%",
-              opacity: 0.05,
-            }}
-          />
-        </div>
-
-        {/* Sidebar: hidden on small screens, visible on lg+ */}
-        <div className="hidden lg:block lg:fixed lg:inset-y-0 lg:left-0 lg:z-10">
-          <Sidebar />
-        </div>
-
-        {/* Mobile bottom nav - Responsive & scrollable */}
-        <nav className="fixed bottom-3 sm:bottom-4 left-1/2 transform -translate-x-1/2 z-20 lg:hidden bg-black/70 backdrop-blur-md rounded-full px-2 sm:px-4 py-2 flex gap-1 sm:gap-2 items-center shadow-lg max-w-[95vw] overflow-x-auto no-scrollbar">
-          <a
-            href="#hero"
-            className="text-xs sm:text-sm text-gray-200 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-white/10 active:bg-white/20 font-modern whitespace-nowrap transition-colors"
-            aria-label="Home"
-          >
-            Home
-          </a>
-          <a
-            href="#about"
-            className="text-xs sm:text-sm text-gray-200 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-white/10 active:bg-white/20 font-modern whitespace-nowrap transition-colors"
-            aria-label="About"
-          >
-            About
-          </a>
-          <a
-            href="#experience"
-            className="text-xs sm:text-sm text-gray-200 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-white/10 active:bg-white/20 font-modern whitespace-nowrap transition-colors"
-            aria-label="Experience"
-          >
-            Experience
-          </a>
-          <a
-            href="#projects"
-            className="text-xs sm:text-sm text-gray-200 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-white/10 active:bg-white/20 font-modern whitespace-nowrap transition-colors"
-            aria-label="Projects"
-          >
-            Projects
-          </a>
-          <a
-            href="#connect"
-            className="text-xs sm:text-sm text-gray-200 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-white/10 active:bg-white/20 font-modern whitespace-nowrap transition-colors"
-            aria-label="Contact"
-          >
-            Contact
-          </a>
-        </nav>
-
-        {/* Main content - Responsive padding */}
-        <main className="relative z-0 flex-1 overflow-y-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 py-0 ml-0 lg:ml-0 pb-20 lg:pb-8">
-          <section
-            id="hero"
-            className="pt-8 sm:pt-12 md:pt-16 lg:pt-0 pb-4 sm:pb-6 md:pb-8"
-          >
-            <Hero />
-          </section>
-
-          <section
-            id="about"
-            className="pt-8 sm:pt-10 md:pt-12 pb-4 sm:pb-6 md:pb-8"
-          >
-            <About />
-          </section>
-
-          <section
-            id="experience"
-            className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8"
-          >
-            <Experience />
-          </section>
-
-          <section
-            id="projects"
-            className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8"
-          >
-            <Projects />
-          </section>
+        <main className="relative z-[2]">
+          <section id="hero"><Hero /></section>
+          <Marquee items={["GRAPHIC DESIGN", "FRONT-END DEVELOPMENT", "UI/UX DESIGN", "BRANDING", "WEB APPS", "CREATIVE CODING"]} speed={35} />
           
-          <section
-            id="champions"
-            className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8"
-          >
-            <Champions />
-          </section>
-
-          <section
-            id="skills"
-            className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8"
-          >
-            <Skills />
-          </section>
-
-          <section
-            id="connect"
-            className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8"
-          >
-            <Connect />
-          </section>
-
-          <footer className="pt-8 sm:pt-10 md:pt-12">
-            <Footer />
-          </footer>
+          <section id="about"><About /></section>
+          <section id="experience"><Experience /></section>
+          
+          <Marquee items={["FEATURED PROJECTS", "DEVELOPMENT", "GRAPHIC DESIGN", "WEB APPLICATIONS", "LANDING PAGES", "DESIGN SYSTEMS"]} speed={28} />
+          
+          <section id="projects"><Projects /></section>
+          <section id="champions"><Champions /></section>
+          
+          <Marquee items={["REACT", "TAILWIND CSS", "FIGMA", "PHOTOSHOP", "NODE.JS", "LARAVEL", "MYSQL", "GIT", "FRAMER", "INKSCAPE"]} speed={20} />
+          
+          <section id="skills"><Skills /></section>
+          <section id="connect"><Connect /></section>
+          <Footer />
         </main>
 
         <style>{`
-          @keyframes aurora {
-            0%, 100% {
-              opacity: 0.3;
-              transform: translateY(0px);
-            }
-            50% {
-              opacity: 0.6;
-              transform: translateY(-30px);
-            }
-          }
-
-          @media (min-width: 768px) {
-            @keyframes aurora {
-              0%, 100% {
-                opacity: 0.3;
-                transform: translateY(0px);
-              }
-              50% {
-                opacity: 0.6;
-                transform: translateY(-50px);
-              }
-            }
-          }
-
-          @keyframes aurora-reverse {
-            0%, 100% {
-              opacity: 0.3;
-              transform: translateY(0px);
-            }
-            50% {
-              opacity: 0.6;
-              transform: translateY(30px);
-            }
-          }
-
-          @media (min-width: 768px) {
-            @keyframes aurora-reverse {
-              0%, 100% {
-                opacity: 0.3;
-                transform: translateY(0px);
-              }
-              50% {
-                opacity: 0.6;
-                transform: translateY(50px);
-              }
-            }
-          }
-
-          @keyframes pulse-slow {
-            0%, 100% {
-              opacity: 0.15;
-              transform: scale(1);
-            }
-            50% {
-              opacity: 0.3;
-              transform: scale(1.05);
-            }
-          }
-
-          @media (min-width: 640px) {
-            @keyframes pulse-slow {
-              0%, 100% {
-                opacity: 0.2;
-                transform: scale(1);
-              }
-              50% {
-                opacity: 0.4;
-                transform: scale(1.1);
-              }
-            }
-          }
-
-          .animate-aurora {
-            animation: aurora 15s ease-in-out infinite;
-          }
-
-          .animate-aurora-reverse {
-            animation: aurora-reverse 20s ease-in-out infinite;
-          }
-
-          .animate-pulse-slow {
-            animation: pulse-slow 8s ease-in-out infinite;
-          }
-
-          .animation-delay-3000 {
-            animation-delay: 3s;
-          }
-
-          /* Hide scrollbar for mobile nav */
-          .no-scrollbar::-webkit-scrollbar {
-            display: none;
-          }
-          .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-
-          /* Smooth scrolling */
-          html {
+          html, body {
+            background-color: #080808; /* Memastikan background dasar browser berwarna gelap */
+            color: #f3f4f6; /* Opsional: set default text color ke abu-abu terang */
             scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+          }
+          * {
+            box-sizing: border-box;
           }
         `}</style>
       </div>

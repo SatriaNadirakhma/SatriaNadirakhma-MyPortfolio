@@ -1,276 +1,190 @@
-import React, { useState } from "react";
+// src/components/Projects.jsx
+import { useState } from "react";
 import Ekspedisi from "../assets/image/ekspedisi.jpg";
 import Tatib from "../assets/image/tatib.jpg";
 import Sipinta from "../assets/image/sipinta.jpg";
 import K3SiantarTop from "../assets/image/k3.jpg";
 import OranjixHMTI from "../assets/image/oranjixhmti.png";
-import { Code, Palette, ArrowRight } from "lucide-react";
+import { Code, Palette, ArrowUpRight } from "lucide-react";
 
-const projects = {
-  development: [
-    {
-      title: "K3 Siantar Top",
-      description:
-        "Developing a landing page web-based application project for K3 (Keselamatan dan Kesehatan Kerja) for PT Siantar Top.",
-      image: K3SiantarTop,
-      link: "https://k3-phi.vercel.app/",
-      icon: Code,
-      color: "from-emerald-700/80 to-emerald-900/60",
-    },
-    {
-      title:
-        "Sistem Informasi Pendaftaran & Integrasi TOEIC Polinema (SIPINTA)",
-      description:
-        "Developing a web-based system designed to simplify the TOEIC registration process for Polinema students while integrating user access across the entire academic community.",
-      image: Sipinta,
-      link: "https://github.com/SatriaNadirakhma/PBLSEM4",
-      icon: Code,
-      color: "from-blue-700 to-blue-900/80",
-    },
-    {
-      title: "Sistem Informasi Tata Tertib",
-      description:
-        "Developing a digital platform designed to simplify and improve campus regulation management. The system allows students, lecturers, and staff to access disciplinary information quickly and transparently. ",
-      image: Tatib,
-      link: "https://github.com/aldofebryn/project",
-      icon: Code,
-      color: "from-yellow-700/80 to-yellow-900/60",
-    },
-    {
-      title: "Sistem Ekspedisi (Terminal)",
-      description:
-        "Developing a Java-based expedition management system operated via terminal to simulate the workflow of delivery services in Indonesia. ",
-      image: Ekspedisi,
-      link: "https://github.com/zidnafaz/Sistem-Ekspedisi",
-      icon: Code,
-      color: "from-red-700/80 to-gray-500",
-    },
-  ],
-  graphicDesign: [
-    {
-      title: "Oranji Studio x HMTI Polinema",
-      description:
-        "Collaboration between Oranji Studio and the Information Technology Student Association (HMTI) to design and develop HMTI merchandise products. (picture source: Instagram @hmtipolinema)",
-      image: OranjixHMTI,
-      link: "https://www.instagram.com/p/DDTd64kSFEY/?img_index=1",
-      icon: Palette,
-      color: "from-pink-700/80 to-pink-900/60",
-    },
-  ],
-};
+const allProjects = [
+  {
+    title: "K3 Siantar Top",
+    description:
+      "Landing page web-based application for K3 (Keselamatan dan Kesehatan Kerja) for PT Siantar Top.",
+    image: K3SiantarTop,
+    link: "https://k3-phi.vercel.app/",
+    icon: Code,
+    category: "Development",
+    span: "wide", // spans 2 cols on desktop
+  },
+  {
+    title: "SIPINTA — TOEIC Registration System",
+    description:
+      "Web-based system to simplify TOEIC registration for Polinema students with integrated user access.",
+    image: Sipinta,
+    link: "https://github.com/SatriaNadirakhma/PBLSEM4",
+    icon: Code,
+    category: "Development",
+    span: "normal",
+  },
+  {
+    title: "Sistem Informasi Tata Tertib",
+    description:
+      "Digital platform for transparent campus regulation management accessible to students, lecturers, and staff.",
+    image: Tatib,
+    link: "https://github.com/aldofebryn/project",
+    icon: Code,
+    category: "Development",
+    span: "normal",
+  },
+  {
+    title: "Oranji Studio × HMTI Polinema",
+    description:
+      "Collaboration to design and develop HMTI merchandise products. (source: Instagram @hmtipolinema)",
+    image: OranjixHMTI,
+    link: "https://www.instagram.com/p/DDTd64kSFEY/?img_index=1",
+    icon: Palette,
+    category: "Graphic Design",
+    span: "wide",
+  },
+  {
+    title: "Sistem Ekspedisi (Terminal)",
+    description:
+      "Java-based expedition management system via terminal to simulate delivery workflows in Indonesia.",
+    image: Ekspedisi,
+    link: "https://github.com/zidnafaz/Sistem-Ekspedisi",
+    icon: Code,
+    category: "Development",
+    span: "normal",
+  },
+];
 
-const ProjectCard = ({
-  title,
-  description,
-  image,
-  link,
-  icon: Icon,
-  color,
-}) => {
-  const [flipped, setFlipped] = useState(false);
+const filters = ["All", "Development", "Graphic Design"];
 
-  const longText = Array.from({ length: 1 })
-    .map(() => description)
-    .join(" ");
+const ProjectCard = ({ title, description, image, link, icon: Icon, category, span }) => {
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <div className="w-[85vw] sm:w-96 md:w-[28rem] h-[22rem] sm:h-[24rem] md:h-[26rem] perspective">
-      <div
-        className={`cardInner relative w-full h-full rounded-2xl transition-transform duration-700 ${
-          flipped ? "is-flipped" : ""
-        }`}
-        aria-hidden={flipped ? "false" : "true"}
-      >
-        {/* FRONT */}
-        <div
-          className="cardFace cardFront absolute inset-0 rounded-2xl overflow-hidden"
-          aria-hidden={flipped ? "true" : "false"}
-        >
-          <img
-            src={image}
-            alt={title}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div
-            className={`absolute inset-0 bg-gradient-to-t ${color} opacity-90`}
-            style={{ mixBlendMode: "multiply" }}
-          />
-          <div className="absolute left-0 right-0 bottom-0 h-36 sm:h-40 md:h-44 bg-white/6 backdrop-blur-sm" />
-
-          <div className="absolute top-4 sm:top-6 left-4 sm:left-6">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-sm">
-              <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-            </div>
-          </div>
-
-          <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 text-white flex flex-col gap-1 sm:gap-2">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-modern font-bold drop-shadow-sm line-clamp-2">
-              {title}
-            </h3>
-            <p className="text-sm sm:text-base font-modern text-white/90 line-clamp-2 sm:line-clamp-3 leading-relaxed mt-1 sm:mt-2">
-              {description}
-            </p>
-
-            <div className="mt-2 sm:mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-              <button
-                onClick={() => setFlipped(true)}
-                className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-modern transition hover:bg-white/20 cursor-pointer"
-                aria-label={`Learn more about ${title}`}
-              >
-                Project Details <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              </button>
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/90 text-gray-900 text-xs sm:text-sm font-modern font-semibold transition hover:bg-white cursor-pointer"
-                aria-label={`Visit ${title}`}
-              >
-                Visit Project
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* BACK */}
-        <div
-          className="cardFace cardBack absolute inset-0 rounded-2xl overflow-hidden bg-neutral-900 p-6 sm:p-8 text-white"
-          aria-hidden={flipped ? "false" : "true"}
-        >
-          <div className="flex justify-between items-start mb-4 sm:mb-6">
-            <div>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-modern font-bold mb-2 line-clamp-2">{title}</h3>
-              <div className="flex items-center gap-2 text-indigo-300 text-xs sm:text-sm">
-                <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span>Project Details</span>
-              </div>
-            </div>
-            <button
-              onClick={() => setFlipped(false)}
-              className="ml-2 sm:ml-4 inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/6 border border-white/10 text-xs sm:text-sm hover:bg-white/20 transition cursor-pointer flex-shrink-0"
-              aria-label="Back"
-            >
-              Kembali
-            </button>
-          </div>
-
-          <div className="text-indigo-200 leading-relaxed text-xs sm:text-sm font-modern overflow-y-auto h-[calc(100%-72px)] sm:h-[calc(100%-88px)] pr-2">
-            {longText}
-          </div>
-        </div>
+    <div
+      className={`group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] cursor-pointer ${
+        span === "wide" ? "sm:col-span-2" : ""
+      }`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Image */}
+      <div className={`overflow-hidden ${span === "wide" ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
+        <img
+          src={image}
+          alt={title}
+          className={`w-full h-full object-cover transition-all duration-700 ${
+            hovered ? "scale-105 brightness-75" : "scale-100 brightness-50"
+          }`}
+          loading="lazy"
+        />
       </div>
 
-      <style>{`
-        .perspective { perspective: 1100px; }
-        .cardInner { transform-style: preserve-3d; }
-        .cardFace { 
-          backface-visibility: hidden; 
-          -webkit-backface-visibility: hidden; 
-          transform-style: preserve-3d; 
-        }
-        .cardFront { transform: rotateY(0deg); }
-        .cardBack { transform: rotateY(180deg); }
-        .cardInner.is-flipped { transform: rotateY(180deg); }
-        .line-clamp-2 { 
-          display: -webkit-box; 
-          -webkit-line-clamp: 2; 
-          -webkit-box-orient: vertical; 
-          overflow: hidden; 
-        }
-        .line-clamp-3 { 
-          display: -webkit-box; 
-          -webkit-line-clamp: 3; 
-          -webkit-box-orient: vertical; 
-          overflow: hidden; 
-        }
-      `}</style>
+      {/* Always-visible bottom info */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+        {/* Category badge */}
+        <div className="flex items-center gap-2 mb-2">
+          <Icon className="w-3 h-3 text-orange-400/80" />
+          <span className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-modern text-white/40">
+            {category}
+          </span>
+        </div>
+
+        <h3 className="text-base sm:text-lg font-modern font-bold text-white leading-tight line-clamp-2">
+          {title}
+        </h3>
+
+        {/* Description + link — reveal on hover */}
+        <div
+          className={`transition-all duration-400 overflow-hidden ${
+            hovered ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
+          }`}
+        >
+          <p className="text-xs sm:text-sm font-modern text-white/50 line-clamp-2 leading-relaxed mb-3">
+            {description}
+          </p>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs tracking-[0.15em] uppercase font-modern text-white border border-white/20 rounded-full px-3 sm:px-4 py-1.5 hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Visit Project
+            <ArrowUpRight className="w-3 h-3" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
 
 const Projects = () => {
-  return (
-    <section id="projects" className="py-12 sm:py-16 md:py-20 bg-000000/100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <h2 className="text-4xl sm:text-6xl md:text-8xl font-stylish italic text-white text-center mb-2 sm:mb-3">
-          Featured Projects
-        </h2>
-        <p className="text-center text-gray-300 text-base sm:text-lg font-modern mb-8 sm:mb-12 px-4">
-          Collections of portfolio's best projects in development and graphic
-          design.
-        </p>
+  const [activeFilter, setActiveFilter] = useState("All");
 
-        {/* Development Section */}
-        <div className="mb-12 sm:mb-16">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-stylish italic text-white mb-6 sm:mb-8 pl-2 sm:pl-4">
-            Development
-          </h3>
-          <div className="scroll-container">
-            <div className="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar px-2 sm:px-4 py-4 snap-x snap-mandatory">
-              {projects.development.map((project, i) => (
-                <div key={`dev-${i}`} className="snap-start flex-shrink-0">
-                  <ProjectCard {...project} />
-                </div>
-              ))}
+  const filtered =
+    activeFilter === "All"
+      ? allProjects
+      : allProjects.filter((p) => p.category === activeFilter);
+
+  return (
+    <section id="projects" className="py-20 sm:py-28 px-5 sm:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Section header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 sm:gap-8 mb-10 sm:mb-14">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-6 h-px bg-white/20" />
+              <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/30">
+                Selected Work
+              </p>
             </div>
+            <h2
+              className="font-stylish italic text-white leading-[0.92]"
+              style={{ fontSize: "clamp(36px, 6vw, 96px)" }}
+            >
+              Featured
+              <br />
+              Projects
+            </h2>
+          </div>
+
+          {/* Filter tabs */}
+          <div className="flex gap-2 flex-wrap">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs tracking-[0.12em] uppercase font-modern transition-all duration-300 ${
+                  activeFilter === filter
+                    ? "bg-white text-black"
+                    : "border border-white/15 text-white/35 hover:text-white hover:border-white/35"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Graphic Design Section */}
-        <div>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-stylish italic text-white mb-6 sm:mb-8 pl-2 sm:pl-4">
-            Graphic Design
-          </h3>
-          <div className="scroll-container">
-            <div className="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar px-2 sm:px-4 py-4 snap-x snap-mandatory">
-              {projects.graphicDesign.map((project, i) => (
-                <div key={`gd-${i}`} className="snap-start flex-shrink-0">
-                  <ProjectCard {...project} />
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {filtered.map((project, i) => (
+            <ProjectCard key={`${project.title}-${i}`} {...project} />
+          ))}
         </div>
 
         <style>{`
-          .no-scrollbar::-webkit-scrollbar { display: none; }
-          .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-          
-          .scroll-container {
-            position: relative;
-            -webkit-mask-image: linear-gradient(
-              to right,
-              transparent 0%,
-              black 8%,
-              black 92%,
-              transparent 100%
-            );
-            mask-image: linear-gradient(
-              to right,
-              transparent 0%,
-              black 8%,
-              black 92%,
-              transparent 100%
-            );
-          }
-          
-          @media (max-width: 640px) {
-            .scroll-container {
-              -webkit-mask-image: linear-gradient(
-                to right,
-                transparent 0%,
-                black 3%,
-                black 97%,
-                transparent 100%
-              );
-              mask-image: linear-gradient(
-                to right,
-                transparent 0%,
-                black 3%,
-                black 97%,
-                transparent 100%
-              );
-            }
+          .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
           }
         `}</style>
       </div>

@@ -1,74 +1,77 @@
 // src/components/Connect.jsx
-// Gunakan react-icons untuk ikon brand
 import {
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaDribbble,
-  FaBehance,
-  FaWhatsapp,
+  FaGithub, FaInstagram, FaLinkedin, FaDribbble, FaBehance, FaWhatsapp,
 } from "react-icons/fa";
+import { ArrowUpRight } from "lucide-react";
 
-// ❗ Ganti link '#' dengan URL Anda
 const socialLinks = [
-  {
-    icon: FaGithub,
-    href: "https://github.com/SatriaNadirakhma",
-    name: "GitHub",
-  },
-  {
-    icon: FaInstagram,
-    href: "https://www.instagram.com/nadirakhma.svg/",
-    name: "Instagram",
-  },
-  {
-    icon: FaLinkedin,
-    href: "https://www.linkedin.com/in/satria-rakhmadani/",
-    name: "LinkedIn",
-  },
-  {
-    icon: FaDribbble,
-    href: "https://dribbble.com/Rakhmadani",
-    name: "Dribbble",
-  },
-  {
-    icon: FaBehance,
-    href: "https://www.behance.net/rakhmanadi2005",
-    name: "Behance",
-  },
-  {
-    icon: FaWhatsapp,
-    href: "https://wa.me/qr/QZZFNQE72CGXP1",
-    name: "WhatsApp",
-  },
+  { icon: FaGithub, href: "https://github.com/SatriaNadirakhma", name: "GitHub" },
+  { icon: FaInstagram, href: "https://www.instagram.com/nadirakhma.svg/", name: "Instagram" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/satria-rakhmadani/", name: "LinkedIn" },
+  { icon: FaDribbble, href: "https://dribbble.com/Rakhmadani", name: "Dribbble" },
+  { icon: FaBehance, href: "https://www.behance.net/rakhmanadi2005", name: "Behance" },
+  { icon: FaWhatsapp, href: "https://wa.me/qr/QZZFNQE72CGXP1", name: "WhatsApp" },
 ];
 
 const Connect = () => {
   return (
-    <section id="connect" className="py-20 text-center">
-      <h2 className="text-6xl md:text-8xl font-stylish italic text-white mb-3">
-        Let's Connect
-      </h2>
-      <p className="text-lg font-modern text-gray-300 mb-10 max-w-lg mx-auto">
-        I am looking for new opportunities and project collaborations. Please
-        feel free to contact me!
-      </p>
+    <section id="connect" className="py-20 sm:py-28 px-5 sm:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Top border */}
+        <div className="border-t border-white/[0.07] pt-16 sm:pt-20">
 
-      <div className="flex justify-center flex-wrap gap-6 md:gap-8">
-        {socialLinks.map((link, index) => (
-          <a
-            key={index}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={link.name}
-            className="text-gray-300 hover:text-gray-400 transform transition-all duration-300 hover:scale-125"
+          {/* Label */}
+          <div className="flex items-center gap-3 mb-8 sm:mb-12">
+            <div className="w-6 h-px bg-white/20" />
+            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/30">
+              Get In Touch
+            </p>
+          </div>
+
+          {/* Big headline */}
+          <h2
+            className="font-stylish italic text-white leading-[0.92] mb-8 sm:mb-12"
+            style={{ fontSize: "clamp(48px, 9vw, 144px)" }}
           >
-            <link.icon className="w-8 h-8 md:w-10 md:h-10" />
-          </a>
-        ))}
+            Let's{" "}
+            <span
+              style={{
+                WebkitTextStroke: "1px rgba(255,255,255,0.25)",
+                color: "transparent",
+              }}
+            >
+              work
+            </span>
+            <br />
+            together.
+          </h2>
+
+          {/* Subtext */}
+          <p className="text-sm sm:text-base font-modern text-white/35 max-w-md leading-relaxed mb-12 sm:mb-16">
+            Looking for new opportunities and project collaborations. Feel free
+            to reach out — I'd love to hear from you.
+          </p>
+
+          {/* Social Links row */}
+          <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">
+            {socialLinks.map((link, i) => (
+              <a
+                key={i}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-xs tracking-[0.18em] uppercase font-modern text-white/25 hover:text-white transition-all duration-300"
+              >
+                <link.icon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5" />
+                {link.name}
+                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-0.5 translate-x-0.5" />
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
 };
+
 export default Connect;

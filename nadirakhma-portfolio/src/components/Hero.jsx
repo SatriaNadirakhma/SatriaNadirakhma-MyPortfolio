@@ -1,6 +1,7 @@
+// src/components/Hero.jsx
 import { Element } from "react-scroll";
 import Profile1 from "../assets/profile1.jpg";
-import { ArrowRight, Sparkles, Download } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import cvATS from "../assets/pdf/cv-ats.pdf";
 
 const Hero = () => {
@@ -8,163 +9,122 @@ const Hero = () => {
     <Element name="hero">
       <section
         id="hero"
-        className="relative min-h-screen flex items-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 overflow-hidden"
+        className="relative min-h-screen flex items-end pb-16 sm:pb-20 md:pb-24 px-5 sm:px-8 pt-28 sm:pt-32 overflow-hidden"
       >
-        {/* Main Container: Responsive Layout */}
-        <div className="relative z-10 max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full flex flex-col lg:flex-row items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16">
-          {/* LEFT COLUMN: Text Content */}
-          <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
-            {/* Glassmorphic Badge - Responsive */}
-            <div className="relative inline-block mb-6 sm:mb-7 md:mb-8 group">
-              <div className="relative bg-white/10 backdrop-blur-xl rounded-full p-0.5 sm:p-1 border border-white/20 shadow-2xl">
-                <div className="rounded-full px-3 sm:px-4 md:px-6 lg:px-8 py-1.5 sm:py-2 md:py-3 flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white flex-shrink-0" />
-                  <span className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-stylish whitespace-nowrap">
-                    Nadi Rakhma
+        {/* Ghost background text */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
+          <span
+            className="font-stylish italic text-white leading-none whitespace-nowrap"
+            style={{ fontSize: "clamp(80px, 22vw, 340px)", opacity: 0.025 }}
+          >
+            Portfolio
+          </span>
+        </div>
+
+        {/* Subtle gradient accent */}
+        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full bg-blue-400/5 blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10 sm:gap-14 lg:gap-16 items-end">
+            {/* LEFT: Editorial text */}
+            <div>
+              {/* Small label */}
+              <div className="flex items-center gap-3 mb-8 sm:mb-10">
+                <div className="w-6 h-px bg-blue-400/60" />
+                <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/35">
+                  Front-End Developer &amp; Graphic Designer
+                </p>
+              </div>
+
+              {/* Big headline */}
+              <h1
+                className="font-stylish italic text-white leading-[0.92] mb-8 sm:mb-10"
+                style={{ fontSize: "clamp(42px, 7vw, 112px)" }}
+              >
+                <span className="block">Crafting</span>
+                <span className="block" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.25)", color: "transparent" }}>
+                  digital
+                </span>
+                <span className="block">experiences</span>
+                <span className="block" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.25)", color: "transparent" }}>
+                  that speak.
+                </span>
+              </h1>
+
+              {/* Subtext */}
+              <p className="text-sm sm:text-base font-modern text-white/35 max-w-xs sm:max-w-sm leading-relaxed mb-10 sm:mb-12">
+                Based in Malang, Indonesia — building user-centered digital
+                solutions through code and design for forward-thinking teams.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-3 sm:gap-4">
+                <a
+                  href="#projects"
+                  className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-white/25 rounded-full font-modern text-xs sm:text-sm text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                >
+                  View Work
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                </a>
+                <a
+                  href={cvATS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-white/10 rounded-full font-modern text-xs sm:text-sm text-white/40 hover:text-white hover:border-white/25 transition-all duration-300"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download CV
+                </a>
+              </div>
+            </div>
+
+            {/* RIGHT: Profile photo — editorial */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                {/* Photo */}
+                <div className="w-52 h-64 sm:w-64 sm:h-80 lg:w-72 lg:h-[360px] overflow-hidden rounded-2xl">
+                  <img
+                    src={Profile1}
+                    alt="Satria Rakhmadani"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Ghost border frame */}
+                <div className="absolute -bottom-3 -right-3 w-full h-full border border-white/10 rounded-2xl -z-10" />
+
+                {/* Info tag */}
+                <div className="absolute -bottom-5 left-4 sm:left-5 bg-[#0d0d0d] border border-white/10 rounded-xl px-3 sm:px-4 py-2.5 shadow-2xl">
+                  <p className="font-stylish italic text-white text-sm">Satria Rakhmadani</p>
+                  <p className="text-[10px] font-modern text-white/35 mt-0.5 tracking-wide">
+                    Malang, Indonesia
+                  </p>
+                </div>
+
+                {/* Year badge */}
+                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0d0d0d] border border-white/10 flex items-center justify-center">
+                  <span className="font-modern text-white/50 text-[9px] sm:text-[10px] tracking-wider leading-tight text-center">
+                    2025
                   </span>
                 </div>
               </div>
             </div>
-
-            {/* Main Heading with Gradient - Responsive */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-3 sm:mb-4 md:mb-5 lg:mb-6 font-stylish italic leading-tight">
-              <span className="block">This is</span>
-              <span className="block bg-gradient-to-r from-gray-400 via-gray-500 to-orange-200 bg-clip-text text-transparent animate-gradient-x">
-                Satria Rakhmadani
-              </span>
-              <span className="block text-gray-200">
-                Explore the work.
-              </span>
-            </h1>
-
-            {/* Subtitle - Responsive */}
-            <div className="mb-6 sm:mb-7 md:mb-8 flex items-center gap-2 sm:gap-3 flex-wrap justify-center lg:justify-start">
-              <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-200 font-modern">
-                Graphic Designer{" "}
-                <span className="text-orange-500 text-lg sm:text-xl md:text-2xl lg:text-3xl mx-1.5 sm:mx-2">
-                  /
-                </span>{" "}
-                Front-End Developer
-              </p>
-            </div>
-
-            {/* CTA Buttons - Responsive */}
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 md:gap-6 w-full sm:w-auto">
-              <a
-                href="https://instagram.com/nadirakhma.svg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-white/5 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl font-modern font-medium text-xs sm:text-sm md:text-base text-white shadow-lg hover:bg-white/10 hover:border-white/30 active:bg-white/15 transition-all duration-300 hover:scale-105 touch-manipulation"
-              >
-                <span className="relative z-10 flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap">
-                  Design project
-                  <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </a>
-
-              <a
-                href={cvATS}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-white/5 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl font-modern font-medium text-xs sm:text-sm md:text-base text-white shadow-lg hover:bg-white/10 hover:border-white/30 active:bg-white/15 transition-all duration-300 hover:scale-105 touch-manipulation"
-              >
-                <span className="flex items-center justify-center gap-2 whitespace-nowrap">
-                  <Download className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 group-hover:scale-110 transition-transform duration-300" />
-                  Download CV
-                </span>
-              </a>
-            </div>
           </div>
 
-          {/* RIGHT COLUMN: Profile Image - Responsive */}
-          <div className="flex-1 relative group flex justify-center lg:justify-end w-full lg:w-auto">
-            {/* Glass Frame */}
-            <div className="relative bg-white/5 backdrop-blur-xl p-1.5 sm:p-2 md:p-3 rounded-2xl sm:rounded-3xl border border-white/20 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:rotate-1">
-              <div className="relative overflow-hidden rounded-xl sm:rounded-2xl">
-                <img
-                  src={Profile1}
-                  alt="Satria Rakhmadani"
-                  className="w-56 h-64 sm:w-64 sm:h-80 md:w-80 md:h-96 lg:w-96 lg:h-[480px] xl:w-[450px] xl:h-[550px] object-cover transform transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-
-                {/* Overlay Gradient on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                {/* Decorative Corner Elements - Responsive */}
-                <div className="absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 border-t-2 border-l-2 border-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 right-2 sm:right-3 md:right-4 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 border-b-2 border-r-2 border-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
-            </div>
+          {/* Bottom scroll hint */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-20">
+            <div className="w-px h-10 bg-white animate-pulse-slow" />
+            <span className="text-[9px] tracking-[0.3em] uppercase font-modern text-white">Scroll</span>
           </div>
         </div>
 
-        {/* Custom Animations */}
         <style>{`
-          @keyframes float {
-            0%, 100% {
-              transform: translateY(0px);
-            }
-            50% {
-              transform: translateY(-20px);
-            }
+          @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
           }
-
-          @keyframes gradient-x {
-            0%, 100% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-          }
-
-          @keyframes scroll {
-            0% {
-              transform: translateY(0);
-              opacity: 1;
-            }
-            100% {
-              transform: translateY(12px);
-              opacity: 0;
-            }
-          }
-
-          .animate-float {
-            animation: float 6s ease-in-out infinite;
-          }
-
-          .animate-float-delayed {
-            animation: float 8s ease-in-out infinite 2s;
-          }
-
-          .animate-float-slow {
-            animation: float 10s ease-in-out infinite 4s;
-          }
-
-          .animate-gradient-x {
-            background-size: 200% 200%;
-            animation: gradient-x 3s ease infinite;
-          }
-
-          .animate-scroll {
-            animation: scroll 2s ease-in-out infinite;
-          }
-
-          /* Mobile optimization */
-          @media (max-width: 640px) {
-            .animate-float {
-              animation: float 6s ease-in-out infinite 0s;
-            }
-
-            .animate-float-delayed {
-              animation: float 8s ease-in-out infinite 1s;
-            }
-
-            .animate-float-slow {
-              animation: float 10s ease-in-out infinite 2s;
-            }
-          }
+          .animate-pulse-slow { animation: pulse-slow 2s ease-in-out infinite; }
         `}</style>
       </section>
     </Element>

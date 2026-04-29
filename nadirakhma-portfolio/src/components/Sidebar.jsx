@@ -1,175 +1,144 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  Home,
-  User,
-  BriefcaseBusiness,
-  Sparkles,
-  CircleStar,
-  Origami,
-  MessageCircleMore,
-} from "lucide-react";
-
-// Item navigasi desktop - dengan active state
-const NavItem = ({ icon: Icon, label, href, isExpanded, isActive }) => (
-  <a
-    href={href}
-    className={`group flex items-center px-3 py-2.5 rounded-xl transition-all duration-300 ${
-      isActive
-        ? "bg-white/20 text-white shadow-lg"
-        : "text-white/70 hover:text-white hover:bg-white/10"
-    }`}
-  >
-    {/* Icon dengan fixed width */}
-    <div className="w-8 flex justify-center">
-      <Icon
-        className={`w-6 h-6 shrink-0 transition-colors duration-300 ${
-          isActive ? "text-orange-300" : "text-white"
-        }`}
-      />
-    </div>
-
-    {/* Teks hanya muncul saat expanded */}
-    <div
-      className={`
-        ml-3 text-sm whitespace-nowrap overflow-hidden
-        transition-[max-width,opacity,transform] duration-300 origin-left
-        ${
-          isExpanded
-            ? "max-w-[140px] opacity-100 scale-100"
-            : "max-w-0 opacity-0 scale-95"
-        }
-      `}
-    >
-      {label}
-    </div>
-  </a>
-);
-
-// Item navigasi mobile - dengan active state
-const MobileNavItem = ({ icon: Icon, href, isActive }) => (
-  <a
-    href={href}
-    className={`flex items-center justify-center px-3 py-2 rounded-lg transition-all duration-300 ${
-      isActive
-        ? "bg-white/20 text-orange-300 shadow-md"
-        : "text-white/70 hover:text-white hover:bg-white/10"
-    }`}
-    aria-label="Navigation item"
-  >
-    <Icon className="w-6 h-6" />
-  </a>
-);
+// src/components/Sidebar.jsx
+// Converted from floating sidebar → minimal editorial top navbar
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
-  const sidebarRef = useRef(null);
 
   const navItems = [
-    { icon: Home, label: "Home", href: "#hero", id: "hero" },
-    { icon: User, label: "About Me", href: "#about", id: "about" },
-    { icon: BriefcaseBusiness, label: "Experience", href: "#experience", id: "experience" },
-    { icon: Sparkles, label: "Projects", href: "#projects", id: "projects" },
-    { icon: CircleStar, label: "Champions", href: "#champions", id: "champions" },
-    { icon: Origami, label: "Skills", href: "#skills", id: "skills" },
-    { icon: MessageCircleMore, label: "Connect", href: "#connect", id: "connect" },
+    { label: "Home", href: "#hero", id: "hero" },
+    { label: "About", href: "#about", id: "about" },
+    { label: "Experience", href: "#experience", id: "experience" },
+    { label: "Projects", href: "#projects", id: "projects" },
+    { label: "Champions", href: "#champions", id: "champions" },
+    { label: "Skills", href: "#skills", id: "skills" },
+    { label: "Connect", href: "#connect", id: "connect" },
   ];
 
-  // Deteksi kursor di sekitar kotak sidebar untuk expand/collapse
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const el = sidebarRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const paddingX = 24;
-      const paddingY = 32;
-
-      const insideX =
-        e.clientX >= rect.left - paddingX && e.clientX <= rect.right + paddingX;
-      const insideY =
-        e.clientY >= rect.top - paddingY && e.clientY <= rect.bottom + paddingY;
-
-      setIsExpanded(insideX && insideY);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  // Deteksi scroll untuk highlight active section [web:63]
   useEffect(() => {
     const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+
       const sections = navItems.map((item) => ({
         id: item.id,
         element: document.getElementById(item.id),
       }));
-
-      let currentSection = "hero";
-
-      // Iterate through sections to find which one is in view
+      let current = "hero";
       for (const section of sections) {
         if (!section.element) continue;
-
         const rect = section.element.getBoundingClientRect();
-
-        // Jika section berada di atas tengah viewport
         if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
-          currentSection = section.id;
+          current = section.id;
         }
       }
-
-      setActiveSection(currentSection);
+      setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [navItems]);
+  }, []);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   return (
     <>
-      {/* Desktop Floating Glass Sidebar */}
+      {/* Top Nav */}
       <nav
-        ref={sidebarRef}
-        className={`
-          hidden md:flex fixed left-4 top-1/2 -translate-y-1/2
-          z-50 pointer-events-auto
-          rounded-3xl border border-white/20
-          bg-white/10 backdrop-blur-xl shadow-2xl
-          transition-all duration-300 ease-out
-          overflow-hidden
-          ${isExpanded ? "w-56 px-3" : "w-16 px-2"}
-          py-3
-          font-modern font-semibold
-          flex-col gap-2
-        `}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-[#080808]/85 backdrop-blur-xl border-b border-white/[0.06]"
+            : "bg-transparent"
+        }`}
       >
-        <div className="flex flex-col items-stretch gap-2 w-full">
-          {navItems.map((item, index) => (
-            <div key={index} className="relative">
-              <NavItem
-                {...item}
-                isExpanded={isExpanded}
-                isActive={activeSection === item.id}
-              />
-            </div>
-          ))}
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between">
+          {/* Logo / Name */}
+          <a
+            href="#hero"
+            className="font-stylish italic text-white text-xl sm:text-2xl tracking-wide hover:text-blue-200 transition-colors duration-300 select-none"
+          >
+            Nadi Rakhma
+          </a>
+
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex items-center gap-7 lg:gap-9">
+            {navItems.slice(1).map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                className={`text-[10px] lg:text-xs tracking-[0.18em] uppercase font-modern transition-all duration-300 relative group ${
+                  activeSection === item.id
+                    ? "text-white"
+                    : "text-white/35 hover:text-white"
+                }`}
+              >
+                {item.label}
+                {/* Active underline */}
+                <span
+                  className={`absolute -bottom-0.5 left-0 h-px bg-blue-400 transition-all duration-300 ${
+                    activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="md:hidden text-white/50 hover:text-white transition-colors p-1 -mr-1"
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
       </nav>
 
-      {/* Mobile Bottom Navigation: Icon dengan active state */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-black/70 backdrop-blur-xl border-t border-white/10 z-40 font-modern font-semibold safe-area-inset-bottom">
-        <div className="flex justify-around items-center py-2 px-2 gap-1">
-          {navItems.map((item, index) => (
-            <MobileNavItem
-              key={index}
-              icon={item.icon}
+      {/* Mobile Fullscreen Menu */}
+      <div
+        className={`fixed inset-0 z-[60] bg-[#080808] flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Close button */}
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="absolute top-5 right-6 text-white/40 hover:text-white transition-colors"
+          aria-label="Close menu"
+        >
+          <X className="w-7 h-7" />
+        </button>
+
+        {/* Nav Items */}
+        <div className="flex flex-col items-center gap-7">
+          {navItems.map((item, i) => (
+            <a
+              key={item.id}
               href={item.href}
-              isActive={activeSection === item.id}
-            />
+              onClick={() => setMenuOpen(false)}
+              className={`text-4xl font-stylish italic transition-all duration-300 ${
+                activeSection === item.id
+                  ? "text-white"
+                  : "text-white/25 hover:text-white"
+              }`}
+              style={{ transitionDelay: menuOpen ? `${i * 40}ms` : "0ms" }}
+            >
+              {item.label}
+            </a>
           ))}
         </div>
-      </nav>
+
+        {/* Bottom tagline */}
+        <p className="absolute bottom-8 text-xs tracking-[0.3em] uppercase font-modern text-white/20">
+          Malang, Indonesia
+        </p>
+      </div>
     </>
   );
 };

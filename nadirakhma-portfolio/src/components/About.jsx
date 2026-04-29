@@ -1,49 +1,94 @@
+// src/components/About.jsx
 import Sticker from "../assets/sticker.png";
 
 const About = () => {
-  // Helper untuk teks bergaris bawah - Responsive
-  const HighlightText = ({ children }) => (
-    <span className="font-modern font-semibold italic relative inline-block text-orange-100">
-      {children}
-      <span className="absolute left-0 -bottom-0 sm:-bottom-0.5 w-full h-0.5 bg-orange-100 opacity-50"></span>
-    </span>
-  );
-
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-6"
+      className="py-20 sm:py-28 md:py-36 px-5 sm:px-8"
     >
-      <div className="flex flex-col items-center text-center max-w-sm sm:max-w-xl md:max-w-3xl lg:max-w-5xl gap-6 sm:gap-8 md:gap-10 lg:gap-12">
-        {/* Heading - Responsive */}
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-stylish text-white italic leading-tight">
-          About Me
-        </h2>
+      <div className="max-w-7xl mx-auto">
+        {/* Top divider + label */}
+        <div className="flex items-center gap-5 mb-12 sm:mb-16">
+          <div className="w-8 h-px bg-white/20" />
+          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/30">
+            About Me
+          </p>
+        </div>
 
-        {/* Deskripsi - Responsive */}
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-modern text-gray-300 leading-relaxed sm:leading-relaxed md:leading-relaxed">
-          I am passionate about building{" "}
-          <HighlightText>
-            creative and user-centered digital experiences
-          </HighlightText>{" "}
-          through{" "}
-          <HighlightText>
-            Front-End Development, Graphic and UI Design
-          </HighlightText>
-          . Driven by curiosity and innovation, I aim to contribute to a
-          forward-thinking team where I can apply my{" "}
-          <HighlightText>design sense and technical expertise</HighlightText> to
-          create <HighlightText>meaningful digital solutions</HighlightText>.
-        </p>
+        {/* Main content: two-column editorial layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 lg:gap-20 items-start">
+          {/* Left: sticker + small info */}
+          <div className="flex flex-row lg:flex-col items-center lg:items-start gap-6 sm:gap-8">
+            <div
+              className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rotate-6 hover:rotate-12 transition-transform duration-500"
+            >
+              <img
+                src={Sticker}
+                alt="Decorative sticker"
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </div>
+            <div className="lg:mt-4">
+              <p className="text-[10px] tracking-[0.25em] uppercase font-modern text-white/20 mb-1">
+                Role
+              </p>
+              <p className="text-sm font-modern text-white/50">
+                Graphic Designer
+              </p>
+              <p className="text-sm font-modern text-white/50">
+                Front-End Developer
+              </p>
+            </div>
+          </div>
 
-        {/* Sticker - Responsive */}
-        <div className="w-20 sm:w-24 md:w-28 lg:w-36 mt-2 sm:mt-3 md:mt-4 rotate-8 hover:rotate-12 transition-transform duration-300">
-          <img 
-            src={Sticker} 
-            alt="Decorative sticker" 
-            className="w-full h-auto"
-            loading="lazy"
-          />
+          {/* Right: big statement */}
+          <div>
+            {/* Big headline */}
+            <h2
+              className="font-stylish italic text-white leading-[1.0] mb-8 sm:mb-10"
+              style={{ fontSize: "clamp(28px, 4.5vw, 68px)" }}
+            >
+              Passionate about building{" "}
+              <span
+                className="font-stylish"
+                style={{
+                  WebkitTextStroke: "1px rgba(255,255,255,0.4)",
+                  color: "transparent",
+                }}
+              >
+                creative
+              </span>{" "}
+              and user-centered digital experiences.
+            </h2>
+
+            {/* Body text */}
+            <p className="text-sm sm:text-base md:text-lg font-modern text-white/40 leading-relaxed max-w-2xl mb-8">
+              Through Front-End Development, Graphic and UI Design, I'm driven
+              by curiosity and innovation. I aim to contribute to
+              forward-thinking teams where my design sense and technical
+              expertise create meaningful digital solutions.
+            </p>
+
+            {/* Horizontal stat strip */}
+            <div className="flex flex-wrap gap-8 sm:gap-12 pt-8 border-t border-white/[0.07]">
+              {[
+                { value: "2+", label: "Years Experience" },
+                { value: "10+", label: "Projects Built" },
+                { value: "5+", label: "Tools Mastered" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-stylish italic text-white text-3xl sm:text-4xl leading-none mb-1">
+                    {stat.value}
+                  </p>
+                  <p className="text-[10px] tracking-[0.2em] uppercase font-modern text-white/30">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Building, ArrowRight, Users } from "lucide-react";
+// src/components/Experience.jsx
+import { useState } from "react";
+import { Building, Users, ArrowUpRight, X } from "lucide-react";
 import Kompen from "../assets/image/kompen.jpg";
 import ITDEC from "../assets/image/itdecpeeps.jpeg";
 import Oranji from "../assets/image/oranjiteam.jpg";
@@ -8,240 +9,157 @@ const experiences = [
   {
     title: "Graphic Designer",
     company: "Oranji Studio",
-    date: "May 2024 - Present",
+    date: "May 2024 — Present",
     description:
       "Designing digital assets such as social media content, promotional materials, and brand visuals based on client and team collaboration.",
     image: Oranji,
-    color: "from-orange-700/80 to-orange-900/60",
     icon: "building",
     link: "https://www.instagram.com/oranji.studio/",
+    accent: "orange",
   },
   {
-    title: "Creative Media Division Project Coordinator",
-    company: "Information Technology Department English Community (ITDEC)",
-    date: "Aug 2025 - Present",
+    title: "Creative Media Division\nProject Coordinator",
+    company: "ITDEC Polinema",
+    date: "Aug 2025 — Present",
     description:
-      "Establishing communication between Creative Media teams to determine ITDEC's branding image",
+      "Establishing communication between Creative Media teams to determine ITDEC's branding image.",
     image: ITDEC,
-    color: "from-emerald-700/80 to-emerald-900/60",
     icon: "users",
     link: "https://www.instagram.com/itdecpolinema/",
+    accent: "emerald",
   },
   {
-    title: "Pemimpin Redaksi (Editor-in-Chief)",
-    company: "Lembaga Pers Mahasiswa (LPM) Kompen Polinema",
-    date: "Mar 2025 - Present",
+    title: "Editor-in-Chief",
+    company: "LPM Kompen Polinema",
+    date: "Mar 2025 — Present",
     description:
-      "Lead the print media and online media division in managing campus journalistic activities, including media work program, content planning, article editing, and publication design.",
+      "Lead the print and online media division managing journalistic activities: content planning, article editing, and publication design.",
     image: Kompen,
-    color: "from-blue-700/80 to-blue-900/60",
     icon: "users",
     link: "https://www.instagram.com/lpmkompen/",
+    accent: "blue",
   },
 ];
 
-const ExperienceCard = ({
-  title,
-  company,
-  date,
-  description,
-  image,
-  color,
-  icon,
-  link,
-}) => {
-  const [flipped, setFlipped] = useState(false);
+const accentColors = {
+  orange: "border-orange-500/30 bg-orange-500/5",
+  emerald: "border-emerald-500/30 bg-emerald-500/5",
+  blue: "border-blue-500/30 bg-blue-500/5",
+};
 
-  const longText = Array.from({ length: 1 })
-    .map(() => description)
-    .join(" ");
-
-  const IconComponent = icon === "users" ? Users : Building;
+const ExperienceCard = ({ title, company, date, description, image, icon, link, accent }) => {
+  const [expanded, setExpanded] = useState(false);
+  const Icon = icon === "users" ? Users : Building;
 
   return (
-    <div className="w-[85vw] sm:w-80 md:w-96 h-[22rem] sm:h-[26rem] md:h-[28rem] perspective flex-shrink-0">
-      {/* inner wrapper mengontrol rotasi */}
-      <div
-        className={`cardInner relative w-full h-full rounded-2xl transition-transform duration-700 ${
-          flipped ? "is-flipped" : ""
-        }`}
-        aria-hidden={flipped ? "false" : "true"}
-      >
-        {/* FRONT */}
-        <div
-          className="cardFace cardFront absolute inset-0 rounded-2xl overflow-hidden"
-          aria-hidden={flipped ? "true" : "false"}
-        >
-          <img
-            src={image}
-            alt={`${title} - ${company}`}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div
-            className={`absolute inset-0 bg-gradient-to-t ${color} opacity-90`}
-            style={{ mixBlendMode: "multiply" }}
-          />
-          <div className="absolute left-0 right-0 bottom-0 h-28 sm:h-32 md:h-36 bg-white/6 backdrop-blur-sm" />
-
-          <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-sm">
-              <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            </div>
-          </div>
-
-          <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 text-white flex flex-col gap-1.5 sm:gap-2">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-modern font-bold drop-shadow-sm line-clamp-2">
-              {title}
-            </h3>
-            <p className="text-xs sm:text-sm text-white/90 line-clamp-1">
-              {company} • <span className="text-white/70">{date}</span>
-            </p>
-            <p className="text-xs sm:text-sm font-modern text-white/90 line-clamp-2 sm:line-clamp-3 leading-relaxed mt-1 sm:mt-2">
-              {description}
-            </p>
-
-            <div className="mt-2 sm:mt-4 flex items-center gap-2">
-              <button
-                onClick={() => setFlipped(true)}
-                className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-modern transition hover:bg-white/20 active:bg-white/30 cursor-pointer touch-manipulation"
-                aria-label={`Learn more about ${title}`}
-              >
-                Learn More <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              </button>
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/90 text-gray-900 text-xs sm:text-sm font-modern font-semibold transition hover:bg-white cursor-pointer"
-              >
-                Social Media
-              </a>
-            </div>
-          </div>
+    <div
+      className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
+        expanded ? accentColors[accent] : "border-white/[0.07] bg-white/[0.02] hover:border-white/15"
+      }`}
+    >
+      {/* Card image strip */}
+      <div className="relative h-36 sm:h-44 overflow-hidden">
+        <img
+          src={image}
+          alt={`${title} — ${company}`}
+          className="w-full h-full object-cover brightness-40 group-hover:brightness-50 transition-all duration-500 scale-105 group-hover:scale-100"
+          loading="lazy"
+        />
+        {/* Icon overlay */}
+        <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+          <Icon className="w-4 h-4 text-white/80" />
         </div>
-
-        {/* BACK */}
-        <div
-          className="cardFace cardBack absolute inset-0 rounded-2xl overflow-hidden bg-neutral-900 p-4 sm:p-6 text-white"
-          aria-hidden={flipped ? "false" : "true"}
-        >
-          <div className="flex justify-between items-start gap-2 mb-3 sm:mb-4">
-            <h3 className="text-base sm:text-lg md:text-xl font-modern font-bold line-clamp-2">
-              {title}
-            </h3>
-            <button
-              onClick={() => setFlipped(false)}
-              className="ml-2 inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/6 border border-white/10 text-xs sm:text-sm hover:bg-white/20 transition cursor-pointer flex-shrink-0 touch-manipulation"
-              aria-label="Back"
-            >
-              Back
-            </button>
-          </div>
-
-          {/* isi hanya teks panjang */}
-          <div className="text-indigo-200 leading-relaxed text-xs sm:text-sm font-modern overflow-y-auto h-[calc(100%-60px)] sm:h-[calc(100%-72px)] pr-2">
-            {longText}
-          </div>
+        {/* Date badge */}
+        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
+          <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">{date}</span>
         </div>
       </div>
 
-      {/* styles khusus untuk efek 3D */}
-      <style>{`
-        .perspective { perspective: 1100px; }
-        .cardInner { transform-style: preserve-3d; }
-        .cardFace { backface-visibility: hidden; -webkit-backface-visibility: hidden; transform-style: preserve-3d; }
-        .cardFront { transform: rotateY(0deg); }
-        .cardBack { transform: rotateY(180deg); }
-        .cardInner.is-flipped { transform: rotateY(180deg); }
-      `}</style>
+      {/* Body */}
+      <div className="p-4 sm:p-5">
+        <p className="text-[10px] tracking-[0.2em] uppercase font-modern text-white/30 mb-1.5">
+          {company}
+        </p>
+        <h3 className="text-base sm:text-lg font-modern font-bold text-white leading-snug mb-3 whitespace-pre-line">
+          {title}
+        </h3>
+
+        {/* Description — toggle */}
+        <div
+          className={`overflow-hidden transition-all duration-400 ${
+            expanded ? "max-h-40 mb-4" : "max-h-0"
+          }`}
+        >
+          <p className="text-xs sm:text-sm font-modern text-white/45 leading-relaxed">
+            {description}
+          </p>
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-[10px] tracking-[0.15em] uppercase font-modern text-white/35 hover:text-white transition-colors duration-300 flex items-center gap-1.5"
+          >
+            {expanded ? (
+              <>
+                <X className="w-3 h-3" /> Close
+              </>
+            ) : (
+              <>Learn More</>
+            )}
+          </button>
+          <span className="text-white/10">|</span>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] tracking-[0.15em] uppercase font-modern text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-1"
+          >
+            Social Media <ArrowUpRight className="w-3 h-3" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-12 sm:py-16 md:py-20 bg-000000/100">
-      <div className="max-w-4xl sm:max-w-5xl md:max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-stylish italic text-white text-center mb-2 sm:mb-3">
-          My Experience
-        </h2>
-        <p className="text-center text-gray-300 text-sm sm:text-base md:text-lg font-modern mb-6 sm:mb-8">
-          Make it through for the journey to do soft skills and hard skills
-          improvement.
-        </p>
+    <section id="experience" className="py-20 sm:py-28 px-5 sm:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-12 sm:mb-16">
+          <div className="w-6 h-px bg-white/20" />
+          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/30">
+            Experience
+          </p>
+        </div>
 
-        <div className="scroll-container">
-          <div className="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto no-scrollbar py-4 snap-x snap-mandatory px-2 sm:px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
+          {/* Left: title */}
+          <h2
+            className="font-stylish italic text-white leading-[0.92]"
+            style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
+          >
+            My<br />
+            <span
+              style={{
+                WebkitTextStroke: "1px rgba(255,255,255,0.3)",
+                color: "transparent",
+              }}
+            >
+              Journey
+            </span>
+          </h2>
+
+          {/* Right: cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {experiences.map((exp, i) => (
-              <div key={i} className="snap-start">
-                <ExperienceCard {...exp} />
-              </div>
+              <ExperienceCard key={i} {...exp} />
             ))}
           </div>
         </div>
-
-        <style>{`
-          .no-scrollbar::-webkit-scrollbar { display: none; }
-          .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-          
-          .scroll-container {
-            position: relative;
-            -webkit-mask-image: linear-gradient(
-              to right,
-              transparent 0%,
-              black 8%,
-              black 92%,
-              transparent 100%
-            );
-            mask-image: linear-gradient(
-              to right,
-              transparent 0%,
-              black 8%,
-              black 92%,
-              transparent 100%
-            );
-          }
-          
-          @media (max-width: 640px) {
-            .scroll-container {
-              -webkit-mask-image: linear-gradient(
-                to right,
-                transparent 0%,
-                black 3%,
-                black 97%,
-                transparent 100%
-              );
-              mask-image: linear-gradient(
-                to right,
-                transparent 0%,
-                black 3%,
-                black 97%,
-                transparent 100%
-              );
-            }
-          }
-
-          .line-clamp-1 {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-          }
-
-          .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-          }
-
-          .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-          }
-        `}</style>
       </div>
     </section>
   );
