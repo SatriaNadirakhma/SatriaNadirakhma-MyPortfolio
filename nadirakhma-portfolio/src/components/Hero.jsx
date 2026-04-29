@@ -42,11 +42,23 @@ const Hero = () => {
                 style={{ fontSize: "clamp(42px, 7vw, 112px)" }}
               >
                 <span className="block">Crafting</span>
-                <span className="block" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.25)", color: "transparent" }}>
+                <span
+                  className="block"
+                  style={{
+                    WebkitTextStroke: "1px rgba(255,255,255,0.25)",
+                    color: "transparent",
+                  }}
+                >
                   digital
                 </span>
                 <span className="block">experiences</span>
-                <span className="block" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.25)", color: "transparent" }}>
+                <span
+                  className="block"
+                  style={{
+                    WebkitTextStroke: "1px rgba(255,255,255,0.25)",
+                    color: "transparent",
+                  }}
+                >
                   that speak.
                 </span>
               </h1>
@@ -96,7 +108,9 @@ const Hero = () => {
 
                 {/* Info tag */}
                 <div className="absolute -bottom-5 left-4 sm:left-5 bg-[#0d0d0d] border border-white/10 rounded-xl px-3 sm:px-4 py-2.5 shadow-2xl">
-                  <p className="font-stylish italic text-white text-sm">Satria Rakhmadani</p>
+                  <p className="font-stylish italic text-white text-sm">
+                    Satria Rakhmadani
+                  </p>
                   <p className="text-[10px] font-modern text-white/35 mt-0.5 tracking-wide">
                     Malang, Indonesia
                   </p>
@@ -115,7 +129,9 @@ const Hero = () => {
           {/* Bottom scroll hint */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-20">
             <div className="w-px h-10 bg-white animate-pulse-slow" />
-            <span className="text-[9px] tracking-[0.3em] uppercase font-modern text-white">Scroll</span>
+            <span className="text-[9px] tracking-[0.3em] uppercase font-modern text-white">
+              Scroll
+            </span>
           </div>
         </div>
 

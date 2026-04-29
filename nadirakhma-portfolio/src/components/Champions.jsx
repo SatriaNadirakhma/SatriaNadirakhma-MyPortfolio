@@ -16,7 +16,15 @@ const champions = [
   },
 ];
 
-const ChampionCard = ({ title, event, description, image, link, icon: Icon, year }) => {
+const ChampionCard = ({
+  title,
+  event,
+  description,
+  image,
+  link,
+  icon: Icon,
+  year,
+}) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -41,7 +49,9 @@ const ChampionCard = ({ title, event, description, image, link, icon: Icon, year
         </div>
         {/* Year badge */}
         <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
-          <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">{year}</span>
+          <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">
+            {year}
+          </span>
         </div>
       </div>
 
@@ -72,7 +82,9 @@ const ChampionCard = ({ title, event, description, image, link, icon: Icon, year
             className="text-[10px] tracking-[0.15em] uppercase font-modern text-white/35 hover:text-white transition-colors duration-300 flex items-center gap-1.5"
           >
             {expanded ? (
-              <><X className="w-3 h-3" /> Close</>
+              <>
+                <X className="w-3 h-3" /> Close
+              </>
             ) : (
               <>Details</>
             )}
@@ -110,7 +122,8 @@ const Champions = () => {
             className="font-stylish italic text-white leading-[0.92]"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
-            Champions<br />
+            Champions
+            <br />
             <span
               style={{
                 WebkitTextStroke: "1px rgba(255,255,255,0.3)",

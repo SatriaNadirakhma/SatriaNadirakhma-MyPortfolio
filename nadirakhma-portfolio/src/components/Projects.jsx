@@ -62,7 +62,15 @@ const allProjects = [
 
 const filters = ["All", "Development", "Graphic Design"];
 
-const ProjectCard = ({ title, description, image, link, icon: Icon, category, span }) => {
+const ProjectCard = ({
+  title,
+  description,
+  image,
+  link,
+  icon: Icon,
+  category,
+  span,
+}) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -74,7 +82,9 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category, sp
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image */}
-      <div className={`overflow-hidden ${span === "wide" ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
+      <div
+        className={`overflow-hidden ${span === "wide" ? "aspect-[16/9]" : "aspect-[4/3]"}`}
+      >
         <img
           src={image}
           alt={title}

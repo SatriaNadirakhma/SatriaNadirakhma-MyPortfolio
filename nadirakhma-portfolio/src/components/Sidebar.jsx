@@ -44,7 +44,9 @@ const Sidebar = () => {
   // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
@@ -82,7 +84,9 @@ const Sidebar = () => {
                 {/* Active underline */}
                 <span
                   className={`absolute -bottom-0.5 left-0 h-px bg-blue-400 transition-all duration-300 ${
-                    activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"
+                    activeSection === item.id
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
                   }`}
                 />
               </a>
@@ -103,7 +107,9 @@ const Sidebar = () => {
       {/* Mobile Fullscreen Menu */}
       <div
         className={`fixed inset-0 z-[60] bg-[#080808] flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          menuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         {/* Close button */}

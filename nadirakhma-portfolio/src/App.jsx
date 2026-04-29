@@ -22,7 +22,7 @@ function App() {
     } else {
       document.body.style.overflow = "auto";
     }
-    
+
     // Cleanup function untuk mencegah bug jika komponen unmount
     return () => {
       document.body.style.overflow = "auto";
@@ -36,8 +36,9 @@ function App() {
       )}
 
       {/* Tambahkan class bersyarat agar konten utama tidak transparan/glitch saat diload */}
-      <div className={`min-h-screen bg-[#080808] text-gray-100 relative transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-        
+      <div
+        className={`min-h-screen bg-[#080808] text-gray-100 relative transition-opacity duration-700 ${isLoading ? "opacity-0" : "opacity-100"}`}
+      >
         {/* Subtle grain overlay for depth */}
         <div
           className="fixed inset-0 pointer-events-none z-[1] opacity-[0.03]"
@@ -60,21 +61,69 @@ function App() {
         <Sidebar />
 
         <main className="relative z-[2]">
-          <section id="hero"><Hero /></section>
-          <Marquee items={["GRAPHIC DESIGN", "FRONT-END DEVELOPMENT", "UI/UX DESIGN", "BRANDING", "WEB APPS", "CREATIVE CODING"]} speed={35} />
-          
-          <section id="about"><About /></section>
-          <section id="experience"><Experience /></section>
-          
-          <Marquee items={["FEATURED PROJECTS", "DEVELOPMENT", "GRAPHIC DESIGN", "WEB APPLICATIONS", "LANDING PAGES", "DESIGN SYSTEMS"]} speed={28} />
-          
-          <section id="projects"><Projects /></section>
-          <section id="champions"><Champions /></section>
-          
-          <Marquee items={["REACT", "TAILWIND CSS", "FIGMA", "PHOTOSHOP", "NODE.JS", "LARAVEL", "MYSQL", "GIT", "FRAMER", "INKSCAPE"]} speed={20} />
-          
-          <section id="skills"><Skills /></section>
-          <section id="connect"><Connect /></section>
+          <section id="hero">
+            <Hero />
+          </section>
+          <Marquee
+            items={[
+              "GRAPHIC DESIGN",
+              "FRONT-END DEVELOPMENT",
+              "UI/UX DESIGN",
+              "BRANDING",
+              "WEB APPS",
+              "CREATIVE CODING",
+            ]}
+            speed={35}
+          />
+
+          <section id="about">
+            <About />
+          </section>
+          <section id="experience">
+            <Experience />
+          </section>
+
+          <Marquee
+            items={[
+              "FEATURED PROJECTS",
+              "DEVELOPMENT",
+              "GRAPHIC DESIGN",
+              "WEB APPLICATIONS",
+              "LANDING PAGES",
+              "DESIGN SYSTEMS",
+            ]}
+            speed={28}
+          />
+
+          <section id="projects">
+            <Projects />
+          </section>
+          <section id="champions">
+            <Champions />
+          </section>
+
+          <Marquee
+            items={[
+              "REACT",
+              "TAILWIND CSS",
+              "FIGMA",
+              "PHOTOSHOP",
+              "NODE.JS",
+              "LARAVEL",
+              "MYSQL",
+              "GIT",
+              "FRAMER",
+              "INKSCAPE",
+            ]}
+            speed={20}
+          />
+
+          <section id="skills">
+            <Skills />
+          </section>
+          <section id="connect">
+            <Connect />
+          </section>
           <Footer />
         </main>
 

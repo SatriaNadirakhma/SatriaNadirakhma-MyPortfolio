@@ -2,24 +2,57 @@
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import {
-  FaReact, FaFigma, FaHtml5, FaCss3Alt, FaJs, FaNodeJs, FaBootstrap, FaLaravel,
+  FaReact,
+  FaFigma,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaNodeJs,
+  FaBootstrap,
+  FaLaravel,
 } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
-import { SiMysql, SiFramer, SiInkscape, SiAdobephotoshop, SiAffinity } from "react-icons/si";
+import {
+  SiMysql,
+  SiFramer,
+  SiInkscape,
+  SiAdobephotoshop,
+  SiAffinity,
+} from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa6";
 
 const categories = [
   {
     label: "Web Development",
     skills: [
-      { icon: FaHtml5, name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-      { icon: FaCss3Alt, name: "CSS3", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-      { icon: FaJs, name: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+      {
+        icon: FaHtml5,
+        name: "HTML5",
+        url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      },
+      {
+        icon: FaCss3Alt,
+        name: "CSS3",
+        url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+      },
+      {
+        icon: FaJs,
+        name: "JavaScript",
+        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      },
       { icon: FaReact, name: "React", url: "https://react.dev/" },
       { icon: FaNodeJs, name: "Node.js", url: "https://nodejs.org/" },
-      { icon: FaBootstrap, name: "Bootstrap", url: "https://getbootstrap.com/" },
+      {
+        icon: FaBootstrap,
+        name: "Bootstrap",
+        url: "https://getbootstrap.com/",
+      },
       { icon: FaLaravel, name: "Laravel", url: "https://laravel.com/" },
-      { icon: RiTailwindCssFill, name: "Tailwind CSS", url: "https://tailwindcss.com/" },
+      {
+        icon: RiTailwindCssFill,
+        name: "Tailwind CSS",
+        url: "https://tailwindcss.com/",
+      },
       { icon: SiMysql, name: "MySQL", url: "https://www.mysql.com/" },
       { icon: FaGitAlt, name: "Git", url: "https://git-scm.com/" },
     ],
@@ -30,8 +63,16 @@ const categories = [
       { icon: FaFigma, name: "Figma", url: "https://www.figma.com/" },
       { icon: SiFramer, name: "Framer", url: "https://www.framer.com/" },
       { icon: SiInkscape, name: "Inkscape", url: "https://inkscape.org/" },
-      { icon: SiAdobephotoshop, name: "Photoshop", url: "https://www.adobe.com/products/photoshop.html" },
-      { icon: SiAffinity, name: "Affinity", url: "https://affinity.serif.com/" },
+      {
+        icon: SiAdobephotoshop,
+        name: "Photoshop",
+        url: "https://www.adobe.com/products/photoshop.html",
+      },
+      {
+        icon: SiAffinity,
+        name: "Affinity",
+        url: "https://affinity.serif.com/",
+      },
     ],
   },
   {
@@ -60,7 +101,9 @@ const SkillPill = ({ icon: Icon, name, url }) => {
       {Icon && (
         <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
       )}
-      <span className="text-xs sm:text-sm font-modern whitespace-nowrap">{name}</span>
+      <span className="text-xs sm:text-sm font-modern whitespace-nowrap">
+        {name}
+      </span>
       {url && (
         <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover:opacity-60 transition-opacity duration-300 flex-shrink-0" />
       )}
@@ -69,7 +112,12 @@ const SkillPill = ({ icon: Icon, name, url }) => {
 
   if (url) {
     return (
-      <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${name}`}>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Visit ${name}`}
+      >
         {inner}
       </a>
     );
@@ -95,7 +143,8 @@ const Skills = () => {
             className="font-stylish italic text-white leading-[0.92]"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
-            My<br />
+            My
+            <br />
             <span
               style={{
                 WebkitTextStroke: "1px rgba(255,255,255,0.3)",

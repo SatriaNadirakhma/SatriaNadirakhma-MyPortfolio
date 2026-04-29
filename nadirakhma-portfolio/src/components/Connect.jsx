@@ -1,16 +1,45 @@
 // src/components/Connect.jsx
 import {
-  FaGithub, FaInstagram, FaLinkedin, FaDribbble, FaBehance, FaWhatsapp,
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaDribbble,
+  FaBehance,
+  FaWhatsapp,
 } from "react-icons/fa";
 import { ArrowUpRight } from "lucide-react";
 
 const socialLinks = [
-  { icon: FaGithub, href: "https://github.com/SatriaNadirakhma", name: "GitHub" },
-  { icon: FaInstagram, href: "https://www.instagram.com/nadirakhma.svg/", name: "Instagram" },
-  { icon: FaLinkedin, href: "https://www.linkedin.com/in/satria-rakhmadani/", name: "LinkedIn" },
-  { icon: FaDribbble, href: "https://dribbble.com/Rakhmadani", name: "Dribbble" },
-  { icon: FaBehance, href: "https://www.behance.net/rakhmanadi2005", name: "Behance" },
-  { icon: FaWhatsapp, href: "https://wa.me/qr/QZZFNQE72CGXP1", name: "WhatsApp" },
+  {
+    icon: FaGithub,
+    href: "https://github.com/SatriaNadirakhma",
+    name: "GitHub",
+  },
+  {
+    icon: FaInstagram,
+    href: "https://www.instagram.com/nadirakhma.svg/",
+    name: "Instagram",
+  },
+  {
+    icon: FaLinkedin,
+    href: "https://www.linkedin.com/in/satria-rakhmadani/",
+    name: "LinkedIn",
+  },
+  {
+    icon: FaDribbble,
+    href: "https://dribbble.com/Rakhmadani",
+    name: "Dribbble",
+  },
+  {
+    icon: FaBehance,
+    href: "https://www.behance.net/rakhmanadi2005",
+    name: "Behance",
+  },
+  {
+    icon: FaWhatsapp,
+    href: "https://wa.me/qr/QZZFNQE72CGXP1",
+    name: "WhatsApp",
+  },
 ];
 
 const Connect = () => {
@@ -19,7 +48,6 @@ const Connect = () => {
       <div className="max-w-7xl mx-auto">
         {/* Top border */}
         <div className="border-t border-white/[0.07] pt-16 sm:pt-20">
-
           {/* Label */}
           <div className="flex items-center gap-3 mb-8 sm:mb-12">
             <div className="w-6 h-px bg-white/20" />

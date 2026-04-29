@@ -1,18 +1,18 @@
 // src/components/LoadingScreen.jsx
 import { useState, useEffect, useRef } from "react";
 
-const MIN_DISPLAY_MS = 1200; 
-const FAKE_SPEED_MS  = 60;   
+const MIN_DISPLAY_MS = 1200;
+const FAKE_SPEED_MS = 60;
 
 const LoadingScreen = ({ onLoadingComplete }) => {
-  const [progress, setProgress]   = useState(0);
-  const [fadeOut, setFadeOut]     = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [fadeOut, setFadeOut] = useState(false);
 
-  const pageLoaded   = useRef(false);
-  const fakeProgress = useRef(0);    
-  const startTime    = useRef(Date.now());
-  const intervalRef  = useRef(null);
-  const doneRef      = useRef(false); 
+  const pageLoaded = useRef(false);
+  const fakeProgress = useRef(0);
+  const startTime = useRef(Date.now());
+  const intervalRef = useRef(null);
+  const doneRef = useRef(false);
 
   const finish = () => {
     if (doneRef.current) return;
@@ -25,14 +25,14 @@ const LoadingScreen = ({ onLoadingComplete }) => {
       setFadeOut(true);
       setTimeout(() => {
         onLoadingComplete?.();
-      }, 600); 
-    }, 300); 
+      }, 600);
+    }, 300);
   };
 
   const tryFinish = () => {
     const elapsed = Date.now() - startTime.current;
     const minPassed = elapsed >= MIN_DISPLAY_MS;
-    
+
     if (pageLoaded.current && minPassed) {
       if (intervalRef.current) clearInterval(intervalRef.current);
       finish();
@@ -81,24 +81,24 @@ const LoadingScreen = ({ onLoadingComplete }) => {
       if (fakeProgress.current >= 95) {
         fakeProgress.current = 95;
         clearInterval(intervalRef.current);
-        
-        const elapsed  = Date.now() - startTime.current;
+
+        const elapsed = Date.now() - startTime.current;
         const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
-        
+
         setTimeout(() => {
           if (pageLoaded.current) {
             finish();
           } else {
-             // Fallback yang lebih aman: Paksa selesai dalam 3 detik untuk menghindari dead-end
+            // Fallback yang lebih aman: Paksa selesai dalam 3 detik untuk menghindari dead-end
             const forceTimer = setTimeout(finish, 3000);
-            
+
             // Mengecek ulang interval singkat jika asset tiba-tiba selesai
             const fallbackCheck = setInterval(() => {
-               if (pageLoaded.current) {
-                  clearInterval(fallbackCheck);
-                  clearTimeout(forceTimer);
-                  finish();
-               }
+              if (pageLoaded.current) {
+                clearInterval(fallbackCheck);
+                clearTimeout(forceTimer);
+                finish();
+              }
             }, 500);
           }
         }, remaining);
@@ -140,7 +140,8 @@ const LoadingScreen = ({ onLoadingComplete }) => {
         style={{
           width: "40vw",
           height: "40vw",
-          background: "radial-gradient(ellipse at top right, rgba(255,140,50,0.06) 0%, transparent 70%)",
+          background:
+            "radial-gradient(ellipse at top right, rgba(255,140,50,0.06) 0%, transparent 70%)",
         }}
       />
       <div
@@ -152,20 +153,76 @@ const LoadingScreen = ({ onLoadingComplete }) => {
         }}
       >
         <div className="flex items-baseline justify-center gap-2 sm:gap-3 mb-5 sm:mb-6 select-none">
-          <span className="font-stylish italic text-white" style={{ fontSize: "clamp(48px, 10vw, 96px)", lineHeight: 1 }}>Nadi</span>
-          <span className="relative inline-block" style={{ fontSize: "clamp(48px, 10vw, 96px)", lineHeight: 1 }}>
-            <span className="font-stylish italic absolute left-0 top-0" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.35)", color: "transparent", opacity: 1 - rakhmaOpacity, transition: "opacity 0.3s ease", whiteSpace: "nowrap" }}>Rakhma</span>
-            <span className="font-stylish italic text-white" style={{ opacity: rakhmaOpacity, transition: "opacity 0.3s ease", whiteSpace: "nowrap" }}>Rakhma</span>
+          <span
+            className="font-stylish italic text-white"
+            style={{ fontSize: "clamp(48px, 10vw, 96px)", lineHeight: 1 }}
+          >
+            Nadi
+          </span>
+          <span
+            className="relative inline-block"
+            style={{ fontSize: "clamp(48px, 10vw, 96px)", lineHeight: 1 }}
+          >
+            <span
+              className="font-stylish italic absolute left-0 top-0"
+              style={{
+                WebkitTextStroke: "1.5px rgba(255,255,255,0.35)",
+                color: "transparent",
+                opacity: 1 - rakhmaOpacity,
+                transition: "opacity 0.3s ease",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Rakhma
+            </span>
+            <span
+              className="font-stylish italic text-white"
+              style={{
+                opacity: rakhmaOpacity,
+                transition: "opacity 0.3s ease",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Rakhma
+            </span>
           </span>
         </div>
-        <div className="mx-auto mb-4" style={{ width: "clamp(160px, 30vw, 280px)", height: "1px", backgroundColor: "rgba(255,255,255,0.08)", borderRadius: "99px", overflow: "hidden" }}>
-          <div style={{ height: "100%", width: `${displayProgress}%`, backgroundColor: displayProgress === 100 ? "rgba(255,255,255,0.5)" : "rgba(255,140,50,0.7)", borderRadius: "99px", transition: "width 0.15s ease, background-color 0.4s ease" }} />
+        <div
+          className="mx-auto mb-4"
+          style={{
+            width: "clamp(160px, 30vw, 280px)",
+            height: "1px",
+            backgroundColor: "rgba(255,255,255,0.08)",
+            borderRadius: "99px",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              width: `${displayProgress}%`,
+              backgroundColor:
+                displayProgress === 100
+                  ? "rgba(255,255,255,0.5)"
+                  : "rgba(255,140,50,0.7)",
+              borderRadius: "99px",
+              transition: "width 0.15s ease, background-color 0.4s ease",
+            }}
+          />
         </div>
-        <p className="font-modern text-white/25 tracking-[0.3em]" style={{ fontSize: "clamp(11px, 1.5vw, 13px)" }}>
+        <p
+          className="font-modern text-white/25 tracking-[0.3em]"
+          style={{ fontSize: "clamp(11px, 1.5vw, 13px)" }}
+        >
           {displayProgress < 100 ? `${displayProgress}%` : "READY"}
         </p>
       </div>
-      <p className="absolute bottom-8 font-modern text-white/15 tracking-[0.3em] uppercase select-none" style={{ fontSize: "10px" }}>Malang, Indonesia</p>
+      <p
+        className="absolute bottom-8 font-modern text-white/15 tracking-[0.3em] uppercase select-none"
+        style={{ fontSize: "10px" }}
+      >
+        Malang, Indonesia
+      </p>
     </div>
   );
 };

@@ -47,14 +47,25 @@ const accentColors = {
   blue: "border-blue-500/30 bg-blue-500/5",
 };
 
-const ExperienceCard = ({ title, company, date, description, image, icon, link, accent }) => {
+const ExperienceCard = ({
+  title,
+  company,
+  date,
+  description,
+  image,
+  icon,
+  link,
+  accent,
+}) => {
   const [expanded, setExpanded] = useState(false);
   const Icon = icon === "users" ? Users : Building;
 
   return (
     <div
       className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
-        expanded ? accentColors[accent] : "border-white/[0.07] bg-white/[0.02] hover:border-white/15"
+        expanded
+          ? accentColors[accent]
+          : "border-white/[0.07] bg-white/[0.02] hover:border-white/15"
       }`}
     >
       {/* Card image strip */}
@@ -71,7 +82,9 @@ const ExperienceCard = ({ title, company, date, description, image, icon, link, 
         </div>
         {/* Date badge */}
         <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
-          <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">{date}</span>
+          <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">
+            {date}
+          </span>
         </div>
       </div>
 
@@ -142,7 +155,8 @@ const Experience = () => {
             className="font-stylish italic text-white leading-[0.92]"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
-            My<br />
+            My
+            <br />
             <span
               style={{
                 WebkitTextStroke: "1px rgba(255,255,255,0.3)",
