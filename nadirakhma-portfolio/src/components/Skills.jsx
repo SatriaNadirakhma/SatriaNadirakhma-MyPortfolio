@@ -18,6 +18,7 @@ import {
   SiInkscape,
   SiAdobephotoshop,
   SiAffinity,
+  SiPostgresql,
 } from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa6";
 
@@ -54,6 +55,7 @@ const categories = [
         url: "https://tailwindcss.com/",
       },
       { icon: SiMysql, name: "MySQL", url: "https://www.mysql.com/" },
+      { icon: SiPostgresql, name: "PostgreSQL", url: "https://www.postgresql.org/" },
       { icon: FaGitAlt, name: "Git", url: "https://git-scm.com/" },
     ],
   },
@@ -147,7 +149,7 @@ const Skills = () => {
             <br />
             <span
               style={{
-                WebkitTextStroke: "1px rgba(255,255,255,0.3)",
+                WebkitTextStroke: "1px rgba(255,255,255,0.8)",
                 color: "transparent",
               }}
             >

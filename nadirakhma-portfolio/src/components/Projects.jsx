@@ -158,7 +158,14 @@ const Projects = () => {
               className="font-stylish italic text-white leading-[0.92]"
               style={{ fontSize: "clamp(36px, 6vw, 96px)" }}
             >
-              Featured
+              <span
+                style={{
+                  WebkitTextStroke: "1px rgba(255,255,255,0.8)",
+                  color: "transparent",
+                }}
+              >
+                Featured
+              </span>
               <br />
               Projects
             </h2>

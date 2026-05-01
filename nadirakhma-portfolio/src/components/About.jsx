@@ -49,13 +49,23 @@ const About = () => {
               <span
                 className="font-stylish"
                 style={{
-                  WebkitTextStroke: "1px rgba(255,255,255,0.4)",
+                  WebkitTextStroke: "0.8px rgba(255,255,255,0.8)",
                   color: "transparent",
                 }}
               >
                 creative
               </span>{" "}
-              and user-centered digital experiences.
+              and{" "}
+              <span
+                className="font-stylish"
+                style={{
+                  WebkitTextStroke: "0.8px rgba(255,255,255,0.8)",
+                  color: "transparent",
+                }}
+              >
+                user-centered
+              </span>{" "}
+              digital experiences.
             </h2>
 
             {/* Body text */}

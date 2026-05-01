@@ -4,6 +4,7 @@ import { Building, Users, ArrowUpRight, X } from "lucide-react";
 import Kompen from "../assets/image/kompen.jpg";
 import ITDEC from "../assets/image/itdecpeeps.jpeg";
 import Oranji from "../assets/image/oranjiteam.jpg";
+import Petrokimia from "../assets/image/petrokimia.jpg";
 
 const experiences = [
   {
@@ -31,12 +32,23 @@ const experiences = [
   {
     title: "Editor-in-Chief",
     company: "LPM Kompen Polinema",
-    date: "Mar 2025 — Present",
+    date: "Mar 2025 — Mar 2026",
     description:
       "Lead the print and online media division managing journalistic activities: content planning, article editing, and publication design.",
     image: Kompen,
     icon: "users",
     link: "https://www.instagram.com/lpmkompen/",
+    accent: "blue",
+  },
+  {
+    title: "Internship",
+    company: "PT. Petrokimia Gresik",
+    date: "Jan 2026 — Present",
+    description:
+      "Conducting research and development in the field of Information Technology to support the company's apps and user's needs.",
+    image: Petrokimia,
+    icon: "building",
+    link: "https://www.instagram.com/petrokimiagresik_official/",
     accent: "blue",
   },
 ];
@@ -159,7 +171,7 @@ const Experience = () => {
             <br />
             <span
               style={{
-                WebkitTextStroke: "1px rgba(255,255,255,0.3)",
+                WebkitTextStroke: "1px rgba(255,255,255,0.8)",
                 color: "transparent",
               }}
             >

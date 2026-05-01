@@ -15,7 +15,7 @@ const Hero = () => {
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
           <span
             className="font-stylish italic text-white leading-none whitespace-nowrap"
-            style={{ fontSize: "clamp(80px, 22vw, 340px)", opacity: 0.025 }}
+            style={{ fontSize: "clamp(80px, 22vw, 340px)", opacity: 0.030 }}
           >
             Portfolio
           </span>
@@ -45,7 +45,7 @@ const Hero = () => {
                 <span
                   className="block"
                   style={{
-                    WebkitTextStroke: "1px rgba(255,255,255,0.25)",
+                    WebkitTextStroke: "1px rgba(255,255,255,0.8)",
                     color: "transparent",
                   }}
                 >
@@ -55,7 +55,7 @@ const Hero = () => {
                 <span
                   className="block"
                   style={{
-                    WebkitTextStroke: "1px rgba(255,255,255,0.25)",
+                    WebkitTextStroke: "1px rgba(255,255,255,0.8)",
                     color: "transparent",
                   }}
                 >

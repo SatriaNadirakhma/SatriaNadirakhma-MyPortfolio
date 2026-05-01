@@ -64,7 +64,7 @@ const Connect = () => {
             Let's{" "}
             <span
               style={{
-                WebkitTextStroke: "1px rgba(255,255,255,0.25)",
+                WebkitTextStroke: "1px rgba(255,255,255,0.8)",
                 color: "transparent",
               }}
             >
