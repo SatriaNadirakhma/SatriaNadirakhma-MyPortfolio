@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState, useEffect } from "react"; // Tambahkan useEffect
+import { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -15,129 +15,81 @@ import Marquee from "./components/Marquee";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Modern Fix: Mencegah user melakukan scroll saat loading screen aktif
   useEffect(() => {
-    if (isLoading) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    // Cleanup function untuk mencegah bug jika komponen unmount
-    return () => {
-      document.body.style.overflow = "auto";
-    };
+    document.body.style.overflow = isLoading ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [isLoading]);
 
   return (
     <>
-      {isLoading && (
-        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
-      )}
+      {/*
+        PERFORMANCE FIX 1:
+        LoadingScreen SELALU di-mount (tidak pakai conditional {isLoading && ...}).
+        Jika conditional, React unmount sebelum fade-out selesai = glitch.
+        LoadingScreen mengurus tampil/sembunyi sendiri via internal state.
+      */}
+      <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
 
-      {/* Tambahkan class bersyarat agar konten utama tidak transparan/glitch saat diload */}
+      {/*
+        PERFORMANCE FIX 2:
+        Pakai visibility:hidden bukan opacity-0 + conditional render.
+        - visibility:hidden = browser skip paint, tapi DOM tetap ada
+        - Karena DOM tetap ada, browser bisa preload gambar hero di background
+          selama loading screen tampil → LCP jauh lebih cepat setelah selesai.
+      */}
       <div
-        className={`min-h-screen bg-[#080808] text-gray-100 relative transition-opacity duration-700 ${isLoading ? "opacity-0" : "opacity-100"}`}
+        className="min-h-screen bg-[#080808] text-gray-100 relative"
+        style={{
+          visibility: isLoading ? "hidden" : "visible",
+          transition: isLoading ? "none" : "opacity 0.4s ease",
+          opacity: isLoading ? 0 : 1,
+        }}
       >
-        {/* Subtle grain overlay for depth */}
         <div
-          className="fixed inset-0 pointer-events-none z-[1] opacity-[0.03]"
+          className="fixed inset-0 pointer-events-none z-[1]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
             backgroundRepeat: "repeat",
             backgroundSize: "180px 180px",
+            opacity: 0.03,
           }}
         />
 
-        {/* Very subtle radial accent — top right */}
         <div
           className="fixed top-0 right-0 w-[500px] h-[500px] pointer-events-none z-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at top right, rgba(255,140,50,0.04) 0%, transparent 70%)",
-          }}
+          style={{ background: "radial-gradient(ellipse at top right, rgba(255,140,50,0.04) 0%, transparent 70%)" }}
         />
 
         <Sidebar />
 
         <main className="relative z-[2]">
-          <section id="hero">
-            <Hero />
-          </section>
-          <Marquee
-            items={[
-              "GRAPHIC DESIGN",
-              "FRONT-END DEVELOPMENT",
-              "UI/UX DESIGN",
-              "BRANDING",
-              "WEB APPS",
-              "CREATIVE CODING",
-            ]}
-            speed={35}
-          />
+          <section id="hero"><Hero /></section>
 
-          <section id="about">
-            <About />
-          </section>
-          <section id="experience">
-            <Experience />
-          </section>
+          <Marquee items={["GRAPHIC DESIGN","FRONT-END DEVELOPMENT","UI/UX DESIGN","BRANDING","WEB APPS","CREATIVE CODING"]} speed={35} />
 
-          <Marquee
-            items={[
-              "FEATURED PROJECTS",
-              "DEVELOPMENT",
-              "GRAPHIC DESIGN",
-              "WEB APPLICATIONS",
-              "LANDING PAGES",
-              "DESIGN SYSTEMS",
-            ]}
-            speed={28}
-          />
+          <section id="about"><About /></section>
+          <section id="experience"><Experience /></section>
 
-          <section id="projects">
-            <Projects />
-          </section>
-          <section id="champions">
-            <Champions />
-          </section>
+          <Marquee items={["FEATURED PROJECTS","DEVELOPMENT","GRAPHIC DESIGN","WEB APPLICATIONS","LANDING PAGES","DESIGN SYSTEMS"]} speed={28} />
 
-          <Marquee
-            items={[
-              "REACT",
-              "TAILWIND CSS",
-              "FIGMA",
-              "PHOTOSHOP",
-              "NODE.JS",
-              "LARAVEL",
-              "MYSQL",
-              "GIT",
-              "FRAMER",
-              "INKSCAPE",
-            ]}
-            speed={20}
-          />
+          <section id="projects"><Projects /></section>
+          <section id="champions"><Champions /></section>
 
-          <section id="skills">
-            <Skills />
-          </section>
-          <section id="connect">
-            <Connect />
-          </section>
+          <Marquee items={["REACT","TAILWIND CSS","FIGMA","PHOTOSHOP","NODE.JS","LARAVEL","MYSQL","GIT","FRAMER","INKSCAPE"]} speed={20} />
+
+          <section id="skills"><Skills /></section>
+          <section id="connect"><Connect /></section>
           <Footer />
         </main>
 
         <style>{`
           html, body {
-            background-color: #080808; /* Memastikan background dasar browser berwarna gelap */
-            color: #f3f4f6; /* Opsional: set default text color ke abu-abu terang */
+            background-color: #080808;
             scroll-behavior: smooth;
             margin: 0;
             padding: 0;
           }
-          * {
-            box-sizing: border-box;
-          }
+          * { box-sizing: border-box; }
         `}</style>
       </div>
     </>

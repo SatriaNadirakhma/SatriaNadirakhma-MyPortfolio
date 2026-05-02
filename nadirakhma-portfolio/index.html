@@ -2,8 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ── Favicon ───────────────────────────────────────────────────── -->
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
 
+    <!-- ── Primary SEO ──────────────────────────────────────────────── -->
+    <title>Satria Rakhmadani — Front-End Developer & Graphic Designer</title>
+    <meta
+      name="description"
+      content="Portfolio of Satria Rakhmadani (Nadi Rakhma) — Front-End Developer and Graphic Designer based in Malang, Indonesia. Specializing in React, UI/UX, and creative digital experiences."
+    />
+    <meta name="author" content="Satria Rakhmadani" />
+    <meta
+      name="keywords"
+      content="Satria Rakhmadani, Nadi Rakhma, Front-End Developer, Graphic Designer, React, UI/UX, Malang, Indonesia, Portfolio"
+    />
+    <link rel="canonical" href="https://nadirakhma.vercel.app/" />
+    <meta name="theme-color" content="#080808" />
+
+    <!-- ── Open Graph ────────────────────────────────────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nadirakhma.vercel.app/" />
+    <meta property="og:title" content="Satria Rakhmadani — Front-End Developer & Graphic Designer" />
+    <meta property="og:description" content="Portfolio of Satria Rakhmadani — building user-centered digital experiences through code and design." />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Nadi Rakhma Portfolio" />
+
+    <!-- ── Twitter Card ──────────────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Satria Rakhmadani — Front-End Developer & Graphic Designer" />
+    <meta name="twitter:description" content="Portfolio of Satria Rakhmadani — building user-centered digital experiences through code and design." />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <!-- ── Google Fonts (Dipertahankan dari kode asli) ──────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,10 +48,39 @@
       rel="stylesheet"
     />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nadirakhma-portfolio</title>
+    <!-- ── Preload hero image (LCP fix) ─────────────────────────────── -->
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/profile1.jpg"
+      fetchPriority="high"
+    />
+
+    <!-- ── Structured Data JSON-LD ───────────────────────────────────── -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Satria Rakhmadani",
+        "alternateName": "Nadi Rakhma",
+        "url": "https://nadirakhma.vercel.app/",
+        "jobTitle": "Front-End Developer & Graphic Designer",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Malang",
+          "addressCountry": "ID"
+        },
+        "sameAs": [
+          "https://github.com/SatriaNadirakhma",
+          "https://www.linkedin.com/in/satria-rakhmadani/",
+          "https://dribbble.com/Rakhmadani",
+          "https://www.behance.net/rakhmanadi2005"
+        ]
+      }
+    </script>
   </head>
   <body>
+    <!-- ── Root & Entry Point (Dipertahankan dari kode asli) ────────── -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

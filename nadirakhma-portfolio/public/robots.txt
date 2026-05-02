@@ -1,0 +1,8 @@
+# robots.txt — Satria Rakhmadani Portfolio
+# Place this file at: /public/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://nadirakhma.vercel.app/sitemap.xml
