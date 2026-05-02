@@ -119,7 +119,7 @@ const Hero = () => {
                 {/* Year badge */}
                 <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0d0d0d] border border-white/10 flex items-center justify-center">
                   <span className="font-modern text-white/50 text-[9px] sm:text-[10px] tracking-wider leading-tight text-center">
-                    2025
+                    N4D1
                   </span>
                 </div>
               </div>
