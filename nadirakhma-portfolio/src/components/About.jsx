@@ -17,7 +17,7 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 lg:gap-20 items-start">
           {/* Left: sticker + small info */}
           <div className="flex flex-row lg:flex-col items-center lg:items-start gap-6 sm:gap-8">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rotate-6 hover:rotate-12 transition-transform duration-500">
+            <div className="w-20 h-20 sm:w-20 sm:h-20 flex-shrink-0 hover:rotate-12 transition-transform duration-500">
               <img
                 src={Sticker}
                 alt="Decorative sticker"
