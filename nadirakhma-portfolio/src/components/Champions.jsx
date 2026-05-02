@@ -11,7 +11,7 @@ const champions = [
     description:
       "Finalist in the UI/UX Design Competition at IT-FEST Universitas Brawijaya, showcasing innovative design solutions and user-centric interfaces.",
     image: ITFest,
-    certificate: EFest,
+    certificate: ITFest,
     link: "https://www.instagram.com/p/DDTd64kSFEY/?img_index=1",
     icon: Trophy,
     year: "2025",
@@ -22,7 +22,7 @@ const champions = [
     description:
       "Secured 1st place in the Poster Mahasiswa Category at E-Fest 2025, demonstrating exceptional creativity and design skills in a competitive environment.",
     image: EFest,
-    certificate: ITFest,
+    certificate: EFest,
     link: "https://www.instagram.com/p/DDTd64kSFEY/?img_index=1",
     icon: Trophy,
     year: "2025",
