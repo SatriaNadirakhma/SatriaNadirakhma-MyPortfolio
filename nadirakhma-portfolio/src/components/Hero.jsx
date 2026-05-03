@@ -20,7 +20,7 @@ const Hero = () => {
             <div>
               <div className="flex items-center gap-3 mb-8 sm:mb-10">
                 <div className="w-6 h-px bg-blue-400/60" />
-                <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/35">Front-End Developer &amp; Graphic Designer</p>
+                <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/35">Visual Designer &amp; Front-End Developer</p>
               </div>
 
               <h1 className="font-stylish italic text-white leading-[0.92] mb-8 sm:mb-10" style={{ fontSize: "clamp(42px, 7vw, 112px)" }}>
@@ -56,7 +56,7 @@ const Hero = () => {
                   */}
                   <img
                     src={Profile1}
-                    alt="Satria Rakhmadani — Front-End Developer & Graphic Designer"
+                    alt="Satria Rakhmadani — Visual Designer & Front-End Developer"
                     width="288"
                     height="360"
                     loading="eager"

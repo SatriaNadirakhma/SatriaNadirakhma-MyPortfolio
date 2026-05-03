@@ -30,7 +30,7 @@ const About = () => {
                 Role
               </p>
               <p className="text-sm font-modern text-white/50">
-                Graphic Designer
+                Visual Designer
               </p>
               <p className="text-sm font-modern text-white/50">
                 Front-End Developer

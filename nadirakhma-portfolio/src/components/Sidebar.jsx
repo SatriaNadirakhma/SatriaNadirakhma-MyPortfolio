@@ -82,7 +82,7 @@ const Sidebar = () => {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between">
           <a
             href="#hero"
-            className="font-stylish italic text-white text-xl sm:text-2xl tracking-wide hover:text-orange-200 transition-colors duration-300 select-none"
+            className="font-stylish italic text-white text-xl sm:text-2xl tracking-wide hover:text-blue-200 transition-colors duration-300 select-none"
           >
             Nadi Rakhma
           </a>
@@ -100,7 +100,7 @@ const Sidebar = () => {
               >
                 {item.label}
                 <span
-                  className={`absolute -bottom-0.5 left-0 h-px bg-orange-400 transition-all duration-300 ${
+                  className={`absolute -bottom-0.5 left-0 h-px bg-blue-400 transition-all duration-300 ${
                     activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
@@ -156,7 +156,7 @@ const Sidebar = () => {
                     {item.label}
                   </span>
                   {isActive && (
-                    <span className="ml-auto w-1.5 h-1.5 rounded-full bg-orange-400" />
+                    <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-400" />
                   )}
                 </a>
               );
@@ -195,7 +195,7 @@ const Sidebar = () => {
                   {item.label}
                 </span>
                 {isActive && (
-                  <span className="w-1 h-1 rounded-full bg-orange-400" />
+                  <span className="w-1 h-1 rounded-full bg-blue-400" />
                 )}
               </a>
             );
@@ -217,7 +217,7 @@ const Sidebar = () => {
               />
               {/* Badge — muncul kalau salah satu item "more" sedang aktif */}
               {moreIsActive && !moreOpen && (
-                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-orange-400" />
+                <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-blue-400" />
               )}
             </div>
             <span
@@ -228,7 +228,7 @@ const Sidebar = () => {
               More
             </span>
             {(moreIsActive || moreOpen) && (
-              <span className="w-1 h-1 rounded-full bg-orange-400" />
+              <span className="w-1 h-1 rounded-full bg-blue-400" />
             )}
           </button>
         </div>
