@@ -1,0 +1,22 @@
+import { SITE } from "@constants/index";
+
+const Footer = () => {
+  return (
+    <footer className="py-10 sm:py-12 px-5 sm:px-8 border-t border-white/[0.05]">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+          <p className="text-[10px] sm:text-xs font-modern text-white/25 tracking-wide">
+            &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
+          </p>
+        </div>
+
+        <p className="text-[10px] sm:text-xs font-modern text-white/15 tracking-wide">
+          Designed &amp; Built by {SITE.shortName}
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

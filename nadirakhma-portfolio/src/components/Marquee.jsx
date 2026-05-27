@@ -1,43 +1,32 @@
-// src/components/Marquee.jsx
-const Marquee = ({
-  items = [
-    "GRAPHIC DESIGN",
-    "FRONT-END DEVELOPMENT",
-    "UI/UX DESIGN",
-    "BRANDING",
-    "WEB DEVELOPMENT",
-    "CREATIVE CODING",
-    "REACT",
-    "FIGMA",
-  ],
-  speed = 30,
-}) => {
-  const repeated = [...items, ...items, ...items];
+import { useMemo, useRef } from "react";
+
+const Marquee = ({ items, speed = 30 }) => {
+  const duplicated = useMemo(() => [...items, ...items], [items]);
+  const containerRef = useRef(null);
 
   return (
-    <div className="overflow-hidden border-t border-b border-white/[0.06] py-3 sm:py-4 my-0 relative">
+    <div className="relative w-full overflow-hidden py-4 sm:py-6 border-y border-white/[0.05] my-0">
       <div
-        className="flex whitespace-nowrap"
+        ref={containerRef}
+        className="flex gap-8 sm:gap-12 whitespace-nowrap"
         style={{
-          animation: `marquee-scroll ${speed}s linear infinite`,
-          width: "max-content",
+          animation: `marquee ${items.length * (speed / 10)}s linear infinite`,
         }}
       >
-        {repeated.map((item, i) => (
+        {duplicated.map((item, i) => (
           <span
-            key={i}
-            className="inline-flex items-center gap-5 sm:gap-8 mx-4 sm:mx-6 text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase font-modern text-white/20"
+            key={`${item}-${i}`}
+            className="text-[10px] sm:text-xs md:text-sm tracking-[0.3em] font-modern text-white/20 font-medium"
           >
             {item}
-            <span className="text-blue-400/60 text-sm sm:text-base">✦</span>
           </span>
         ))}
       </div>
 
       <style>{`
-        @keyframes marquee-scroll {
+        @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-33.333%); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
     </div>

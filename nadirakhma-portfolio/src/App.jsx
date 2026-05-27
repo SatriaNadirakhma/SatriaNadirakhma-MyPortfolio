@@ -1,42 +1,32 @@
-// src/App.jsx
 import { useState, useEffect } from "react";
-import Sidebar from "./components/Sidebar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Experience from "./components/Experience";
-import Projects from "./components/Projects";
-import Champions from "./components/Champions";
-import Skills from "./components/Skills";
-import Connect from "./components/Connect";
-import Footer from "./components/Footer";
-import LoadingScreen from "./components/LoadingScreen";
-import Marquee from "./components/Marquee";
+import { ErrorBoundary } from "@components/ErrorBoundary";
+import Sidebar from "@components/Sidebar";
+import LoadingScreen from "@components/LoadingScreen";
+import Marquee from "@components/Marquee";
+import Hero from "@sections/Hero";
+import About from "@sections/About";
+import Experience from "@sections/Experience";
+import Projects from "@sections/Projects";
+import Champions from "@sections/Champions";
+import Skills from "@sections/Skills";
+import Connect from "@sections/Connect";
+import Footer from "@sections/Footer";
+import { SECTION_IDS, MARQUEE_ITEMS } from "@constants/index";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     document.body.style.overflow = isLoading ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isLoading]);
 
   return (
-    <>
-      {/*
-        PERFORMANCE FIX 1:
-        LoadingScreen SELALU di-mount (tidak pakai conditional {isLoading && ...}).
-        Jika conditional, React unmount sebelum fade-out selesai = glitch.
-        LoadingScreen mengurus tampil/sembunyi sendiri via internal state.
-      */}
+    <ErrorBoundary>
       <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
 
-      {/*
-        PERFORMANCE FIX 2:
-        Pakai visibility:hidden bukan opacity-0 + conditional render.
-        - visibility:hidden = browser skip paint, tapi DOM tetap ada
-        - Karena DOM tetap ada, browser bisa preload gambar hero di background
-          selama loading screen tampil → LCP jauh lebih cepat setelah selesai.
-      */}
       <div
         className="min-h-screen bg-[#080808] text-gray-100 relative"
         style={{
@@ -57,28 +47,45 @@ function App() {
 
         <div
           className="fixed top-0 right-0 w-[500px] h-[500px] pointer-events-none z-0"
-          style={{ background: "radial-gradient(ellipse at top right, rgba(255,140,50,0.04) 0%, transparent 70%)" }}
+          style={{
+            background:
+              "radial-gradient(ellipse at top right, rgba(255,140,50,0.04) 0%, transparent 70%)",
+          }}
         />
 
         <Sidebar />
 
         <main className="relative z-[2]">
-          <section id="hero"><Hero /></section>
+          <section id={SECTION_IDS.hero}>
+            <Hero />
+          </section>
 
-          <Marquee items={["GRAPHIC DESIGN","FRONT-END DEVELOPMENT","UI/UX DESIGN","BRANDING","WEB APPS","CREATIVE CODING"]} speed={35} />
+          <Marquee items={MARQUEE_ITEMS.primary} speed={35} />
 
-          <section id="about"><About /></section>
-          <section id="experience"><Experience /></section>
+          <section id={SECTION_IDS.about}>
+            <About />
+          </section>
+          <section id={SECTION_IDS.experience}>
+            <Experience />
+          </section>
 
-          <Marquee items={["FEATURED PROJECTS","DEVELOPMENT","GRAPHIC DESIGN","WEB APPLICATIONS","LANDING PAGES","DESIGN SYSTEMS"]} speed={28} />
+          <Marquee items={MARQUEE_ITEMS.secondary} speed={28} />
 
-          <section id="projects"><Projects /></section>
-          <section id="champions"><Champions /></section>
+          <section id={SECTION_IDS.projects}>
+            <Projects />
+          </section>
+          <section id={SECTION_IDS.champions}>
+            <Champions />
+          </section>
 
-          <Marquee items={["REACT","TAILWIND CSS","FIGMA","PHOTOSHOP","NODE.JS","LARAVEL","MYSQL","GIT","FRAMER","INKSCAPE"]} speed={20} />
+          <Marquee items={MARQUEE_ITEMS.tech} speed={20} />
 
-          <section id="skills"><Skills /></section>
-          <section id="connect"><Connect /></section>
+          <section id={SECTION_IDS.skills}>
+            <Skills />
+          </section>
+          <section id={SECTION_IDS.connect}>
+            <Connect />
+          </section>
           <Footer />
         </main>
 
@@ -92,7 +99,7 @@ function App() {
           * { box-sizing: border-box; }
         `}</style>
       </div>
-    </>
+    </ErrorBoundary>
   );
 }
 
