@@ -3,6 +3,7 @@ import Tatib from "@assets/image/tatib.jpg";
 import Sipinta from "@assets/image/sipinta.jpg";
 import K3SiantarTop from "@assets/image/k3.jpg";
 import OranjixHMTI from "@assets/image/oranjixhmti.png";
+import Alceena from "@assets/image/alceena.png";
 import { Code, Palette } from "lucide-react";
 
 export const allProjects = [
@@ -55,6 +56,16 @@ export const allProjects = [
     icon: Code,
     category: "Development",
     span: "normal",
+  },
+  {
+    title: "Alceena'23 Social Media Design",
+    description:
+      "Designing social media content for Alceena'23, class of 2023 student account for the Information Technology Department at the Malang State Polytechnic, to enhance online presence and engagement. (source: Behance - Nadi Rakhma)",
+    image: Alceena,
+    link: "https://www.behance.net/gallery/188506751/Social-Media-Designs-Alceena",
+    icon: Palette,
+    category: "Graphic Design",
+    span: "wide",
   },
 ];
 
