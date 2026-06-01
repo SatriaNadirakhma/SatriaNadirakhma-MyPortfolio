@@ -16,7 +16,6 @@ export const allProjects = [
     link: "https://k3-phi.vercel.app/",
     icon: Code,
     category: "Development",
-    span: "normal",
   },
   {
     title: "SIPINTA -- TOEIC Registration System",
@@ -26,7 +25,6 @@ export const allProjects = [
     link: "https://github.com/SatriaNadirakhma/PBLSEM4",
     icon: Code,
     category: "Development",
-    span: "normal",
   },
   {
     title: "Sistem Informasi Tata Tertib",
@@ -36,7 +34,6 @@ export const allProjects = [
     link: "https://github.com/aldofebryn/project",
     icon: Code,
     category: "Development",
-    span: "normal",
   },
   {
     title: "Oranji Studio x HMTI Polinema",
@@ -46,7 +43,6 @@ export const allProjects = [
     link: "https://www.instagram.com/p/DDTd64kSFEY/?img_index=1",
     icon: Palette,
     category: "Graphic Design",
-    span: "normal",
   },
   {
     title: "Sistem Ekspedisi (Terminal)",
@@ -56,7 +52,6 @@ export const allProjects = [
     link: "https://github.com/zidnafaz/Sistem-Ekspedisi",
     icon: Code,
     category: "Development",
-    span: "normal",
   },
   {
     title: "Alceena'23 Social Media Design",
@@ -66,7 +61,6 @@ export const allProjects = [
     link: "https://www.behance.net/gallery/188506751/Social-Media-Designs-Alceena",
     icon: Palette,
     category: "Graphic Design",
-    span: "normal",
   },
   {
     title: "MitraBoost - UI/UX Design",
@@ -76,7 +70,6 @@ export const allProjects = [
     link: "https://www.figma.com/deck/xrebbWvdKPfUD4AzOoO40S",
     icon: Palette,
     category: "Graphic Design",
-    span: "normal",
   },
 ];
 

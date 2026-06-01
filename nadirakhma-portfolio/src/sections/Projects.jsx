@@ -3,18 +3,16 @@ import { ArrowUpRight } from "lucide-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 
-const ProjectCard = ({ title, description, image, link, icon: Icon, category, span }) => {
+const ProjectCard = ({ title, description, image, link, icon: Icon, category }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] cursor-pointer ${
-        span === "wide" ? "sm:col-span-2" : ""
-      }`}
+      className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className={`overflow-hidden ${span === "wide" ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
+      <div className="overflow-hidden aspect-[4/3]">
         <img
           src={image}
           alt={title}
