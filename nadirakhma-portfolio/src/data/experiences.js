@@ -38,7 +38,7 @@ export const experiences = [
     accent: "blue",
   },
   {
-    title: "Internship",
+    title: "IT Intern",
     company: "PT. Petrokimia Gresik",
     date: "Jan 2026 -- Present",
     description:
