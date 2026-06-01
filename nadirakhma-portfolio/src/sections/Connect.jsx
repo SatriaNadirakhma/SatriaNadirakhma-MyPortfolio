@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Send, MessageCircle } from "lucide-react";
 import { socialLinks } from "@data/socialLinks";
 import { SECTION_IDS } from "@constants/index";
 
@@ -15,7 +15,7 @@ const Connect = () => {
           </div>
 
           <h2
-            className="font-stylish italic text-white leading-[0.92] mb-8 sm:mb-12"
+            className="font-modern font-bold text-white leading-[0.92] mb-8 sm:mb-12"
             style={{ fontSize: "clamp(48px, 9vw, 144px)" }}
           >
             Let's{" "}
@@ -31,10 +31,30 @@ const Connect = () => {
             together.
           </h2>
 
-          <p className="text-sm sm:text-base font-modern text-white/35 max-w-md leading-relaxed mb-12 sm:mb-16">
-            Looking for new opportunities and project collaborations. Feel free to reach out -- I'd
-            love to hear from you.
+          <p className="text-sm sm:text-base font-modern text-white/35 max-w-md leading-relaxed mb-6 sm:mb-8">
+            Open to internship opportunities &amp; freelance projects.
+            <br />
+            Available for new opportunities from August 2026.
           </p>
+
+          <div className="flex flex-wrap gap-3 sm:gap-4 mb-12 sm:mb-16">
+            <a
+              href="mailto:rakhmadanisatria@gmail.com"
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-white/25 rounded-full font-modern text-xs sm:text-sm text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+            >
+              <Send className="w-3.5 h-3.5" /> Send Email{" "}
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
+            <a
+              href="https://wa.me/6285335510121"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wa-btn group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-white/10 rounded-full font-modern text-xs sm:text-sm text-white/40 transition-all duration-300"
+            >
+              <MessageCircle className="w-3.5 h-3.5" /> WhatsApp{" "}
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
+          </div>
 
           <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">
             {socialLinks.map((link, i) => (
@@ -53,6 +73,14 @@ const Connect = () => {
           </div>
         </div>
       </div>
+
+      <style>{`
+        .wa-btn:hover {
+          background-color: #25D366;
+          color: #FFFFFF;
+          border-color: #25D366;
+        }
+      `}</style>
     </section>
   );
 };

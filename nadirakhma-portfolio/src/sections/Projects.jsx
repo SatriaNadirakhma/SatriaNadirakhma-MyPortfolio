@@ -43,6 +43,17 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
           <p className="text-xs sm:text-sm font-modern text-white/50 line-clamp-2 leading-relaxed mb-3">
             {description}
           </p>
+
+          {(title.includes("SIPINTA") || title.includes("K3 Siantar Top")) && (
+            <a
+              href="#"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] tracking-[0.12em] uppercase font-modern text-white/25 hover:text-white/60 transition-colors duration-300 mb-2"
+            >
+              Case Study <ArrowUpRight className="w-2.5 h-2.5" />
+            </a>
+          )}
+
           <a
             href={link}
             target="_blank"
@@ -79,7 +90,7 @@ const Projects = () => {
               </p>
             </div>
             <h2
-              className="font-stylish italic text-white leading-[0.92]"
+              className="font-modern font-bold text-white leading-[0.92]"
               style={{ fontSize: "clamp(36px, 6vw, 96px)" }}
             >
               <span

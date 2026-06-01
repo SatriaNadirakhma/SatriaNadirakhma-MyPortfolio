@@ -206,7 +206,7 @@ const Champions = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <h2
-            className="font-stylish italic text-white leading-[0.92]"
+            className="font-modern font-bold text-white leading-[0.92]"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
             Champions

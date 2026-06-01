@@ -51,7 +51,7 @@ export const MARQUEE_ITEMS = {
 };
 
 export const STATS = [
-  { value: "2+", label: "Years Experience" },
-  { value: "10+", label: "Projects Built" },
-  { value: "5+", label: "Tools Mastered" },
+  { value: "2+", label: "Industry Experience" },
+  { value: "10+", label: "Projects Completed" },
+  { value: "5+", label: "Clients & Collaborations" },
 ];
