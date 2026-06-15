@@ -1,7 +1,7 @@
-import Kompen from "@assets/image/kompen.jpg";
-import ITDEC from "@assets/image/itdecpeeps.jpeg";
-import Oranji from "@assets/image/oranjiteam.jpg";
-import Petrokimia from "@assets/image/petrokimia.jpg";
+import Kompen from "@assets/image/kompen.webp";
+import ITDEC from "@assets/image/itdecpeeps.webp";
+import Oranji from "@assets/image/oranjiteam.webp";
+import Petrokimia from "@assets/image/petrokimia.webp";
 
 export const experiences = [
   {

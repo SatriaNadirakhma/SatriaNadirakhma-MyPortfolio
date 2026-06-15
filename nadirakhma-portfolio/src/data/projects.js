@@ -1,10 +1,10 @@
-import Ekspedisi from "@assets/image/ekspedisi.jpg";
-import Tatib from "@assets/image/tatib.jpg";
-import Sipinta from "@assets/image/sipinta.jpg";
-import K3SiantarTop from "@assets/image/k3.jpg";
-import OranjixHMTI from "@assets/image/oranjixhmti.png";
-import Alceena from "@assets/image/alceena.png";
-import MitraBoost from "@assets/image/mitraboost.jpg";
+import Ekspedisi from "@assets/image/ekspedisi.webp";
+import Tatib from "@assets/image/tatib.webp";
+import Sipinta from "@assets/image/sipinta.webp";
+import K3SiantarTop from "@assets/image/k3.webp";
+import OranjixHMTI from "@assets/image/oranjixhmti.webp";
+import Alceena from "@assets/image/alceena.webp";
+import MitraBoost from "@assets/image/mitraboost.webp";
 import { Code, Palette } from "lucide-react";
 
 export const allProjects = [

@@ -44,7 +44,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
             {description}
           </p>
 
-          {(title.includes("SIPINTA") || title.includes("K3 Siantar Top")) && (
+          {/* {(title.includes("SIPINTA") || title.includes("K3 Siantar Top")) && (
             <a
               href="#"
               onClick={(e) => e.stopPropagation()}
@@ -52,7 +52,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
             >
               Case Study <ArrowUpRight className="w-2.5 h-2.5" />
             </a>
-          )}
+          )} */}
 
           <a
             href={link}

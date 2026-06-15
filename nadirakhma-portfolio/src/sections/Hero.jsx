@@ -1,5 +1,5 @@
 import { Element } from "react-scroll";
-import Profile1 from "@assets/profile1.jpg";
+import Profile1 from "@assets/profile1.webp";
 import { ArrowRight, Download, MapPin } from "lucide-react";
 import cvATS from "@assets/pdf/cv-ats.pdf";
 import { SECTION_IDS } from "@constants/index";

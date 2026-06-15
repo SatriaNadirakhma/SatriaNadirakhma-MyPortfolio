@@ -1,5 +1,5 @@
-import EFest from "@assets/image/efest.png";
-import ITFest from "@assets/image/itfest.png";
+import EFest from "@assets/image/efest.webp";
+import ITFest from "@assets/image/itfest.webp";
 import { Trophy } from "lucide-react";
 
 export const champions = [
