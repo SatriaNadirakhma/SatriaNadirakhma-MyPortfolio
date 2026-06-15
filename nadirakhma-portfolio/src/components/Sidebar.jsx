@@ -33,7 +33,7 @@ const Sidebar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 px-5 sm:px-8 py-4 transition-all duration-300 ${
-          scrolled ? "bg-[#080808]/80 backdrop-blur-xl border-b border-white/[0.05]" : ""
+          scrolled ? "bg-[#111111]/50 backdrop-blur-lg" : ""
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
