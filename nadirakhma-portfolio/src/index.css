@@ -8,14 +8,13 @@
   --font-modern: "Inter", sans-serif;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 html {
   background-color: #fafafa;
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    background-color: #080808;
-  }
+html.dark {
+  background-color: #080808;
 }
 
 :root {
@@ -30,18 +29,16 @@ html {
   --color-stroke: rgba(17, 24, 39, 0.65);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #080808;
-    --color-surface: rgba(255, 255, 255, 0.02);
-    --color-text-primary: #ffffff;
-    --color-text-secondary: rgba(255, 255, 255, 0.4);
-    --color-text-muted: rgba(255, 255, 255, 0.3);
-    --color-text-subtle: rgba(255, 255, 255, 0.2);
-    --color-border: rgba(255, 255, 255, 0.07);
-    --color-border-subtle: rgba(255, 255, 255, 0.05);
-    --color-stroke: rgba(255, 255, 255, 0.65);
-  }
+.dark {
+  --color-bg: #080808;
+  --color-surface: rgba(255, 255, 255, 0.02);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.4);
+  --color-text-muted: rgba(255, 255, 255, 0.3);
+  --color-text-subtle: rgba(255, 255, 255, 0.2);
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
+  --color-stroke: rgba(255, 255, 255, 0.65);
 }
 
 @keyframes fade-in {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@context/ThemeContext";
 import Logo from "@assets/logo.png";
 import { SECTION_IDS } from "@constants/index";
 
@@ -15,6 +16,8 @@ const NAV_ITEMS = [
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -49,7 +52,7 @@ const Sidebar = () => {
             <img src={Logo} alt="Nadi Rakhma Logo" className="h-8 w-auto" />
           </Link>
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.to}
@@ -62,15 +65,34 @@ const Sidebar = () => {
                 {item.label}
               </Link>
             ))}
+
+            {/* theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-1.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors duration-300"
+              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-500 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors p-1"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-1 rounded-full text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-300"
+              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-1 text-gray-500 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </nav>
 
