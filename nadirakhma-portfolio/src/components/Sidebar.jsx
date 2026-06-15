@@ -46,13 +46,13 @@ const Sidebar = () => {
             to={SECTION_IDS.hero}
             smooth
             duration={500}
-            className="cursor-pointer"
+            className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
             aria-label="Back to top"
           >
             <img src={Logo} alt="Nadi Rakhma Logo" className="h-8 w-auto" />
           </Link>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.to}
@@ -60,7 +60,7 @@ const Sidebar = () => {
                 smooth
                 duration={500}
                 offset={-60}
-                className="text-[11px] tracking-[0.2em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/35 dark:hover:text-white transition-colors duration-300 cursor-pointer"
+                className="text-[11px] tracking-[0.2em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/35 dark:hover:text-white transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
               >
                 {item.label}
               </Link>
@@ -69,7 +69,7 @@ const Sidebar = () => {
             {/* theme toggle */}
             <button
               onClick={toggleTheme}
-              className="p-1.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors duration-300"
+              className="p-1.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -79,7 +79,7 @@ const Sidebar = () => {
           <div className="md:hidden flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-1 rounded-full text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-300"
+              className="p-1 rounded-full text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -87,7 +87,7 @@ const Sidebar = () => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-1 text-gray-500 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors"
+              className="p-1 text-gray-500 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

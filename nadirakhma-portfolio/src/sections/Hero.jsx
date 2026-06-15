@@ -179,7 +179,7 @@ const Hero = () => {
               <div className="flex flex-wrap gap-3 sm:gap-4">
                 <a
                   href={`#${SECTION_IDS.projects}`}
-                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300"
+                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   style={{
                     background: isDark
                       ? "rgba(59,130,246,0.15)"
@@ -214,7 +214,7 @@ const Hero = () => {
 
                 <a
                   href={`#${SECTION_IDS.projects}`}
-                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300"
+                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   style={{
                     border: isDark
                       ? "1px solid rgba(255,255,255,0.1)"
@@ -248,7 +248,7 @@ const Hero = () => {
                   href={cvATS}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300"
+                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   style={{
                     border: isDark
                       ? "1px solid rgba(255,255,255,0.08)"
@@ -304,7 +304,7 @@ const Hero = () => {
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 scale-105 hover:scale-100"
                   />
                 </div>
 
@@ -408,7 +408,7 @@ const Hero = () => {
 
         {/* scroll indicator */}
         <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-20 transition-colors duration-300`}>
-          <div className={`w-px h-10 animate-pulse-slow ${isDark ? "bg-white" : "bg-gray-900"}`} />
+          <div className={`w-px h-10 animate-pulse-line ${isDark ? "bg-white" : "bg-gray-900"}`} />
           <span className={`text-[9px] tracking-[0.3em] uppercase font-modern ${isDark ? "text-white" : "text-gray-900"}`}>
             Scroll
           </span>

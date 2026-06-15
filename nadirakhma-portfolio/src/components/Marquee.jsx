@@ -8,7 +8,7 @@ const Marquee = ({ items, speed = 30 }) => {
     <div className="relative w-full overflow-hidden py-4 sm:py-6 border-y border-gray-200 dark:border-white/[0.05] my-0">
       <div
         ref={containerRef}
-        className="flex gap-8 sm:gap-12 whitespace-nowrap"
+        className="flex gap-8 sm:gap-12 whitespace-nowrap marquee-track"
         style={{
           animation: `marquee ${items.length * (speed / 10)}s linear infinite`,
         }}
@@ -22,13 +22,6 @@ const Marquee = ({ items, speed = 30 }) => {
           </span>
         ))}
       </div>
-
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
     </div>
   );
 };

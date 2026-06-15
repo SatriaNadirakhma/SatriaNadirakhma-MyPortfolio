@@ -9,7 +9,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] cursor-pointer"
+      className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] cursor-pointer hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -17,7 +17,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
         <img
           src={image}
           alt={title}
-          className={`w-full h-full object-cover transition-all duration-700 ${
+          className={`w-full h-full object-cover transition-all duration-500 ${
             hovered ? "scale-105 brightness-75" : "scale-100 brightness-50"
           }`}
           loading="lazy"
@@ -37,7 +37,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
         </h3>
 
         <div
-          className={`transition-all duration-400 overflow-hidden ${
+          className={`transition-all duration-300 overflow-hidden ${
             hovered ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
           }`}
         >
@@ -50,7 +50,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs tracking-[0.15em] uppercase font-modern text-white border border-white/20 rounded-full px-3 sm:px-4 py-1.5 hover:bg-white hover:text-black transition-all duration-300"
+              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs tracking-[0.15em] uppercase font-modern text-white border border-white/20 rounded-full px-3 sm:px-4 py-1.5 hover:bg-white hover:text-black transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             Visit Project
             <ArrowUpRight className="w-3 h-3" />
@@ -106,7 +106,7 @@ const Projects = () => {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs tracking-[0.12em] uppercase font-modern transition-all duration-300 ${
+                className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs tracking-[0.12em] uppercase font-modern transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                   activeFilter === filter
                     ? "bg-gray-900 text-white dark:bg-white dark:text-black"
                     : "border border-gray-300 dark:border-white/15 text-gray-500 dark:text-white/35 hover:text-gray-900 dark:hover:text-white hover:border-gray-500 dark:hover:border-white/35"

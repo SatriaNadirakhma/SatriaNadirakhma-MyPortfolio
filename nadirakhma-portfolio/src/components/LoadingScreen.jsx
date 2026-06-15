@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
 const LoadingScreen = ({ onLoadingComplete }) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [visible, setVisible] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -15,21 +16,28 @@ const LoadingScreen = ({ onLoadingComplete }) => {
       });
     }, 20);
 
-    const timeout = setTimeout(() => {
-      setIsVisible(false);
-      setTimeout(() => onLoadingComplete?.(), 400);
+    const outTimer = setTimeout(() => {
+      setFadeOut(true);
+      setTimeout(() => {
+        setVisible(false);
+        onLoadingComplete?.();
+      }, 400);
     }, 2200);
 
     return () => {
       clearInterval(interval);
-      clearTimeout(timeout);
+      clearTimeout(outTimer);
     };
   }, [onLoadingComplete]);
 
-  if (!isVisible) return null;
+  if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center transition-opacity duration-400 bg-[#fafafa] dark:bg-[#080808]">
+    <div
+      className={`fixed inset-0 z-[999] flex items-center justify-center transition-opacity duration-400 ease-out bg-[#fafafa] dark:bg-[#080808] ${
+        fadeOut ? "opacity-0" : "opacity-100"
+      }`}
+    >
       <div className="text-center">
         <h1 className="font-stylish italic text-4xl sm:text-5xl md:text-6xl mb-8 text-gray-900 dark:text-white">
           Nadi Rakhma

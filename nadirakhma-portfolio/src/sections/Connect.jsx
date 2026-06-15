@@ -46,7 +46,7 @@ const Connect = () => {
           <div className="flex flex-wrap gap-3 sm:gap-4 mb-12 sm:mb-16">
             <a
               href="mailto:rakhmadanisatria@gmail.com"
-              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-300 dark:border-white/25 rounded-full font-modern text-xs sm:text-sm text-gray-900 dark:text-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-300 dark:border-white/25 rounded-full font-modern text-xs sm:text-sm text-gray-900 dark:text-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
               <Send className="w-3.5 h-3.5" /> Send Email{" "}
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -55,7 +55,7 @@ const Connect = () => {
               href="https://wa.me/6285335510121"
               target="_blank"
               rel="noopener noreferrer"
-              className="wa-btn group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-200 dark:border-white/10 rounded-full font-modern text-xs sm:text-sm text-gray-500 dark:text-white/40 transition-all duration-300"
+              className="wa-btn group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-200 dark:border-white/10 rounded-full font-modern text-xs sm:text-sm text-gray-500 dark:text-white/40 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
               <MessageCircle className="w-3.5 h-3.5" /> WhatsApp{" "}
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -69,7 +69,7 @@ const Connect = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-xs tracking-[0.18em] uppercase font-modern text-gray-400 dark:text-white/25 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+                className="group inline-flex items-center gap-2 text-xs tracking-[0.18em] uppercase font-modern text-gray-400 dark:text-white/25 hover:text-gray-900 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
               >
                 <link.icon className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-300" />
                 {link.name}

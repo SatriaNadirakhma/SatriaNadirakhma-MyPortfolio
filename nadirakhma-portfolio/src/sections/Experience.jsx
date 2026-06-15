@@ -13,7 +13,7 @@ const ExperienceCard = ({ title, company, date, description, image, icon, link, 
       className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
         expanded
           ? accentColors[accent]
-          : "border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/15"
+          : "border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
       }`}
     >
       <div className="relative h-36 sm:h-44 overflow-hidden">
@@ -42,7 +42,7 @@ const ExperienceCard = ({ title, company, date, description, image, icon, link, 
         </h3>
 
         <div
-          className={`overflow-hidden transition-all duration-400 ${
+          className={`overflow-hidden transition-all duration-300 ${
             expanded ? "max-h-40 mb-4" : "max-h-0"
           }`}
         >
@@ -54,7 +54,7 @@ const ExperienceCard = ({ title, company, date, description, image, icon, link, 
         <div className="flex items-center gap-3">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 flex items-center gap-1.5"
+            className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
           >
             {expanded ? (
               <>
@@ -69,7 +69,7 @@ const ExperienceCard = ({ title, company, date, description, image, icon, link, 
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 inline-flex items-center gap-1"
+            className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
           >
             Social Media <ArrowUpRight className="w-3 h-3" />
           </a>

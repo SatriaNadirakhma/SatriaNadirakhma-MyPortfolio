@@ -11,7 +11,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto">
 
         <div className="flex items-center gap-5 mb-12 sm:mb-16">
-          <div className="w-8 h-px bg-gray-300 dark:bg-white/20" />
+          <div className="w-6 h-px bg-gray-300 dark:bg-white/20" />
           <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-gray-500 dark:text-white/30">
             About Me
           </p>

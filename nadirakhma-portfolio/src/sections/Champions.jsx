@@ -36,7 +36,7 @@ const CertificateModal = ({ src, title, onClose }) => {
       onClick={onClose}
     >
       <div
-        className={`relative w-full max-w-2xl border rounded-2xl overflow-hidden shadow-2xl ${
+        className={`relative w-full max-w-2xl border rounded-xl overflow-hidden shadow-2xl ${
           isDark
             ? "bg-[#0f0f0f] border-white/[0.07]"
             : "bg-white border-gray-200"
@@ -57,7 +57,7 @@ const CertificateModal = ({ src, title, onClose }) => {
             onClick={onClose}
             className={`p-1 -mr-1 transition-colors ${
               isDark ? "text-white/25 hover:text-white" : "text-gray-400 hover:text-gray-900"
-            }`}
+            } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm`}
             aria-label="Close preview"
           >
             <X className="w-4 h-4" />
@@ -139,7 +139,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
         className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
           expanded
             ? "border-orange-500/30 bg-orange-500/5"
-            : "border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/15"
+            : "border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
         }`}
       >
         <div className="relative h-44 sm:h-52 overflow-hidden">
@@ -180,7 +180,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
           <div className="flex items-center gap-3 flex-wrap">
             <button
               onClick={() => setExpanded(!expanded)}
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 flex items-center gap-1.5"
+              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
             >
               {expanded ? (
                 <>
@@ -195,7 +195,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
 
             <button
               onClick={() => setCertOpen(true)}
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-orange-400 transition-colors duration-300 inline-flex items-center gap-1.5"
+              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-orange-400 transition-colors duration-300 inline-flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
             >
               <ZoomIn className="w-3 h-3" /> Certificate
             </button>
@@ -206,7 +206,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 inline-flex items-center gap-1"
+              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
             >
               View Post <ArrowUpRight className="w-3 h-3" />
             </a>
