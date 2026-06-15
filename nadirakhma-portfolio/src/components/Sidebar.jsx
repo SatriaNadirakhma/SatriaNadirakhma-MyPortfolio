@@ -33,7 +33,9 @@ const Sidebar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 px-5 sm:px-8 py-4 transition-all duration-300 ${
-          scrolled ? "bg-[#111111]/50 backdrop-blur-lg" : ""
+          scrolled
+            ? "bg-white/70 backdrop-blur-lg shadow-sm dark:bg-[#111111]/50 dark:shadow-none"
+            : ""
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -55,7 +57,7 @@ const Sidebar = () => {
                 smooth
                 duration={500}
                 offset={-60}
-                className="text-[11px] tracking-[0.2em] uppercase font-modern text-white/35 hover:text-white transition-colors duration-300 cursor-pointer"
+                className="text-[11px] tracking-[0.2em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/35 dark:hover:text-white transition-colors duration-300 cursor-pointer"
               >
                 {item.label}
               </Link>
@@ -64,7 +66,7 @@ const Sidebar = () => {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white/60 hover:text-white transition-colors p-1"
+            className="md:hidden text-gray-500 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors p-1"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -74,7 +76,7 @@ const Sidebar = () => {
 
       {isOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-[#080808]/95 backdrop-blur-xl" />
+          <div className="absolute inset-0 backdrop-blur-xl bg-white/95 dark:bg-[#080808]/95" />
 
           <div className="relative flex flex-col items-center justify-center h-full gap-8">
             {NAV_ITEMS.map((item) => (
@@ -85,7 +87,7 @@ const Sidebar = () => {
                 duration={500}
                 offset={-60}
                 onClick={() => setIsOpen(false)}
-                className="text-lg tracking-[0.3em] uppercase font-modern text-white/40 hover:text-white transition-colors duration-300 cursor-pointer"
+                className="text-lg tracking-[0.3em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-300 cursor-pointer"
               >
                 {item.label}
               </Link>

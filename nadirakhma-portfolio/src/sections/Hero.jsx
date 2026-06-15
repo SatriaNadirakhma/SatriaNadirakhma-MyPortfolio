@@ -1,23 +1,29 @@
 import { Element } from "react-scroll";
+import { useTheme } from "@context/ThemeContext";
 import Profile1 from "@assets/profile1.webp";
 import { ArrowRight, Download, MapPin } from "lucide-react";
 import cvATS from "@assets/pdf/cv-ats.pdf";
 import { SECTION_IDS } from "@constants/index";
 
 const Hero = () => {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   return (
     <Element name={SECTION_IDS.hero}>
       <section
         id={SECTION_IDS.hero}
-        className="relative min-h-screen flex items-center px-5 sm:px-8 pt-20 pb-16 overflow-hidden"
-        style={{ backgroundColor: "#080808" }}
+        className={`relative min-h-screen flex items-center px-5 sm:px-8 pt-20 pb-16 overflow-hidden transition-colors duration-300 ${
+          isDark ? "bg-[#080808]" : "bg-[#fafafa]"
+        }`}
       >
         {/* ── dot grid pattern ── */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            backgroundImage: isDark
+              ? "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)"
+              : "radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px)",
             backgroundSize: "30px 30px",
           }}
         />
@@ -26,8 +32,9 @@ const Hero = () => {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(ellipse 75% 65% at 50% 50%, transparent 35%, #080808 100%)",
+            background: isDark
+              ? "radial-gradient(ellipse 75% 65% at 50% 50%, transparent 35%, #080808 100%)"
+              : "radial-gradient(ellipse 75% 65% at 50% 50%, transparent 35%, #fafafa 100%)",
           }}
         />
 
@@ -35,8 +42,9 @@ const Hero = () => {
         <div
           className="absolute top-0 left-0 right-0 h-px pointer-events-none"
           style={{
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(147,197,253,0.15) 30%, rgba(147,197,253,0.3) 50%, rgba(147,197,253,0.15) 70%, transparent 100%)",
+            background: isDark
+              ? "linear-gradient(90deg, transparent 0%, rgba(147,197,253,0.15) 30%, rgba(147,197,253,0.3) 50%, rgba(147,197,253,0.15) 70%, transparent 100%)"
+              : "linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.15) 30%, rgba(59,130,246,0.3) 50%, rgba(59,130,246,0.15) 70%, transparent 100%)",
           }}
         />
 
@@ -44,8 +52,9 @@ const Hero = () => {
         <div
           className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
           style={{
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(147,197,253,0.08) 40%, rgba(147,197,253,0.15) 50%, rgba(147,197,253,0.08) 60%, transparent 100%)",
+            background: isDark
+              ? "linear-gradient(90deg, transparent 0%, rgba(147,197,253,0.08) 40%, rgba(147,197,253,0.15) 50%, rgba(147,197,253,0.08) 60%, transparent 100%)"
+              : "linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.08) 40%, rgba(59,130,246,0.15) 50%, rgba(59,130,246,0.08) 60%, transparent 100%)",
           }}
         />
 
@@ -53,7 +62,9 @@ const Hero = () => {
         <div
           className="absolute top-[-10%] right-[-5%] w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full pointer-events-none"
           style={{
-            background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)",
+            background: isDark
+              ? "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -62,7 +73,9 @@ const Hero = () => {
         <div
           className="absolute bottom-[-10%] left-[-5%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full pointer-events-none"
           style={{
-            background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
+            background: isDark
+              ? "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -71,8 +84,9 @@ const Hero = () => {
         <div
           className="absolute left-0 top-0 bottom-0 w-px pointer-events-none hidden lg:block"
           style={{
-            background:
-              "linear-gradient(180deg, transparent 0%, rgba(147,197,253,0.08) 30%, rgba(147,197,253,0.15) 50%, rgba(147,197,253,0.08) 70%, transparent 100%)",
+            background: isDark
+              ? "linear-gradient(180deg, transparent 0%, rgba(147,197,253,0.08) 30%, rgba(147,197,253,0.15) 50%, rgba(147,197,253,0.08) 70%, transparent 100%)"
+              : "linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.08) 30%, rgba(59,130,246,0.15) 50%, rgba(59,130,246,0.08) 70%, transparent 100%)",
             marginLeft: "clamp(40px, 5vw, 80px)",
           }}
         />
@@ -86,10 +100,21 @@ const Hero = () => {
 
               {/* eyebrow */}
               <div className="flex items-center gap-3 mb-6 sm:mb-8">
-                <div className="h-px w-8" style={{ background: "rgba(147,197,253,0.5)" }} />
+                <div
+                  className="h-px w-8 transition-colors duration-300"
+                  style={{
+                    background: isDark
+                      ? "rgba(147,197,253,0.5)"
+                      : "rgba(59,130,246,0.5)",
+                  }}
+                />
                 <p
-                  className="font-modern uppercase tracking-[0.28em] text-[10px] sm:text-[11px]"
-                  style={{ color: "rgba(147,197,253,0.6)" }}
+                  className="font-modern uppercase tracking-[0.28em] text-[10px] sm:text-[11px] transition-colors duration-300"
+                  style={{
+                    color: isDark
+                      ? "rgba(147,197,253,0.6)"
+                      : "rgba(37,99,235,0.7)",
+                  }}
                 >
                   Front-End Developer &amp; UI/UX Designer
                 </p>
@@ -100,21 +125,29 @@ const Hero = () => {
                 className="font-modern font-bold leading-[0.93] mb-8 sm:mb-10"
                 style={{ fontSize: "clamp(52px, 8.5vw, 128px)" }}
               >
-                <span className="block text-white">Crafting</span>
+                <span className={`block transition-colors duration-300 ${isDark ? "text-white" : "text-gray-900"}`}>
+                  Crafting
+                </span>
                 <span
-                  className="block"
+                  className="block transition-all duration-300"
                   style={{
-                    WebkitTextStroke: "1.5px rgba(147,197,253,0.65)",
+                    WebkitTextStroke: isDark
+                      ? "1.5px rgba(147,197,253,0.65)"
+                      : "1.5px rgba(37,99,235,0.6)",
                     color: "transparent",
                   }}
                 >
                   interfaces
                 </span>
-                <span className="block text-white">that work</span>
+                <span className={`block transition-colors duration-300 ${isDark ? "text-white" : "text-gray-900"}`}>
+                  that work
+                </span>
                 <span
-                  className="block"
+                  className="block transition-all duration-300"
                   style={{
-                    WebkitTextStroke: "1.5px rgba(147,197,253,0.65)",
+                    WebkitTextStroke: isDark
+                      ? "1.5px rgba(147,197,253,0.65)"
+                      : "1.5px rgba(37,99,235,0.6)",
                     color: "transparent",
                   }}
                 >
@@ -123,12 +156,20 @@ const Hero = () => {
               </h1>
 
               {/* divider */}
-              <div className="w-16 h-px mb-8 sm:mb-10" style={{ background: "rgba(147,197,253,0.2)" }} />
+              <div
+                className="w-16 h-px mb-8 sm:mb-10 transition-colors duration-300"
+                style={{
+                  background: isDark
+                    ? "rgba(147,197,253,0.2)"
+                    : "rgba(59,130,246,0.25)",
+                }}
+              />
 
               {/* sub-headline */}
               <p
-                className="font-modern text-sm sm:text-base leading-relaxed mb-10 sm:mb-12 max-w-md"
-                style={{ color: "rgba(255,255,255,0.38)" }}
+                className={`font-modern text-sm sm:text-base leading-relaxed mb-10 sm:mb-12 max-w-md transition-colors duration-300 ${
+                  isDark ? "text-white/38" : "text-gray-500"
+                }`}
               >
                 Based in Malang, Indonesia — bridging code and design
                 into production.
@@ -140,9 +181,15 @@ const Hero = () => {
                   href={`#${SECTION_IDS.projects}`}
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300"
                   style={{
-                    background: "rgba(59,130,246,0.15)",
-                    border: "1px solid rgba(147,197,253,0.3)",
-                    color: "rgba(147,197,253,0.9)",
+                    background: isDark
+                      ? "rgba(59,130,246,0.15)"
+                      : "rgba(59,130,246,0.1)",
+                    border: isDark
+                      ? "1px solid rgba(147,197,253,0.3)"
+                      : "1px solid rgba(37,99,235,0.3)",
+                    color: isDark
+                      ? "rgba(147,197,253,0.9)"
+                      : "rgba(37,99,235,0.9)",
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.background = "rgba(59,130,246,1)";
@@ -150,9 +197,15 @@ const Hero = () => {
                     e.currentTarget.style.color = "#fff";
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.background = "rgba(59,130,246,0.15)";
-                    e.currentTarget.style.borderColor = "rgba(147,197,253,0.3)";
-                    e.currentTarget.style.color = "rgba(147,197,253,0.9)";
+                    e.currentTarget.style.background = isDark
+                      ? "rgba(59,130,246,0.15)"
+                      : "rgba(59,130,246,0.1)";
+                    e.currentTarget.style.borderColor = isDark
+                      ? "rgba(147,197,253,0.3)"
+                      : "rgba(37,99,235,0.3)";
+                    e.currentTarget.style.color = isDark
+                      ? "rgba(147,197,253,0.9)"
+                      : "rgba(37,99,235,0.9)";
                   }}
                 >
                   Explore My Work
@@ -163,16 +216,28 @@ const Hero = () => {
                   href={`#${SECTION_IDS.projects}`}
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300"
                   style={{
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    color: "rgba(255,255,255,0.35)",
+                    border: isDark
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid rgba(0,0,0,0.1)",
+                    color: isDark
+                      ? "rgba(255,255,255,0.35)"
+                      : "rgba(0,0,0,0.5)",
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                    e.currentTarget.style.borderColor = isDark
+                      ? "rgba(255,255,255,0.22)"
+                      : "rgba(0,0,0,0.25)";
+                    e.currentTarget.style.color = isDark
+                      ? "rgba(255,255,255,0.7)"
+                      : "rgba(0,0,0,0.8)";
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.35)";
+                    e.currentTarget.style.borderColor = isDark
+                      ? "rgba(255,255,255,0.1)"
+                      : "rgba(0,0,0,0.1)";
+                    e.currentTarget.style.color = isDark
+                      ? "rgba(255,255,255,0.35)"
+                      : "rgba(0,0,0,0.5)";
                   }}
                 >
                   Design Portfolio
@@ -185,16 +250,28 @@ const Hero = () => {
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300"
                   style={{
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    color: "rgba(255,255,255,0.28)",
+                    border: isDark
+                      ? "1px solid rgba(255,255,255,0.08)"
+                      : "1px solid rgba(0,0,0,0.08)",
+                    color: isDark
+                      ? "rgba(255,255,255,0.28)"
+                      : "rgba(0,0,0,0.4)",
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                    e.currentTarget.style.borderColor = isDark
+                      ? "rgba(255,255,255,0.2)"
+                      : "rgba(0,0,0,0.2)";
+                    e.currentTarget.style.color = isDark
+                      ? "rgba(255,255,255,0.6)"
+                      : "rgba(0,0,0,0.7)";
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.28)";
+                    e.currentTarget.style.borderColor = isDark
+                      ? "rgba(255,255,255,0.08)"
+                      : "rgba(0,0,0,0.08)";
+                    e.currentTarget.style.color = isDark
+                      ? "rgba(255,255,255,0.28)"
+                      : "rgba(0,0,0,0.4)";
                   }}
                 >
                   <Download className="w-3.5 h-3.5" />
@@ -209,9 +286,11 @@ const Hero = () => {
 
                 {/* outer glow ring */}
                 <div
-                  className="absolute inset-0 rounded-2xl pointer-events-none"
+                  className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-300"
                   style={{
-                    boxShadow: "0 0 0 1px rgba(147,197,253,0.1), 0 0 60px rgba(59,130,246,0.12)",
+                    boxShadow: isDark
+                      ? "0 0 0 1px rgba(147,197,253,0.1), 0 0 60px rgba(59,130,246,0.12)"
+                      : "0 0 0 1px rgba(59,130,246,0.08), 0 0 60px rgba(59,130,246,0.06)",
                   }}
                 />
 
@@ -231,23 +310,31 @@ const Hero = () => {
 
                 {/* offset border frame */}
                 <div
-                  className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl -z-10"
-                  style={{ border: "1px solid rgba(147,197,253,0.1)" }}
+                  className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl -z-10 transition-colors duration-300"
+                  style={{
+                    border: isDark
+                      ? "1px solid rgba(147,197,253,0.1)"
+                      : "1px solid rgba(59,130,246,0.1)",
+                  }}
                 />
 
-                {/* ── NAME BADGE — redesigned, more prominent ── */}
+                {/* ── NAME BADGE ── */}
                 <div
-                  className="absolute -bottom-6 left-3 sm:left-4 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 shadow-2xl"
+                  className="absolute -bottom-6 left-3 sm:left-4 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 shadow-2xl transition-all duration-300"
                   style={{
-                    backgroundColor: "#0d1526",
-                    border: "1px solid rgba(147,197,253,0.18)",
+                    backgroundColor: isDark ? "#0d1526" : "#ffffff",
+                    border: isDark
+                      ? "1px solid rgba(147,197,253,0.18)"
+                      : "1px solid rgba(59,130,246,0.18)",
                     backdropFilter: "blur(12px)",
                     minWidth: "180px",
                   }}
                 >
-                  {/* name — large and prominent */}
+                  {/* name */}
                   <p
-                    className="font-stylish italic text-white leading-tight"
+                    className={`font-stylish italic leading-tight transition-colors duration-300 ${
+                      isDark ? "text-white" : "text-gray-900"
+                    }`}
                     style={{ fontSize: "clamp(19px, 3vw, 24px)" }}
                   >
                     Satria Rakhmadani
@@ -255,10 +342,12 @@ const Hero = () => {
 
                   {/* role */}
                   <p
-                    className="font-modern mt-1"
+                    className="font-modern mt-1 transition-colors duration-300"
                     style={{
                       fontSize: "10px",
-                      color: "rgba(147,197,253,0.55)",
+                      color: isDark
+                        ? "rgba(147,197,253,0.55)"
+                        : "rgba(37,99,235,0.6)",
                       letterSpacing: "0.05em",
                     }}
                   >
@@ -268,29 +357,45 @@ const Hero = () => {
                   {/* location row */}
                   <div className="flex items-center gap-1 mt-2">
                     <MapPin
-                      className="w-2.5 h-2.5 flex-shrink-0"
-                      style={{ color: "rgba(255,255,255,0.25)" }}
+                      className="w-2.5 h-2.5 flex-shrink-0 transition-colors duration-300"
+                      style={{
+                        color: isDark
+                          ? "rgba(255,255,255,0.25)"
+                          : "rgba(0,0,0,0.35)",
+                      }}
                     />
                     <p
-                      className="font-modern"
-                      style={{ fontSize: "9px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.05em" }}
+                      className="font-modern transition-colors duration-300"
+                      style={{
+                        fontSize: "9px",
+                        color: isDark
+                          ? "rgba(255,255,255,0.3)"
+                          : "rgba(0,0,0,0.45)",
+                        letterSpacing: "0.05em",
+                      }}
                     >
                       Malang, Indonesia
                     </p>
                   </div>
                 </div>
 
-                {/* N4D1 badge — top right, unchanged */}
+                {/* N4D1 badge — top right */}
                 <div
-                  className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
+                  className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors duration-300"
                   style={{
-                    backgroundColor: "#080808",
-                    border: "1px solid rgba(147,197,253,0.14)",
+                    backgroundColor: isDark ? "#080808" : "#fafafa",
+                    border: isDark
+                      ? "1px solid rgba(147,197,253,0.14)"
+                      : "1px solid rgba(59,130,246,0.14)",
                   }}
                 >
                   <span
-                    className="font-modern text-[9px] sm:text-[10px] tracking-wider leading-tight text-center"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
+                    className="font-modern text-[9px] sm:text-[10px] tracking-wider leading-tight text-center transition-colors duration-300"
+                    style={{
+                      color: isDark
+                        ? "rgba(255,255,255,0.45)"
+                        : "rgba(0,0,0,0.5)",
+                    }}
                   >
                     N4D1
                   </span>
@@ -302,17 +407,12 @@ const Hero = () => {
         </div>
 
         {/* scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-20">
-          <div className="w-px h-10 bg-white animate-pulse-slow" />
-          <span className="text-[9px] tracking-[0.3em] uppercase font-modern text-white">
+        <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-20 transition-colors duration-300`}>
+          <div className={`w-px h-10 animate-pulse-slow ${isDark ? "bg-white" : "bg-gray-900"}`} />
+          <span className={`text-[9px] tracking-[0.3em] uppercase font-modern ${isDark ? "text-white" : "text-gray-900"}`}>
             Scroll
           </span>
         </div>
-
-        <style>{`
-          @keyframes pulse-slow { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-          .animate-pulse-slow { animation: pulse-slow 2s ease-in-out infinite; }
-        `}</style>
       </section>
     </Element>
   );

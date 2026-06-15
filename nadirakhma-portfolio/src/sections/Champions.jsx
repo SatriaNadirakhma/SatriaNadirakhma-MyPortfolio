@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTheme } from "@context/ThemeContext";
 import { Trophy, ArrowUpRight, X, ZoomIn } from "lucide-react";
 import { champions } from "@data/champions";
 import { SECTION_IDS } from "@constants/index";
@@ -11,6 +12,8 @@ import {
 const CertificateModal = ({ src, title, onClose }) => {
   const canvasRef = useRef(null);
   const overlayRef = useRef(null);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   useScrollLock();
 
@@ -26,22 +29,35 @@ const CertificateModal = ({ src, title, onClose }) => {
     <div
       ref={overlayRef}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
-      style={{ background: "rgba(8,8,8,0.92)", backdropFilter: "blur(20px)" }}
+      style={{
+        background: isDark ? "rgba(8,8,8,0.92)" : "rgba(250,250,250,0.92)",
+        backdropFilter: "blur(20px)",
+      }}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl bg-[#0f0f0f] border border-white/[0.07] rounded-2xl overflow-hidden shadow-2xl"
+        className={`relative w-full max-w-2xl border rounded-2xl overflow-hidden shadow-2xl ${
+          isDark
+            ? "bg-[#0f0f0f] border-white/[0.07]"
+            : "bg-white border-gray-200"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
+        <div className={`flex items-center justify-between px-5 py-4 border-b ${
+          isDark ? "border-white/[0.06]" : "border-gray-100"
+        }`}>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] tracking-[0.22em] uppercase font-modern text-white/35">
+            <span className={`text-[10px] tracking-[0.22em] uppercase font-modern ${
+              isDark ? "text-white/35" : "text-gray-500"
+            }`}>
               Certificate Preview -- Protected
             </span>
           </div>
           <button
             onClick={onClose}
-            className="text-white/25 hover:text-white transition-colors p-1 -mr-1"
+            className={`p-1 -mr-1 transition-colors ${
+              isDark ? "text-white/25 hover:text-white" : "text-gray-400 hover:text-gray-900"
+            }`}
             aria-label="Close preview"
           >
             <X className="w-4 h-4" />
@@ -74,7 +90,9 @@ const CertificateModal = ({ src, title, onClose }) => {
             style={{ transform: "rotate(-25deg)" }}
           >
             <span
-              className="font-stylish italic text-white whitespace-nowrap"
+              className={`font-stylish italic whitespace-nowrap ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
               style={{
                 fontSize: "clamp(18px, 4.5vw, 44px)",
                 opacity: 0.055,
@@ -86,9 +104,15 @@ const CertificateModal = ({ src, title, onClose }) => {
           </div>
         </div>
 
-        <div className="px-5 py-3 border-t border-white/[0.06] flex items-center justify-between">
-          <p className="text-[10px] font-modern text-white/20 truncate pr-4">{title}</p>
-          <p className="text-[10px] font-modern text-white/12 tracking-[0.2em] uppercase flex-shrink-0">
+        <div className={`px-5 py-3 border-t flex items-center justify-between ${
+          isDark ? "border-white/[0.06]" : "border-gray-100"
+        }`}>
+          <p className={`text-[10px] font-modern truncate pr-4 ${
+            isDark ? "text-white/20" : "text-gray-400"
+          }`}>{title}</p>
+          <p className={`text-[10px] font-modern tracking-[0.2em] uppercase flex-shrink-0 ${
+            isDark ? "text-white/12" : "text-gray-300"
+          }`}>
             View Only
           </p>
         </div>
@@ -115,7 +139,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
         className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
           expanded
             ? "border-orange-500/30 bg-orange-500/5"
-            : "border-white/[0.07] bg-white/[0.02] hover:border-white/15"
+            : "border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/15"
         }`}
       >
         <div className="relative h-44 sm:h-52 overflow-hidden">
@@ -139,7 +163,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
           <p className="text-[10px] tracking-[0.2em] uppercase font-modern text-orange-400/70 mb-1.5">
             {event}
           </p>
-          <h3 className="text-base sm:text-lg font-modern font-bold text-white leading-snug mb-3">
+          <h3 className="text-base sm:text-lg font-modern font-bold text-gray-900 dark:text-white leading-snug mb-3">
             {title}
           </h3>
 
@@ -148,7 +172,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
               expanded ? "max-h-40 mb-4" : "max-h-0"
             }`}
           >
-            <p className="text-xs sm:text-sm font-modern text-white/45 leading-relaxed">
+            <p className="text-xs sm:text-sm font-modern text-gray-600 dark:text-white/45 leading-relaxed">
               {description}
             </p>
           </div>
@@ -156,7 +180,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
           <div className="flex items-center gap-3 flex-wrap">
             <button
               onClick={() => setExpanded(!expanded)}
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-white/35 hover:text-white transition-colors duration-300 flex items-center gap-1.5"
+              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 flex items-center gap-1.5"
             >
               {expanded ? (
                 <>
@@ -167,22 +191,22 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
               )}
             </button>
 
-            <span className="text-white/10">|</span>
+            <span className="text-gray-300 dark:text-white/10">|</span>
 
             <button
               onClick={() => setCertOpen(true)}
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-white/35 hover:text-orange-400 transition-colors duration-300 inline-flex items-center gap-1.5"
+              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-orange-400 transition-colors duration-300 inline-flex items-center gap-1.5"
             >
               <ZoomIn className="w-3 h-3" /> Certificate
             </button>
 
-            <span className="text-white/10">|</span>
+            <span className="text-gray-300 dark:text-white/10">|</span>
 
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-1"
+              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 inline-flex items-center gap-1"
             >
               View Post <ArrowUpRight className="w-3 h-3" />
             </a>
@@ -194,26 +218,31 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
 };
 
 const Champions = () => {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   return (
     <section id={SECTION_IDS.champions} className="py-20 sm:py-28 px-5 sm:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-12 sm:mb-16">
-          <div className="w-6 h-px bg-white/20" />
-          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/30">
+          <div className="w-6 h-px bg-gray-300 dark:bg-white/20" />
+          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-gray-500 dark:text-white/30">
             License &amp; Awards
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <h2
-            className="font-modern font-bold text-white leading-[0.92]"
+            className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
             Champions
             <br />
             <span
               style={{
-                WebkitTextStroke: "1px rgba(255,255,255,0.8)",
+                WebkitTextStroke: isDark
+                  ? "1px rgba(255,255,255,0.8)"
+                  : "1px rgba(17,24,39,0.65)",
                 color: "transparent",
               }}
             >

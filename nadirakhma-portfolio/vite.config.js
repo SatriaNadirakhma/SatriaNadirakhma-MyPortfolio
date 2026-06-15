@@ -15,6 +15,7 @@ export default defineConfig({
       "@utils": fileURLToPath(new URL("./src/utils", import.meta.url)),
       "@constants": fileURLToPath(new URL("./src/constants", import.meta.url)),
       "@assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
+      "@context": fileURLToPath(new URL("./src/context", import.meta.url)),
     },
   },
 });

@@ -8,6 +8,42 @@
   --font-modern: "Inter", sans-serif;
 }
 
+html {
+  background-color: #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: #080808;
+  }
+}
+
+:root {
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3af;
+  --color-text-subtle: #d1d5db;
+  --color-border: #e5e7eb;
+  --color-border-subtle: #f3f4f6;
+  --color-stroke: rgba(17, 24, 39, 0.65);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #080808;
+    --color-surface: rgba(255, 255, 255, 0.02);
+    --color-text-primary: #ffffff;
+    --color-text-secondary: rgba(255, 255, 255, 0.4);
+    --color-text-muted: rgba(255, 255, 255, 0.3);
+    --color-text-subtle: rgba(255, 255, 255, 0.2);
+    --color-border: rgba(255, 255, 255, 0.07);
+    --color-border-subtle: rgba(255, 255, 255, 0.05);
+    --color-stroke: rgba(255, 255, 255, 0.65);
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -21,4 +57,15 @@
 
 .animate-fade-in {
   animation: fade-in 0.6s ease forwards;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+.animate-pulse-slow { animation: pulse-slow 2s ease-in-out infinite; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

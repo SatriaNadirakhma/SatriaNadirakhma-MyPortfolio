@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme } from "@context/ThemeContext";
 import { ArrowUpRight } from "lucide-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
@@ -8,7 +9,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] cursor-pointer"
+      className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -44,16 +45,6 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
             {description}
           </p>
 
-          {/* {(title.includes("SIPINTA") || title.includes("K3 Siantar Top")) && (
-            <a
-              href="#"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] tracking-[0.12em] uppercase font-modern text-white/25 hover:text-white/60 transition-colors duration-300 mb-2"
-            >
-              Case Study <ArrowUpRight className="w-2.5 h-2.5" />
-            </a>
-          )} */}
-
           <a
             href={link}
             target="_blank"
@@ -72,6 +63,8 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const filtered =
     activeFilter === "All"
@@ -84,18 +77,20 @@ const Projects = () => {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 sm:gap-8 mb-10 sm:mb-14">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-6 h-px bg-white/20" />
-              <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/30">
+              <div className="w-6 h-px bg-gray-300 dark:bg-white/20" />
+              <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-gray-500 dark:text-white/30">
                 Selected Work
               </p>
             </div>
             <h2
-              className="font-modern font-bold text-white leading-[0.92]"
+              className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
               style={{ fontSize: "clamp(36px, 6vw, 96px)" }}
             >
               <span
                 style={{
-                  WebkitTextStroke: "1px rgba(255,255,255,0.8)",
+                  WebkitTextStroke: isDark
+                    ? "1px rgba(255,255,255,0.8)"
+                    : "1px rgba(17,24,39,0.65)",
                   color: "transparent",
                 }}
               >
@@ -113,8 +108,8 @@ const Projects = () => {
                 onClick={() => setActiveFilter(filter)}
                 className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs tracking-[0.12em] uppercase font-modern transition-all duration-300 ${
                   activeFilter === filter
-                    ? "bg-white text-black"
-                    : "border border-white/15 text-white/35 hover:text-white hover:border-white/35"
+                    ? "bg-gray-900 text-white dark:bg-white dark:text-black"
+                    : "border border-gray-300 dark:border-white/15 text-gray-500 dark:text-white/35 hover:text-gray-900 dark:hover:text-white hover:border-gray-500 dark:hover:border-white/35"
                 }`}
               >
                 {filter}

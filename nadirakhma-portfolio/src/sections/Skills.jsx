@@ -1,3 +1,4 @@
+import { useTheme } from "@context/ThemeContext";
 import { ExternalLink } from "lucide-react";
 import { skillCategories } from "@data/skills";
 import { SECTION_IDS } from "@constants/index";
@@ -7,8 +8,8 @@ const SkillPill = ({ icon: Icon, name, url }) => {
     <span
       className={`group inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full border transition-all duration-300 select-none ${
         url
-          ? "border-white/10 bg-white/[0.03] text-white/50 hover:text-white hover:border-white/30 hover:bg-white/[0.07] cursor-pointer"
-          : "border-white/[0.07] bg-transparent text-white/30 cursor-default"
+          ? "border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/[0.03] text-gray-500 dark:text-white/50 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-white/30 hover:bg-gray-100 dark:hover:bg-white/[0.07] cursor-pointer"
+          : "border-gray-200 dark:border-white/[0.07] bg-transparent text-gray-400 dark:text-white/30 cursor-default"
       }`}
     >
       {Icon && (
@@ -32,26 +33,31 @@ const SkillPill = ({ icon: Icon, name, url }) => {
 };
 
 const Skills = () => {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   return (
     <section id={SECTION_IDS.skills} className="py-20 sm:py-28 px-5 sm:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-12 sm:mb-16">
-          <div className="w-6 h-px bg-white/20" />
-          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-white/30">
+          <div className="w-6 h-px bg-gray-300 dark:bg-white/20" />
+          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-gray-500 dark:text-white/30">
             Capabilities
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <h2
-            className="font-modern font-bold text-white leading-[0.92]"
+            className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
             My
             <br />
             <span
               style={{
-                WebkitTextStroke: "1px rgba(255,255,255,0.8)",
+                WebkitTextStroke: isDark
+                  ? "1px rgba(255,255,255,0.8)"
+                  : "1px rgba(17,24,39,0.65)",
                 color: "transparent",
               }}
             >
@@ -62,7 +68,7 @@ const Skills = () => {
           <div className="flex flex-col gap-10 sm:gap-12">
             {skillCategories.map((cat) => (
               <div key={cat.label}>
-                <p className="text-[10px] tracking-[0.25em] uppercase font-modern text-white/25 mb-4 sm:mb-5">
+                <p className="text-[10px] tracking-[0.25em] uppercase font-modern text-gray-400 dark:text-white/25 mb-4 sm:mb-5">
                   {cat.label}
                 </p>
                 <div className="flex flex-wrap gap-2 sm:gap-2.5">
