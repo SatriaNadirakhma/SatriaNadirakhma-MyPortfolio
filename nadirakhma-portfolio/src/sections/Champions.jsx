@@ -150,7 +150,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
             loading="lazy"
           />
           <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-            <Icon className="w-4 h-4 text-orange-400" />
+            <Icon className="w-4 h-4 text-white" />
           </div>
           <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
             <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">

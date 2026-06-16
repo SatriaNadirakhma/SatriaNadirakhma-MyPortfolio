@@ -1,8 +1,9 @@
-import { Element } from "react-scroll";
+import { Element, Link } from "react-scroll";
 import { useTheme } from "@context/ThemeContext";
 import Profile1 from "@assets/profile1.webp";
 import { ArrowRight, Download, MapPin } from "lucide-react";
 import cvATS from "@assets/pdf/cv-ats.pdf";
+import portfolio from "@assets/pdf/portfolio.pdf";
 import { SECTION_IDS } from "@constants/index";
 
 const Hero = () => {
@@ -177,9 +178,12 @@ const Hero = () => {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <a
-                  href={`#${SECTION_IDS.projects}`}
-                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                <Link
+                  to={SECTION_IDS.projects}
+                  smooth
+                  duration={500}
+                  offset={-60}
+                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   style={{
                     background: isDark
                       ? "rgba(59,130,246,0.15)"
@@ -210,10 +214,12 @@ const Hero = () => {
                 >
                   Explore My Work
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-                </a>
+                </Link>
 
                 <a
-                  href={`#${SECTION_IDS.projects}`}
+                  href={portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   style={{
                     border: isDark
