@@ -17,8 +17,8 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
         <img
           src={image}
           alt={title}
-          className={`w-full h-full object-cover transition-all duration-500 ${
-            hovered ? "scale-105 brightness-75" : "scale-100 brightness-50"
+          className={`w-full h-full object-cover transition-all duration-300 ${
+            hovered ? "scale-105 brightness-60" : "scale-100 brightness-90"
           }`}
           loading="lazy"
         />

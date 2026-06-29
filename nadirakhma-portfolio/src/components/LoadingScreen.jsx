@@ -39,7 +39,7 @@ const LoadingScreen = ({ onLoadingComplete }) => {
       }`}
     >
       <div className="text-center">
-        <h1 className="font-stylish italic text-4xl sm:text-5xl md:text-6xl mb-8 text-gray-900 dark:text-white">
+        <h1 className="font-stylish italic text-4xl sm:text-5xl md:text-6xl mb-4 text-gray-900 dark:text-white">
           Nadi Rakhma
         </h1>
 

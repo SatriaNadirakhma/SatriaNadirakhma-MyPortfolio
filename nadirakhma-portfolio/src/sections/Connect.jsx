@@ -3,6 +3,12 @@ import { ArrowUpRight, Send, MessageCircle } from "lucide-react";
 import { socialLinks } from "@data/socialLinks";
 import { SECTION_IDS } from "@constants/index";
 
+// ─────────────────────────────────────────────────────────────
+// 📦 INSTALASI MagneticButton (Aceternity UI via shadcn):
+//    bunx --bun shadcn@latest add @aceternity/magnetic-button-demo
+// ─────────────────────────────────────────────────────────────
+import { MagneticButton } from "@/components/ui/magnetic-button";
+
 const Connect = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -44,22 +50,26 @@ const Connect = () => {
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 mb-12 sm:mb-16">
-            <a
-              href="mailto:rakhmadanisatria@gmail.com"
-              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-300 dark:border-white/25 rounded-full font-modern text-xs sm:text-sm text-gray-900 dark:text-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-            >
-              <Send className="w-3.5 h-3.5" /> Send Email{" "}
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
-            <a
-              href="https://wa.me/6285335510121"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wa-btn group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-200 dark:border-white/10 rounded-full font-modern text-xs sm:text-sm text-gray-500 dark:text-white/40 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-            >
-              <MessageCircle className="w-3.5 h-3.5" /> WhatsApp{" "}
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
+            <MagneticButton className="rounded-full">
+              <a
+                href="mailto:rakhmadanisatria@gmail.com"
+                className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-300 dark:border-white/25 rounded-full font-modern text-xs sm:text-sm text-gray-900 dark:text-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              >
+                <Send className="w-3.5 h-3.5" /> Send Email{" "}
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+            </MagneticButton>
+            <MagneticButton className="rounded-full">
+              <a
+                href="https://wa.me/6285335510121"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="wa-btn group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-gray-200 dark:border-white/10 rounded-full font-modern text-xs sm:text-sm text-gray-500 dark:text-white/40 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              >
+                <MessageCircle className="w-3.5 h-3.5" /> WhatsApp{" "}
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+            </MagneticButton>
           </div>
 
           <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">

@@ -18,6 +18,8 @@ import {
   SiPostgresql,
 } from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa6";
+import { BsRobot } from "react-icons/bs";
+import { SiOpenai, SiGooglegemini } from "react-icons/si";
 
 export const skillCategories = [
   {
@@ -44,6 +46,17 @@ export const skillCategories = [
       { icon: SiInkscape, name: "Inkscape", url: "https://inkscape.org/" },
       { icon: SiAdobephotoshop, name: "Photoshop", url: "https://www.adobe.com/products/photoshop.html" },
       { icon: SiAffinity, name: "Affinity", url: "https://affinity.serif.com/" },
+    ],
+  },
+  {
+    label: "AI Tools",
+    skills: [
+      { icon: SiOpenai,      name: "OpenAI",      url: "https://openai.com/" },
+      { icon: SiGooglegemini, name: "Gemini",     url: "https://gemini.google.com/" },
+      { icon: BsRobot,       name: "Claude",      url: "https://claude.ai/" },
+      { icon: BsRobot,       name: "Claude Code", url: "https://claude.ai/code" },
+      { icon: BsRobot,       name: "DeepSeek",    url: "https://www.deepseek.com/" },
+      { icon: BsRobot,       name: "Manus AI",    url: "https://manus.im/" },
     ],
   },
   {

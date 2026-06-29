@@ -20,7 +20,7 @@ const ExperienceCard = ({ title, company, date, description, image, icon, link, 
         <img
           src={image}
           alt={`${title} -- ${company}`}
-          className="w-full h-full object-cover brightness-40 group-hover:brightness-50 transition-all duration-500 scale-105 group-hover:scale-100"
+          className="w-full h-full object-cover brightness-90 group-hover:brightness-50 transition-all duration-300 scale-105 group-hover:scale-100"
           loading="lazy"
         />
         <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center">
