@@ -6,6 +6,12 @@ import cvATS from "@assets/pdf/cv-ats.pdf";
 import portfolio from "@assets/pdf/portfolio.pdf";
 import { SECTION_IDS } from "@constants/index";
 
+// ─────────────────────────────────────────────────────────────
+// 📦 INSTALASI MagneticButton (Aceternity UI via shadcn):
+//    bunx --bun shadcn@latest add @aceternity/magnetic-button-demo
+// ─────────────────────────────────────────────────────────────
+import { MagneticButton } from "@/components/ui/magnetic-button";
+
 const Hero = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -14,85 +20,8 @@ const Hero = () => {
     <Element name={SECTION_IDS.hero}>
       <section
         id={SECTION_IDS.hero}
-        className={`relative min-h-screen flex items-center px-5 sm:px-8 pt-20 pb-16 overflow-hidden transition-colors duration-300 ${
-          isDark ? "bg-[#080808]" : "bg-[#fafafa]"
-        }`}
+        className="relative min-h-screen flex items-center px-5 sm:px-8 pt-20 pb-16 overflow-hidden bg-[#fafafa] dark:bg-[#080808] transition-colors duration-300"
       >
-        {/* ── dot grid pattern ── */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: isDark
-              ? "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)"
-              : "radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px)",
-            backgroundSize: "30px 30px",
-          }}
-        />
-
-        {/* ── radial vignette ── */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: isDark
-              ? "radial-gradient(ellipse 75% 65% at 50% 50%, transparent 35%, #080808 100%)"
-              : "radial-gradient(ellipse 75% 65% at 50% 50%, transparent 35%, #fafafa 100%)",
-          }}
-        />
-
-        {/* ── horizontal line top ── */}
-        <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none"
-          style={{
-            background: isDark
-              ? "linear-gradient(90deg, transparent 0%, rgba(147,197,253,0.15) 30%, rgba(147,197,253,0.3) 50%, rgba(147,197,253,0.15) 70%, transparent 100%)"
-              : "linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.15) 30%, rgba(59,130,246,0.3) 50%, rgba(59,130,246,0.15) 70%, transparent 100%)",
-          }}
-        />
-
-        {/* ── horizontal line bottom ── */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
-          style={{
-            background: isDark
-              ? "linear-gradient(90deg, transparent 0%, rgba(147,197,253,0.08) 40%, rgba(147,197,253,0.15) 50%, rgba(147,197,253,0.08) 60%, transparent 100%)"
-              : "linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.08) 40%, rgba(59,130,246,0.15) 50%, rgba(59,130,246,0.08) 60%, transparent 100%)",
-          }}
-        />
-
-        {/* ── glow top-right ── */}
-        <div
-          className="absolute top-[-10%] right-[-5%] w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full pointer-events-none"
-          style={{
-            background: isDark
-              ? "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)",
-            filter: "blur(60px)",
-          }}
-        />
-
-        {/* ── glow bottom-left ── */}
-        <div
-          className="absolute bottom-[-10%] left-[-5%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full pointer-events-none"
-          style={{
-            background: isDark
-              ? "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-
-        {/* ── vertical rule left ── */}
-        <div
-          className="absolute left-0 top-0 bottom-0 w-px pointer-events-none hidden lg:block"
-          style={{
-            background: isDark
-              ? "linear-gradient(180deg, transparent 0%, rgba(147,197,253,0.08) 30%, rgba(147,197,253,0.15) 50%, rgba(147,197,253,0.08) 70%, transparent 100%)"
-              : "linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.08) 30%, rgba(59,130,246,0.15) 50%, rgba(59,130,246,0.08) 70%, transparent 100%)",
-            marginLeft: "clamp(40px, 5vw, 80px)",
-          }}
-        />
-
-        {/* ── main content ── */}
         <div className="relative z-10 max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
 
@@ -178,6 +107,7 @@ const Hero = () => {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-3 sm:gap-4">
+                <MagneticButton className="rounded-full">
                 <Link
                   to={SECTION_IDS.projects}
                   smooth
@@ -215,74 +145,97 @@ const Hero = () => {
                   Explore My Work
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
+                </MagneticButton>
 
+                <MagneticButton className="rounded-full">
                 <a
                   href={portfolio}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   style={{
+                    background: isDark
+                      ? "rgba(255,255,255,0.07)"
+                      : "rgba(0,0,0,0.05)",
                     border: isDark
-                      ? "1px solid rgba(255,255,255,0.1)"
-                      : "1px solid rgba(0,0,0,0.1)",
+                      ? "1px solid rgba(255,255,255,0.22)"
+                      : "1px solid rgba(0,0,0,0.2)",
                     color: isDark
-                      ? "rgba(255,255,255,0.35)"
-                      : "rgba(0,0,0,0.5)",
+                      ? "rgba(255,255,255,0.82)"
+                      : "rgba(0,0,0,0.75)",
                   }}
                   onMouseEnter={e => {
+                    e.currentTarget.style.background = isDark
+                      ? "rgba(255,255,255,0.12)"
+                      : "rgba(0,0,0,0.09)";
                     e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.22)"
-                      : "rgba(0,0,0,0.25)";
+                      ? "rgba(255,255,255,0.38)"
+                      : "rgba(0,0,0,0.32)";
                     e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,0.7)"
-                      : "rgba(0,0,0,0.8)";
+                      ? "rgba(255,255,255,1)"
+                      : "rgba(0,0,0,0.9)";
                   }}
                   onMouseLeave={e => {
+                    e.currentTarget.style.background = isDark
+                      ? "rgba(255,255,255,0.07)"
+                      : "rgba(0,0,0,0.05)";
                     e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.1)"
-                      : "rgba(0,0,0,0.1)";
+                      ? "rgba(255,255,255,0.22)"
+                      : "rgba(0,0,0,0.2)";
                     e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,0.35)"
-                      : "rgba(0,0,0,0.5)";
+                      ? "rgba(255,255,255,0.82)"
+                      : "rgba(0,0,0,0.75)";
                   }}
                 >
                   Design Portfolio
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
+                </MagneticButton>
 
+                <MagneticButton className="rounded-full">
                 <a
                   href={cvATS}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   style={{
+                    background: isDark
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(0,0,0,0.04)",
                     border: isDark
-                      ? "1px solid rgba(255,255,255,0.08)"
-                      : "1px solid rgba(0,0,0,0.08)",
+                      ? "1px solid rgba(255,255,255,0.18)"
+                      : "1px solid rgba(0,0,0,0.16)",
                     color: isDark
-                      ? "rgba(255,255,255,0.28)"
-                      : "rgba(0,0,0,0.4)",
+                      ? "rgba(255,255,255,0.78)"
+                      : "rgba(0,0,0,0.7)",
                   }}
                   onMouseEnter={e => {
+                    e.currentTarget.style.background = isDark
+                      ? "rgba(255,255,255,0.1)"
+                      : "rgba(0,0,0,0.07)";
                     e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.2)"
-                      : "rgba(0,0,0,0.2)";
+                      ? "rgba(255,255,255,0.32)"
+                      : "rgba(0,0,0,0.28)";
                     e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,0.6)"
-                      : "rgba(0,0,0,0.7)";
+                      ? "rgba(255,255,255,0.95)"
+                      : "rgba(0,0,0,0.88)";
                   }}
                   onMouseLeave={e => {
+                    e.currentTarget.style.background = isDark
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(0,0,0,0.04)";
                     e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.08)"
-                      : "rgba(0,0,0,0.08)";
+                      ? "rgba(255,255,255,0.18)"
+                      : "rgba(0,0,0,0.16)";
                     e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,0.28)"
-                      : "rgba(0,0,0,0.4)";
+                      ? "rgba(255,255,255,0.78)"
+                      : "rgba(0,0,0,0.7)";
                   }}
                 >
                   <Download className="w-3.5 h-3.5" />
                   Download CV
                 </a>
+                </MagneticButton>
               </div>
             </div>
 
