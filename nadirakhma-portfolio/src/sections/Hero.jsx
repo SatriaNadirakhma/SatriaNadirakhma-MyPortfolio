@@ -24,19 +24,6 @@ const Hero = () => {
         : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
     },
     divider: { background: isDark ? "rgba(147,197,253,0.2)" : "rgba(59,130,246,0.25)" },
-    photoShadow: {
-      boxShadow: isDark
-        ? "0 0 0 1px rgba(147,197,253,0.1), 0 0 60px rgba(59,130,246,0.12)"
-        : "0 0 0 1px rgba(59,130,246,0.08), 0 0 60px rgba(59,130,246,0.06)",
-    },
-    offsetBorder: { border: isDark ? "1px solid rgba(147,197,253,0.1)" : "1px solid rgba(59,130,246,0.1)" },
-    nameBadge: {
-      backgroundColor: isDark ? "#0d1526" : "#ffffff",
-      border: isDark ? "1px solid rgba(147,197,253,0.18)" : "1px solid rgba(59,130,246,0.18)",
-    },
-    roleText: { color: isDark ? "rgba(147,197,253,0.55)" : "rgba(37,99,235,0.6)" },
-    mapPin: { color: isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.35)" },
-    location: { color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.45)" },
     n4d1Badge: {
       backgroundColor: isDark ? "#080808" : "#fafafa",
       border: isDark ? "1px solid rgba(147,197,253,0.14)" : "1px solid rgba(59,130,246,0.14)",
@@ -50,7 +37,7 @@ const Hero = () => {
         id={SECTION_IDS.hero}
         className="relative min-h-screen flex items-center px-5 sm:px-8 pt-20 pb-16 overflow-hidden bg-[#fafafa] dark:bg-[#080808] transition-colors duration-300"
       >
-        <div className="relative z-10 max-w-7xl mx-auto w-full">
+          <div className="relative z-10 max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
 
             {/* LEFT */}
@@ -83,7 +70,7 @@ const Hero = () => {
 
               {/* divider */}
               <div
-                className="w-16 h-px mb-8 sm:mb-10 transition-colors duration-300"
+                className="w-28 h-px mb-8 sm:mb-10 transition-colors duration-300"
                 style={s.divider}
               />
 
@@ -136,86 +123,70 @@ const Hero = () => {
                   </a>
                 </MagneticButton>
               </div>
+
             </div>
 
-            {/* RIGHT — photo */}
+            {/* RIGHT — profile card */}
             <div className="flex justify-center lg:justify-end lg:self-center">
-              <div className="relative">
+              <div
+                className="flex flex-col rounded-2xl border border-gray-200 dark:border-white/[0.08] shadow-sm dark:shadow-none bg-white dark:bg-[#080808] w-full max-w-[340px] transition-colors duration-300 p-3"
+              >
+                <div className="relative rounded-xl overflow-hidden">
+                  <div className="w-full aspect-[3/4] overflow-hidden">
+                    <img
+                      src={Profile1}
+                      alt="Satria Rakhmadani"
+                      width="340"
+                      height="460"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 scale-105 hover:scale-100"
+                    />
+                  </div>
 
-                {/* outer glow ring */}
-                <div
-                  className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-300"
-                  style={s.photoShadow}
-                />
-
-                {/* photo */}
-                <div className="w-56 h-72 sm:w-64 sm:h-80 lg:w-80 lg:h-[420px] overflow-hidden rounded-2xl">
-                  <img
-                    src={Profile1}
-                    alt="Satria Rakhmadani — Front-End Developer &amp; UI/UX Designer"
-                    width="320"
-                    height="420"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 scale-105 hover:scale-100"
-                  />
+                  <div
+                    className="absolute top-4 right-4 w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center backdrop-blur-md transition-colors duration-300"
+                    style={s.n4d1Badge}
+                  >
+                    <span
+                      className="font-modern text-[9px] sm:text-[10px] tracking-wider leading-tight text-center transition-colors duration-300"
+                      style={s.n4d1Text}
+                    >
+                      N4D1
+                    </span>
+                  </div>
                 </div>
 
-                {/* offset border frame */}
-                <div
-                  className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl -z-10 transition-colors duration-300"
-                  style={s.offsetBorder}
-                />
-
-                {/* ── NAME BADGE ── */}
-                <div
-                  className="absolute -bottom-6 left-3 sm:left-4 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 shadow-2xl transition-all duration-300"
-                  style={{ ...s.nameBadge, backdropFilter: "blur(12px)", minWidth: "180px" }}
-                >
-                  {/* name */}
+                <div className="flex flex-col gap-2 px-1 py-3 sm:py-4">
                   <p
-                    className={`font-stylish italic leading-tight transition-colors duration-300 ${
+                    className={`font-modern font-semibold leading-tight transition-colors duration-300 ${
                       isDark ? "text-white" : "text-gray-900"
                     }`}
-                    style={{ fontSize: "clamp(19px, 3vw, 24px)" }}
+                    style={{ fontSize: "clamp(20px, 3vw, 26px)" }}
                   >
                     Satria Rakhmadani
                   </p>
 
-                  {/* role */}
-                  <p
-                    className="font-modern mt-1 transition-colors duration-300"
-                    style={{ ...s.roleText, fontSize: "10px", letterSpacing: "0.05em" }}
-                  >
-                    Front-End Dev &amp; UI/UX Designer
-                  </p>
-
-                  {/* location row */}
-                  <div className="flex items-center gap-1 mt-2">
-                    <MapPin
-                      className="w-2.5 h-2.5 flex-shrink-0 transition-colors duration-300"
-                      style={s.mapPin}
-                    />
-                    <p
-                      className="font-modern transition-colors duration-300"
-                      style={{ ...s.location, fontSize: "9px", letterSpacing: "0.05em" }}
-                    >
-                      Malang, Indonesia
-                    </p>
-                  </div>
-                </div>
-
-                {/* N4D1 badge — top right */}
-                <div
-                  className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors duration-300"
-                  style={s.n4d1Badge}
-                >
                   <span
-                    className="font-modern text-[9px] sm:text-[10px] tracking-wider leading-tight text-center transition-colors duration-300"
-                    style={s.n4d1Text}
+                    className="inline-flex items-center self-start rounded-lg px-3 py-1.5 font-modern text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-300 border border-blue-400/20 dark:border-blue-400/15"
+                    style={{
+                      backgroundColor: isDark ? "rgba(147,197,253,0.12)" : "rgba(37,99,235,0.08)",
+                      color: isDark ? "rgba(147,197,253,0.7)" : "rgba(37,99,235,0.7)",
+                    }}
                   >
-                    N4D1
+                    Digital Designer &amp; Front-End Developer
+                  </span>
+
+                  <span
+                    className="inline-flex items-center gap-1.5 self-start rounded-lg px-3 py-1.5 font-modern text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-300 border border-gray-300/40 dark:border-white/10"
+                    style={{
+                      backgroundColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+                      color: isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)",
+                    }}
+                  >
+                    <MapPin className="w-3 h-3 flex-shrink-0" />
+                    Malang, Indonesia
                   </span>
                 </div>
               </div>

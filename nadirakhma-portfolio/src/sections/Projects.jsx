@@ -3,6 +3,7 @@ import { useTheme } from "@context/ThemeContext";
 import { ArrowUpRight } from "lucide-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
+import Reveal from "@components/Reveal";
 
 const ProjectCard = ({ title, description, image, link, icon: Icon, category }) => {
   const [hovered, setHovered] = useState(false);
@@ -73,7 +74,7 @@ const Projects = () => {
 
   return (
     <section id={SECTION_IDS.projects} className="py-20 sm:py-28 px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Reveal><div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 sm:gap-8 mb-10 sm:mb-14">
           <div>
             <h2
@@ -127,7 +128,7 @@ const Projects = () => {
             overflow: hidden;
           }
         `}</style>
-      </div>
+      </div></Reveal>
     </section>
   );
 };

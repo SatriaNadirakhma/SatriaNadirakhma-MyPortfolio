@@ -8,6 +8,7 @@ import {
   blockKeyboardShortcuts,
   renderCertificateToCanvas,
 } from "@utils/certificateSecurity";
+import Reveal from "@components/Reveal";
 
 const CertificateModal = ({ src, title, onClose }) => {
   const canvasRef = useRef(null);
@@ -223,7 +224,7 @@ const Champions = () => {
 
   return (
     <section id={SECTION_IDS.champions} className="py-20 sm:py-28 px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Reveal><div className="max-w-7xl mx-auto">
         <div className="border-t border-gray-200 dark:border-white/[0.07] pt-16 sm:pt-20"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
@@ -252,7 +253,7 @@ const Champions = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div></Reveal>
     </section>
   );
 };

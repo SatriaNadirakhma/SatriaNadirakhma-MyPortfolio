@@ -3,6 +3,7 @@ import { useTheme } from "@context/ThemeContext";
 import { Building, Users, ArrowUpRight, X } from "lucide-react";
 import { experiences, accentColors } from "@data/experiences";
 import { SECTION_IDS } from "@constants/index";
+import Reveal from "@components/Reveal";
 
 const ExperienceCard = ({ title, company, date, description, image, icon, link, accent }) => {
   const [expanded, setExpanded] = useState(false);
@@ -85,7 +86,7 @@ const Experience = () => {
 
   return (
     <section id={SECTION_IDS.experience} className="py-20 sm:py-28 px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Reveal><div className="max-w-7xl mx-auto">
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <h2
@@ -113,7 +114,7 @@ const Experience = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div></Reveal>
     </section>
   );
 };

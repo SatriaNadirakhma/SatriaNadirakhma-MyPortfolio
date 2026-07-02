@@ -2,6 +2,7 @@ import { useTheme } from "@context/ThemeContext";
 import { ArrowUpRight, Send, MessageCircle } from "lucide-react";
 import { socialLinks } from "@data/socialLinks";
 import { SECTION_IDS } from "@constants/index";
+import Reveal from "@components/Reveal";
 
 // ─────────────────────────────────────────────────────────────
 // 📦 INSTALASI MagneticButton (Aceternity UI via shadcn):
@@ -15,7 +16,7 @@ const Connect = () => {
 
   return (
     <section id={SECTION_IDS.connect} className="py-20 sm:py-28 px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Reveal><div className="max-w-7xl mx-auto">
         <div className="border-t border-gray-200 dark:border-white/[0.07] pt-16 sm:pt-20">
 
           <h2
@@ -83,8 +84,7 @@ const Connect = () => {
             ))}
           </div>
         </div>
-      </div>
-
+      </div></Reveal>
     </section>
   );
 };

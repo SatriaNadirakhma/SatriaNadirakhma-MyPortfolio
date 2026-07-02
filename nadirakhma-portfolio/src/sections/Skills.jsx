@@ -2,6 +2,7 @@ import { useTheme } from "@context/ThemeContext";
 import { ExternalLink } from "lucide-react";
 import { skillCategories } from "@data/skills";
 import { SECTION_IDS } from "@constants/index";
+import Reveal from "@components/Reveal";
 
 const SkillPill = ({ icon: Icon, name, url }) => {
   const inner = (
@@ -38,7 +39,7 @@ const Skills = () => {
 
   return (
     <section id={SECTION_IDS.skills} className="py-20 sm:py-28 px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Reveal><div className="max-w-7xl mx-auto">
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <h2
@@ -75,7 +76,7 @@ const Skills = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div></Reveal>
     </section>
   );
 };

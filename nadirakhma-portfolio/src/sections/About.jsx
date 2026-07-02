@@ -1,6 +1,7 @@
 import { useTheme } from "@context/ThemeContext";
 import Sticker from "@assets/sticker.png";
 import { SECTION_IDS, STATS } from "@constants/index";
+import Reveal from "@components/Reveal";
 
 const About = () => {
   const { resolvedTheme } = useTheme();
@@ -8,7 +9,7 @@ const About = () => {
 
   return (
     <section id={SECTION_IDS.about} className="py-20 sm:py-28 md:py-36 px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Reveal once={false}><div className="max-w-7xl mx-auto">
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 lg:gap-20 items-start">
 
@@ -92,7 +93,7 @@ const About = () => {
           </div>
 
         </div>
-      </div>
+      </div></Reveal>
     </section>
   );
 };
