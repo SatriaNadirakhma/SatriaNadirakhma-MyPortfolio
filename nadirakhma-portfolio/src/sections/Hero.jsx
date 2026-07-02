@@ -21,41 +21,6 @@ const Hero = () => {
       color: "transparent",
     },
     divider: { background: isDark ? "rgba(147,197,253,0.2)" : "rgba(59,130,246,0.25)" },
-    exploreBtn: {
-      background: isDark ? "rgba(59,130,246,0.15)" : "rgba(59,130,246,0.1)",
-      border: isDark ? "1px solid rgba(147,197,253,0.3)" : "1px solid rgba(37,99,235,0.3)",
-      color: isDark ? "rgba(147,197,253,0.9)" : "rgba(37,99,235,0.9)",
-    },
-    portfolioBtn: {
-      background: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)",
-      border: isDark ? "1px solid rgba(255,255,255,0.22)" : "1px solid rgba(0,0,0,0.2)",
-      color: isDark ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)",
-    },
-    portfolioHover: {
-      background: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.09)",
-      borderColor: isDark ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.32)",
-      color: isDark ? "rgba(255,255,255,1)" : "rgba(0,0,0,0.9)",
-    },
-    portfolioLeave: {
-      background: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)",
-      borderColor: isDark ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.2)",
-      color: isDark ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)",
-    },
-    cvBtn: {
-      background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
-      border: isDark ? "1px solid rgba(255,255,255,0.18)" : "1px solid rgba(0,0,0,0.16)",
-      color: isDark ? "rgba(255,255,255,0.78)" : "rgba(0,0,0,0.7)",
-    },
-    cvHover: {
-      background: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.07)",
-      borderColor: isDark ? "rgba(255,255,255,0.32)" : "rgba(0,0,0,0.28)",
-      color: isDark ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.88)",
-    },
-    cvLeave: {
-      background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
-      borderColor: isDark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.16)",
-      color: isDark ? "rgba(255,255,255,0.78)" : "rgba(0,0,0,0.7)",
-    },
     photoShadow: {
       boxShadow: isDark
         ? "0 0 0 1px rgba(147,197,253,0.1), 0 0 60px rgba(59,130,246,0.12)"
@@ -145,74 +110,41 @@ const Hero = () => {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <MagneticButton className="rounded-full">
-                <Link
-                  to={SECTION_IDS.projects}
-                  smooth
-                  duration={500}
-                  offset={-60}
-                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  style={s.exploreBtn}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = "rgba(59,130,246,1)";
-                    e.currentTarget.style.borderColor = "rgba(59,130,246,1)";
-                    e.currentTarget.style.color = "#fff";
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = s.exploreBtn.background;
-                    e.currentTarget.style.borderColor = isDark ? "rgba(147,197,253,0.3)" : "rgba(37,99,235,0.3)";
-                    e.currentTarget.style.color = s.exploreBtn.color;
-                  }}
-                >
-                  Explore My Work
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-                </Link>
+                <MagneticButton>
+                  <Link
+                    to={SECTION_IDS.projects}
+                    smooth
+                    duration={500}
+                    offset={-60}
+                    className="inline-flex items-center gap-2 rounded-lg bg-linear-to-b from-blue-500 to-blue-700 px-5 sm:px-6 py-2.5 font-modern text-xs sm:text-sm font-medium text-white ring-1 ring-white/20 ring-offset-1 ring-offset-blue-500 ring-inset transition-transform duration-150 active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  >
+                    Explore My Work
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </MagneticButton>
 
-                <MagneticButton className="rounded-full">
-                <a
-                  href={PORTFOLIO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  style={s.portfolioBtn}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = s.portfolioHover.background;
-                    e.currentTarget.style.borderColor = s.portfolioHover.borderColor;
-                    e.currentTarget.style.color = s.portfolioHover.color;
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = s.portfolioLeave.background;
-                    e.currentTarget.style.borderColor = s.portfolioLeave.borderColor;
-                    e.currentTarget.style.color = s.portfolioLeave.color;
-                  }}
-                >
-                  Design Portfolio
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-                </a>
+                <MagneticButton>
+                  <a
+                    href={PORTFOLIO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg bg-linear-to-b from-orange-500 to-orange-700 px-5 sm:px-6 py-2.5 font-modern text-xs sm:text-sm font-medium text-white ring-1 ring-white/20 ring-offset-1 ring-offset-orange-500 ring-inset transition-transform duration-150 active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  >
+                    Design Portfolio
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
                 </MagneticButton>
 
-                <MagneticButton className="rounded-full">
-                <a
-                  href={cvATS}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  style={s.cvBtn}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = s.cvHover.background;
-                    e.currentTarget.style.borderColor = s.cvHover.borderColor;
-                    e.currentTarget.style.color = s.cvHover.color;
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = s.cvLeave.background;
-                    e.currentTarget.style.borderColor = s.cvLeave.borderColor;
-                    e.currentTarget.style.color = s.cvLeave.color;
-                  }}
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  Download CV
-                </a>
+                <MagneticButton>
+                  <a
+                    href={cvATS}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg bg-linear-to-b from-gray-100 to-gray-300 px-5 sm:px-6 py-2.5 font-modern text-xs sm:text-sm font-medium text-gray-800 ring-1 ring-black/10 ring-offset-1 ring-offset-gray-400 ring-inset transition-transform duration-150 active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    Download CV
+                  </a>
                 </MagneticButton>
               </div>
             </div>
