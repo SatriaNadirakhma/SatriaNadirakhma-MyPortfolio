@@ -17,8 +17,11 @@ const Hero = () => {
     eyebrowLine: { background: isDark ? "rgba(147,197,253,0.5)" : "rgba(59,130,246,0.5)" },
     eyebrowText: { color: isDark ? "rgba(147,197,253,0.6)" : "rgba(37,99,235,0.7)" },
     stroke: {
-      WebkitTextStroke: isDark ? "1.5px rgba(147,197,253,0.65)" : "1.5px rgba(37,99,235,0.6)",
-      color: "transparent",
+      color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
+      fontStyle: "italic",
+      textShadow: isDark
+        ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
+        : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
     },
     divider: { background: isDark ? "rgba(147,197,253,0.2)" : "rgba(59,130,246,0.25)" },
     photoShadow: {
@@ -52,20 +55,6 @@ const Hero = () => {
 
             {/* LEFT */}
             <div className="flex flex-col">
-
-              {/* eyebrow */}
-              <div className="flex items-center gap-3 mb-6 sm:mb-8">
-                <div
-                  className="h-px w-8 transition-colors duration-300"
-                  style={s.eyebrowLine}
-                />
-                <p
-                  className="font-modern uppercase tracking-[0.28em] text-[10px] sm:text-[11px] transition-colors duration-300"
-                  style={s.eyebrowText}
-                >
-                  Digital Designer &amp; Front-End Developer
-                </p>
-              </div>
 
               {/* headline */}
               <h1

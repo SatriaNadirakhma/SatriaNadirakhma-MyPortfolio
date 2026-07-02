@@ -10,13 +10,6 @@ const About = () => {
     <section id={SECTION_IDS.about} className="py-20 sm:py-28 md:py-36 px-5 sm:px-8">
       <div className="max-w-7xl mx-auto">
 
-        <div className="flex items-center gap-5 mb-12 sm:mb-16">
-          <div className="w-6 h-px bg-gray-300 dark:bg-white/20" />
-          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-gray-500 dark:text-white/30">
-            About Me
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 lg:gap-20 items-start">
 
           <div className="flex flex-row lg:flex-col items-center lg:items-start gap-6 sm:gap-8">
@@ -45,10 +38,11 @@ const About = () => {
               Building digital products{" "}
               <span
                 style={{
-                  WebkitTextStroke: isDark
-                    ? "0.8px rgba(255,255,255,0.8)"
-                    : "0.8px rgba(17,24,39,0.65)",
-                  color: "transparent",
+                  color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
+                  fontStyle: "italic",
+                  textShadow: isDark
+                    ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
+                    : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
                 }}
               >
                 end-to-end
@@ -56,10 +50,11 @@ const About = () => {
               {" "}— from{" "}
               <span
                 style={{
-                  WebkitTextStroke: isDark
-                    ? "0.8px rgba(255,255,255,0.8)"
-                    : "0.8px rgba(17,24,39,0.65)",
-                  color: "transparent",
+                  color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
+                  fontStyle: "italic",
+                  textShadow: isDark
+                    ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
+                    : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
                 }}
               >
                 wireframe

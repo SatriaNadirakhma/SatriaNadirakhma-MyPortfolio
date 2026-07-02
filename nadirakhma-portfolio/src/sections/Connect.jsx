@@ -17,12 +17,6 @@ const Connect = () => {
     <section id={SECTION_IDS.connect} className="py-20 sm:py-28 px-5 sm:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="border-t border-gray-200 dark:border-white/[0.07] pt-16 sm:pt-20">
-          <div className="flex items-center gap-3 mb-8 sm:mb-12">
-            <div className="w-6 h-px bg-gray-300 dark:bg-white/20" />
-            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-gray-500 dark:text-white/30">
-              Get In Touch
-            </p>
-          </div>
 
           <h2
             className="font-modern font-bold leading-[0.92] mb-8 sm:mb-12 text-gray-900 dark:text-white"
@@ -31,10 +25,11 @@ const Connect = () => {
             Let's{" "}
             <span
               style={{
-                WebkitTextStroke: isDark
-                  ? "1px rgba(255,255,255,0.8)"
-                  : "1px rgba(17,24,39,0.65)",
-                color: "transparent",
+                color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
+                fontStyle: "italic",
+                textShadow: isDark
+                  ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
+                  : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
               }}
             >
               work

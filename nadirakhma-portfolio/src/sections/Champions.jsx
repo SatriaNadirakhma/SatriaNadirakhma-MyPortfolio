@@ -224,12 +224,7 @@ const Champions = () => {
   return (
     <section id={SECTION_IDS.champions} className="py-20 sm:py-28 px-5 sm:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-3 mb-12 sm:mb-16">
-          <div className="w-6 h-px bg-gray-300 dark:bg-white/20" />
-          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-modern text-gray-500 dark:text-white/30">
-            License &amp; Awards
-          </p>
-        </div>
+        <div className="border-t border-gray-200 dark:border-white/[0.07] pt-16 sm:pt-20"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <h2
@@ -238,16 +233,17 @@ const Champions = () => {
           >
             Champions
             <br />
-            <span
-              style={{
-                WebkitTextStroke: isDark
-                  ? "1px rgba(255,255,255,0.8)"
-                  : "1px rgba(17,24,39,0.65)",
-                color: "transparent",
-              }}
-            >
-              &amp; Awards
-            </span>
+              <span
+                style={{
+                  color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
+                  fontStyle: "italic",
+                  textShadow: isDark
+                    ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
+                    : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
+                }}
+              >
+                &amp; Awards
+              </span>
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
