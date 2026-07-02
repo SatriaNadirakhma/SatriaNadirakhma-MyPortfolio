@@ -1,20 +1,80 @@
 import { Element, Link } from "react-scroll";
+import { useMemo } from "react";
 import { useTheme } from "@context/ThemeContext";
 import Profile1 from "@assets/profile1.webp";
 import { ArrowRight, Download, MapPin } from "lucide-react";
 import cvATS from "@assets/pdf/cv-ats.pdf";
-import portfolio from "@assets/pdf/portfolio.pdf";
+const PORTFOLIO_URL = "https://drive.google.com/file/d/1fLRntV4Js0ywnQDJTb23QXyGjaBlDult/view";
 import { SECTION_IDS } from "@constants/index";
 
-// ─────────────────────────────────────────────────────────────
-// 📦 INSTALASI MagneticButton (Aceternity UI via shadcn):
-//    bunx --bun shadcn@latest add @aceternity/magnetic-button-demo
-// ─────────────────────────────────────────────────────────────
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const Hero = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+
+  const s = useMemo(() => ({
+    eyebrowLine: { background: isDark ? "rgba(147,197,253,0.5)" : "rgba(59,130,246,0.5)" },
+    eyebrowText: { color: isDark ? "rgba(147,197,253,0.6)" : "rgba(37,99,235,0.7)" },
+    stroke: {
+      WebkitTextStroke: isDark ? "1.5px rgba(147,197,253,0.65)" : "1.5px rgba(37,99,235,0.6)",
+      color: "transparent",
+    },
+    divider: { background: isDark ? "rgba(147,197,253,0.2)" : "rgba(59,130,246,0.25)" },
+    exploreBtn: {
+      background: isDark ? "rgba(59,130,246,0.15)" : "rgba(59,130,246,0.1)",
+      border: isDark ? "1px solid rgba(147,197,253,0.3)" : "1px solid rgba(37,99,235,0.3)",
+      color: isDark ? "rgba(147,197,253,0.9)" : "rgba(37,99,235,0.9)",
+    },
+    portfolioBtn: {
+      background: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)",
+      border: isDark ? "1px solid rgba(255,255,255,0.22)" : "1px solid rgba(0,0,0,0.2)",
+      color: isDark ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)",
+    },
+    portfolioHover: {
+      background: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.09)",
+      borderColor: isDark ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.32)",
+      color: isDark ? "rgba(255,255,255,1)" : "rgba(0,0,0,0.9)",
+    },
+    portfolioLeave: {
+      background: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)",
+      borderColor: isDark ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.2)",
+      color: isDark ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)",
+    },
+    cvBtn: {
+      background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+      border: isDark ? "1px solid rgba(255,255,255,0.18)" : "1px solid rgba(0,0,0,0.16)",
+      color: isDark ? "rgba(255,255,255,0.78)" : "rgba(0,0,0,0.7)",
+    },
+    cvHover: {
+      background: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.07)",
+      borderColor: isDark ? "rgba(255,255,255,0.32)" : "rgba(0,0,0,0.28)",
+      color: isDark ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.88)",
+    },
+    cvLeave: {
+      background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+      borderColor: isDark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.16)",
+      color: isDark ? "rgba(255,255,255,0.78)" : "rgba(0,0,0,0.7)",
+    },
+    photoShadow: {
+      boxShadow: isDark
+        ? "0 0 0 1px rgba(147,197,253,0.1), 0 0 60px rgba(59,130,246,0.12)"
+        : "0 0 0 1px rgba(59,130,246,0.08), 0 0 60px rgba(59,130,246,0.06)",
+    },
+    offsetBorder: { border: isDark ? "1px solid rgba(147,197,253,0.1)" : "1px solid rgba(59,130,246,0.1)" },
+    nameBadge: {
+      backgroundColor: isDark ? "#0d1526" : "#ffffff",
+      border: isDark ? "1px solid rgba(147,197,253,0.18)" : "1px solid rgba(59,130,246,0.18)",
+    },
+    roleText: { color: isDark ? "rgba(147,197,253,0.55)" : "rgba(37,99,235,0.6)" },
+    mapPin: { color: isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.35)" },
+    location: { color: isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.45)" },
+    n4d1Badge: {
+      backgroundColor: isDark ? "#080808" : "#fafafa",
+      border: isDark ? "1px solid rgba(147,197,253,0.14)" : "1px solid rgba(59,130,246,0.14)",
+    },
+    n4d1Text: { color: isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)" },
+  }), [isDark]);
 
   return (
     <Element name={SECTION_IDS.hero}>
@@ -32,21 +92,13 @@ const Hero = () => {
               <div className="flex items-center gap-3 mb-6 sm:mb-8">
                 <div
                   className="h-px w-8 transition-colors duration-300"
-                  style={{
-                    background: isDark
-                      ? "rgba(147,197,253,0.5)"
-                      : "rgba(59,130,246,0.5)",
-                  }}
+                  style={s.eyebrowLine}
                 />
                 <p
                   className="font-modern uppercase tracking-[0.28em] text-[10px] sm:text-[11px] transition-colors duration-300"
-                  style={{
-                    color: isDark
-                      ? "rgba(147,197,253,0.6)"
-                      : "rgba(37,99,235,0.7)",
-                  }}
+                  style={s.eyebrowText}
                 >
-                  Front-End Developer &amp; UI/UX Designer
+                  Digital Designer &amp; Front-End Developer
                 </p>
               </div>
 
@@ -60,12 +112,7 @@ const Hero = () => {
                 </span>
                 <span
                   className="block transition-all duration-300"
-                  style={{
-                    WebkitTextStroke: isDark
-                      ? "1.5px rgba(147,197,253,0.65)"
-                      : "1.5px rgba(37,99,235,0.6)",
-                    color: "transparent",
-                  }}
+                  style={s.stroke}
                 >
                   interfaces
                 </span>
@@ -74,12 +121,7 @@ const Hero = () => {
                 </span>
                 <span
                   className="block transition-all duration-300"
-                  style={{
-                    WebkitTextStroke: isDark
-                      ? "1.5px rgba(147,197,253,0.65)"
-                      : "1.5px rgba(37,99,235,0.6)",
-                    color: "transparent",
-                  }}
+                  style={s.stroke}
                 >
                   beautifully.
                 </span>
@@ -88,11 +130,7 @@ const Hero = () => {
               {/* divider */}
               <div
                 className="w-16 h-px mb-8 sm:mb-10 transition-colors duration-300"
-                style={{
-                  background: isDark
-                    ? "rgba(147,197,253,0.2)"
-                    : "rgba(59,130,246,0.25)",
-                }}
+                style={s.divider}
               />
 
               {/* sub-headline */}
@@ -114,32 +152,16 @@ const Hero = () => {
                   duration={500}
                   offset={-60}
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  style={{
-                    background: isDark
-                      ? "rgba(59,130,246,0.15)"
-                      : "rgba(59,130,246,0.1)",
-                    border: isDark
-                      ? "1px solid rgba(147,197,253,0.3)"
-                      : "1px solid rgba(37,99,235,0.3)",
-                    color: isDark
-                      ? "rgba(147,197,253,0.9)"
-                      : "rgba(37,99,235,0.9)",
-                  }}
+                  style={s.exploreBtn}
                   onMouseEnter={e => {
                     e.currentTarget.style.background = "rgba(59,130,246,1)";
                     e.currentTarget.style.borderColor = "rgba(59,130,246,1)";
                     e.currentTarget.style.color = "#fff";
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.background = isDark
-                      ? "rgba(59,130,246,0.15)"
-                      : "rgba(59,130,246,0.1)";
-                    e.currentTarget.style.borderColor = isDark
-                      ? "rgba(147,197,253,0.3)"
-                      : "rgba(37,99,235,0.3)";
-                    e.currentTarget.style.color = isDark
-                      ? "rgba(147,197,253,0.9)"
-                      : "rgba(37,99,235,0.9)";
+                    e.currentTarget.style.background = s.exploreBtn.background;
+                    e.currentTarget.style.borderColor = isDark ? "rgba(147,197,253,0.3)" : "rgba(37,99,235,0.3)";
+                    e.currentTarget.style.color = s.exploreBtn.color;
                   }}
                 >
                   Explore My Work
@@ -149,42 +171,20 @@ const Hero = () => {
 
                 <MagneticButton className="rounded-full">
                 <a
-                  href={portfolio}
+                  href={PORTFOLIO_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  style={{
-                    background: isDark
-                      ? "rgba(255,255,255,0.07)"
-                      : "rgba(0,0,0,0.05)",
-                    border: isDark
-                      ? "1px solid rgba(255,255,255,0.22)"
-                      : "1px solid rgba(0,0,0,0.2)",
-                    color: isDark
-                      ? "rgba(255,255,255,0.82)"
-                      : "rgba(0,0,0,0.75)",
-                  }}
+                  style={s.portfolioBtn}
                   onMouseEnter={e => {
-                    e.currentTarget.style.background = isDark
-                      ? "rgba(255,255,255,0.12)"
-                      : "rgba(0,0,0,0.09)";
-                    e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.38)"
-                      : "rgba(0,0,0,0.32)";
-                    e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,1)"
-                      : "rgba(0,0,0,0.9)";
+                    e.currentTarget.style.background = s.portfolioHover.background;
+                    e.currentTarget.style.borderColor = s.portfolioHover.borderColor;
+                    e.currentTarget.style.color = s.portfolioHover.color;
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.background = isDark
-                      ? "rgba(255,255,255,0.07)"
-                      : "rgba(0,0,0,0.05)";
-                    e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.22)"
-                      : "rgba(0,0,0,0.2)";
-                    e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,0.82)"
-                      : "rgba(0,0,0,0.75)";
+                    e.currentTarget.style.background = s.portfolioLeave.background;
+                    e.currentTarget.style.borderColor = s.portfolioLeave.borderColor;
+                    e.currentTarget.style.color = s.portfolioLeave.color;
                   }}
                 >
                   Design Portfolio
@@ -198,38 +198,16 @@ const Hero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full font-modern text-xs sm:text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  style={{
-                    background: isDark
-                      ? "rgba(255,255,255,0.05)"
-                      : "rgba(0,0,0,0.04)",
-                    border: isDark
-                      ? "1px solid rgba(255,255,255,0.18)"
-                      : "1px solid rgba(0,0,0,0.16)",
-                    color: isDark
-                      ? "rgba(255,255,255,0.78)"
-                      : "rgba(0,0,0,0.7)",
-                  }}
+                  style={s.cvBtn}
                   onMouseEnter={e => {
-                    e.currentTarget.style.background = isDark
-                      ? "rgba(255,255,255,0.1)"
-                      : "rgba(0,0,0,0.07)";
-                    e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.32)"
-                      : "rgba(0,0,0,0.28)";
-                    e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,0.95)"
-                      : "rgba(0,0,0,0.88)";
+                    e.currentTarget.style.background = s.cvHover.background;
+                    e.currentTarget.style.borderColor = s.cvHover.borderColor;
+                    e.currentTarget.style.color = s.cvHover.color;
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.background = isDark
-                      ? "rgba(255,255,255,0.05)"
-                      : "rgba(0,0,0,0.04)";
-                    e.currentTarget.style.borderColor = isDark
-                      ? "rgba(255,255,255,0.18)"
-                      : "rgba(0,0,0,0.16)";
-                    e.currentTarget.style.color = isDark
-                      ? "rgba(255,255,255,0.78)"
-                      : "rgba(0,0,0,0.7)";
+                    e.currentTarget.style.background = s.cvLeave.background;
+                    e.currentTarget.style.borderColor = s.cvLeave.borderColor;
+                    e.currentTarget.style.color = s.cvLeave.color;
                   }}
                 >
                   <Download className="w-3.5 h-3.5" />
@@ -246,11 +224,7 @@ const Hero = () => {
                 {/* outer glow ring */}
                 <div
                   className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-300"
-                  style={{
-                    boxShadow: isDark
-                      ? "0 0 0 1px rgba(147,197,253,0.1), 0 0 60px rgba(59,130,246,0.12)"
-                      : "0 0 0 1px rgba(59,130,246,0.08), 0 0 60px rgba(59,130,246,0.06)",
-                  }}
+                  style={s.photoShadow}
                 />
 
                 {/* photo */}
@@ -270,24 +244,13 @@ const Hero = () => {
                 {/* offset border frame */}
                 <div
                   className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl -z-10 transition-colors duration-300"
-                  style={{
-                    border: isDark
-                      ? "1px solid rgba(147,197,253,0.1)"
-                      : "1px solid rgba(59,130,246,0.1)",
-                  }}
+                  style={s.offsetBorder}
                 />
 
                 {/* ── NAME BADGE ── */}
                 <div
                   className="absolute -bottom-6 left-3 sm:left-4 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 shadow-2xl transition-all duration-300"
-                  style={{
-                    backgroundColor: isDark ? "#0d1526" : "#ffffff",
-                    border: isDark
-                      ? "1px solid rgba(147,197,253,0.18)"
-                      : "1px solid rgba(59,130,246,0.18)",
-                    backdropFilter: "blur(12px)",
-                    minWidth: "180px",
-                  }}
+                  style={{ ...s.nameBadge, backdropFilter: "blur(12px)", minWidth: "180px" }}
                 >
                   {/* name */}
                   <p
@@ -302,13 +265,7 @@ const Hero = () => {
                   {/* role */}
                   <p
                     className="font-modern mt-1 transition-colors duration-300"
-                    style={{
-                      fontSize: "10px",
-                      color: isDark
-                        ? "rgba(147,197,253,0.55)"
-                        : "rgba(37,99,235,0.6)",
-                      letterSpacing: "0.05em",
-                    }}
+                    style={{ ...s.roleText, fontSize: "10px", letterSpacing: "0.05em" }}
                   >
                     Front-End Dev &amp; UI/UX Designer
                   </p>
@@ -317,21 +274,11 @@ const Hero = () => {
                   <div className="flex items-center gap-1 mt-2">
                     <MapPin
                       className="w-2.5 h-2.5 flex-shrink-0 transition-colors duration-300"
-                      style={{
-                        color: isDark
-                          ? "rgba(255,255,255,0.25)"
-                          : "rgba(0,0,0,0.35)",
-                      }}
+                      style={s.mapPin}
                     />
                     <p
                       className="font-modern transition-colors duration-300"
-                      style={{
-                        fontSize: "9px",
-                        color: isDark
-                          ? "rgba(255,255,255,0.3)"
-                          : "rgba(0,0,0,0.45)",
-                        letterSpacing: "0.05em",
-                      }}
+                      style={{ ...s.location, fontSize: "9px", letterSpacing: "0.05em" }}
                     >
                       Malang, Indonesia
                     </p>
@@ -341,20 +288,11 @@ const Hero = () => {
                 {/* N4D1 badge — top right */}
                 <div
                   className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors duration-300"
-                  style={{
-                    backgroundColor: isDark ? "#080808" : "#fafafa",
-                    border: isDark
-                      ? "1px solid rgba(147,197,253,0.14)"
-                      : "1px solid rgba(59,130,246,0.14)",
-                  }}
+                  style={s.n4d1Badge}
                 >
                   <span
                     className="font-modern text-[9px] sm:text-[10px] tracking-wider leading-tight text-center transition-colors duration-300"
-                    style={{
-                      color: isDark
-                        ? "rgba(255,255,255,0.45)"
-                        : "rgba(0,0,0,0.5)",
-                    }}
+                    style={s.n4d1Text}
                   >
                     N4D1
                   </span>

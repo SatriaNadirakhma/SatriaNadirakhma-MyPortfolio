@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-scroll";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@context/ThemeContext";
@@ -20,7 +20,14 @@ const Sidebar = () => {
   const isDark = resolvedTheme === "dark";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const past = { current: false };
+    const handleScroll = () => {
+      const val = window.scrollY > 20;
+      if (val !== past.current) {
+        past.current = val;
+        setScrolled(val);
+      }
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
