@@ -1,93 +1,125 @@
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useOutsideClick } from "@hooks/use-outside-click";
 import { useTheme } from "@context/ThemeContext";
-import { Building, Users, ArrowUpRight, X } from "lucide-react";
-import { experiences, accentColors } from "@data/experiences";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 
-const ExperienceCard = ({ title, company, date, description, image, icon, link, accent }) => {
-  const [expanded, setExpanded] = useState(false);
-  const Icon = icon === "users" ? Users : Building;
+import OranjiIcon from "@assets/collaborations/oranji.webp";
+import ItdecIcon from "@assets/collaborations/itdec.webp";
+import KompenIcon from "@assets/collaborations/kompen.webp";
+import PetrokimiaIcon from "@assets/collaborations/petrokimia.webp";
+import OranjiLarge from "@assets/image/oranjiteam.webp";
+import ItdecLarge from "@assets/image/itdecpeeps.webp";
+import KompenLarge from "@assets/image/kompen.webp";
+import PetrokimiaLarge from "@assets/image/petrokimia.webp";
 
-  return (
-    <div
-      className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
-        expanded
-          ? accentColors[accent]
-          : "border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
-      }`}
-    >
-      <div className="relative h-36 sm:h-44 overflow-hidden">
-        <img
-          src={image}
-          alt={`${title} -- ${company}`}
-          className="w-full h-full object-cover brightness-90 group-hover:brightness-50 transition-all duration-300 scale-105 group-hover:scale-100"
-          loading="lazy"
-        />
-        <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-          <Icon className="w-4 h-4 text-white/80" />
-        </div>
-        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
-          <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">
-            {date}
-          </span>
-        </div>
-      </div>
+const CloseIcon = () => (
+  <motion.svg
+    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.05 } }}
+    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2"
+    strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-black"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M18 6l-12 12" />
+    <path d="M6 6l12 12" />
+  </motion.svg>
+);
 
-      <div className="p-4 sm:p-5">
-        <p className="text-[10px] tracking-[0.2em] uppercase font-modern text-gray-500 dark:text-white/30 mb-1.5">
-          {company}
-        </p>
-        <h3 className="text-base sm:text-lg font-modern font-bold text-gray-900 dark:text-white leading-snug mb-3 whitespace-pre-line">
-          {title}
-        </h3>
-
-        <div
-          className={`overflow-hidden transition-all duration-300 ${
-            expanded ? "max-h-40 mb-4" : "max-h-0"
-          }`}
-        >
-          <p className="text-xs sm:text-sm font-modern text-gray-600 dark:text-white/45 leading-relaxed">
-            {description}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
-          >
-            {expanded ? (
-              <>
-                <X className="w-3 h-3" /> Close
-              </>
-            ) : (
-              <>Learn More</>
-            )}
-          </button>
-          <span className="text-gray-300 dark:text-white/10">|</span>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
-          >
-            Social Media <ArrowUpRight className="w-3 h-3" />
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-};
+const CARDS = [
+  {
+    title: "Graphic Designer",
+    description: "Oranji Studio",
+    src: OranjiIcon,
+    largeSrc: OranjiLarge,
+    ctaText: "View",
+    ctaLink: "https://www.instagram.com/oranji.studio/",
+    date: "May 2024 -- Present",
+    content: () => (
+      <p>
+        Designing digital assets such as social media content, promotional materials,
+        and brand visuals based on client and team collaboration. Working closely with
+        cross-functional creative teams to deliver consistent visual identity across
+        multiple platforms and campaigns.
+      </p>
+    ),
+  },
+  {
+    title: "Creative Media Division — Project Coordinator",
+    description: "ITDEC Polinema",
+    src: ItdecIcon,
+    largeSrc: ItdecLarge,
+    ctaText: "View",
+    ctaLink: "https://www.instagram.com/itdecpolinema/",
+    date: "Aug 2025 -- Present",
+    content: () => (
+      <p>
+        Establishing communication between Creative Media teams to determine ITDEC&apos;s
+        branding image. Coordinating design output across an 8-person team for campus-wide
+        events and initiatives, ensuring visual consistency and timely delivery.
+      </p>
+    ),
+  },
+  {
+    title: "Editor-in-Chief",
+    description: "LPM Kompen Polinema",
+    src: KompenIcon,
+    largeSrc: KompenLarge,
+    ctaText: "View",
+    ctaLink: "https://www.instagram.com/lpmkompen/",
+    date: "Mar 2025 -- Mar 2026",
+    content: () => (
+      <p>
+        Led the print and online media division managing journalistic activities:
+        content planning, article editing, and publication design. Coordinated a team
+        of writers and designers to produce high-quality campus publications on schedule.
+      </p>
+    ),
+  },
+  {
+    title: "IT Intern",
+    description: "PT. Petrokimia Gresik (BUMN)",
+    src: PetrokimiaIcon,
+    largeSrc: PetrokimiaLarge,
+    ctaText: "View",
+    ctaLink: "https://www.instagram.com/petrokimiagresik_official/",
+    date: "Jan 2026 -- Present",
+    content: () => (
+      <p>
+        Conducting research and development in the field of Information Technology
+        to support the company&apos;s applications and user needs. Collaborating with
+        the IT team on internal tools, data analysis, and process automation.
+      </p>
+    ),
+  },
+];
 
 const Experience = () => {
+  const [active, setActive] = useState(null);
+  const ref = useRef(null);
+  const id = useId();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+
+  useEffect(() => {
+    function onKeyDown(event) {
+      if (event.key === "Escape") setActive(false);
+    }
+    if (active && typeof active === "object") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [active]);
+
+  useOutsideClick(ref, () => setActive(null));
 
   return (
     <section id={SECTION_IDS.experience} className="py-20 sm:py-28 px-5 sm:px-8">
       <Reveal><div className="max-w-7xl mx-auto">
-
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <h2
             className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
@@ -95,23 +127,150 @@ const Experience = () => {
           >
             My
             <br />
-              <span
-                style={{
-                  color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
-                  fontStyle: "italic",
-                  textShadow: isDark
-                    ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
-                    : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
-                }}
-              >
-                Journey
-              </span>
+            <span
+              style={{
+                color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
+                fontStyle: "italic",
+                textShadow: isDark
+                  ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
+                  : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
+              }}
+            >
+              Journey
+            </span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {experiences.map((exp, i) => (
-              <ExperienceCard key={i} {...exp} />
-            ))}
+          <div className="flex flex-col w-full">
+            {/* Expandable card modal */}
+            <AnimatePresence>
+              {active && typeof active === "object" && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 bg-black/20 z-10"
+                />
+              )}
+            </AnimatePresence>
+            <AnimatePresence>
+              {active && typeof active === "object" ? (
+                <div className="fixed inset-0 grid place-items-center z-[100]">
+                  <motion.button
+                    key={`button-${active.title}-${id}`}
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0, transition: { duration: 0.05 } }}
+                    className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+                    onClick={() => setActive(null)}
+                  >
+                    <CloseIcon />
+                  </motion.button>
+                  <motion.div
+                    layoutId={`card-${active.title}-${id}`}
+                    ref={ref}
+                    className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden outline-2 dark:*:outline-white/10 outline-dark-/10"
+                  >
+                    <motion.div layoutId={`image-${active.title}-${id}`}>
+                      <img
+                        width={500}
+                        height={300}
+                        src={active.largeSrc || active.src}
+                        alt={active.title}
+                        className="w-full h-64 lg:h-72 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                      />
+                    </motion.div>
+
+                    <div>
+                      <div className="flex justify-between items-start p-4">
+                        <div>
+                          <motion.h3
+                            layoutId={`title-${active.title}-${id}`}
+                            className="font-bold text-neutral-700 dark:text-neutral-200"
+                          >
+                            {active.title}
+                          </motion.h3>
+                          <motion.p
+                            layoutId={`description-${active.description}-${id}`}
+                            className="text-neutral-600 dark:text-neutral-400"
+                          >
+                            {active.description}
+                          </motion.p>
+                          <p className="text-[10px] tracking-wide font-modern text-neutral-400 dark:text-neutral-500 mt-1">
+                            {active.date}
+                          </p>
+                        </div>
+
+                        <motion.a
+                          layoutId={`button-${active.title}-${id}`}
+                          href={active.ctaLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-3 text-sm rounded-full font-bold bg-gray-900 text-white dark:bg-white dark:text-black"
+                        >
+                          Visit
+                        </motion.a>
+                      </div>
+                      <div className="pt-4 relative px-4">
+                        <motion.div
+                          layout
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none]"
+                        >
+                          {typeof active.content === "function" ? active.content() : active.content}
+                        </motion.div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              ) : null}
+            </AnimatePresence>
+
+            {/* Card list */}
+            <div className="flex flex-col gap-2">
+              {CARDS.map((card) => (
+                <motion.div
+                  layoutId={`card-${card.title}-${id}`}
+                  key={`card-${card.title}-${id}`}
+                  onClick={() => setActive(card)}
+                  className="p-6 flex items-center gap-4 hover:bg-gray-200/50 dark:hover:bg-neutral-800/50 rounded-xl cursor-pointer transition-colors duration-200 outline-1"
+                >
+                  <motion.div layoutId={`image-${card.title}-${id}`} className="flex-shrink-0 h-20 w-20 rounded-lg overflow-hidden">
+                    <img
+                      src={card.src}
+                      alt={card.title}
+                      className="h-full w-full object-contain object-center"
+                    />
+                  </motion.div>
+                  <div className="flex-1 min-w-0">
+                    <motion.h3
+                      layoutId={`title-${card.title}-${id}`}
+                      className="font-medium text-sm sm:text-base text-neutral-800 dark:text-neutral-200"
+                    >
+                      {card.title}
+                    </motion.h3>
+                    <motion.p
+                      layoutId={`description-${card.description}-${id}`}
+                      className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5"
+                    >
+                      {card.description}
+                    </motion.p>
+                  </div>
+                  <motion.button
+                    layoutId={`button-${card.title}-${id}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActive(card);
+                    }}
+                    className="px-4 py-2 text-xs sm:text-sm rounded-full font-bold bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-200 flex-shrink-0"
+                  >
+                    {card.ctaText}
+                  </motion.button>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div></Reveal>

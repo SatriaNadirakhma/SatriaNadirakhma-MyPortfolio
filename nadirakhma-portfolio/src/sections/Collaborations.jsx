@@ -25,7 +25,7 @@ const Collaborations = () => {
       <Reveal><div className="max-w-7xl mx-auto">
         <div className="border-t border-gray-200 dark:border-white/[0.07] pt-14 sm:pt-18">
           <p className="text-center text-[10px] tracking-[0.25em] uppercase font-modern text-gray-400 dark:text-white/25 mb-8 sm:mb-10">
-            Collaborations, Partners &amp; Building Experiences
+            Collaborations &amp; Building Experiences
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-12">
