@@ -7,6 +7,7 @@ import { SECTION_IDS } from "@constants/index";
 
 const NAV_ITEMS = [
   { label: "About", to: SECTION_IDS.about },
+  { label: "Collab", to: SECTION_IDS.collaborations },
   { label: "Experience", to: SECTION_IDS.experience },
   { label: "Projects", to: SECTION_IDS.projects },
   { label: "Skills", to: SECTION_IDS.skills },

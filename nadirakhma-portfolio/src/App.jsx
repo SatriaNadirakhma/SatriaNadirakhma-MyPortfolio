@@ -6,6 +6,7 @@ import LoadingScreen from "@components/LoadingScreen";
 import Marquee from "@components/Marquee";
 import Hero from "@sections/Hero";
 import About from "@sections/About";
+import Collaborations from "@sections/Collaborations";
 import Experience from "@sections/Experience";
 import Projects from "@sections/Projects";
 import Champions from "@sections/Champions";
@@ -49,6 +50,9 @@ function App() {
 
           <section id={SECTION_IDS.about}>
             <About />
+          </section>
+          <section id={SECTION_IDS.collaborations}>
+            <Collaborations />
           </section>
           <section id={SECTION_IDS.experience}>
             <Experience />
