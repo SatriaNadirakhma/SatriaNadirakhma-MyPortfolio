@@ -12,6 +12,7 @@ export const SITE = {
 export const SECTION_IDS = {
   hero: "hero",
   about: "about",
+  collaborations: "collaborations",
   experience: "experience",
   projects: "projects",
   champions: "champions",
