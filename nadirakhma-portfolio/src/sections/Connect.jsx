@@ -21,7 +21,7 @@ const Connect = () => {
 
           <h2
             className="font-modern font-bold leading-[0.92] mb-8 sm:mb-12 text-gray-900 dark:text-white"
-            style={{ fontSize: "clamp(48px, 9vw, 144px)" }}
+            style={{ fontSize: "clamp(48px, 8.5vw, 96px)" }}
           >
             Let's{" "}
             <span

@@ -46,7 +46,7 @@ const Hero = () => {
               {/* headline */}
               <h1
                 className="font-modern font-bold leading-[0.93] mb-8 sm:mb-10"
-                style={{ fontSize: "clamp(52px, 8.5vw, 128px)" }}
+                style={{ fontSize: "clamp(48px, 8.5vw, 96px)" }}
               >
                 <span className={`block transition-colors duration-300 ${isDark ? "text-white" : "text-gray-900"}`}>
                   Crafting
@@ -70,7 +70,7 @@ const Hero = () => {
 
               {/* divider */}
               <div
-                className="w-28 h-px mb-8 sm:mb-10 transition-colors duration-300"
+                className="w-64 h-px mb-8 sm:mb-10 transition-colors duration-300"
                 style={s.divider}
               />
 
@@ -129,10 +129,10 @@ const Hero = () => {
             {/* RIGHT — profile card */}
             <div className="flex justify-center lg:justify-end lg:self-center">
               <div
-                className="flex flex-col rounded-2xl border border-gray-200 dark:border-white/[0.08] shadow-sm dark:shadow-none bg-white dark:bg-[#080808] w-full max-w-[340px] transition-colors duration-300 p-3"
+                className="flex flex-col rounded-2xl border border-gray-200 dark:border-white/8 shadow-sm dark:shadow-none bg-white dark:bg-[#080808] w-full max-w-85 transition-colors duration-300 p-3"
               >
                 <div className="relative rounded-xl overflow-hidden">
-                  <div className="w-full aspect-[3/4] overflow-hidden">
+                  <div className="w-full aspect-3/4 overflow-hidden">
                     <img
                       src={Profile1}
                       alt="Satria Rakhmadani"
@@ -185,7 +185,7 @@ const Hero = () => {
                       color: isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)",
                     }}
                   >
-                    <MapPin className="w-3 h-3 flex-shrink-0" />
+                    <MapPin className="w-3 h-3 shrink-0" />
                     Malang, Indonesia
                   </span>
                 </div>

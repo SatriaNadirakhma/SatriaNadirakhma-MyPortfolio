@@ -10,11 +10,11 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] cursor-pointer hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300"
+      className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/20 cursor-pointer hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="overflow-hidden aspect-[4/3]">
+      <div className="overflow-hidden aspect-4/3">
         <img
           src={image}
           alt={title}
@@ -25,10 +25,10 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 bg-linear-to-t from-black/80 via-black/40 to-transparent">
         <div className="flex items-center gap-2 mb-2">
-          <Icon className="w-3 h-3 text-orange-400/80" />
-          <span className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-modern text-white/40">
+          <Icon className="w-3 h-3 text-white" />
+          <span className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-modern text-white">
             {category}
           </span>
         </div>
@@ -79,7 +79,7 @@ const Projects = () => {
           <div>
             <h2
               className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
-              style={{ fontSize: "clamp(36px, 6vw, 96px)" }}
+              style={{ fontSize: "clamp(36px, 6vw, 80px)" }}
             >
               <span
                 style={{

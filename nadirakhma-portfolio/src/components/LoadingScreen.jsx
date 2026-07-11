@@ -98,7 +98,7 @@ const LoadingScreen = ({ onLoadingComplete }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[999] flex flex-col items-center justify-center transition-all duration-500 ease-in-out"
+      className="fixed inset-0 z-999 flex flex-col items-center justify-center transition-all duration-500 ease-in-out"
       style={{
         background: isDark ? "#000" : "#fafafa",
         transform: exiting ? "scale(0.9)" : "scale(1)",
@@ -113,13 +113,13 @@ const LoadingScreen = ({ onLoadingComplete }) => {
         >
           {/* Center logo */}
           <div
-            className="absolute flex items-center justify-center z-[999]"
+            className="absolute flex items-center justify-center z-999"
             style={{
               top: "50%",
               left: "50%",
               transform: "translate(-50%,-50%)",
-              width: 60,
-              height: 60,
+              width: 28,
+              height: 28,
             }}
           >
             <div

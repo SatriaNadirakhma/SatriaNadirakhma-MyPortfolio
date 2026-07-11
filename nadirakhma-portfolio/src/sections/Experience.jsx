@@ -154,7 +154,7 @@ const Experience = () => {
             </AnimatePresence>
             <AnimatePresence>
               {active && typeof active === "object" ? (
-                <div className="fixed inset-0 grid place-items-center z-[100]">
+                <div className="fixed inset-0 grid place-items-center z-100">
                   <motion.button
                     key={`button-${active.title}-${id}`}
                     layout
@@ -169,7 +169,7 @@ const Experience = () => {
                   <motion.div
                     layoutId={`card-${active.title}-${id}`}
                     ref={ref}
-                    className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden outline-2 dark:*:outline-white/10 outline-dark-/10"
+                    className="w-full max-w-500px h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden outline-2 dark:*:outline-white/10 outline-dark-/10"
                   >
                     <motion.div layoutId={`image-${active.title}-${id}`}>
                       <img
@@ -237,7 +237,7 @@ const Experience = () => {
                   onClick={() => setActive(card)}
                   className="p-6 flex items-center gap-4 hover:bg-gray-200/50 dark:hover:bg-neutral-800/50 rounded-xl cursor-pointer transition-colors duration-200 outline-1"
                 >
-                  <motion.div layoutId={`image-${card.title}-${id}`} className="flex-shrink-0 h-20 w-20 rounded-lg overflow-hidden">
+                  <motion.div layoutId={`image-${card.title}-${id}`} className="shrink-0 h-20 w-20 rounded-lg overflow-hidden">
                     <img
                       src={card.src}
                       alt={card.title}
@@ -264,7 +264,7 @@ const Experience = () => {
                       e.stopPropagation();
                       setActive(card);
                     }}
-                    className="px-4 py-2 text-xs sm:text-sm rounded-full font-bold bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-200 flex-shrink-0"
+                    className="px-4 py-2 text-xs sm:text-sm rounded-full font-bold bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-200 shrink-0"
                   >
                     {card.ctaText}
                   </motion.button>

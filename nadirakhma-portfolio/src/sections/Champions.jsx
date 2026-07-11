@@ -29,7 +29,7 @@ const CertificateModal = ({ src, title, onClose }) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8"
       style={{
         background: isDark ? "rgba(8,8,8,0.92)" : "rgba(250,250,250,0.92)",
         backdropFilter: "blur(20px)",
@@ -45,7 +45,7 @@ const CertificateModal = ({ src, title, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className={`flex items-center justify-between px-5 py-4 border-b ${
-          isDark ? "border-white/[0.06]" : "border-gray-100"
+          isDark ? "border-white/6" : "border-gray-100"
         }`}>
           <div className="flex items-center gap-2">
             <span className={`text-[10px] tracking-[0.22em] uppercase font-modern ${
@@ -106,12 +106,12 @@ const CertificateModal = ({ src, title, onClose }) => {
         </div>
 
         <div className={`px-5 py-3 border-t flex items-center justify-between ${
-          isDark ? "border-white/[0.06]" : "border-gray-100"
+          isDark ? "border-white/6" : "border-gray-100"
         }`}>
           <p className={`text-[10px] font-modern truncate pr-4 ${
             isDark ? "text-white/20" : "text-gray-400"
           }`}>{title}</p>
-          <p className={`text-[10px] font-modern tracking-[0.2em] uppercase flex-shrink-0 ${
+          <p className={`text-[10px] font-modern tracking-[0.2em] uppercase shrink-0 ${
             isDark ? "text-white/12" : "text-gray-300"
           }`}>
             View Only
@@ -140,7 +140,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
         className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
           expanded
             ? "border-orange-500/30 bg-orange-500/5"
-            : "border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+            : "border-gray-200 dark:border-white/7 bg-gray-50 dark:bg-white/2 hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
         }`}
       >
         <div className="relative h-44 sm:h-52 overflow-hidden">
@@ -161,7 +161,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
         </div>
 
         <div className="p-4 sm:p-5">
-          <p className="text-[10px] tracking-[0.2em] uppercase font-modern text-orange-400/70 mb-1.5">
+          <p className="text-[10px] tracking-[0.2em] uppercase font-modern text-blue-400/70 mb-1.5">
             {event}
           </p>
           <h3 className="text-base sm:text-lg font-modern font-bold text-gray-900 dark:text-white leading-snug mb-3">
