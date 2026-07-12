@@ -18,6 +18,15 @@ export const allProjects = [
     category: "Development",
   },
   {
+    title: "MitraBoost - UI/UX Design",
+    description:
+      "Designing the user interface and experience for the MitraBoost application to improve usability and user satisfaction about making business decisions.",
+    image: MitraBoost,
+    link: "https://www.figma.com/deck/xrebbWvdKPfUD4AzOoO40S",
+    icon: Palette,
+    category: "Graphic Design",
+  },
+  {
     title: "SIPINTA -- TOEIC Registration System",
     description:
       "Web-based system to simplify TOEIC registration for Polinema students with integrated user access.",
@@ -45,15 +54,6 @@ export const allProjects = [
     category: "Graphic Design",
   },
   {
-    title: "Sistem Ekspedisi (Terminal)",
-    description:
-      "Java-based expedition management system via terminal to simulate delivery workflows in Indonesia.",
-    image: Ekspedisi,
-    link: "https://github.com/zidnafaz/Sistem-Ekspedisi",
-    icon: Code,
-    category: "Development",
-  },
-  {
     title: "Alceena'23 Social Media Design",
     description:
       "Designing social media content for Alceena'23, class of 2023 student account for the Information Technology Department at the Malang State Polytechnic, to enhance online presence and engagement. (source: Behance - Nadi Rakhma)",
@@ -63,13 +63,13 @@ export const allProjects = [
     category: "Graphic Design",
   },
   {
-    title: "MitraBoost - UI/UX Design",
+    title: "Sistem Ekspedisi (Terminal)",
     description:
-      "Designing the user interface and experience for the MitraBoost application to improve usability and user satisfaction about making business decisions.",
-    image: MitraBoost,
-    link: "https://www.figma.com/deck/xrebbWvdKPfUD4AzOoO40S",
-    icon: Palette,
-    category: "Graphic Design",
+      "Java-based expedition management system via terminal to simulate delivery workflows in Indonesia.",
+    image: Ekspedisi,
+    link: "https://github.com/zidnafaz/Sistem-Ekspedisi",
+    icon: Code,
+    category: "Development",
   },
 ];
 

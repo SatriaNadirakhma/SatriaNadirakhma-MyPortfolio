@@ -96,9 +96,11 @@ const LoadingScreen = ({ onLoadingComplete }) => {
 
   if (!visible) return null;
 
+  const textColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)";
+
   return (
     <div
-      className="fixed inset-0 z-999 flex flex-col items-center justify-center transition-all duration-500 ease-in-out"
+      className="fixed inset-0 z-[999] flex flex-col items-center justify-center transition-all duration-500 ease-in-out"
       style={{
         background: isDark ? "#000" : "#fafafa",
         transform: exiting ? "scale(0.9)" : "scale(1)",
@@ -106,42 +108,11 @@ const LoadingScreen = ({ onLoadingComplete }) => {
         borderRadius: exiting ? "50%" : 0,
       }}
     >
-      <div className="relative flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center gap-10">
         <div
           className="relative flex items-center justify-center"
-          style={{ height: 250, aspectRatio: "1" }}
+          style={{ width: 220, height: 220 }}
         >
-          {/* Center logo */}
-          <div
-            className="absolute flex items-center justify-center z-999"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
-              width: 28,
-              height: 28,
-            }}
-          >
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                animation: exiting ? "none" : "loader-icon-pulse 2s infinite ease-in-out",
-              }}
-            >
-              <img
-                src={Logo}
-                alt="Nadi Rakhma"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                  filter: isDark ? "brightness(0) invert(1)" : "none",
-                }}
-              />
-            </div>
-          </div>
-
           {/* Ripple boxes */}
           {BOXES.map((box) => (
             <div
@@ -166,37 +137,55 @@ const LoadingScreen = ({ onLoadingComplete }) => {
               }}
             />
           ))}
+
+          {/* Center logo */}
+          <div
+            className="absolute z-[999] flex items-center justify-center"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
+          >
+            <div
+              style={{
+                width: 48,
+                height: 48,
+                animation: exiting ? "none" : "loader-icon-pulse 2s infinite ease-in-out",
+              }}
+            >
+              <img
+                src={Logo}
+                alt="Nadi Rakhma"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  filter: isDark ? "brightness(0) invert(1)" : "none",
+                }}
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Loading text — extra top spacing */}
-        <div className="relative h-8 overflow-hidden" style={{ width: 220, marginTop: 48 }}>
-          {/* "Still Brewing" */}
+        <div className="relative h-7 flex items-center justify-center" style={{ width: 220 }}>
           <span
             className="absolute inset-0 flex items-center justify-center font-modern text-xs sm:text-sm tracking-[0.25em] uppercase transition-all duration-500 ease-in-out"
             style={{
-              color: isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)",
+              color: textColor,
               opacity: exiting ? 0 : showAlmost ? 0 : 1,
-              transform: exiting
-                ? "translateY(20px)"
-                : showAlmost
-                  ? "translateY(-24px)"
-                  : "translateY(0)",
+              transform: exiting ? "translateY(16px)" : showAlmost ? "translateY(-20px)" : "translateY(0)",
             }}
           >
             Still Brewing<span style={{ minWidth: 24, display: "inline-block", textAlign: "left" }}>{dots}</span>
           </span>
 
-          {/* "Almost There" */}
           <span
             className="absolute inset-0 flex items-center justify-center font-modern text-xs sm:text-sm tracking-[0.25em] uppercase transition-all duration-500 ease-in-out"
             style={{
-              color: isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)",
+              color: textColor,
               opacity: exiting ? 0 : showAlmost ? 1 : 0,
-              transform: exiting
-                ? "translateY(20px)"
-                : showAlmost
-                  ? "translateY(0)"
-                  : "translateY(24px)",
+              transform: exiting ? "translateY(16px)" : showAlmost ? "translateY(0)" : "translateY(20px)",
             }}
           >
             Almost There<span style={{ minWidth: 24, display: "inline-block", textAlign: "left" }}>{dots}</span>
