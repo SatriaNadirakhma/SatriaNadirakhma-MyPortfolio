@@ -19,7 +19,7 @@ const CloseIcon = () => (
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.05 } }}
     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
     fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-black"
+    strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-black dark:text-white"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M18 6l-12 12" />
@@ -148,42 +148,42 @@ const Experience = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="fixed inset-0 bg-black/20 z-10"
+                  className="fixed inset-0 bg-black/80 z-10 backdrop-blur-sm"
                 />
               )}
             </AnimatePresence>
             <AnimatePresence>
               {active && typeof active === "object" ? (
-                <div className="fixed inset-0 grid place-items-center z-100">
-                  <motion.button
-                    key={`button-${active.title}-${id}`}
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, transition: { duration: 0.05 } }}
-                    className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
-                    onClick={() => setActive(null)}
-                  >
-                    <CloseIcon />
-                  </motion.button>
+                <div className="fixed inset-0 grid place-items-center z-[100]">
                   <motion.div
                     layoutId={`card-${active.title}-${id}`}
                     ref={ref}
-                    className="w-full max-w-500px h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden outline-2 dark:*:outline-white/10 outline-dark-/10"
+                    className="relative w-full max-w-[500px] max-h-full md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden outline-1 outline-gray-300 dark:outline-gray-500 shadow-lg"
                   >
+                    <motion.button
+                      key={`close-${active.title}-${id}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onClick={() => setActive(null)}
+                      className="absolute top-3 right-3 z-10 flex items-center justify-center bg-white/90 dark:bg-neutral-800/90 backdrop-blur-sm rounded-full h-8 w-8 shadow-sm hover:bg-white dark:hover:bg-neutral-700 transition-colors"
+                      aria-label="Close"
+                    >
+                      <CloseIcon />
+                    </motion.button>
                     <motion.div layoutId={`image-${active.title}-${id}`}>
                       <img
                         width={500}
                         height={300}
                         src={active.largeSrc || active.src}
                         alt={active.title}
-                        className="w-full h-64 lg:h-72 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                        className="w-full h-48 sm:h-64 lg:h-72 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
                       />
                     </motion.div>
 
-                    <div>
+                    <div className="flex flex-col flex-1 overflow-hidden">
                       <div className="flex justify-between items-start p-4">
-                        <div>
+                        <div className="min-w-0 flex-1 pr-3">
                           <motion.h3
                             layoutId={`title-${active.title}-${id}`}
                             className="font-bold text-neutral-700 dark:text-neutral-200"
@@ -192,7 +192,7 @@ const Experience = () => {
                           </motion.h3>
                           <motion.p
                             layoutId={`description-${active.description}-${id}`}
-                            className="text-neutral-600 dark:text-neutral-400"
+                            className="text-neutral-600 dark:text-neutral-400 text-sm"
                           >
                             {active.description}
                           </motion.p>
@@ -206,18 +206,18 @@ const Experience = () => {
                           href={active.ctaLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-4 py-3 text-sm rounded-full font-bold bg-gray-900 text-white dark:bg-white dark:text-black"
+                          className="px-4 py-2.5 text-sm rounded-full font-bold bg-gray-900 text-white dark:bg-white dark:text-black shrink-0"
                         >
                           Visit
                         </motion.a>
                       </div>
-                      <div className="pt-4 relative px-4">
+                      <div className="relative px-4 flex-1 overflow-y-auto">
                         <motion.div
                           layout
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
-                          className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none]"
+                          className="text-neutral-600 text-sm leading-relaxed pb-6 dark:text-neutral-400"
                         >
                           {typeof active.content === "function" ? active.content() : active.content}
                         </motion.div>
