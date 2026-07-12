@@ -16,7 +16,7 @@ const LOGOS = [
   { src: Kompen, alt: "LPM Kompen", href: "https://lpmkompen.or.id/" },
   { src: Hmti, alt: "HMTI Polinema", href: "https://www.instagram.com/hmtipolinema/" },
   { src: Wri, alt: "WRI", href: "https://wridev.id/en/" },
-  { src: Alceena, alt: "Alceena", href: "https://www.google.com" },
+  { src: Alceena, alt: "Alceena", href: "https://www.instagram.com/alceena23.polinema/" },
 ];
 
 const Collaborations = () => {
