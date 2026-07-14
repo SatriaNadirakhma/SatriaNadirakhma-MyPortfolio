@@ -147,7 +147,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover brightness-80 group-hover:brightness-60 transition-all duration-300 scale-105 group-hover:scale-100"
+            className="w-full h-full object-cover group-hover:brightness-60 transition-all duration-300 scale-105 group-hover:scale-100"
             loading="lazy"
           />
           <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center">
