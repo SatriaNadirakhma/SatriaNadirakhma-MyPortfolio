@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@context/ThemeContext";
 import { useLenis } from "@context/LenisContext";
+import { useActiveSection } from "@hooks/useActiveSection";
 import { cn } from "@/lib/utils";
 import Logo from "@assets/logo.png";
 import { SECTION_IDS } from "@constants/index";
@@ -12,9 +14,22 @@ const NAV_ITEMS = [
   { label: "Collab", to: SECTION_IDS.collaborations },
   { label: "Experience", to: SECTION_IDS.experience },
   { label: "Projects", to: SECTION_IDS.projects },
+  { label: "Champions", to: SECTION_IDS.champions },
   { label: "Skills", to: SECTION_IDS.skills },
   { label: "Connect", to: SECTION_IDS.connect },
 ];
+
+const NAV_SECTION_IDS = NAV_ITEMS.map((item) => item.to);
+
+const menuStagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
+};
+
+const menuItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+};
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -23,20 +38,35 @@ const Sidebar = () => {
   const isDark = resolvedTheme === "dark";
   const { lenis } = useLenis();
 
-  useEffect(() => {
-    const past = { current: false };
-    const handleScroll = () => {
-      const val = window.scrollY > 20;
-      if (val !== past.current) { past.current = val; setScrolled(val); }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Real scrollspy — which section is currently centered in the viewport —
+  // used to drive the sliding pill on desktop and the highlighted label on mobile.
+  const activeSection = useActiveSection(NAV_SECTION_IDS);
 
+  // Header shrink/blur now reacts to Lenis's own scroll event instead of a
+  // second, independent `window.addEventListener('scroll', ...)` — one
+  // source of truth for "how far has the page scrolled".
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [open]);
+    if (!lenis) return;
+    const onScroll = ({ scroll }) => setScrolled(scroll > 20);
+    lenis.on("scroll", onScroll);
+    return () => lenis.off?.("scroll", onScroll);
+  }, [lenis]);
+
+  // Opening the mobile menu now stops Lenis itself, not just body overflow —
+  // otherwise a wheel/trackpad gesture over the menu would still scroll the
+  // page underneath it.
+  useEffect(() => {
+    if (open) {
+      lenis?.stop();
+      document.body.style.overflow = "hidden";
+    } else {
+      lenis?.start();
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open, lenis]);
 
   const navigate = useCallback((sectionId) => {
     setOpen(false);
@@ -44,7 +74,7 @@ const Sidebar = () => {
   }, [lenis]);
 
   const linkClass = cn(
-    "text-xs tracking-[0.12em] uppercase font-modern transition-colors duration-200 rounded-md px-3 py-1.5",
+    "relative text-xs tracking-[0.12em] uppercase font-modern transition-colors duration-200 rounded-md px-3 py-1.5",
     "text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white cursor-pointer"
   );
 
@@ -71,15 +101,25 @@ const Sidebar = () => {
           </a>
 
           <div className="hidden md:flex items-center gap-1">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.to}
-                onClick={(e) => { e.preventDefault(); navigate(item.to); }}
-                className={linkClass}
-              >
-                {item.label}
-              </a>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeSection === item.to;
+              return (
+                <a
+                  key={item.to}
+                  onClick={(e) => { e.preventDefault(); navigate(item.to); }}
+                  className={cn(linkClass, isActive && "text-gray-900 dark:text-white")}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-0 rounded-md bg-gray-100 dark:bg-white/10"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative">{item.label}</span>
+                </a>
+              );
+            })}
             <button
               onClick={toggleTheme}
               className="ml-2 p-1.5 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors"
@@ -97,32 +137,65 @@ const Sidebar = () => {
             <MenuToggleIcon open={open} className="w-5 h-5" duration={300} />
           </button>
         </nav>
-
-        <div className={cn("fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden md:hidden", open ? "block" : "hidden")}>
-          <div className="flex h-full w-full flex-col justify-between gap-y-4 p-4 bg-white/95 dark:bg-[#080808]/95 backdrop-blur-xl">
-            <div className="flex flex-col gap-y-2 pt-4">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item.to}
-                  onClick={(e) => { e.preventDefault(); navigate(item.to); }}
-                  className="text-sm tracking-[0.15em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-200 py-2 cursor-pointer"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-            <div className="flex items-center justify-center pb-8">
-              <button
-                onClick={() => { toggleTheme(); setOpen(false); }}
-                className="inline-flex items-center gap-2 text-sm tracking-[0.12em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-200 py-2"
-              >
-                {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                {isDark ? "Light Mode" : "Dark Mode"}
-              </button>
-            </div>
-          </div>
-        </div>
       </header>
+
+      {/* Mobile menu — reveals as a circle expanding from the burger icon,
+          rather than the previous instant block/hidden swap. */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ clipPath: "circle(0% at calc(100% - 32px) 28px)" }}
+            animate={{ clipPath: "circle(150% at calc(100% - 32px) 28px)" }}
+            exit={{ clipPath: "circle(0% at calc(100% - 32px) 28px)" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 md:hidden"
+            style={{ background: isDark ? "#080808" : "#fafafa" }}
+          >
+            <motion.div
+              variants={menuStagger}
+              initial="hidden"
+              animate="show"
+              className="flex h-full w-full flex-col justify-between gap-y-4 p-4 pt-24"
+            >
+              <div className="flex flex-col gap-y-2">
+                {NAV_ITEMS.map((item) => {
+                  const isActive = activeSection === item.to;
+                  return (
+                    <motion.a
+                      key={item.to}
+                      variants={menuItem}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      onClick={(e) => { e.preventDefault(); navigate(item.to); }}
+                      className={cn(
+                        "text-sm tracking-[0.15em] uppercase font-modern transition-colors duration-200 py-2 cursor-pointer",
+                        isActive
+                          ? "text-gray-900 dark:text-white"
+                          : "text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white"
+                      )}
+                    >
+                      {item.label}
+                    </motion.a>
+                  );
+                })}
+              </div>
+              <motion.div
+                variants={menuItem}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="flex items-center justify-center pb-8"
+              >
+                <button
+                  onClick={() => { toggleTheme(); setOpen(false); }}
+                  className="inline-flex items-center gap-2 text-sm tracking-[0.12em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-200 py-2"
+                >
+                  {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  {isDark ? "Light Mode" : "Dark Mode"}
+                </button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
