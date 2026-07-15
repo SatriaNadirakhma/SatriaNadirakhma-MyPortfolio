@@ -16,6 +16,7 @@ import Skills from "@sections/Skills";
 import Connect from "@sections/Connect";
 import Footer from "@sections/Footer";
 import { SECTION_IDS, MARQUEE_ITEMS } from "@constants/index";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Thin bar tied to Lenis's real scroll progress (0 → 1) — not a fake
 // scrollY / documentHeight approximation. Same blue → orange gradient as
@@ -110,6 +111,7 @@ function App() {
   return (
     <LenisProvider>
       <AppContent />
+      <SpeedInsights />
     </LenisProvider>
   );
 }
