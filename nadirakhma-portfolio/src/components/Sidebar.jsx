@@ -1,9 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-scroll";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@context/ThemeContext";
+import { useLenis } from "@context/LenisContext";
+import { cn } from "@/lib/utils";
 import Logo from "@assets/logo.png";
 import { SECTION_IDS } from "@constants/index";
+import MenuToggleIcon from "@/components/ui/menu-toggle-icon";
 
 const NAV_ITEMS = [
   { label: "About", to: SECTION_IDS.about },
@@ -15,116 +17,112 @@ const NAV_ITEMS = [
 ];
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { resolvedTheme, toggleTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+  const { lenis } = useLenis();
 
   useEffect(() => {
     const past = { current: false };
     const handleScroll = () => {
       const val = window.scrollY > 20;
-      if (val !== past.current) {
-        past.current = val;
-        setScrolled(val);
-      }
+      if (val !== past.current) { past.current = val; setScrolled(val); }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const navigate = useCallback((sectionId) => {
+    setOpen(false);
+    lenis?.scrollTo(`#${sectionId}`, { offset: -60 });
+  }, [lenis]);
+
+  const linkClass = cn(
+    "text-xs tracking-[0.12em] uppercase font-modern transition-colors duration-200 rounded-md px-3 py-1.5",
+    "text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white cursor-pointer"
+  );
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 px-5 sm:px-8 py-4 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/70 backdrop-blur-lg shadow-sm dark:bg-[#111111]/50 dark:shadow-none"
-            : ""
-        }`}
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 mx-auto w-full max-w-5xl border-b transition-all duration-300",
+          {
+            "bg-white/95 backdrop-blur-lg dark:bg-[#080808]/90 border-gray-200 dark:border-white/[0.08] shadow-sm md:top-3 md:rounded-xl md:border md:shadow":
+              scrolled && !open,
+            "bg-white/90 dark:bg-[#080808]/90 border-transparent": !scrolled && !open,
+            "bg-white dark:bg-[#080808] border-transparent": open,
+          }
+        )}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link
-            to={SECTION_IDS.hero}
-            smooth
-            duration={500}
-            className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
+        <nav className="flex h-14 w-full items-center justify-between px-4 md:h-12 md:transition-all">
+          <a
+            onClick={(e) => { e.preventDefault(); lenis?.scrollTo(`#${SECTION_IDS.hero}`); }}
+            className="cursor-pointer flex-shrink-0"
             aria-label="Back to top"
           >
-            <img src={Logo} alt="Nadi Rakhma Logo" className="h-8 w-auto" />
-          </Link>
+            <img src={Logo} alt="Nadi Rakhma" className="h-7 w-auto" />
+          </a>
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
-              <Link
+              <a
                 key={item.to}
-                to={item.to}
-                smooth
-                duration={500}
-                offset={-60}
-                className="text-[11px] tracking-[0.2em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/35 dark:hover:text-white transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
+                onClick={(e) => { e.preventDefault(); navigate(item.to); }}
+                className={linkClass}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
-
-            {/* theme toggle */}
             <button
               onClick={toggleTheme}
-              className="p-1.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              className="ml-2 p-1.5 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors"
+              aria-label={isDark ? "Switch to light" : "Switch to dark"}
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
           </div>
 
-          <div className="md:hidden flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-1 rounded-full text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
+          <button
+            onClick={() => setOpen(!open)}
+            className="p-1.5 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors md:hidden"
+            aria-label="Toggle menu"
+          >
+            <MenuToggleIcon open={open} className="w-5 h-5" duration={300} />
+          </button>
+        </nav>
 
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-1 text-gray-500 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {isOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 backdrop-blur-xl bg-white/95 dark:bg-[#080808]/95" />
-
-          <div className="relative flex flex-col items-center justify-center h-full gap-8">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                smooth
-                duration={500}
-                offset={-60}
-                onClick={() => setIsOpen(false)}
-                className="text-lg tracking-[0.3em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-300 cursor-pointer"
+        <div className={cn("fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden md:hidden", open ? "block" : "hidden")}>
+          <div className="flex h-full w-full flex-col justify-between gap-y-4 p-4 bg-white/95 dark:bg-[#080808]/95 backdrop-blur-xl">
+            <div className="flex flex-col gap-y-2 pt-4">
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.to}
+                  onClick={(e) => { e.preventDefault(); navigate(item.to); }}
+                  className="text-sm tracking-[0.15em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-200 py-2 cursor-pointer"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            <div className="flex items-center justify-center pb-8">
+              <button
+                onClick={() => { toggleTheme(); setOpen(false); }}
+                className="inline-flex items-center gap-2 text-sm tracking-[0.12em] uppercase font-modern text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-200 py-2"
               >
-                {item.label}
-              </Link>
-            ))}
+                {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {isDark ? "Light Mode" : "Dark Mode"}
+              </button>
+            </div>
           </div>
         </div>
-      )}
+      </header>
     </>
   );
 };
