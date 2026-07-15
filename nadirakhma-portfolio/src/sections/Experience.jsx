@@ -2,8 +2,10 @@ import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@hooks/use-outside-click";
 import { useTheme } from "@context/ThemeContext";
+import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
+import ScrollHeading from "@components/ScrollHeading";
 
 import OranjiIcon from "@assets/collaborations/oranji.webp";
 import ItdecIcon from "@assets/collaborations/itdec.webp";
@@ -100,20 +102,28 @@ const Experience = () => {
   const ref = useRef(null);
   const id = useId();
   const { resolvedTheme } = useTheme();
+  const { lenis } = useLenis();
   const isDark = resolvedTheme === "dark";
 
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") setActive(false);
     }
+
+    // Lenis stop/start alongside the overflow toggle — overflow alone
+    // doesn't stop Lenis's own transform-driven scroll, so without this
+    // the page behind the modal would still glide on wheel/trackpad input.
     if (active && typeof active === "object") {
       document.body.style.overflow = "hidden";
+      lenis?.stop();
     } else {
       document.body.style.overflow = "auto";
+      lenis?.start();
     }
+
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active]);
+  }, [active, lenis]);
 
   useOutsideClick(ref, () => setActive(null));
 
@@ -121,7 +131,7 @@ const Experience = () => {
     <section id={SECTION_IDS.experience} className="py-20 sm:py-28 px-5 sm:px-8">
       <Reveal><div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
-          <h2
+          <ScrollHeading
             className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
@@ -138,7 +148,7 @@ const Experience = () => {
             >
               Journey
             </span>
-          </h2>
+          </ScrollHeading>
 
           <div className="flex flex-col w-full">
             {/* Expandable card modal */}
@@ -211,7 +221,10 @@ const Experience = () => {
                           Visit
                         </motion.a>
                       </div>
-                      <div className="relative px-4 flex-1 overflow-y-auto">
+                      <div
+                        className="relative px-4 flex-1 overflow-y-auto"
+                        data-lenis-prevent
+                      >
                         <motion.div
                           layout
                           initial={{ opacity: 0 }}

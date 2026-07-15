@@ -2,6 +2,7 @@ import { useTheme } from "@context/ThemeContext";
 import Sticker from "@assets/sticker.png";
 import { SECTION_IDS, STATS } from "@constants/index";
 import Reveal from "@components/Reveal";
+import ScrollHeading from "@components/ScrollHeading";
 
 const About = () => {
   const { resolvedTheme } = useTheme();
@@ -32,7 +33,7 @@ const About = () => {
           </div>
 
           <div>
-            <h2
+            <ScrollHeading
               className="font-modern font-bold leading-[1.0] mb-6 sm:mb-8 text-gray-900 dark:text-white"
               style={{ fontSize: "clamp(26px, 4vw, 60px)" }}
             >
@@ -61,7 +62,7 @@ const About = () => {
                 wireframe
               </span>
               {" "}to production.
-            </h2>
+            </ScrollHeading>
 
             <p className="text-sm sm:text-base font-modern text-gray-600 dark:text-white/40 leading-relaxed max-w-2xl mb-4">
               Front-End Developer and UI/UX &amp; Visual Designer with hands-on industry

@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
+import ScrollHeading from "@components/ScrollHeading";
 
 const ProjectCard = ({ title, description, image, link, icon: Icon, category }) => {
   const [hovered, setHovered] = useState(false);
@@ -77,7 +78,7 @@ const Projects = () => {
       <Reveal><div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 sm:gap-8 mb-10 sm:mb-14">
           <div>
-            <h2
+            <ScrollHeading
               className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
               style={{ fontSize: "clamp(36px, 6vw, 80px)" }}
             >
@@ -94,7 +95,7 @@ const Projects = () => {
               </span>
               <br />
               Projects
-            </h2>
+            </ScrollHeading>
           </div>
 
           <div className="flex gap-2 flex-wrap">

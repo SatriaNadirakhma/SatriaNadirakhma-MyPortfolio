@@ -1,3 +1,5 @@
+import { motion, useTransform } from "motion/react";
+import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 
@@ -20,6 +22,11 @@ const LOGOS = [
 ];
 
 const Collaborations = () => {
+  const { velocity } = useLenis();
+  // Logos drift a few px opposite the scroll direction — reads as momentum
+  // carrying through the row rather than a static wall of marks.
+  const drift = useTransform(velocity, [-40, 0, 40], [-10, 0, 10], { clamp: true });
+
   return (
     <section id={SECTION_IDS.collaborations} className="py-16 sm:py-24 px-5 sm:px-8">
       <Reveal><div className="max-w-7xl mx-auto">
@@ -28,7 +35,10 @@ const Collaborations = () => {
             Collaborations &amp; Building Experiences
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-12">
+          <motion.div
+            style={{ x: drift }}
+            className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-12"
+          >
             {LOGOS.map((logo) => (
               <a
                 key={logo.alt}
@@ -45,7 +55,7 @@ const Collaborations = () => {
                 />
               </a>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div></Reveal>
     </section>

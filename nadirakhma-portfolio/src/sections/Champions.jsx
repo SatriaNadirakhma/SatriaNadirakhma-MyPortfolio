@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { motion } from "motion/react";
 import { useTheme } from "@context/ThemeContext";
 import { Trophy, ArrowUpRight, X, ZoomIn } from "lucide-react";
 import { champions } from "@data/champions";
@@ -9,6 +10,7 @@ import {
   renderCertificateToCanvas,
 } from "@utils/certificateSecurity";
 import Reveal from "@components/Reveal";
+import ScrollHeading from "@components/ScrollHeading";
 
 const CertificateModal = ({ src, title, onClose }) => {
   const canvasRef = useRef(null);
@@ -16,6 +18,9 @@ const CertificateModal = ({ src, title, onClose }) => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
+  // Now stops the actual Lenis instance while open (see useScrollLock) —
+  // previously this only toggled body overflow, so a wheel gesture over
+  // the backdrop could still scroll the page behind the preview.
   useScrollLock();
 
   useEffect(() => {
@@ -27,16 +32,24 @@ const CertificateModal = ({ src, title, onClose }) => {
   }, []);
 
   return (
-    <div
+    <motion.div
       ref={overlayRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
       className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8"
       style={{
         background: isDark ? "rgba(8,8,8,0.92)" : "rgba(250,250,250,0.92)",
         backdropFilter: "blur(20px)",
       }}
       onClick={onClose}
+      data-lenis-prevent
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96, y: 8 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className={`relative w-full max-w-2xl border rounded-xl overflow-hidden shadow-2xl ${
           isDark
             ? "bg-[#0f0f0f] border-white/[0.07]"
@@ -117,8 +130,8 @@ const CertificateModal = ({ src, title, onClose }) => {
             View Only
           </p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
@@ -228,7 +241,7 @@ const Champions = () => {
         <div className="border-t border-gray-200 dark:border-white/[0.07] pt-16 sm:pt-20"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
-          <h2
+          <ScrollHeading
             className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
@@ -245,7 +258,7 @@ const Champions = () => {
               >
                 &amp; Awards
               </span>
-          </h2>
+          </ScrollHeading>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {champions.map((item, i) => (

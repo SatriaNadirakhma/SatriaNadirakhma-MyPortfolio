@@ -3,6 +3,7 @@ import { ArrowUpRight, Send, MessageCircle } from "lucide-react";
 import { socialLinks } from "@data/socialLinks";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
+import ScrollHeading from "@components/ScrollHeading";
 
 // ─────────────────────────────────────────────────────────────
 // 📦 INSTALASI MagneticButton (Aceternity UI via shadcn):
@@ -19,7 +20,7 @@ const Connect = () => {
       <Reveal><div className="max-w-7xl mx-auto">
         <div className="border-t border-gray-200 dark:border-white/[0.07] pt-16 sm:pt-20">
 
-          <h2
+          <ScrollHeading
             className="font-modern font-bold leading-[0.92] mb-8 sm:mb-12 text-gray-900 dark:text-white"
             style={{ fontSize: "clamp(48px, 8.5vw, 96px)" }}
           >
@@ -37,7 +38,7 @@ const Connect = () => {
             </span>
             <br />
             together.
-          </h2>
+          </ScrollHeading>
 
           <p className="text-sm sm:text-base font-modern text-gray-500 dark:text-white/35 max-w-md leading-relaxed mb-6 sm:mb-8">
             Open to internship opportunities &amp; freelance projects.

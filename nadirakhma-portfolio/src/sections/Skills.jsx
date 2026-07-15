@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { skillCategories } from "@data/skills";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
+import ScrollHeading from "@components/ScrollHeading";
 
 const SkillPill = ({ icon: Icon, name, url }) => {
   const inner = (
@@ -42,7 +43,7 @@ const Skills = () => {
       <Reveal><div className="max-w-7xl mx-auto">
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
-          <h2
+          <ScrollHeading
             className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
             style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
           >
@@ -59,7 +60,7 @@ const Skills = () => {
               >
                 Skills
               </span>
-          </h2>
+          </ScrollHeading>
 
           <div className="flex flex-col gap-10 sm:gap-12">
             {skillCategories.map((cat) => (
