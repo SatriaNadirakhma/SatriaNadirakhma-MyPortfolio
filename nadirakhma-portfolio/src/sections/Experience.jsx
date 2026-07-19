@@ -6,6 +6,9 @@ import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import ScrollHeading from "@components/ScrollHeading";
+// Note: no ParallaxImage here — the card/modal images use layoutId shared
+// transitions (framer-motion layout animation), which would conflict with
+// a nested independently-animating parallax wrapper.
 
 import OranjiIcon from "@assets/collaborations/oranji.webp";
 import ItdecIcon from "@assets/collaborations/itdec.webp";
@@ -133,7 +136,7 @@ const Experience = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
           <ScrollHeading
             className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
-            style={{ fontSize: "clamp(36px, 5vw, 80px)" }}
+            style={{ fontSize: "clamp(36px, 4vw, 72px)" }}
           >
             My
             <br />
@@ -141,9 +144,9 @@ const Experience = () => {
               style={{
                 color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
                 fontStyle: "italic",
-                textShadow: isDark
-                  ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
-                  : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
+                WebkitTextStroke: isDark
+                  ? "1px rgba(147,197,253,0.5)"
+                  : "1px rgba(37,99,235,0.5)",
               }}
             >
               Journey

@@ -42,9 +42,9 @@ const About = () => {
                 style={{
                   color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
                   fontStyle: "italic",
-                  textShadow: isDark
-                    ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
-                    : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
+                  WebkitTextStroke: isDark
+                    ? "1px rgba(147,197,253,0.5)"
+                    : "1px rgba(37,99,235,0.5)",
                 }}
               >
                 end-to-end
@@ -54,9 +54,9 @@ const About = () => {
                 style={{
                   color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
                   fontStyle: "italic",
-                  textShadow: isDark
-                    ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
-                    : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
+                  WebkitTextStroke: isDark
+                    ? "1px rgba(147,197,253,0.5)"
+                    : "1px rgba(37,99,235,0.5)",
                 }}
               >
                 wireframe
