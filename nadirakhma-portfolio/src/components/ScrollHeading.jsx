@@ -16,6 +16,14 @@ import { useLenis } from "@context/LenisContext";
  * budget, so every section keeps the exact same feel instead of five
  * different scroll gimmicks.
  *
+ * On top of the velocity skew, the whole headline now does a one-time
+ * "mask reveal" the first time it scrolls into view: it's clipped behind
+ * an overflow-hidden band and slides up into place, rather than just
+ * fading in. This works on the block as a whole (not word-by-word)
+ * specifically so it stays safe with the mixed italic/colored <span>
+ * children already used throughout the sections — no need to parse text
+ * nodes apart.
+ *
  * Usage: identical to a plain <h2>, className/style pass straight through.
  *   <ScrollHeading className="font-modern font-bold ..." style={{ fontSize: "..." }}>
  *     My <span>Journey</span>
@@ -29,9 +37,17 @@ const ScrollHeading = ({ as = "h2", className = "", style = {}, children }) => {
   const y = useTransform(velocity, [-40, 0, 40], [4, 0, -4], { clamp: true });
 
   return (
-    <Tag className={className} style={{ ...style, skewY, y }}>
-      {children}
-    </Tag>
+    <motion.div
+      className="overflow-hidden"
+      initial={{ y: "115%", opacity: 0 }}
+      whileInView={{ y: "0%", opacity: 1 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <Tag className={className} style={{ ...style, skewY, y }}>
+        {children}
+      </Tag>
+    </motion.div>
   );
 };
 

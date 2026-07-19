@@ -6,6 +6,7 @@ import { ErrorBoundary } from "@components/ErrorBoundary";
 import Sidebar from "@components/Sidebar";
 import LoadingScreen from "@components/LoadingScreen";
 import Marquee from "@components/Marquee";
+import CustomCursor from "@components/CustomCursor";
 import Hero from "@sections/Hero";
 import About from "@sections/About";
 import Collaborations from "@sections/Collaborations";
@@ -55,6 +56,7 @@ function AppContent() {
       <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
 
       {!isLoading && <ScrollProgress />}
+      {!isLoading && <CustomCursor />}
 
       <div
         className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300"
