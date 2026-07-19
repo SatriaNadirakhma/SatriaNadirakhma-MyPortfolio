@@ -71,17 +71,18 @@ const Connect = () => {
 
           <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">
             {socialLinks.map((link, i) => (
-              <a
-                key={i}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-xs tracking-[0.18em] uppercase font-modern text-gray-400 dark:text-white/25 hover:text-gray-900 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
-              >
-                <link.icon className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-300" />
-                {link.name}
-                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
-              </a>
+              <MagneticButton key={i} strength={0.6} maxDistance={40}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 px-2.5 py-1.5 text-xs tracking-[0.18em] uppercase font-modern text-gray-400 dark:text-white/25 hover:text-gray-900 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
+                >
+                  <link.icon className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-300" />
+                  {link.name}
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                </a>
+              </MagneticButton>
             ))}
           </div>
         </div>
