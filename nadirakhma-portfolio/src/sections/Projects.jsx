@@ -5,17 +5,21 @@ import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import ScrollHeading from "@components/ScrollHeading";
+import ParallaxImage from "@components/ParallaxImage";
+import TiltCard from "@components/TiltCard";
 
 const ProjectCard = ({ title, description, image, link, icon: Icon, category }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div
-      className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/20 cursor-pointer hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all duration-300"
+    <TiltCard
+      maxTilt={7}
+      className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.07] bg-gray-50 dark:bg-white/20 cursor-pointer hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)] transition-[border-color,box-shadow] duration-300"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      data-cursor="view"
     >
-      <div className="overflow-hidden aspect-4/3">
+      <ParallaxImage amount={36} className="aspect-4/3">
         <img
           src={image}
           alt={title}
@@ -24,7 +28,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
           }`}
           loading="lazy"
         />
-      </div>
+      </ParallaxImage>
 
       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 bg-linear-to-t from-black/80 via-black/40 to-transparent">
         <div className="flex items-center gap-2 mb-2">
@@ -59,7 +63,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
           </a>
         </div>
       </div>
-    </div>
+    </TiltCard>
   );
 };
 

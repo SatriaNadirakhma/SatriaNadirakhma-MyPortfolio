@@ -24,6 +24,12 @@ const Hero = () => {
   });
   const cardY = useTransform(scrollYProgress, [0, 1], [0, 64]);
   const cardOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
+  // Scroll-scrub tilt — a 21st.dev "Container Scroll Animation"-style
+  // pattern, adapted to run off the same scrollYProgress (and therefore
+  // the same Lenis-smoothed scroll) as the y/opacity drift above, rather
+  // than a separate scroll-triggered library.
+  const cardRotateX = useTransform(scrollYProgress, [0, 1], [0, 14]);
+  const cardScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
 
   // react-scroll's <Link smooth> fights Lenis (both try to own the wheel/
   // scrollTo behavior), so the "Explore My Work" CTA now hands off to the
@@ -110,6 +116,7 @@ const Hero = () => {
                 <a
                   href={`#${SECTION_IDS.projects}`}
                   onClick={handleExploreClick}
+                  data-cursor="scroll"
                   className="inline-flex items-center gap-2 rounded-lg bg-linear-to-b from-blue-500 to-blue-700 px-5 sm:px-6 py-2.5 font-modern text-xs sm:text-sm font-medium text-white ring-1 ring-white/20 ring-offset-1 ring-offset-blue-500 ring-inset transition-transform duration-150 active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 >
                   Explore My Work
@@ -146,10 +153,11 @@ const Hero = () => {
 
           {/* RIGHT — profile card */}
           <motion.div
-            style={{ y: cardY, opacity: cardOpacity }}
+            style={{ y: cardY, opacity: cardOpacity, perspective: 1000 }}
             className="flex justify-center lg:justify-end lg:self-center"
           >
-            <div
+            <motion.div
+              style={{ rotateX: cardRotateX, scale: cardScale, transformStyle: "preserve-3d" }}
               className="flex flex-col rounded-2xl border border-gray-200 dark:border-white/8 shadow-sm dark:shadow-none bg-white dark:bg-[#080808] w-full max-w-85 transition-colors duration-300 p-3"
             >
               <div className="relative rounded-xl overflow-hidden">
@@ -210,7 +218,7 @@ const Hero = () => {
                   Malang, Indonesia
                 </span>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
         </div>

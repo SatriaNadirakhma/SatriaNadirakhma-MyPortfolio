@@ -11,6 +11,8 @@ import {
 } from "@utils/certificateSecurity";
 import Reveal from "@components/Reveal";
 import ScrollHeading from "@components/ScrollHeading";
+import ParallaxImage from "@components/ParallaxImage";
+import TiltCard from "@components/TiltCard";
 
 const CertificateModal = ({ src, title, onClose }) => {
   const canvasRef = useRef(null);
@@ -149,20 +151,24 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
         />
       )}
 
-      <div
-        className={`group relative border rounded-2xl overflow-hidden transition-all duration-300 ${
+      <TiltCard
+        maxTilt={6}
+        data-cursor="details"
+        className={`group relative border rounded-2xl overflow-hidden transition-[border-color,background-color] duration-300 ${
           expanded
             ? "border-orange-500/30 bg-orange-500/5"
-            : "border-gray-200 dark:border-white/7 bg-gray-50 dark:bg-white/2 hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+            : "border-gray-200 dark:border-white/7 bg-gray-50 dark:bg-white/2 hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)]"
         }`}
       >
         <div className="relative h-44 sm:h-52 overflow-hidden">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover group-hover:brightness-60 transition-all duration-300 scale-105 group-hover:scale-100"
-            loading="lazy"
-          />
+          <ParallaxImage amount={28} position="absolute" className="inset-0">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover group-hover:brightness-60 transition-all duration-300 scale-105 group-hover:scale-100"
+              loading="lazy"
+            />
+          </ParallaxImage>
           <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center">
             <Icon className="w-4 h-4 text-white" />
           </div>
@@ -226,7 +232,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
             </a>
           </div>
         </div>
-      </div>
+      </TiltCard>
     </>
   );
 };
