@@ -45,9 +45,9 @@ const Hero = () => {
     stroke: {
       color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
       fontStyle: "italic",
-      textShadow: isDark
-        ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
-        : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
+      WebkitTextStroke: isDark
+        ? "1px rgba(147,197,253,0.5)"
+        : "1px rgba(37,99,235,0.5)",
     },
     divider: { background: isDark ? "rgba(147,197,253,0.2)" : "rgba(59,130,246,0.25)" },
     n4d1Badge: {
@@ -63,6 +63,52 @@ const Hero = () => {
       id={SECTION_IDS.hero}
       className="relative min-h-screen flex items-center px-5 sm:px-8 pt-20 pb-16 overflow-hidden bg-[#fafafa] dark:bg-[#080808] transition-colors duration-300"
     >
+        {/* Vercel-hero-style backdrop: a radial gradient anchored to the
+            bottom-left corner, masked so it fades out toward the top of
+            the section instead of sitting as a flat colored block.
+            Reuses the same blue/orange pair as the CTAs, progress bar,
+            and back-to-top ring, so it reads as this site's palette
+            rather than a borrowed one.
+
+            Uses inline `zIndex`/`position` rather than Tailwind's -z-20
+            utility — negative z-index utilities are opt-in/scale-limited
+            depending on the Tailwind config, so inline style guarantees
+            this actually paints behind the content in every setup instead
+            of silently no-op'ing. */}
+        <div
+          className="pointer-events-none"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            opacity: isDark ? 0.7 : 0.35,
+            transition: "opacity 300ms",
+            background: "radial-gradient(80% 100% at 0% 100%, #f97316 50%, #3b82f6 100%)",
+            WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 60%)",
+            maskImage: "linear-gradient(to top, black 0%, transparent 60%)",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+          }}
+        />
+
+        {/* Fine gridline overlay, purely decorative — sits above the glow,
+            below the content, and fades out toward the bottom so it
+            doesn't fight the profile card or CTA row for attention. */}
+        <div
+          className="pointer-events-none"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            backgroundImage: isDark
+              ? "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)"
+              : "linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 75%)",
+            maskImage: "linear-gradient(to bottom, black 0%, transparent 75%)",
+          }}
+        />
+
         <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
 

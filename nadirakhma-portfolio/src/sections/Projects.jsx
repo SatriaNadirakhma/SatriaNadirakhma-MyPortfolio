@@ -84,15 +84,15 @@ const Projects = () => {
           <div>
             <ScrollHeading
               className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
-              style={{ fontSize: "clamp(36px, 6vw, 80px)" }}
+              style={{ fontSize: "clamp(36px, 4vw, 72px)" }}
             >
               <span
                 style={{
                   color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
                   fontStyle: "italic",
-                  textShadow: isDark
-                    ? "-1px -1px 0 rgba(147,197,253,0.5), 1px -1px 0 rgba(147,197,253,0.5), -1px 1px 0 rgba(147,197,253,0.5), 1px 1px 0 rgba(147,197,253,0.5)"
-                    : "-1px -1px 0 rgba(37,99,235,0.5), 1px -1px 0 rgba(37,99,235,0.5), -1px 1px 0 rgba(37,99,235,0.5), 1px 1px 0 rgba(37,99,235,0.5)",
+                  WebkitTextStroke: isDark
+                    ? "1px rgba(147,197,253,0.5)"
+                    : "1px rgba(37,99,235,0.5)",
                 }}
               >
                 Featured

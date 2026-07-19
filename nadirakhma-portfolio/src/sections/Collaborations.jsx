@@ -2,6 +2,7 @@ import { motion, useTransform } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
+import CollabLogo from "@components/CollabLogo";
 
 import Alceena from "@assets/collaborations/alceena.webp";
 import Hmti from "@assets/collaborations/hmti.webp";
@@ -39,21 +40,14 @@ const Collaborations = () => {
             style={{ x: drift }}
             className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-12"
           >
-            {LOGOS.map((logo) => (
-              <a
+            {LOGOS.map((logo, index) => (
+              <CollabLogo
                 key={logo.alt}
+                src={logo.src}
+                alt={logo.alt}
                 href={logo.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-transform duration-300 hover:scale-110"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  loading="lazy"
-                  className="h-12 sm:h-24 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
-                />
-              </a>
+                index={index}
+              />
             ))}
           </motion.div>
         </div>

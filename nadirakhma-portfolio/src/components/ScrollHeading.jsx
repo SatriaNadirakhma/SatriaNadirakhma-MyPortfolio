@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion, useTransform } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 
@@ -24,6 +25,13 @@ import { useLenis } from "@context/LenisContext";
  * children already used throughout the sections — no need to parse text
  * nodes apart.
  *
+ * The overflow-hidden clip is only needed *during* that reveal — several
+ * headings use a tight `leading-[0.92]`, and descenders/ascenders (the
+ * tail on "J", "y", "&", "g") sit outside that tightened line box. Once
+ * the reveal finishes, clipping is switched off (`onAnimationComplete`)
+ * so those glyph parts render normally instead of staying permanently
+ * cropped by the mask container.
+ *
  * Usage: identical to a plain <h2>, className/style pass straight through.
  *   <ScrollHeading className="font-modern font-bold ..." style={{ fontSize: "..." }}>
  *     My <span>Journey</span>
@@ -32,17 +40,19 @@ import { useLenis } from "@context/LenisContext";
 const ScrollHeading = ({ as = "h2", className = "", style = {}, children }) => {
   const { velocity } = useLenis();
   const Tag = motion[as] ?? motion.h2;
+  const [revealed, setRevealed] = useState(false);
 
   const skewY = useTransform(velocity, [-40, 0, 40], [2.2, 0, -2.2], { clamp: true });
   const y = useTransform(velocity, [-40, 0, 40], [4, 0, -4], { clamp: true });
 
   return (
     <motion.div
-      className="overflow-hidden"
+      className={revealed ? "overflow-visible" : "overflow-hidden"}
       initial={{ y: "115%", opacity: 0 }}
       whileInView={{ y: "0%", opacity: 1 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      onAnimationComplete={() => setRevealed(true)}
     >
       <Tag className={className} style={{ ...style, skewY, y }}>
         {children}
