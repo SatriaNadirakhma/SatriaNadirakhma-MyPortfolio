@@ -1,38 +1,9 @@
 import { useTheme } from "@context/ThemeContext";
-import { ExternalLink } from "lucide-react";
 import { skillCategories } from "@data/skills";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import ScrollHeading from "@components/ScrollHeading";
-
-const SkillPill = ({ icon: Icon, name, url }) => {
-  const inner = (
-    <span
-      className={`group inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full border transition-all duration-300 select-none ${
-        url
-          ? "border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/3 text-gray-500 dark:text-white/50 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-white/30 hover:bg-gray-100 dark:hover:bg-white/[0.07] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-          : "border-gray-200 dark:border-white/[0.07] bg-transparent text-gray-400 dark:text-white/30 cursor-default"
-      }`}
-    >
-      {Icon && (
-        <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 group-hover:scale-110 transition-transform duration-300" />
-      )}
-      <span className="text-xs sm:text-sm font-modern whitespace-nowrap">{name}</span>
-      {url && (
-        <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover:opacity-60 transition-opacity duration-300 shrink-0" />
-      )}
-    </span>
-  );
-
-  if (url) {
-    return (
-      <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${name}`}>
-        {inner}
-      </a>
-    );
-  }
-  return inner;
-};
+import SkillPill from "@components/SkillPill";
 
 const Skills = () => {
   const { resolvedTheme } = useTheme();
