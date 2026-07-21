@@ -14,12 +14,30 @@ import {
   SiFramer,
   SiInkscape,
   SiAdobephotoshop,
+  SiAdobeillustrator,
   SiAffinity,
   SiPostgresql,
+  SiOpenai,
+  SiGooglegemini,
+  SiPhp,
+  SiAstro,
 } from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa6";
-import { BsRobot } from "react-icons/bs";
-import { SiOpenai, SiGooglegemini } from "react-icons/si";
+import {
+  Claude,
+  ClaudeCode,
+  DeepSeek,
+  Manus,
+  Kimi,
+  GeminiCLI,
+  GithubCopilot,
+  OpenCode,
+  Cline,
+  Grok,
+  NotebookLM,
+  Perplexity,
+  Vercel,
+} from "@lobehub/icons";
 
 export const skillCategories = [
   {
@@ -28,7 +46,9 @@ export const skillCategories = [
       { icon: FaHtml5, name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
       { icon: FaCss3Alt, name: "CSS3", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
       { icon: FaJs, name: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+      { icon: SiPhp, name: "PHP", url: "https://www.php.net/" },
       { icon: FaReact, name: "React", url: "https://react.dev/" },
+      { icon: SiAstro, name: "Astro", url: "https://astro.build/" },
       { icon: FaNodeJs, name: "Node.js", url: "https://nodejs.org/" },
       { icon: FaBootstrap, name: "Bootstrap", url: "https://getbootstrap.com/" },
       { icon: FaLaravel, name: "Laravel", url: "https://laravel.com/" },
@@ -36,6 +56,7 @@ export const skillCategories = [
       { icon: SiMysql, name: "MySQL", url: "https://www.mysql.com/" },
       { icon: SiPostgresql, name: "PostgreSQL", url: "https://www.postgresql.org/" },
       { icon: FaGitAlt, name: "Git", url: "https://git-scm.com/" },
+      { icon: Vercel, name: "Vercel", url: "https://vercel.com/" },
     ],
   },
   {
@@ -45,18 +66,27 @@ export const skillCategories = [
       { icon: SiFramer, name: "Framer", url: "https://www.framer.com/" },
       { icon: SiInkscape, name: "Inkscape", url: "https://inkscape.org/" },
       { icon: SiAdobephotoshop, name: "Photoshop", url: "https://www.adobe.com/products/photoshop.html" },
+      { icon: SiAdobeillustrator, name: "Illustrator", url: "https://www.adobe.com/products/illustrator.html" },
       { icon: SiAffinity, name: "Affinity", url: "https://affinity.serif.com/" },
     ],
   },
   {
     label: "AI Tools",
     skills: [
-      { icon: SiOpenai,      name: "OpenAI",      url: "https://openai.com/" },
-      { icon: SiGooglegemini, name: "Gemini",     url: "https://gemini.google.com/" },
-      { icon: BsRobot,       name: "Claude",      url: "https://claude.ai/" },
-      { icon: BsRobot,       name: "Claude Code", url: "https://claude.ai/code" },
-      { icon: BsRobot,       name: "DeepSeek",    url: "https://www.deepseek.com/" },
-      { icon: BsRobot,       name: "Manus AI",    url: "https://manus.im/" },
+      { icon: SiOpenai,      name: "OpenAI",        url: "https://openai.com/" },
+      { icon: SiGooglegemini, name: "Gemini",       url: "https://gemini.google.com/" },
+      { icon: GeminiCLI,     name: "Gemini CLI",    url: "https://geminicli.com/" },
+      { icon: Claude,        name: "Claude",        url: "https://claude.ai/" },
+      { icon: ClaudeCode,    name: "Claude Code",   url: "https://claude.ai/code" },
+      { icon: DeepSeek,      name: "DeepSeek",      url: "https://www.deepseek.com/" },
+      { icon: Manus,         name: "Manus AI",      url: "https://manus.im/" },
+      { icon: OpenCode,      name: "OpenCode",      url: "https://opencode.ai/" },
+      { icon: GithubCopilot, name: "GitHub Copilot",url: "https://github.com/features/copilot" },
+      { icon: Kimi,          name: "Kimi AI",       url: "https://www.kimi.com/" },
+      { icon: Cline,         name: "Cline",         url: "https://cline.bot/" },
+      { icon: Grok,          name: "Grok",          url: "https://grok.com/" },
+      { icon: NotebookLM,    name: "NotebookLM",    url: "https://notebooklm.google.com/" },
+      { icon: Perplexity,    name: "Perplexity",    url: "https://www.perplexity.ai/" },
     ],
   },
   {
