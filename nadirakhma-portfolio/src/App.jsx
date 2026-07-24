@@ -14,6 +14,7 @@ import Experience from "@sections/Experience";
 import Projects from "@sections/Projects";
 import Champions from "@sections/Champions";
 import Skills from "@sections/Skills";
+import Playlist from "@sections/Playlist";
 import Connect from "@sections/Connect";
 import Footer from "@sections/Footer";
 import { SECTION_IDS, MARQUEE_ITEMS } from "@constants/index";
@@ -99,6 +100,11 @@ function AppContent() {
           <section id={SECTION_IDS.skills}>
             <Skills />
           </section>
+
+          <section id={SECTION_IDS.playlist}>
+            <Playlist />
+          </section>
+
           <section id={SECTION_IDS.connect}>
             <Connect />
           </section>
