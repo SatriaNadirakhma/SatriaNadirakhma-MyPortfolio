@@ -11,16 +11,6 @@ import ScrollHeading from "@components/ScrollHeading";
 // ─────────────────────────────────────────────────────────────
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
-const s = useMemo(() => ({
-    stroke: {
-      color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
-      fontStyle: "italic",
-      WebkitTextStroke: isDark
-        ? "1px rgba(147,197,253,0.5)"
-        : "1px rgba(37,99,235,0.5)",
-    },
-  }), [isDark]);
-
 const Connect = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -51,9 +41,9 @@ const Connect = () => {
           </ScrollHeading>
 
           <p className="text-sm sm:text-base font-modern text-gray-500 dark:text-white/35 max-w-md leading-relaxed mb-6 sm:mb-8">
-            Open to internship opportunities &amp; freelance projects.
+            Open to collaborations &amp; freelance projects.
             <br />
-            Available for new opportunities from August 2026.
+            Available for new opportunities from July 2026.
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 mb-12 sm:mb-16">
