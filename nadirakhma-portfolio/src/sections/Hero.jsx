@@ -90,10 +90,7 @@ const Hero = () => {
             maskRepeat: "no-repeat",
           }}
         />
-
-        {/* Fine gridline overlay, purely decorative — sits above the glow,
-            below the content, and fades out toward the bottom so it
-            doesn't fight the profile card or CTA row for attention. */}
+        
         <div
           className="pointer-events-none"
           style={{
