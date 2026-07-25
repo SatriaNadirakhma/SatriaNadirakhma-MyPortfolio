@@ -34,6 +34,38 @@ const CloseIcon = () => (
 
 const CARDS = [
   {
+    title: "Full-stack Developer Intern",
+    description: "PT. Petrokimia Gresik (BUMN)",
+    src: PetrokimiaIcon,
+    largeSrc: PetrokimiaLarge,
+    ctaText: "View",
+    ctaLink: "https://www.instagram.com/petrokimiagresik_official/",
+    date: "Jan 2026 -- Jul 2026",
+    content: () => (
+      <p>
+        Conducting research and development in the field of Information Technology
+        to support the company&apos;s applications and user needs. Collaborating with
+        the IT team on internal tools, data analysis, and process automation.
+      </p>
+    ),
+  },
+    {
+    title: "Editor-in-Chief",
+    description: "LPM Kompen Polinema",
+    src: KompenIcon,
+    largeSrc: KompenLarge,
+    ctaText: "View",
+    ctaLink: "https://www.instagram.com/lpmkompen/",
+    date: "Mar 2025 -- Mar 2026",
+    content: () => (
+      <p>
+        Led the print and online media division managing journalistic activities:
+        content planning, article editing, and publication design. Coordinated a team
+        of writers and designers to produce high-quality campus publications on schedule.
+      </p>
+    ),
+  },
+  {
     title: "Graphic Designer",
     description: "Oranji Studio",
     src: OranjiIcon,
@@ -57,44 +89,12 @@ const CARDS = [
     largeSrc: ItdecLarge,
     ctaText: "View",
     ctaLink: "https://www.instagram.com/itdecpolinema/",
-    date: "Aug 2025 -- Present",
+    date: "Aug 2025 -- May 2026",
     content: () => (
       <p>
         Establishing communication between Creative Media teams to determine ITDEC&apos;s
         branding image. Coordinating design output across an 8-person team for campus-wide
         events and initiatives, ensuring visual consistency and timely delivery.
-      </p>
-    ),
-  },
-  {
-    title: "Editor-in-Chief",
-    description: "LPM Kompen Polinema",
-    src: KompenIcon,
-    largeSrc: KompenLarge,
-    ctaText: "View",
-    ctaLink: "https://www.instagram.com/lpmkompen/",
-    date: "Mar 2025 -- Mar 2026",
-    content: () => (
-      <p>
-        Led the print and online media division managing journalistic activities:
-        content planning, article editing, and publication design. Coordinated a team
-        of writers and designers to produce high-quality campus publications on schedule.
-      </p>
-    ),
-  },
-  {
-    title: "IT Intern",
-    description: "PT. Petrokimia Gresik (BUMN)",
-    src: PetrokimiaIcon,
-    largeSrc: PetrokimiaLarge,
-    ctaText: "View",
-    ctaLink: "https://www.instagram.com/petrokimiagresik_official/",
-    date: "Jan 2026 -- Present",
-    content: () => (
-      <p>
-        Conducting research and development in the field of Information Technology
-        to support the company&apos;s applications and user needs. Collaborating with
-        the IT team on internal tools, data analysis, and process automation.
       </p>
     ),
   },
