@@ -38,7 +38,7 @@ const Collaborations = () => {
 
           <motion.div
             style={{ x: drift }}
-            className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-12"
+            className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-2"
           >
             {LOGOS.map((logo, index) => (
               <CollabLogo

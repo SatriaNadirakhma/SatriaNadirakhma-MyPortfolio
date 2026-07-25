@@ -11,6 +11,16 @@ import ScrollHeading from "@components/ScrollHeading";
 // ─────────────────────────────────────────────────────────────
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
+const s = useMemo(() => ({
+    stroke: {
+      color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
+      fontStyle: "italic",
+      WebkitTextStroke: isDark
+        ? "1px rgba(147,197,253,0.5)"
+        : "1px rgba(37,99,235,0.5)",
+    },
+  }), [isDark]);
+
 const Connect = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -50,7 +60,7 @@ const Connect = () => {
             <MagneticButton>
               <a
                 href="mailto:rakhmadanisatria@gmail.com"
-                className="inline-flex items-center gap-2 rounded-lg bg-linear-to-b from-red-500 to-red-600 px-5 sm:px-6 py-2.5 font-modern text-xs sm:text-sm font-medium text-white ring-1 ring-white/20 ring-offset-1 ring-offset-red-500 ring-inset transition-transform duration-150 active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="inline-flex items-center gap-2 rounded-lg bg-linear-to-b from-purple-500 to-purple-700 px-5 sm:px-6 py-2.5 font-modern text-xs sm:text-sm font-medium text-white ring-1 ring-white/20 ring-offset-1 ring-offset-purple-500 ring-inset transition-transform duration-150 active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
               >
                 <Send className="w-3.5 h-3.5" /> Send Email
                 <ArrowUpRight className="w-3.5 h-3.5" />
