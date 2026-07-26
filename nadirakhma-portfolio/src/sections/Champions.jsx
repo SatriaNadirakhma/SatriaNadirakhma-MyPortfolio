@@ -197,10 +197,14 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
             </p>
           </div>
 
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={() => setExpanded(!expanded)}
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
+              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase font-modern transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                expanded
+                  ? "border-orange-500/40 bg-orange-500/10 text-orange-500 dark:text-orange-400"
+                  : "border-gray-300 dark:border-white/15 text-gray-500 dark:text-white/50 hover:border-gray-500 dark:hover:border-white/35 hover:text-gray-900 dark:hover:text-white"
+              }`}
             >
               {expanded ? (
                 <>
@@ -211,22 +215,18 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
               )}
             </button>
 
-            <span className="text-gray-300 dark:text-white/10">|</span>
-
             <button
               onClick={() => setCertOpen(true)}
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-orange-400 transition-colors duration-300 inline-flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
+              className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 dark:border-white/15 px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase font-modern text-gray-500 dark:text-white/50 hover:border-orange-400/50 hover:text-orange-500 dark:hover:text-orange-400 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
               <ZoomIn className="w-3 h-3" /> Certificate
             </button>
-
-            <span className="text-gray-300 dark:text-white/10">|</span>
 
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] tracking-[0.15em] uppercase font-modern text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm"
+              className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 dark:border-white/15 px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase font-modern text-gray-500 dark:text-white/50 hover:border-blue-400/50 hover:text-blue-500 dark:hover:text-blue-400 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
               View Post <ArrowUpRight className="w-3 h-3" />
             </a>
