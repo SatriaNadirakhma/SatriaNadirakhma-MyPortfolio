@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { useTheme } from "@context/ThemeContext";
 import { LenisProvider, useLenis } from "@context/LenisContext";
+import { AppReadyProvider } from "@context/AppReadyContext";
 import { ErrorBoundary } from "@components/ErrorBoundary";
 import Sidebar from "@components/Sidebar";
 import LoadingScreen from "@components/LoadingScreen";
@@ -59,58 +60,63 @@ function AppContent() {
       {!isLoading && <ScrollProgress />}
       {!isLoading && <CustomCursor />}
 
-      <div
-        className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300"
-        style={{
-          visibility: isLoading ? "hidden" : "visible",
-          transition: isLoading ? "none" : "opacity 0.4s ease, background-color 0.3s ease",
-          opacity: isLoading ? 0 : 1,
-        }}
-      >
-        <Sidebar />
+      {/* Hero (and anything else wired to useAppReady) is mounted the whole
+          time — only visibility/opacity below are toggled — so its entrance
+          variants need this signal instead of firing blind on mount. */}
+      <AppReadyProvider isReady={!isLoading}>
+        <div
+          className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300"
+          style={{
+            visibility: isLoading ? "hidden" : "visible",
+            transition: isLoading ? "none" : "opacity 0.4s ease, background-color 0.3s ease",
+            opacity: isLoading ? 0 : 1,
+          }}
+        >
+          <Sidebar />
 
-        <main className="relative z-[2]">
-          <section id={SECTION_IDS.hero}>
-            <Hero />
-          </section>
+          <main className="relative z-[2]">
+            <section id={SECTION_IDS.hero}>
+              <Hero />
+            </section>
 
-          <Marquee items={MARQUEE_ITEMS.primary} speed={35} />
+            <Marquee items={MARQUEE_ITEMS.primary} speed={35} />
 
-          <section id={SECTION_IDS.about}>
-            <About />
-          </section>
-          <section id={SECTION_IDS.collaborations}>
-            <Collaborations />
-          </section>
-          <section id={SECTION_IDS.experience}>
-            <Experience />
-          </section>
+            <section id={SECTION_IDS.about}>
+              <About />
+            </section>
+            <section id={SECTION_IDS.collaborations}>
+              <Collaborations />
+            </section>
+            <section id={SECTION_IDS.experience}>
+              <Experience />
+            </section>
 
-          <Marquee items={MARQUEE_ITEMS.secondary} speed={28} />
+            <Marquee items={MARQUEE_ITEMS.secondary} speed={28} />
 
-          <section id={SECTION_IDS.projects}>
-            <Projects />
-          </section>
-          <section id={SECTION_IDS.champions}>
-            <Champions />
-          </section>
+            <section id={SECTION_IDS.projects}>
+              <Projects />
+            </section>
+            <section id={SECTION_IDS.champions}>
+              <Champions />
+            </section>
 
-          <Marquee items={MARQUEE_ITEMS.tech} speed={20} />
+            <Marquee items={MARQUEE_ITEMS.tech} speed={20} />
 
-          <section id={SECTION_IDS.skills}>
-            <Skills />
-          </section>
+            <section id={SECTION_IDS.skills}>
+              <Skills />
+            </section>
 
-          <section id={SECTION_IDS.playlist}>
-            <Playlist />
-          </section>
+            <section id={SECTION_IDS.playlist}>
+              <Playlist />
+            </section>
 
-          <section id={SECTION_IDS.connect}>
-            <Connect />
-          </section>
-          <Footer />
-        </main>
-      </div>
+            <section id={SECTION_IDS.connect}>
+              <Connect />
+            </section>
+            <Footer />
+          </main>
+        </div>
+      </AppReadyProvider>
     </ErrorBoundary>
   );
 }
