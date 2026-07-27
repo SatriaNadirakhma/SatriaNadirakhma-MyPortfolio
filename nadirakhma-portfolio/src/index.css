@@ -110,6 +110,19 @@ html.dark {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Text selection highlight — orange, matching the site's blue/orange
+   accent gradient (same #f97316 used on CTAs, the hero backdrop, and
+   the loading-screen decode). White text keeps contrast on top of it
+   in both themes, so it doesn't need a separate .dark override. */
+::selection {
+  background-color: #f97316;
+  color: #ffffff;
+}
+::-moz-selection {
+  background-color: #f97316;
+  color: #ffffff;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
