@@ -171,6 +171,14 @@ html.dark {
   100% { transform: translateX(-50%); }
 }
 
+/* Hides the scrollbar on horizontally-scrollable strips (e.g. the GitHub
+   calendar on narrow viewports) while keeping actual scroll/drag/wheel
+   behavior intact — Firefox/IE are handled inline via style props, this
+   covers WebKit/Blink which only listen to the pseudo-element. */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Native cursor is hidden only once CustomCursor confirms a fine pointer
    is present (see CustomCursor.jsx) — never toggled by CSS media query
    alone, so touch devices never lose their tap cursor. */
