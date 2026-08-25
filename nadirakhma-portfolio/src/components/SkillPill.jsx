@@ -81,7 +81,7 @@ const SkillPill = ({ icon: Icon, name, url }) => {
       />
 
       {Icon && (
-        <span className="relative z-10 shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:rotate-12 group-hover:scale-125">
+        <span className="relative z-10 shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-125">
           <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </span>
       )}
