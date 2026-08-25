@@ -1,6 +1,6 @@
 # Portfolio — Satria Rakhmadani
 
-Personal portfolio website for **Satria Rakhmadani (Nadi Rakhma)**, a Visual Designer & Front-End Developer based in Malang, Indonesia.
+Personal portfolio website for **Satria Rakhmadani (Nadi Rakhma)**, a Digital Designer & Front-End Developer based in Malang, Indonesia.
 
 ## Tech Stack
 

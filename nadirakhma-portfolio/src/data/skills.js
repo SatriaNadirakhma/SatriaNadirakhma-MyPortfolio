@@ -41,6 +41,17 @@ import {
 
 export const skillCategories = [
   {
+    label: "Design",
+    skills: [
+      { icon: FaFigma, name: "Figma", url: "https://www.figma.com/" },
+      { icon: SiFramer, name: "Framer", url: "https://www.framer.com/" },
+      { icon: SiInkscape, name: "Inkscape", url: "https://inkscape.org/" },
+      { icon: SiAdobephotoshop, name: "Photoshop", url: "https://www.adobe.com/products/photoshop.html" },
+      { icon: SiAdobeillustrator, name: "Illustrator", url: "https://www.adobe.com/products/illustrator.html" },
+      { icon: SiAffinity, name: "Affinity", url: "https://affinity.serif.com/" },
+    ],
+  },
+    {
     label: "Web Development",
     skills: [
       { icon: FaHtml5, name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
@@ -57,17 +68,6 @@ export const skillCategories = [
       { icon: SiPostgresql, name: "PostgreSQL", url: "https://www.postgresql.org/" },
       { icon: FaGitAlt, name: "Git", url: "https://git-scm.com/" },
       { icon: Vercel, name: "Vercel", url: "https://vercel.com/" },
-    ],
-  },
-  {
-    label: "Design",
-    skills: [
-      { icon: FaFigma, name: "Figma", url: "https://www.figma.com/" },
-      { icon: SiFramer, name: "Framer", url: "https://www.framer.com/" },
-      { icon: SiInkscape, name: "Inkscape", url: "https://inkscape.org/" },
-      { icon: SiAdobephotoshop, name: "Photoshop", url: "https://www.adobe.com/products/photoshop.html" },
-      { icon: SiAdobeillustrator, name: "Illustrator", url: "https://www.adobe.com/products/illustrator.html" },
-      { icon: SiAffinity, name: "Affinity", url: "https://affinity.serif.com/" },
     ],
   },
   {

@@ -56,19 +56,13 @@ const Github = () => {
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12"
         >
           <div>
-            <span
-              className="block text-xs tracking-[0.25em] uppercase mb-3 font-modern"
-              style={{ color: isDark ? "rgba(147,197,253,0.6)" : "rgba(37,99,235,0.7)" }}
-            >
-              Open Source
-            </span>
             <h2
               className={`font-modern font-bold leading-[0.95] ${
                 isDark ? "text-white" : "text-gray-900"
               }`}
               style={{ fontSize: "clamp(32px, 5vw, 52px)" }}
             >
-              Code, most days.
+              My GitHub Contributions
             </h2>
           </div>
 

@@ -879,7 +879,7 @@ export const GithubCalendar = memo(function GithubCalendar({
         <div
           ref={scrollRef}
           className={cn(
-            "overflow-x-auto no-scrollbar transition-all duration-500",
+            "relative overflow-x-auto no-scrollbar transition-all duration-500",
             gameActive ? "pb-[80px]" : "",
           )}
           style={
@@ -1028,7 +1028,7 @@ export const GithubCalendar = memo(function GithubCalendar({
             box, and each side hides itself once there's nothing further to
             scroll that direction. Sit in the non-scrolling wrapper so they
             stay put instead of sliding away with the content. */}
-        {needsHScroll && !gameActive && !atStart && (
+        {needsHScroll && !atStart && (
           <button
             type="button"
             onClick={() => scrollByStep(-1)}
@@ -1038,7 +1038,7 @@ export const GithubCalendar = memo(function GithubCalendar({
             <ChevronLeft className="w-4 h-4" />
           </button>
         )}
-        {needsHScroll && !gameActive && !atEnd && (
+        {needsHScroll && !atEnd && (
           <button
             type="button"
             onClick={() => scrollByStep(1)}

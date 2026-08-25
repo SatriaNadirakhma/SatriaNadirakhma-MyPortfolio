@@ -27,8 +27,8 @@ const About = () => {
               <p className="text-[10px] tracking-[0.25em] uppercase font-modern text-gray-400 dark:text-white/20 mb-1">
                 Role
               </p>
-              <p className="text-sm font-modern text-gray-600 dark:text-white/50">Front-End Developer</p>
-              <p className="text-sm font-modern text-gray-600 dark:text-white/50">UI/UX &amp; Visual Designer</p>
+              <p className="text-sm font-modern text-gray-600 dark:text-white/50">Digital Designer</p>
+              <p className="text-sm font-modern text-gray-600 dark:text-white/50">Front-end Developer</p>
             </div>
           </div>
 
@@ -47,9 +47,9 @@ const About = () => {
                     : "1px rgba(37,99,235,0.5)",
                 }}
               >
-                end-to-end
+                end-to-end.
               </span>
-              {" "}— from{" "}
+              {" "}From{" "}
               <span
                 style={{
                   color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
@@ -70,13 +70,13 @@ const About = () => {
               2+ years of design practice at <span className="text-gray-800 dark:text-white/60">Oranji Studio</span>.
             </p>
             <p className="text-sm sm:text-base font-modern text-gray-600 dark:text-white/40 leading-relaxed max-w-2xl mb-4">
-              I work across the full stack — React, Laravel, Inertia.js on the dev side;
-              Figma, Inkscape, and brand identity on the design side. I bridge the gap
+              I work across the full stack. React, Laravel, Inertia.js on the dev side;
+              Figma, Inkscape, Affinity by Canva, and brand identity on the design side. I bridge the gap
               between strong visual aesthetics and clean, functional code.
             </p>
             <p className="text-sm sm:text-base font-modern text-gray-600 dark:text-white/40 leading-relaxed max-w-2xl mb-10">
-              Finalist, UI/UX Competition at IT FEST Brawijaya University.
-              1st Champion, Poster Mahasiswa at Entrepreneur Festival Politeknik Negeri Malang.
+              Finalist of UI/UX Competition at IT FEST Brawijaya University.
+              1st Champion of Poster Mahasiswa at Entrepreneur Festival Politeknik Negeri Malang.
             </p>
 
             <div className="flex flex-wrap gap-8 sm:gap-12 pt-8 border-t border-gray-200 dark:border-white/[0.07]">

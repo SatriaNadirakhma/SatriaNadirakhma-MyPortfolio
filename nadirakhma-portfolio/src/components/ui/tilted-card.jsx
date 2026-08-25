@@ -26,6 +26,7 @@ export const TiltedCard = ({
   imageWidth = "300px",
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
+  borderRadius = "clamp(6px, 2.5vw, 15px)",
   showMobileWarning = true,
   showTooltip = true,
   overlayContent = null,
@@ -109,7 +110,8 @@ export const TiltedCard = ({
         <motion.img
           src={imageSrc}
           alt={altText}
-          className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
+          className="absolute top-0 left-0 w-full h-full object-cover will-change-transform [transform:translateZ(0)]"
+          style={{ borderRadius }}
         />
 
         {displayOverlayContent && overlayContent && (
