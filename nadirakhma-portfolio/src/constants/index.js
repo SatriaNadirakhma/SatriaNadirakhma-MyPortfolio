@@ -3,7 +3,7 @@ export const SITE = {
   shortName: "Nadi Rakhma",
   url: "https://nadirakhma.vercel.app",
   location: "Malang, Indonesia",
-  role: "Visual Designer & Front-End Developer",
+  role: "Digital Designer & Front-End Developer",
   email: "satria.nadirakhma@gmail.com",
   description:
     "Building user-centered digital experiences through code and design for forward-thinking teams.",

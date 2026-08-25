@@ -266,8 +266,9 @@ const Hero = () => {
                 isDark ? "text-white/38" : "text-gray-500"
               }`}
             >
-              Based in Malang, Indonesia — bridging code and design
-              into production.
+            Bridging code and design into production. 
+            <br />
+            Open for collaborations and freelance work.
             </motion.p>
 
             {/* CTAs */}
