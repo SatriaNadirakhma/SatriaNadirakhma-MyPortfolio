@@ -1,6 +1,7 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { ErrorBoundary } from "@components/ErrorBoundary";
-import { LenisProvider } from "@context/LenisContext";
+import { LenisProvider, useLenis } from "@context/LenisContext";
 import Sidebar from "@components/Sidebar";
 import LoadingScreen from "@components/LoadingScreen";
 import InView from "@components/InView";
@@ -19,17 +20,37 @@ const Champions = lazy(() => import("@sections/Champions"));
 const Skills = lazy(() => import("@sections/Skills"));
 const Github = lazy(() => import("@sections/Github"));
 const Playlist = lazy(() => import("@sections/Playlist"));
+const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage"));
 
-function AppContent() {
+function Landing() {
+  const location = useLocation();
+  const { lenis } = useLenis();
+
+  // Handle direct navigation to /#sectionId (e.g. from /projects)
+  // and hash changes, with retry for lazy InView sections
+  useEffect(() => {
+    if (!location.hash) return;
+    const id = location.hash.replace("#", "");
+    let attempts = 0;
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (lenis) lenis.scrollTo(`#${id}`, { offset: -64 });
+        else el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (attempts++ < 12) setTimeout(tryScroll, 200);
+    };
+    // Small delay to let lazy sections mount after route change
+    const t = setTimeout(tryScroll, 150);
+    return () => clearTimeout(t);
+  }, [location.hash, lenis]);
+
   return (
     <ErrorBoundary>
-      {/* Non-blocking hairline loader — the page renders immediately and
-          the bar just reports image preload progress along the top. */}
       <LoadingScreen />
-
       <div className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300">
         <Sidebar />
-
         <main className="relative">
           <section id={SECTION_IDS.hero}>
             <Hero />
@@ -104,7 +125,10 @@ function AppContent() {
 function App() {
   return (
     <LenisProvider>
-      <AppContent />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/projects" element={<AllProjectsPage />} />
+      </Routes>
       <SpeedInsights />
     </LenisProvider>
   );

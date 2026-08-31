@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
+import PlusCorners from "@components/PlusCorners";
 
 /**
  * Quiet project card: screenshot in a 1px frame (4px radius, no device
@@ -61,9 +63,13 @@ const Projects = () => {
       ? allProjects
       : allProjects.filter((p) => p.category === activeFilter);
 
+  const displayed = filtered.slice(0, 6);
+  const hasMore = allProjects.length > 6;
+
   return (
     <section id={SECTION_IDS.projects} className="px-5 sm:px-8">
-      <Reveal><div className="max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+        <PlusCorners />
         <SectionHeader
           title="Featured projects."
           description="A selection of shipped work — web applications, landing pages, and design systems."
@@ -86,12 +92,21 @@ const Projects = () => {
         </SectionHeader>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-          {filtered.map((project) => (
+          {displayed.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
         </div>
 
-        <p className="mt-12 flex items-center gap-1.5 text-sm font-light text-gray-500 dark:text-white/60">
+        {hasMore && (
+          <div className="mt-10 flex justify-center">
+            <Link to="/projects" className="btn-base btn-ghost">
+              See All Projects
+              <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        )}
+
+        <p className="mt-8 flex items-center gap-1.5 text-sm font-light text-gray-500 dark:text-white/60">
           <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
           Every project opens its live build or case study in a new tab.
         </p>

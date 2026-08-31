@@ -15,6 +15,7 @@ export const SECTION_IDS = {
   collaborations: "collaborations",
   experience: "experience",
   projects: "projects",
+  allProjects: "all-projects",
   champions: "champions",
   skills: "skills",
   github: "github",
