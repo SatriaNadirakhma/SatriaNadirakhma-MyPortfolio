@@ -25,6 +25,5 @@ export const useScrollLock = () => {
       lenis?.start();
       document.body.style.overflow = previousOverflow;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lenis]);
 };

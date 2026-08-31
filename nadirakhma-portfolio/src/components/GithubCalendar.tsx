@@ -757,8 +757,8 @@ export const GithubCalendar = memo(function GithubCalendar({
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw starry space background
-      ctx.fillStyle = "#ffffff";
+      // Draw starry space background — adapts to light/dark so stars stay visible
+      ctx.fillStyle = isDark ? "#ffffff" : "#1f2937";
       stars.forEach((s) => {
         ctx.globalAlpha = s.alpha;
         ctx.fillRect(s.x, s.y, s.size, s.size);
@@ -823,6 +823,7 @@ export const GithubCalendar = memo(function GithubCalendar({
     monthLabelHeight,
     activeColors,
     id,
+    isDark,
   ]);
 
   // ── Loading / error states ───────────────────────────
@@ -870,7 +871,11 @@ export const GithubCalendar = memo(function GithubCalendar({
     <div
       className={cn(
         "w-full overflow-hidden border rounded-sm transition-all duration-500",
-        gameActive ? "bg-black border-neutral-800" : "",
+        gameActive
+          ? isDark
+            ? "bg-black border-neutral-800"
+            : "bg-white border-gray-200"
+          : "",
         className,
       )}
     >
@@ -1033,7 +1038,12 @@ export const GithubCalendar = memo(function GithubCalendar({
             type="button"
             onClick={() => scrollByStep(-1)}
             aria-label="Scroll calendar left"
-            className="absolute left-1 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-7 h-7 rounded-full border border-neutral-700/40 bg-[#0a0a0a]/80 dark:bg-[#0a0a0a]/80 text-white backdrop-blur-sm shadow-md cursor-pointer transition-opacity hover:opacity-90"
+            className={cn(
+              "absolute left-1 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-7 h-7 rounded-full border backdrop-blur-sm shadow-md cursor-pointer transition-opacity hover:opacity-90",
+              isDark
+                ? "border-neutral-700/40 bg-[#0a0a0a]/80 text-white"
+                : "border-gray-200 bg-white/80 text-gray-700"
+            )}
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
@@ -1043,7 +1053,12 @@ export const GithubCalendar = memo(function GithubCalendar({
             type="button"
             onClick={() => scrollByStep(1)}
             aria-label="Scroll calendar right"
-            className="absolute right-1 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-7 h-7 rounded-full border border-neutral-700/40 bg-[#0a0a0a]/80 dark:bg-[#0a0a0a]/80 text-white backdrop-blur-sm shadow-md cursor-pointer transition-opacity hover:opacity-90"
+            className={cn(
+              "absolute right-1 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-7 h-7 rounded-full border backdrop-blur-sm shadow-md cursor-pointer transition-opacity hover:opacity-90",
+              isDark
+                ? "border-neutral-700/40 bg-[#0a0a0a]/80 text-white"
+                : "border-gray-200 bg-white/80 text-gray-700"
+            )}
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -1070,13 +1085,33 @@ export const GithubCalendar = memo(function GithubCalendar({
               </div>
 
               {/* Game Mode Switch */}
-              <div className="flex items-center gap-2 sm:border-l border-neutral-800 sm:pl-4">
-                <span className="text-[11px] text-neutral-400 select-none">Game Mode</span>
+              <div
+                className={cn(
+                  "flex items-center gap-2 sm:border-l sm:pl-4",
+                  isDark ? "border-neutral-800" : "border-gray-200"
+                )}
+              >
+                <span
+                  className={cn(
+                    "text-[11px] select-none",
+                    isDark ? "text-neutral-400" : "text-gray-500"
+                  )}
+                >
+                  Game Mode
+                </span>
                 <button
+                  type="button"
+                  role="switch"
+                  aria-checked={gameActive}
+                  aria-label="Toggle game mode"
                   onClick={() => setGameActive(!gameActive)}
                   className={cn(
-                    "relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none",
-                    gameActive ? "bg-emerald-500" : "bg-neutral-800"
+                    "relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+                    gameActive
+                      ? "bg-emerald-500"
+                      : isDark
+                        ? "bg-neutral-800"
+                        : "bg-gray-200"
                   )}
                 >
                   <span
@@ -1097,17 +1132,37 @@ export const GithubCalendar = memo(function GithubCalendar({
                 href={`https://github.com/${username}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-wrap items-center gap-1 text-neutral-400 select-none"
+                className={cn(
+                  "flex flex-wrap items-center gap-1 select-none",
+                  isDark ? "text-neutral-400" : "text-gray-500"
+                )}
               >
-                <span className="font-semibold text-neutral-200">
+                <span
+                  className={cn(
+                    "font-semibold",
+                    isDark ? "text-neutral-200" : "text-gray-900"
+                  )}
+                >
                   {username}
                 </span>
                 <span>contributed</span>
-                <span className="font-bold text-[#39d353]">
+                <span
+                  className={cn(
+                    "font-bold",
+                    isDark ? "text-[#39d353]" : "text-[#1a7f37]"
+                  )}
+                >
                   {stats.total.toLocaleString()}
                 </span>
                 <span>this year on</span>
-                <span className="font-semibold text-neutral-200 underline decoration-neutral-400 underline-offset-4">
+                <span
+                  className={cn(
+                    "font-semibold underline underline-offset-4",
+                    isDark
+                      ? "text-neutral-200 decoration-neutral-400"
+                      : "text-gray-900 decoration-gray-400"
+                  )}
+                >
                   GitHub
                 </span>
               </a>

@@ -17,38 +17,9 @@ export const SECTION_IDS = {
   projects: "projects",
   champions: "champions",
   skills: "skills",
+  github: "github",
+  playlist: "playlist",
   connect: "connect",
-};
-
-export const MARQUEE_ITEMS = {
-  primary: [
-    "GRAPHIC DESIGN",
-    "FRONT-END DEVELOPMENT",
-    "UI/UX DESIGN",
-    "BRANDING",
-    "WEB APPS",
-    "CREATIVE CODING",
-  ],
-  secondary: [
-    "FEATURED PROJECTS",
-    "DEVELOPMENT",
-    "GRAPHIC DESIGN",
-    "WEB APPLICATIONS",
-    "LANDING PAGES",
-    "DESIGN SYSTEMS",
-  ],
-  tech: [
-    "REACT",
-    "TAILWIND CSS",
-    "FIGMA",
-    "PHOTOSHOP",
-    "NODE.JS",
-    "LARAVEL",
-    "MYSQL",
-    "GIT",
-    "FRAMER",
-    "INKSCAPE",
-  ],
 };
 
 export const STATS = [
