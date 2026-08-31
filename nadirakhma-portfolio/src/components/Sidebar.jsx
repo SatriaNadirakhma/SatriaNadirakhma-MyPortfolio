@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Sun, Moon, Menu, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTheme } from "@context/ThemeContext";
 import { useLenis } from "@context/LenisContext";
 import { useActiveSection } from "@hooks/useActiveSection";
@@ -10,7 +11,6 @@ import { SITE, SECTION_IDS } from "@constants/index";
 
 const NAV_ITEMS = [
   { label: "About", to: SECTION_IDS.about },
-  { label: "Collab", to: SECTION_IDS.collaborations },
   { label: "Experience", to: SECTION_IDS.experience },
   { label: "Projects", to: SECTION_IDS.projects },
   { label: "Champions", to: SECTION_IDS.champions },
@@ -25,9 +25,12 @@ const Sidebar = () => {
   const { resolvedTheme, toggleTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   const { lenis } = useLenis();
+  const routerNavigate = useNavigate();
+  const location = useLocation();
 
-  // Real scrollspy — which section is currently centered in the viewport.
-  const activeSection = useActiveSection(NAV_SECTION_IDS);
+  // Real scrollspy — only on landing; on /projects no section exists
+  const rawActive = useActiveSection(NAV_SECTION_IDS);
+  const activeSection = location.pathname === "/" ? rawActive : null;
 
   // Opening the mobile menu stops Lenis itself, not just body overflow —
   // otherwise a wheel/trackpad gesture over the menu would still scroll
@@ -45,10 +48,42 @@ const Sidebar = () => {
     };
   }, [open, lenis]);
 
-  const navigate = useCallback((sectionId) => {
-    setOpen(false);
-    lenis?.scrollTo(`#${sectionId}`, { offset: -60 });
+  const scrollToId = useCallback((id) => {
+    const el = document.getElementById(id);
+    if (!el) return false;
+    if (lenis) {
+      lenis.scrollTo(`#${id}`, { offset: -64 });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    return true;
   }, [lenis]);
+
+  const handleNavClick = useCallback((sectionId) => {
+    setOpen(false);
+    // Cross-page: from /projects back to landing
+    if (location.pathname !== "/") {
+      routerNavigate(`/#${sectionId}`);
+      // Wait for route + lazy InView sections to mount
+      let attempts = 0;
+      const tryScroll = () => {
+        if (scrollToId(sectionId)) return;
+        if (attempts++ < 12) setTimeout(tryScroll, 200);
+      };
+      setTimeout(tryScroll, 150);
+      return;
+    }
+    // Same page — handle lazy sections not yet in DOM
+    if (!scrollToId(sectionId)) {
+      window.location.hash = sectionId;
+      let attempts = 0;
+      const poll = () => {
+        if (scrollToId(sectionId)) return;
+        if (attempts++ < 10) setTimeout(poll, 200);
+      };
+      setTimeout(poll, 300);
+    }
+  }, [lenis, location.pathname, routerNavigate, scrollToId]);
 
   const linkClass = cn(
     "text-sm font-normal text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-150 cursor-pointer"
@@ -60,7 +95,16 @@ const Sidebar = () => {
         <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
           <a
             href={`#${SECTION_IDS.hero}`}
-            onClick={(e) => { e.preventDefault(); lenis?.scrollTo(`#${SECTION_IDS.hero}`); }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (location.pathname !== "/") {
+                routerNavigate("/");
+                setTimeout(() => {
+                  if (lenis) lenis.scrollTo(0);
+                  else window.scrollTo({ top: 0, behavior: "smooth" });
+                }, 150);
+              } else handleNavClick(SECTION_IDS.hero);
+            }}
             className="cursor-pointer flex-shrink-0 rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             aria-label="Back to top"
           >
@@ -74,7 +118,7 @@ const Sidebar = () => {
                 <a
                   key={item.to}
                   href={`#${item.to}`}
-                  onClick={(e) => { e.preventDefault(); navigate(item.to); }}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(item.to); }}
                   className={cn(
                     linkClass,
                     "rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
@@ -90,14 +134,14 @@ const Sidebar = () => {
           <div className="hidden md:flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-[4px] text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors"
+              className="btn-base btn-ghost !p-0 w-8 h-8 shrink-0"
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDark ? <Sun aria-hidden="true" focusable="false" className="w-4 h-4" /> : <Moon aria-hidden="true" focusable="false" className="w-4 h-4" />}
             </button>
             <a
               href={`mailto:${SITE.email}`}
-              className="btn-base btn-primary px-4 py-2 text-[13px]"
+              className="btn-base btn-primary px-4 py-2 text-[13px] h-8"
             >
               Hire me
             </a>
@@ -132,7 +176,7 @@ const Sidebar = () => {
                     <a
                       key={item.to}
                       href={`#${item.to}`}
-                      onClick={(e) => { e.preventDefault(); navigate(item.to); }}
+                      onClick={(e) => { e.preventDefault(); handleNavClick(item.to); }}
                       className={cn(
                         "text-2xl font-light tracking-[-0.01em] py-2.5 transition-colors duration-150 cursor-pointer rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
                         isActive

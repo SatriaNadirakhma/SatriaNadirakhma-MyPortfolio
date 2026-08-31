@@ -1,13 +1,15 @@
 import { SECTION_IDS, STATS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
+import PlusCorners from "@components/PlusCorners";
 import Profile1 from "@assets/profile1.webp";
 import { MapPin } from "lucide-react";
 
 const About = () => {
   return (
     <section id={SECTION_IDS.about} className="px-5 sm:px-8">
-      <Reveal><div className="max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12 overflow-hidden">
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+        <PlusCorners />
         <SectionHeader
           title={
             <>
@@ -57,7 +59,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className="-mx-6 sm:-mx-8 lg:-mx-12 -mb-6 sm:-mb-8 lg:-mb-12 mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 border-t border-gray-200 dark:border-white/[0.07] divide-y sm:divide-y-0 sm:divide-x divide-gray-200 dark:divide-white/[0.07] overflow-hidden rounded-b-[4px]">
+        <div className="-mx-6 sm:-mx-8 lg:-mx-12 -mb-6 sm:-mb-8 lg:-mb-12 mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 border-t border-gray-200 dark:border-white/[0.07] divide-y sm:divide-y-0 sm:divide-x divide-gray-200 dark:divide-white/[0.07]">
           {STATS.map((stat) => (
             <div key={stat.label} className="p-6 sm:p-8 text-center">
               <p className="font-modern font-light text-gray-900 dark:text-white text-4xl sm:text-5xl leading-none mb-2.5 tabular-nums">

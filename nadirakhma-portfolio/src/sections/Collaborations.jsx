@@ -1,4 +1,5 @@
 import { SECTION_IDS } from "@constants/index";
+import PlusCorners from "@components/PlusCorners";
 
 import Alceena from "@assets/collaborations/alceena.webp";
 import Hmti from "@assets/collaborations/hmti.webp";
@@ -28,7 +29,8 @@ const Collaborations = () => {
 
   return (
     <section id={SECTION_IDS.collaborations} className="px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px overflow-hidden">
+      <div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px">
+        <PlusCorners />
 
         <div className="group overflow-hidden">
           <div className="flex w-max animate-marquee">

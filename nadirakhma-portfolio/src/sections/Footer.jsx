@@ -1,3 +1,4 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import { SITE, SECTION_IDS } from "@constants/index";
 import { useLenis } from "@context/LenisContext";
 import Reveal from "@components/Reveal";
@@ -14,6 +15,33 @@ const NAV_LINKS = [
 
 const Footer = () => {
   const { lenis } = useLenis();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNav = (id) => {
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      let attempts = 0;
+      const tryScroll = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (lenis) lenis.scrollTo(`#${id}`, { offset: -64 });
+          else el.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+        if (attempts++ < 12) setTimeout(tryScroll, 200);
+      };
+      setTimeout(tryScroll, 150);
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      if (lenis) lenis.scrollTo(`#${id}`, { offset: -64 });
+      else el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.hash = id;
+    }
+  };
 
   return (
     <footer className="px-5 sm:px-8 bg-gray-50 dark:bg-white/[0.02] border-t border-gray-200 dark:border-white/[0.07] transition-colors duration-300">
@@ -36,7 +64,7 @@ const Footer = () => {
                 <a
                   key={link.to}
                   href={`#${link.to}`}
-                  onClick={(e) => { e.preventDefault(); lenis?.scrollTo(`#${link.to}`, { offset: -60 }); }}
+                  onClick={(e) => { e.preventDefault(); handleNav(link.to); }}
                   className="text-sm font-normal text-gray-500 dark:text-white/40 hover:text-gray-900 dark:hover:text-white transition-colors duration-150 cursor-pointer rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 >
                   {link.label}

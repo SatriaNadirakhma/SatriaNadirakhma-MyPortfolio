@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
-import { ArrowRight, Download } from "lucide-react";
+import PlusCorners from "@components/PlusCorners";
+import { ArrowRight, Download, ExternalLink } from "lucide-react";
 import cvATS from "@assets/pdf/cv-ats.pdf";
 
 const PORTFOLIO_URL = "https://drive.google.com/file/d/1fLRntV4Js0ywnQDJTb23QXyGjaBlDult/view";
@@ -31,7 +32,8 @@ const Hero = () => {
       id={SECTION_IDS.hero}
       className="px-5 sm:px-8 pt-28 bg-[#fafafa] dark:bg-[#080808] transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto w-full border border-gray-200 dark:border-white/[0.07] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col justify-center min-h-[60vh]">
+      <div className="relative max-w-7xl mx-auto w-full border border-gray-200 dark:border-white/[0.07] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col justify-center min-h-[60vh]">
+        <PlusCorners />
         <motion.div
           variants={columnVariants}
           initial="hidden"
@@ -70,11 +72,11 @@ const Hero = () => {
             Open for collaborations and freelance work.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap items-center gap-3">
+          <motion.div variants={itemVariants} className="mt-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
             <a
               href={`#${SECTION_IDS.projects}`}
               onClick={handleExploreClick}
-              className="btn-base btn-primary"
+              className="btn-base btn-primary w-full sm:w-auto justify-center"
             >
               Explore my work
               <ArrowRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
@@ -84,19 +86,20 @@ const Hero = () => {
               href={cvATS}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-base btn-ghost"
+              className="btn-base btn-ghost w-full sm:w-auto justify-center"
             >
-              <Download aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
               Download CV
+              <Download aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
             </a>
 
             <a
               href={PORTFOLIO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 ml-2 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
+              className="btn-base btn-ghost w-full sm:w-auto justify-center"
             >
-              Design portfolio <ArrowRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+              Design portfolio
+              <ExternalLink aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
             </a>
           </motion.div>
         </motion.div>

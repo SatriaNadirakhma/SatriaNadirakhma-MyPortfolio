@@ -11,6 +11,7 @@ import {
 } from "@utils/certificateSecurity";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
+import PlusCorners from "@components/PlusCorners";
 
 const CertificateModal = ({ src, title, onClose }) => {
   const canvasRef = useRef(null);
@@ -198,7 +199,8 @@ const ChampionCard = ({ title, event, description, image, certificate, link, yea
 const Champions = () => {
   return (
     <section id={SECTION_IDS.champions} className="px-5 sm:px-8">
-      <Reveal><div className="max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+        <PlusCorners />
         <SectionHeader
           label="Champions"
           title={
