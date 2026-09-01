@@ -1,135 +1,184 @@
-import { useState, useEffect } from "react";
-import { motion } from "motion/react";
-import { useTheme } from "@context/ThemeContext";
-import { LenisProvider, useLenis } from "@context/LenisContext";
-import { AppReadyProvider } from "@context/AppReadyContext";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
 import { ErrorBoundary } from "@components/ErrorBoundary";
+import { LenisProvider, useLenis } from "@context/LenisContext";
+import ScrollToTop from "@components/ScrollToTop";
 import Sidebar from "@components/Sidebar";
 import LoadingScreen from "@components/LoadingScreen";
-import Marquee from "@components/Marquee";
-import CustomCursor from "@components/CustomCursor";
+import InView from "@components/InView";
 import Hero from "@sections/Hero";
 import About from "@sections/About";
 import Collaborations from "@sections/Collaborations";
-import Experience from "@sections/Experience";
-import Projects from "@sections/Projects";
-import Champions from "@sections/Champions";
-import Skills from "@sections/Skills";
-import Github from "@sections/Github";
-import Playlist from "@sections/Playlist";
 import Connect from "@sections/Connect";
 import Footer from "@sections/Footer";
-import { SECTION_IDS, MARQUEE_ITEMS } from "@constants/index";
+import { SECTION_IDS } from "@constants/index";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
-// Thin bar tied to Lenis's real scroll progress (0 → 1) — not a fake
-// scrollY / documentHeight approximation. Same blue → orange gradient as
-// the Hero CTAs so it reads as part of the system, not a bolt-on widget.
-const ScrollProgress = () => {
-  const { progress } = useLenis();
-  return (
-    <motion.div
-      aria-hidden="true"
-      className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[60] bg-linear-to-r from-blue-500 to-orange-500 pointer-events-none"
-      style={{ scaleX: progress }}
-    />
-  );
-};
+// Heavy below-fold sections — split to separate chunks and only load when near viewport
+const Experience = lazy(() => import("@sections/Experience"));
+const Projects = lazy(() => import("@sections/Projects"));
+const Champions = lazy(() => import("@sections/Champions"));
+const Skills = lazy(() => import("@sections/Skills"));
+const Github = lazy(() => import("@sections/Github"));
+const Playlist = lazy(() => import("@sections/Playlist"));
+const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage"));
 
-function AppContent() {
-  const [isLoading, setIsLoading] = useState(true);
-  const { resolvedTheme } = useTheme();
+function Landing() {
+  const location = useLocation();
   const { lenis } = useLenis();
-  const isDark = resolvedTheme === "dark";
 
+  // Handle direct navigation to /#sectionId (e.g. from /projects)
+  // and hash changes, with retry for lazy InView sections
   useEffect(() => {
-    document.body.style.overflow = isLoading ? "hidden" : "";
-    if (isLoading) {
-      lenis?.stop();
-    } else {
-      lenis?.start();
-    }
-    return () => {
-      document.body.style.overflow = "";
+    if (!location.hash) return;
+    const id = location.hash.replace("#", "");
+    let attempts = 0;
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (lenis) lenis.scrollTo(`#${id}`, { offset: -64 });
+        else el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (attempts++ < 12) setTimeout(tryScroll, 200);
     };
-  }, [isLoading, lenis]);
+    // Small delay to let lazy sections mount after route change
+    const t = setTimeout(tryScroll, 150);
+    return () => clearTimeout(t);
+  }, [location.hash, lenis]);
 
   return (
     <ErrorBoundary>
-      <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
-
-      {!isLoading && <ScrollProgress />}
-      {!isLoading && <CustomCursor />}
-
-      {/* Hero (and anything else wired to useAppReady) is mounted the whole
-          time — only visibility/opacity below are toggled — so its entrance
-          variants need this signal instead of firing blind on mount. */}
-      <AppReadyProvider isReady={!isLoading}>
-        <div
-          className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300"
-          style={{
-            visibility: isLoading ? "hidden" : "visible",
-            transition: isLoading ? "none" : "opacity 0.4s ease, background-color 0.3s ease",
-            opacity: isLoading ? 0 : 1,
-          }}
+      <div className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300">
+        <Sidebar />
+        <motion.main
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          className="relative"
         >
-          <Sidebar />
+          <section id={SECTION_IDS.hero}>
+            <Hero />
+          </section>
 
-          <main className="relative z-[2]">
-            <section id={SECTION_IDS.hero}>
-              <Hero />
-            </section>
+          <section id={SECTION_IDS.collaborations}>
+            <Collaborations />
+          </section>
 
-            <Marquee items={MARQUEE_ITEMS.primary} speed={35} />
+          <section id={SECTION_IDS.about}>
+            <About />
+          </section>
 
-            <section id={SECTION_IDS.about}>
-              <About />
-            </section>
-            <section id={SECTION_IDS.collaborations}>
-              <Collaborations />
-            </section>
-            <section id={SECTION_IDS.experience}>
-              <Experience />
-            </section>
+          <InView minHeight={500}>
+            <Suspense fallback={null}>
+              <section id={SECTION_IDS.experience}>
+                <Experience />
+              </section>
+            </Suspense>
+          </InView>
 
-            <Marquee items={MARQUEE_ITEMS.secondary} speed={28} />
+          <InView minHeight={600}>
+            <Suspense fallback={null}>
+              <section id={SECTION_IDS.projects}>
+                <Projects />
+              </section>
+            </Suspense>
+          </InView>
 
-            <section id={SECTION_IDS.projects}>
-              <Projects />
-            </section>
-            <section id={SECTION_IDS.champions}>
-              <Champions />
-            </section>
+          <InView minHeight={500}>
+            <Suspense fallback={null}>
+              <section id={SECTION_IDS.champions}>
+                <Champions />
+              </section>
+            </Suspense>
+          </InView>
 
-            <Marquee items={MARQUEE_ITEMS.tech} speed={20} />
+          <InView minHeight={400}>
+            <Suspense fallback={null}>
+              <section id={SECTION_IDS.skills}>
+                <Skills />
+              </section>
+            </Suspense>
+          </InView>
 
-            <section id={SECTION_IDS.skills}>
-              <Skills />
-            </section>
+          <InView minHeight={300}>
+            <Suspense fallback={null}>
+              <section id={SECTION_IDS.github}>
+                <Github />
+              </section>
+            </Suspense>
+          </InView>
 
-            <section id={SECTION_IDS.github}>
-              <Github />
-            </section>
+          <InView minHeight={300}>
+            <Suspense fallback={null}>
+              <section id={SECTION_IDS.playlist}>
+                <Playlist />
+              </section>
+            </Suspense>
+          </InView>
 
-            <section id={SECTION_IDS.playlist}>
-              <Playlist />
-            </section>
-
-            <section id={SECTION_IDS.connect}>
-              <Connect />
-            </section>
-            <Footer />
-          </main>
-        </div>
-      </AppReadyProvider>
+          <section id={SECTION_IDS.connect}>
+            <Connect />
+          </section>
+          <Footer />
+        </motion.main>
+      </div>
     </ErrorBoundary>
+  );
+}
+
+function AppInner() {
+  const [ready, setReady] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+  const { lenis } = useLenis();
+
+  useEffect(() => {
+    if (!ready) {
+      document.body.style.overflow = "hidden";
+      lenis?.stop();
+    } else {
+      document.body.style.overflow = "";
+      lenis?.start();
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [ready, lenis]);
+
+  return (
+    <>
+      <AnimatePresence mode="wait">
+        {showLoader && (
+          <LoadingScreen
+            onLoadingComplete={() => {
+              setReady(true);
+              setTimeout(() => setShowLoader(false), 800);
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      <div style={{ visibility: ready ? "visible" : "hidden" }}>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route
+            path="/projects"
+            element={
+              <Suspense fallback={null}>
+                <AllProjectsPage />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </div>
+    </>
   );
 }
 
 function App() {
   return (
     <LenisProvider>
-      <AppContent />
+      <AppInner />
       <SpeedInsights />
     </LenisProvider>
   );

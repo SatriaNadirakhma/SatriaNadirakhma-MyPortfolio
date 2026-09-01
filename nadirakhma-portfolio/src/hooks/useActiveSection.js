@@ -1,49 +1,63 @@
 import { useEffect, useState } from "react";
 
 /**
- * Replacement for react-scroll's `spy` prop.
+ * Scrollspy via IntersectionObserver that handles lazy-mounted sections.
  *
- * react-scroll highlighted the active nav item by listening to scroll and
- * comparing element offsets on every tick. This does the same job with an
- * IntersectionObserver instead — cheaper, and doesn't care whether the
- * scroll driving it is native or Lenis-smoothed.
- *
- * `rootMargin: "-40% 0px -50% 0px"` shrinks the observed viewport to a
- * thin band around its vertical center, so "active" means "currently near
- * the middle of the screen" rather than "barely visible at the edge".
- *
- * Usage:
- *   const activeId = useActiveSection(Object.values(SECTION_IDS));
- *   <a className={activeId === SECTION_IDS.about ? "active" : ""}>About</a>
+ * Previously it collected elements once at mount, so sections wrapped in
+ * `InView` (lazy) were not observed until a full re-mount. Now it watches
+ * the DOM for new nodes and observes them as they appear.
  */
 export const useActiveSection = (sectionIds = [], options = {}) => {
   const [activeId, setActiveId] = useState(sectionIds[0] ?? null);
 
   useEffect(() => {
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
+    const observed = new Set();
+    let observer = null;
 
-    if (elements.length === 0) return;
+    const createObserver = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]) {
-          setActiveId(visible[0].target.id);
+          if (visible[0]) {
+            setActiveId(visible[0].target.id);
+          }
+        },
+        {
+          rootMargin: options.rootMargin ?? "-40% 0px -50% 0px",
+          threshold: options.threshold ?? [0, 0.25, 0.5, 0.75, 1],
         }
-      },
-      {
-        rootMargin: options.rootMargin ?? "-40% 0px -50% 0px",
-        threshold: options.threshold ?? [0, 0.25, 0.5, 0.75, 1],
-      }
-    );
+      );
+    };
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    const observeAll = () => {
+      sectionIds.forEach((id) => {
+        if (observed.has(id)) return;
+        const el = document.getElementById(id);
+        if (el && observer) {
+          observer.observe(el);
+          observed.add(id);
+        }
+      });
+    };
+
+    createObserver();
+    observeAll();
+
+    // Watch for lazy sections being mounted later (InView)
+    const mo = new MutationObserver(() => observeAll());
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Also poll once after a short delay for sections that mount via React.lazy
+    const t = setTimeout(observeAll, 500);
+
+    return () => {
+      clearTimeout(t);
+      mo.disconnect();
+      if (observer) observer.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sectionIds.join(","), options.rootMargin, options.threshold]);
 

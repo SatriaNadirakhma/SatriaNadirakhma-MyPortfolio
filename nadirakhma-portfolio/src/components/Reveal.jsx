@@ -1,28 +1,17 @@
 import { motion } from "motion/react";
 
-const Reveal = ({
-  children,
-  className,
-  delay = 0,
-  y = 50,
-  scale,
-  stiffness = 120,
-  damping = 18,
-  once = true,
-}) => {
-  const initial = { opacity: 0, y };
-  const animate = { opacity: 1, y: 0 };
-  if (scale != null) {
-    initial.scale = scale;
-    animate.scale = 1;
-  }
-
+/**
+ * One gentle reveal for the whole site: fade up 16px, once, on first
+ * scroll into view. Duration-based easing (no spring bounce) so sections
+ * settle like page turns rather than popping.
+ */
+const Reveal = ({ children, className, delay = 0 }) => {
   return (
     <motion.div
-      initial={initial}
-      whileInView={animate}
-      viewport={{ once, amount: 0.3 }}
-      transition={{ type: "spring", stiffness, damping, delay }}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, ease: "easeOut", delay }}
       className={className}
     >
       {children}

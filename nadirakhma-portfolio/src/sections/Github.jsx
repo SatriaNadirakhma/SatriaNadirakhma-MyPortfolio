@@ -1,27 +1,20 @@
 import { useMemo } from "react";
-import { motion } from "motion/react";
-import { Github as GithubIcon, ArrowRight } from "lucide-react";
+import { Github as GithubIcon } from "lucide-react";
 import { useTheme } from "@context/ThemeContext";
 import GithubCalendar from "@components/GithubCalendar";
 import { SECTION_IDS } from "@constants/index";
-import { MagneticButton } from "@/components/ui/magnetic-button";
+import Reveal from "@components/Reveal";
+import SectionHeader from "@components/SectionHeader";
+import PlusCorners from "@components/PlusCorners";
 
-// Replace with your actual GitHub handle — used both for the calendar
-// data fetch and the "View GitHub Profile" button below.
 const GITHUB_USERNAME = "SatriaNadirakhma";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-};
 
 const Github = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
-  // Same blue -> orange heat as the rest of the site (CTAs, hero backdrop,
-  // loading-screen decode) instead of the calendar's default GitHub green,
-  // so it reads as part of this design system rather than a bolted-on widget.
+  // Blue -> orange heat on the calendar, same pair as the site's accents,
+  // so the widget reads as part of this system rather than a bolted-on one.
   const brandTheme = useMemo(
     () =>
       isDark
@@ -43,52 +36,26 @@ const Github = () => {
   );
 
   return (
-    <section
-      id={SECTION_IDS.github}
-      className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#fafafa] dark:bg-[#080808] transition-colors duration-300"
-    >
-      <div className="max-w-5xl mx-auto w-full">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12"
+    <section id={SECTION_IDS.github} className="px-5 sm:px-8">
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+        <PlusCorners />
+        <SectionHeader
+          title="My GitHub contributions."
+          description="A year of commits, read as a heat map — the quiet record of consistent building."
         >
-          <div>
-            <h2
-              className={`font-modern font-bold leading-[0.95] ${
-                isDark ? "text-white" : "text-gray-900"
-              }`}
-              style={{ fontSize: "clamp(32px, 5vw, 52px)" }}
-            >
-              My GitHub Contributions
-            </h2>
-          </div>
+          <a
+            href={`https://github.com/${GITHUB_USERNAME}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-base btn-ghost self-start"
+          >
+            <GithubIcon className="w-4 h-4" />
+            View GitHub profile
+          </a>
+        </SectionHeader>
 
-          <MagneticButton>
-            <a
-              href={`https://github.com/SatriaNadirakhma`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-linear-to-b from-blue-500 to-blue-700 px-5 sm:px-6 py-2.5 font-modern text-xs sm:text-sm font-medium text-white ring-1 ring-white/20 ring-offset-1 ring-offset-blue-500 ring-inset transition-transform duration-150 active:scale-98 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-            >
-              <GithubIcon className="w-3.5 h-3.5" />
-              View GitHub Profile
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-          </MagneticButton>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-        >
-          <GithubCalendar username={GITHUB_USERNAME} theme={brandTheme} cellShape="rounded" />
-        </motion.div>
-      </div>
+        <GithubCalendar username={GITHUB_USERNAME} theme={brandTheme} cellShape="rounded" />
+      </div></Reveal>
     </section>
   );
 };

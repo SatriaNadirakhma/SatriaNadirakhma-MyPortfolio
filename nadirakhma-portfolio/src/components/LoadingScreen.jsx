@@ -1,50 +1,59 @@
 import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useTheme } from "@context/ThemeContext";
-import Logo from "@assets/logo.png";
 
 const IMAGES = [
   () => import("@assets/profile1.webp"),
   () => import("@assets/logo.png"),
   () => import("@assets/sticker.png"),
-  () => import("@assets/image/efest.webp"),
-  () => import("@assets/image/itfest.webp"),
-  () => import("@assets/image/ekspedisi.webp"),
-  () => import("@assets/image/tatib.webp"),
-  () => import("@assets/image/sipinta.webp"),
-  () => import("@assets/image/k3.webp"),
-  () => import("@assets/image/oranjixhmti.webp"),
-  () => import("@assets/image/alceena.webp"),
-  () => import("@assets/image/mitraboost.webp"),
-  () => import("@assets/image/kompen.webp"),
-  () => import("@assets/image/itdecpeeps.webp"),
-  () => import("@assets/image/oranjiteam.webp"),
-  () => import("@assets/image/petrokimia.webp"),
 ];
 
-const RADIUS = 54;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+// -- Matrix dot loader -------------------------------------------------------
+// Variant delay tables — each dot gets --d (ms) into the 1200ms cycle.
+// scan: col * 120, twinkle: order * 75, orbit: ring * 150, pulse: inner vs outer
+const MATRIX_VARIANTS = {
+  scan: Array.from({ length: 16 }, (_, i) => (i % 4) * 120),
+  twinkle: (() => {
+    const order = [7, 2, 11, 5, 14, 9, 0, 12, 3, 15, 6, 10, 13, 1, 8, 4];
+    return order.map((_, idx) => {
+      const pos = order.indexOf(idx);
+      // fallback to idx if not found (should not happen)
+      const p = pos === -1 ? idx : pos;
+      return Math.round((p * 1200) / 16);
+    });
+  })(),
+  orbit: (() => {
+    const ring = [1, 2, 7, 11, 14, 13, 8, 4];
+    return Array.from({ length: 16 }, (_, i) => {
+      const r = ring.indexOf(i);
+      return r === -1 ? 0 : Math.round((r * 1200) / 8);
+    });
+  })(),
+  pulse: Array.from({ length: 16 }, (_, i) => {
+    const inner = [5, 6, 9, 10].includes(i);
+    return inner ? 0 : Math.round(1200 * 0.16);
+  }),
+};
 
+const MatrixLoader = ({ variant = "scan", className = "" }) => {
+  const delays = MATRIX_VARIANTS[variant] || MATRIX_VARIANTS.scan;
+  return (
+    <div className={`t-matrix ${className}`} data-variant={variant} aria-hidden="true">
+      {Array.from({ length: 16 }).map((_, i) => (
+        <i key={i} style={{ "--d": delays[i] }} />
+      ))}
+    </div>
+  );
+};
+
+/**
+ * Blocking loader: matrix dots + percentage 0→100.
+ * Preloads critical images + fonts; holds at least 1.2s for the
+ * animation to be perceived. On completion the parent is notified
+ * via onLoadingComplete, which triggers the swipe-up page transition.
+ */
 const LoadingScreen = ({ onLoadingComplete }) => {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [showAlmost, setShowAlmost] = useState(false);
-  const [dots, setDots] = useState(".");
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prev) => (prev === "." ? ".." : prev === ".." ? "..." : "."));
-    }, 400);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowAlmost(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const preload = useCallback(async () => {
     const total = IMAGES.length + 1;
@@ -52,7 +61,11 @@ const LoadingScreen = ({ onLoadingComplete }) => {
 
     const tick = () => {
       loaded++;
-      setProgress(Math.round((loaded / total) * 100));
+      // Animate progress smoothly to the next integer
+      setProgress((prev) => {
+        const next = Math.round((loaded / total) * 100);
+        return next > prev ? next : prev;
+      });
     };
 
     const promises = IMAGES.map((imp) =>
@@ -72,111 +85,64 @@ const LoadingScreen = ({ onLoadingComplete }) => {
     promises.push(document.fonts.ready.then(tick));
 
     await Promise.all(promises);
+    // Ensure we end at exactly 100 after all ticks
+    setProgress(100);
   }, []);
 
   useEffect(() => {
-    const minTime = new Promise((r) => setTimeout(r, 5000));
-    // No more manual setTimeout(600) to fake the exit duration — visible
-    // just flips to false, and AnimatePresence's onExitComplete below fires
-    // onLoadingComplete the instant the real exit animation actually finishes.
-    Promise.all([preload(), minTime]).then(() => setVisible(false));
+    const minTime = new Promise((r) => setTimeout(r, 1400));
+    Promise.all([preload(), minTime]).then(() => {
+      // Small hold at 100% before swiping
+      setTimeout(() => setVisible(false), 400);
+    });
   }, [preload]);
 
-  const textColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)";
+  // Drive progress toward 100 with a gentle interval if preload is fast,
+  // so the number feels alive rather than jumping.
+  useEffect(() => {
+    if (!visible) return;
+    if (progress >= 100) return;
+    const id = setInterval(() => {
+      setProgress((p) => (p < 98 ? p + 1 : p));
+    }, 22);
+    return () => clearInterval(id);
+  }, [progress, visible]);
+
+  const handleExitComplete = () => {
+    onLoadingComplete?.();
+  };
 
   return (
-    <AnimatePresence onExitComplete={() => onLoadingComplete?.()}>
+    <AnimatePresence onExitComplete={handleExitComplete}>
       {visible && (
         <motion.div
-          key="loading-screen"
-          exit={{ opacity: 0, scale: 0.94, filter: "blur(8px)" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[999] flex flex-col items-center justify-center"
-          style={{ background: isDark ? "#080808" : "#fafafa" }}
+          key="matrix-loader"
+          initial={{ y: 0 }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#fafafa] dark:bg-[#080808] overflow-hidden"
+          aria-label="Loading"
+          aria-live="polite"
         >
+          {/* Center: matrix + percentage */}
           <div className="flex flex-col items-center gap-8">
-            {/* Progress ring + breathing logo mark */}
-            <div className="relative flex items-center justify-center" style={{ width: 140, height: 140 }}>
-              <svg width="140" height="140" viewBox="0 0 140 140" className="-rotate-90">
-                <circle
-                  cx="70"
-                  cy="70"
-                  r={RADIUS}
-                  fill="none"
-                  strokeWidth="1.5"
-                  className={isDark ? "stroke-white/8" : "stroke-gray-200"}
-                />
-                <motion.circle
-                  cx="70"
-                  cy="70"
-                  r={RADIUS}
-                  fill="none"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  stroke="url(#loading-gradient)"
-                  style={{ strokeDasharray: CIRCUMFERENCE }}
-                  animate={{ strokeDashoffset: CIRCUMFERENCE - (CIRCUMFERENCE * progress) / 100 }}
-                  transition={{ ease: "easeOut", duration: 0.35 }}
-                />
-                <defs>
-                  <linearGradient id="loading-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor={isDark ? "#93c5fd" : "#3b82f6"} />
-                    <stop offset="100%" stopColor="#f97316" />
-                  </linearGradient>
-                </defs>
-              </svg>
+            <MatrixLoader variant="scan" />
 
-              <motion.div
-                className="absolute flex items-center justify-center"
-                style={{ width: 44, height: 44 }}
-                animate={{ scale: [1, 1.06, 1] }}
-                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <img
-                  src={Logo}
-                  alt="Nadi Rakhma"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    filter: isDark ? "brightness(0) invert(1)" : "none",
-                  }}
-                />
-              </motion.div>
+            <div className="flex flex-col items-center gap-2">
+              <span className="font-modern font-light tabular-nums text-gray-900 dark:text-white text-3xl sm:text-4xl tracking-[-0.02em]">
+                {progress}%
+              </span>
+              <span className="section-label">Loading</span>
             </div>
+          </div>
 
-            {/* Live percentage — the actual `progress` state, finally shown */}
-            <motion.span
-              key={progress}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="font-modern font-bold tabular-nums leading-none"
-              style={{
-                fontSize: "clamp(32px, 5vw, 44px)",
-                color: isDark ? "rgba(255,255,255,0.9)" : "rgba(17,24,39,0.9)",
-              }}
-            >
-              {progress}%
-            </motion.span>
-
-            {/* Status label crossfade */}
-            <div className="relative h-5 flex items-center justify-center overflow-hidden" style={{ width: 220 }}>
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={showAlmost ? "almost" : "brewing"}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="absolute font-modern text-xs sm:text-sm tracking-[0.25em] uppercase"
-                  style={{ color: textColor }}
-                >
-                  {showAlmost ? "Almost There" : "Still Brewing"}
-                  <span style={{ minWidth: 24, display: "inline-block", textAlign: "left" }}>{dots}</span>
-                </motion.span>
-              </AnimatePresence>
-            </div>
+          {/* Bottom bar — subtle progress hairline */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gray-200 dark:bg-white/[0.07]">
+            <motion.div
+              className="h-full bg-blue-600 dark:bg-blue-400"
+              style={{ width: `${progress}%` }}
+              transition={{ ease: "easeOut", duration: 0.2 }}
+            />
           </div>
         </motion.div>
       )}

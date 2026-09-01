@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useTheme } from "@context/ThemeContext";
 import { Trophy, ArrowUpRight, X, ZoomIn } from "lucide-react";
@@ -10,9 +10,8 @@ import {
   renderCertificateToCanvas,
 } from "@utils/certificateSecurity";
 import Reveal from "@components/Reveal";
-import ScrollHeading from "@components/ScrollHeading";
-import ParallaxImage from "@components/ParallaxImage";
-import TiltCard from "@components/TiltCard";
+import SectionHeader from "@components/SectionHeader";
+import PlusCorners from "@components/PlusCorners";
 
 const CertificateModal = ({ src, title, onClose }) => {
   const canvasRef = useRef(null);
@@ -20,9 +19,8 @@ const CertificateModal = ({ src, title, onClose }) => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
-  // Now stops the actual Lenis instance while open (see useScrollLock) —
-  // previously this only toggled body overflow, so a wheel gesture over
-  // the backdrop could still scroll the page behind the preview.
+  // Stops the actual Lenis instance while open (see useScrollLock) — a
+  // wheel gesture over the backdrop must not scroll the page behind.
   useScrollLock();
 
   useEffect(() => {
@@ -39,44 +37,42 @@ const CertificateModal = ({ src, title, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8"
       style={{
         background: isDark ? "rgba(8,8,8,0.92)" : "rgba(250,250,250,0.92)",
-        backdropFilter: "blur(20px)",
+        backdropFilter: "blur(16px)",
       }}
       onClick={onClose}
       data-lenis-prevent
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.96, y: 8 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative w-full max-w-2xl border rounded-xl overflow-hidden shadow-2xl ${
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className={`relative w-full max-w-2xl border rounded-[4px] overflow-hidden ${
           isDark
             ? "bg-[#0f0f0f] border-white/[0.07]"
             : "bg-white border-gray-200"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={`flex items-center justify-between px-5 py-4 border-b ${
+        <div className={`flex items-center justify-between px-5 py-3.5 border-b ${
           isDark ? "border-white/6" : "border-gray-100"
         }`}>
-          <div className="flex items-center gap-2">
-            <span className={`text-[10px] tracking-[0.22em] uppercase font-modern ${
-              isDark ? "text-white/35" : "text-gray-500"
-            }`}>
-              Certificate Preview -- Protected
-            </span>
-          </div>
+          <span className={`section-label ${
+            isDark ? "text-white/35" : "text-gray-500"
+          }`}>
+            Certificate preview — protected
+          </span>
           <button
             onClick={onClose}
             className={`p-1 -mr-1 transition-colors ${
-              isDark ? "text-white/25 hover:text-white" : "text-gray-400 hover:text-gray-900"
-            } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-sm`}
+              isDark ? "text-white/60 hover:text-white" : "text-gray-500 hover:text-gray-900"
+            } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-[4px]`}
             aria-label="Close preview"
           >
-            <X className="w-4 h-4" />
+            <X aria-hidden="true" focusable="false" className="w-4 h-4" />
           </button>
         </div>
 
@@ -123,13 +119,13 @@ const CertificateModal = ({ src, title, onClose }) => {
         <div className={`px-5 py-3 border-t flex items-center justify-between ${
           isDark ? "border-white/6" : "border-gray-100"
         }`}>
-          <p className={`text-[10px] font-modern truncate pr-4 ${
-            isDark ? "text-white/20" : "text-gray-400"
+          <p className={`text-[11px] font-normal truncate pr-4 ${
+            isDark ? "text-white/60" : "text-gray-500"
           }`}>{title}</p>
-          <p className={`text-[10px] font-modern tracking-[0.2em] uppercase shrink-0 ${
-            isDark ? "text-white/12" : "text-gray-300"
+          <p className={`section-label shrink-0 ${
+            isDark ? "text-white/60" : "text-gray-500"
           }`}>
-            View Only
+            View only
           </p>
         </div>
       </motion.div>
@@ -137,8 +133,7 @@ const CertificateModal = ({ src, title, onClose }) => {
   );
 };
 
-const ChampionCard = ({ title, event, description, image, certificate, link, icon: Icon, year }) => {
-  const [expanded, setExpanded] = useState(false);
+const ChampionCard = ({ title, event, description, image, certificate, link, year }) => {
   const [certOpen, setCertOpen] = useState(false);
 
   return (
@@ -151,126 +146,76 @@ const ChampionCard = ({ title, event, description, image, certificate, link, ico
         />
       )}
 
-      <TiltCard
-        maxTilt={6}
-        data-cursor="details"
-        className={`group relative border rounded-2xl overflow-hidden transition-[border-color,background-color] duration-300 ${
-          expanded
-            ? "border-orange-500/30 bg-orange-500/5"
-            : "border-gray-200 dark:border-white/7 bg-gray-50 dark:bg-white/2 hover:border-gray-300 dark:hover:border-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)]"
-        }`}
-      >
-        <div className="relative h-44 sm:h-52 overflow-hidden">
-          <ParallaxImage amount={28} position="absolute" className="inset-0">
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-full object-cover group-hover:brightness-60 transition-all duration-300 scale-105 group-hover:scale-100"
-              loading="lazy"
-            />
-          </ParallaxImage>
-          <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-            <Icon className="w-4 h-4 text-white" />
-          </div>
-          <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
-            <span className="text-[9px] tracking-widest uppercase font-modern text-white/50">
+      <article className="group flex flex-col rounded-[4px] border border-[#e5edf5] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] overflow-hidden transition-colors duration-150 hover:border-[#b9b9f9]/60 dark:hover:border-white/15 focus-within:border-[#b9b9f9]/60 dark:focus-within:border-white/25">
+        <div className="relative overflow-hidden">
+          <img
+            src={image}
+            alt={title}
+            className="w-full aspect-[16/10] object-cover"
+            loading="lazy"
+          />
+          <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-[4px] border border-white/15 bg-black/50 backdrop-blur-sm px-2.5 py-1">
+            <Trophy aria-hidden="true" focusable="false" className="w-3 h-3 text-white" />
+            <span className="text-[10px] tracking-[0.15em] uppercase text-white/70">
               {year}
             </span>
           </div>
         </div>
 
-        <div className="p-4 sm:p-5">
-          <p className="text-[10px] tracking-[0.2em] uppercase font-modern text-blue-400/70 mb-1.5">
+        <div className="p-5 sm:p-6 flex flex-col items-start">
+          <p className="section-label text-orange-600 dark:text-orange-400">
             {event}
           </p>
-          <h3 className="text-base sm:text-lg font-modern font-bold text-gray-900 dark:text-white leading-snug mb-3">
+          <h3 className="mt-2 text-lg sm:text-xl font-light text-gray-900 dark:text-white leading-snug tracking-[-0.01em]">
             {title}
           </h3>
+          <p className="mt-2 text-sm font-light text-gray-500 dark:text-white/40 leading-relaxed">
+            {description}
+          </p>
 
-          <div
-            className={`overflow-hidden transition-all duration-300 ${
-              expanded ? "max-h-40 mb-4" : "max-h-0"
-            }`}
-          >
-            <p className="text-xs sm:text-sm font-modern text-gray-600 dark:text-white/45 leading-relaxed">
-              {description}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 flex-wrap">
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase font-modern transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                expanded
-                  ? "border-orange-500/40 bg-orange-500/10 text-orange-500 dark:text-orange-400"
-                  : "border-gray-300 dark:border-white/15 text-gray-500 dark:text-white/50 hover:border-gray-500 dark:hover:border-white/35 hover:text-gray-900 dark:hover:text-white"
-              }`}
-            >
-              {expanded ? (
-                <>
-                  <X className="w-3 h-3" /> Close
-                </>
-              ) : (
-                <>Details</>
-              )}
-            </button>
-
+          <div className="mt-4 flex items-center gap-2 flex-wrap">
             <button
               onClick={() => setCertOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 dark:border-white/15 px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase font-modern text-gray-500 dark:text-white/50 hover:border-orange-400/50 hover:text-orange-500 dark:hover:text-orange-400 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-1.5 rounded-[4px] border border-gray-300 dark:border-white/15 px-3 py-1.5 text-xs font-normal text-gray-500 dark:text-white/50 hover:border-orange-400/50 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
-              <ZoomIn className="w-3 h-3" /> Certificate
+              <ZoomIn aria-hidden="true" focusable="false" className="w-3 h-3" /> Certificate
             </button>
 
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 dark:border-white/15 px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase font-modern text-gray-500 dark:text-white/50 hover:border-blue-400/50 hover:text-blue-500 dark:hover:text-blue-400 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-1 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
             >
-              View Post <ArrowUpRight className="w-3 h-3" />
+              View post <ArrowUpRight aria-hidden="true" focusable="false" className="w-3 h-3" />
             </a>
           </div>
         </div>
-      </TiltCard>
+      </article>
     </>
   );
 };
 
 const Champions = () => {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
   return (
-    <section id={SECTION_IDS.champions} className="py-20 sm:py-28 px-5 sm:px-8">
-      <Reveal><div className="max-w-7xl mx-auto">
-        <div className="border-t border-gray-200 dark:border-white/[0.07] pt-16 sm:pt-20"></div>
+    <section id={SECTION_IDS.champions} className="px-5 sm:px-8">
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+        <PlusCorners />
+        <SectionHeader
+          label="Champions"
+          title={
+            <>
+              Champions &amp;{" "}
+              <span className="text-orange-600 dark:text-orange-400">awards.</span>
+            </>
+          }
+          description="Recognition that validates the process — from a national poster competition to a university UI/UX final."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-10 sm:gap-16 items-start">
-          <ScrollHeading
-            className="font-modern font-bold leading-[0.92] text-gray-900 dark:text-white"
-            style={{ fontSize: "clamp(36px, 4vw, 72px)" }}
-          >
-            Champions
-            <br />
-              <span
-                style={{
-                  color: isDark ? "rgba(147,197,253,0.65)" : "rgba(37,99,235,0.6)",
-                  fontStyle: "italic",
-                  WebkitTextStroke: isDark
-                    ? "1px rgba(147,197,253,0.5)"
-                    : "1px rgba(37,99,235,0.5)",
-                }}
-              >
-                &amp; Awards
-              </span>
-          </ScrollHeading>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {champions.map((item, i) => (
-              <ChampionCard key={i} {...item} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-12">
+          {champions.map((item) => (
+            <ChampionCard key={item.title} {...item} />
+          ))}
         </div>
       </div></Reveal>
     </section>
