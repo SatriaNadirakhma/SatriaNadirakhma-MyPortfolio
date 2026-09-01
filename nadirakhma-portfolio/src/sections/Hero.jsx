@@ -62,7 +62,7 @@ const Hero = () => {
             style={{ fontSize: "clamp(44px, 6.5vw, 78px)" }}
           >
             Crafting{" "}
-            <span className="font-stylish italic text-blue-600 dark:text-blue-400">
+            <span className="font-modern italic font-semibold text-blue-600 dark:text-blue-400">
               interfaces
             </span>{" "}
             that work beautifully.

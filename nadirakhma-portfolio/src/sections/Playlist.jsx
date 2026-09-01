@@ -49,7 +49,7 @@ const Playlist = () => {
           style={{ fontSize: "clamp(30px, 4vw, 44px)" }}
         >
           The{" "}
-          <span className="font-stylish italic text-blue-600 dark:text-blue-400">
+          <span className="font-modern italic font-semibold text-blue-600 dark:text-blue-400">
             playlist
           </span>{" "}
           behind the pixels.

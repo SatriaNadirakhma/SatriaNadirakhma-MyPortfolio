@@ -9,8 +9,6 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Instrument Serif"', ...defaultTheme.fontFamily.serif],
-
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
     },

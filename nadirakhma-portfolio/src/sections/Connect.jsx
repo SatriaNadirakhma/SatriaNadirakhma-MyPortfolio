@@ -23,7 +23,7 @@ const Connect = () => {
           style={{ fontSize: "clamp(40px, 6vw, 72px)" }}
         >
           Let&apos;s{" "}
-          <span className="font-stylish italic text-blue-600 dark:text-blue-400">
+          <span className="font-modern italic font-semibold text-blue-600 dark:text-blue-400">
             work
           </span>{" "}
           together.

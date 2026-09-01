@@ -11,10 +11,11 @@ const About = () => {
       <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
         <PlusCorners />
         <SectionHeader
+          label="About"
           title={
             <>
               Building digital products,{" "}
-              <span className="text-blue-600 dark:text-blue-400">end-to-end.</span>
+              <span className="font-modern italic font-semibold text-blue-600 dark:text-blue-400">end-to-end.</span>
             </>
           }
         />
