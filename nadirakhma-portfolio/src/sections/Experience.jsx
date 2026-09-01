@@ -8,8 +8,18 @@ import OranjiIcon from "@assets/collaborations/oranji.webp";
 import ItdecIcon from "@assets/collaborations/itdec.webp";
 import KompenIcon from "@assets/collaborations/kompen.webp";
 import PetrokimiaIcon from "@assets/collaborations/petrokimia.webp";
+import AtbakIcon from "@assets/collaborations/atbak.webp";
 
 const ROWS = [
+  {
+    title: "Full-stack Developer",
+    company: "CV Bakti Anugrah Kreasi",
+    src: AtbakIcon,
+    link: "https://www.instagram.com/",
+    date: "Jul 2026 \u2013 Present",
+    summary:
+      "Lead the development of web applications and internal tools, collaborating with cross-functional teams to deliver scalable solutions. Implemented new features, optimized performance, and ensured code quality through best practices and code reviews.",
+  },
   {
     title: "Full-stack Developer Intern",
     company: "PT. Petrokimia Gresik (BUMN)",
@@ -38,7 +48,7 @@ const ROWS = [
       "Designing digital assets such as social media content, promotional materials, and brand visuals based on client and team collaboration. Working closely with cross-functional creative teams to deliver consistent visual identity across multiple platforms and campaigns.",
   },
   {
-    title: "Creative Media Division \u2014 Project Coordinator",
+    title: "Project Coordinator",
     company: "ITDEC Polinema",
     src: ItdecIcon,
     link: "https://www.instagram.com/itdecpolinema/",

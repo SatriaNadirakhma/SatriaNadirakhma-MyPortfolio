@@ -146,8 +146,8 @@ const ChampionCard = ({ title, event, description, image, certificate, link, yea
         />
       )}
 
-      <article className="flex flex-col">
-        <div className="relative rounded-[4px] border border-gray-200 dark:border-white/[0.07] overflow-hidden">
+      <article className="group flex flex-col rounded-[4px] border border-[#e5edf5] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] overflow-hidden transition-colors duration-150 hover:border-[#b9b9f9]/60 dark:hover:border-white/15 focus-within:border-[#b9b9f9]/60 dark:focus-within:border-white/25">
+        <div className="relative overflow-hidden">
           <img
             src={image}
             alt={title}
@@ -162,7 +162,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, yea
           </div>
         </div>
 
-        <div className="mt-4 sm:mt-5 flex flex-col items-start">
+        <div className="p-5 sm:p-6 flex flex-col items-start">
           <p className="section-label text-orange-600 dark:text-orange-400">
             {event}
           </p>

@@ -30,15 +30,20 @@ const Hero = () => {
   return (
     <section
       id={SECTION_IDS.hero}
-      className="px-5 sm:px-8 pt-28 bg-[#fafafa] dark:bg-[#080808] transition-colors duration-300"
+      className="px-5 sm:px-8 pt-28 transition-colors duration-300"
     >
-      <div className="relative max-w-7xl mx-auto w-full border border-gray-200 dark:border-white/[0.07] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col justify-center min-h-[60vh]">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="relative max-w-7xl mx-auto w-full border border-gray-200 dark:border-white/[0.07] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col justify-center min-h-[60vh] overflow-hidden"
+      >
         <PlusCorners />
         <motion.div
           variants={columnVariants}
           initial="hidden"
           animate="show"
-          className="flex flex-col"
+          className="relative z-10 flex flex-col"
         >
           {/* Availability line — a ledger-style status entry, not a badge:
               the site's one live signal, and its one ambient animation. */}
@@ -65,7 +70,7 @@ const Hero = () => {
 
           <motion.p
             variants={itemVariants}
-            className="mt-8 text-lg sm:text-xl font-light text-gray-500 dark:text-white/40 leading-relaxed max-w-xl"
+            className="mt-8 text-lg sm:text-xl font-normal text-gray-600 dark:text-white/85 leading-relaxed max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_1px_12px_rgba(0,0,0,0.6)]"
           >
             Bridging code and design into production.
             <br />
@@ -103,7 +108,7 @@ const Hero = () => {
             </a>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

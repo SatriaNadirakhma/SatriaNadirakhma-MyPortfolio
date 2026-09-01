@@ -143,6 +143,35 @@ html.dark {
 }
 .animate-status-pulse { animation: status-pulse 2.4s ease-in-out infinite; }
 
+/* Transitions.dev — Matrix dot loader */
+:root {
+  --matrix-cycle: 1200ms;
+  --matrix-base: #3a3a3e;
+  --matrix-active: #b8b8c2;
+  --matrix-ease: ease-in-out;
+}
+.dark {
+  --matrix-base: #2a2a2e;
+  --matrix-active: #e4e4e7;
+}
+.t-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, 2px);
+  grid-auto-rows: 2px;
+  gap: 2px;
+}
+.t-matrix i {
+  display: block;
+  background: var(--matrix-base);
+  animation: t-matrix-pulse var(--matrix-cycle) var(--matrix-ease) infinite;
+  animation-delay: calc(var(--d, 0) * 1ms);
+}
+.t-matrix i.is-gap { visibility: hidden; animation: none; }
+@keyframes t-matrix-pulse {
+  0%, 45%, 100% { background-color: var(--matrix-base); }
+  15%           { background-color: var(--matrix-active); }
+}
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -165,8 +194,9 @@ html.dark {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-status-pulse,
-  .animate-marquee {
-    animation: none;
+  .animate-marquee,
+  .t-matrix i {
+    animation: none !important;
   }
 }
 

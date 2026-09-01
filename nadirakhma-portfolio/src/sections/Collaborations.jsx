@@ -8,8 +8,10 @@ import Kompen from "@assets/collaborations/kompen.webp";
 import Oranji from "@assets/collaborations/oranji.webp";
 import Petrokimia from "@assets/collaborations/petrokimia.webp";
 import Wri from "@assets/collaborations/wri.webp";
+import Atbak from "@assets/collaborations/atbak.webp";
 
 const LOGOS = [
+  { src: Atbak, alt: "Atbak", href: "https://www.instagram.com/" },
   { src: Petrokimia, alt: "Petrokimia Gresik", href: "https://petrokimia-gresik.com/" },
   { src: Oranji, alt: "Oranji Studio", href: "https://www.instagram.com/oranji.studio/" },
   { src: Itdec, alt: "ITDEC Polinema", href: "https://www.instagram.com/itdecpolinema/" },
@@ -50,7 +52,7 @@ const Collaborations = () => {
                   decoding="async"
                   width="80"
                   height="32"
-                  className="h-8 sm:h-10 w-auto max-w-full object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-150"
+                  className="h-8 sm:h-10 w-auto max-w-full object-contain opacity-100 transition-opacity duration-150"
                 />
               </a>
             ))}

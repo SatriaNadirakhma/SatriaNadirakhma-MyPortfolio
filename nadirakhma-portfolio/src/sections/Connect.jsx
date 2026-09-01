@@ -8,7 +8,7 @@ const gradMap = {
   GitHub: "from-[#24292e] to-[#6e5494]",
   Instagram: "from-[#feda75] via-[#d62976] to-[#4f5bd5]",
   LinkedIn: "from-[#0077B5] to-[#00a0dc]",
-  Dribbble: "from-[#ea4c89] to-[#c32361]",
+  Reddit: "from-[#FF4500] to-[#FF8700]",
   Behance: "from-[#1769ff] to-[#053eff]",
   WhatsApp: "from-[#25D366] to-[#128C7E]",
 };

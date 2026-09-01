@@ -14,13 +14,13 @@ import PlusCorners from "@components/PlusCorners";
  */
 const ProjectCard = ({ title, description, image, link, icon: Icon, category }) => {
   return (
-    <article className="group flex flex-col">
+    <article className="group flex flex-col rounded-[4px] border border-[#e5edf5] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] overflow-hidden transition-colors duration-150 hover:border-[#b9b9f9]/60 dark:hover:border-white/15 focus-within:border-[#b9b9f9]/60 dark:focus-within:border-white/25">
       <a
         href={link}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Visit ${title}`}
-        className="block rounded-[4px] border border-gray-200 dark:border-white/[0.07] overflow-hidden bg-white dark:bg-white/[0.02] transition-colors duration-150 group-hover:border-gray-400 dark:group-hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        className="block overflow-hidden focus-visible:outline-none"
       >
         <img
           src={image}
@@ -30,7 +30,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
         />
       </a>
 
-      <div className="mt-4 sm:mt-5 flex flex-col items-start">
+      <div className="p-5 sm:p-6 flex flex-col items-start">
         <p className="flex items-center gap-2 section-label">
           <Icon aria-hidden="true" focusable="false" className="w-3 h-3" />
           {category}
