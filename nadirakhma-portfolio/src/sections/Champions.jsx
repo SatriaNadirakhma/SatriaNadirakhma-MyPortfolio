@@ -102,7 +102,7 @@ const CertificateModal = ({ src, title, onClose }) => {
             style={{ transform: "rotate(-25deg)" }}
           >
             <span
-              className={`font-stylish italic whitespace-nowrap ${
+              className={`font-modern italic font-medium whitespace-nowrap ${
                 isDark ? "text-white" : "text-gray-900"
               }`}
               style={{
@@ -206,7 +206,7 @@ const Champions = () => {
           title={
             <>
               Champions &amp;{" "}
-              <span className="text-orange-600 dark:text-orange-400">awards.</span>
+              <span className="font-modern italic font-semibold text-orange-600 dark:text-orange-400">awards.</span>
             </>
           }
           description="Recognition that validates the process — from a national poster competition to a university UI/UX final."
