@@ -24,15 +24,17 @@ const Playlist = () => {
       <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
         <PlusCorners />
 
-        <div className="grid grid-cols-5 gap-2 sm:gap-4 mb-12 sm:mb-14">
-          {ALBUM_COVERS.map((cover) => (
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 mb-12 sm:mb-14">
+          {ALBUM_COVERS.map((cover, index) => (
             <a
               key={cover.src}
               href={PLAYLIST_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${cover.alt} — open playlist`}
-              className="block rounded-[4px] border border-gray-200 dark:border-white/[0.07] overflow-hidden transition-colors duration-150 hover:border-gray-400 dark:hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              className={`block rounded-[4px] border border-gray-200 dark:border-white/[0.07] overflow-hidden transition-colors duration-150 hover:border-gray-400 dark:hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                index === 3 ? "hidden sm:block" : index === 4 ? "hidden lg:block" : ""
+              }`}
             >
               <img
                 src={cover.src}
