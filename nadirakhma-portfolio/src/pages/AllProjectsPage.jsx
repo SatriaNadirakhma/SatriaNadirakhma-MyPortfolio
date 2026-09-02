@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import { allProjects } from "@data/projects";
+import { allProjects, projectFilters } from "@data/projects";
 import SectionHeader from "@components/SectionHeader";
 import PlusCorners from "@components/PlusCorners";
 import Reveal from "@components/Reveal";
@@ -35,15 +36,23 @@ const Card = ({ title, description, image, link, icon: Icon, category, index = 0
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 inline-flex items-center gap-1 text-sm font-normal text-emerald-600 dark:text-emerald-400 hover:underline underline-offset-4"
+        className="group/link mt-3 inline-flex items-center gap-1 text-sm font-normal text-emerald-600 dark:text-emerald-400 hover:underline underline-offset-4"
       >
-        Visit project <ChevronRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+        Visit project
+        <span className="relative w-3.5 h-3.5 inline-block" aria-hidden="true">
+          <ChevronRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover/link:opacity-0 group-hover/link:translate-x-0.5" />
+          <ArrowRight className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-x-0" />
+        </span>
       </a>
     </div>
   </motion.article>
 );
 
 const AllProjectsPage = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const filtered =
+    activeFilter === "All" ? allProjects : allProjects.filter((p) => p.category === activeFilter);
+
   return (
     <div className="min-h-screen bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300">
       <Sidebar />
@@ -73,9 +82,25 @@ const AllProjectsPage = () => {
                 </>
               }
               description="Complete collection — every build, from landing pages to design systems, in a 2-column grid."
-            />
+            >
+              <div className="flex gap-2 flex-wrap">
+                {projectFilters.map((filter) => (
+                  <button
+                    key={filter}
+                    onClick={() => setActiveFilter(filter)}
+                    className={`px-4 py-1.5 rounded-[4px] text-xs font-normal tracking-[0.08em] uppercase transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                      activeFilter === filter
+                        ? "bg-gray-900 text-white dark:bg-white dark:text-black"
+                        : "border border-gray-300 dark:border-white/15 text-gray-500 dark:text-white/35 hover:text-gray-900 dark:hover:text-white hover:border-gray-500 dark:hover:border-white/35"
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
+            </SectionHeader>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-12">
-              {allProjects.map((project, i) => (
+              {filtered.map((project, i) => (
                 <Card key={`page-${project.title}`} {...project} index={i} />
               ))}
             </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useTheme } from "@context/ThemeContext";
-import { Trophy, ArrowUpRight, X, ZoomIn } from "lucide-react";
+import { Trophy, ArrowUpRight, X, ZoomIn, ChevronRight, ArrowRight } from "lucide-react";
 import { champions } from "@data/champions";
 import { SECTION_IDS } from "@constants/index";
 import { useScrollLock } from "@hooks/useScrollLock";
@@ -176,18 +176,22 @@ const ChampionCard = ({ title, event, description, image, certificate, link, yea
           <div className="mt-4 flex items-center gap-2 flex-wrap">
             <button
               onClick={() => setCertOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-gray-300 dark:border-white/15 px-3 py-1.5 text-xs font-normal text-gray-500 dark:text-white/50 hover:border-orange-400/50 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+              className="group/btn inline-flex items-center gap-1.5 rounded-[4px] border border-gray-300 dark:border-white/15 px-3 py-1.5 text-xs font-normal text-gray-500 dark:text-white/50 hover:border-orange-400/50 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
-              <ZoomIn aria-hidden="true" focusable="false" className="w-3 h-3" /> Certificate
+              <ZoomIn aria-hidden="true" focusable="false" className="w-3 h-3 transition-transform duration-300 group-hover/btn:rotate-90" /> Certificate
             </button>
 
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
+              className="group/link inline-flex items-center gap-1 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
             >
-              View post <ArrowUpRight aria-hidden="true" focusable="false" className="w-3 h-3" />
+              View post
+              <span className="relative w-3 h-3 inline-block" aria-hidden="true">
+                <ChevronRight className="absolute inset-0 w-3 h-3 transition-all duration-200 group-hover/link:opacity-0 group-hover/link:translate-x-0.5" />
+                <ArrowRight className="absolute inset-0 w-3 h-3 opacity-0 -translate-x-1 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-x-0" />
+              </span>
             </a>
           </div>
         </div>
