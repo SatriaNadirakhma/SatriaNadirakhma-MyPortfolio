@@ -206,7 +206,6 @@ const Champions = () => {
       <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
         <PlusCorners />
         <SectionHeader
-          label="Champions"
           title={
             <>
               Champions &amp;{" "}

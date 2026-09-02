@@ -75,7 +75,6 @@ const AllProjectsPage = () => {
           <div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] rounded-[4px] p-6 sm:p-8 lg:p-12">
             <PlusCorners />
             <SectionHeader
-              label="Archive"
               title={
                 <>
                   All projects<span className="text-emerald-600 dark:text-emerald-400">.</span>
