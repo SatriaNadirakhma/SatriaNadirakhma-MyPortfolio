@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
 import { AsciiEffect } from "three/addons/effects/AsciiEffect.js";
 import { useTheme } from "@context/ThemeContext";
+import { useLenis } from "@context/LenisContext";
 import logoBlue from "@assets/svg/nadi-blue-gradient.svg?url";
 import logoWhite from "@assets/svg/nadi-white.svg?url";
 
@@ -15,20 +16,39 @@ export default function Logo3D({ className = "" }) {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   const [failed, setFailed] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const isVisibleRef = useRef(false);
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef(null);
+  const { lenis } = useLenis();
+
+  // Pause during active scroll — biggest jank fix (Lenis vs AsciiEffect both rAF)
+  useEffect(() => {
+    if (!lenis) return;
+    const onScroll = () => {
+      isScrollingRef.current = true;
+      clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => { isScrollingRef.current = false; }, 120);
+    };
+    lenis.on("scroll", onScroll);
+    return () => {
+      lenis.off("scroll", onScroll);
+      clearTimeout(scrollTimeoutRef.current);
+    };
+  }, [lenis]);
 
   // Only animate when in viewport — saves battery/FPS when hero is scrolled away
+  // rootMargin -30% bottom stops earlier, before scroll velocity peaks
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.15 }
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0, rootMargin: "0px 0px -30% 0px" }
     );
     obs.observe(el);
     // Initially assume visible if already in viewport (hero is above fold)
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) setIsVisible(true);
+    if (rect.top < window.innerHeight && rect.bottom > 0) isVisibleRef.current = true;
     return () => obs.disconnect();
   }, []);
 
@@ -149,8 +169,9 @@ export default function Logo3D({ className = "" }) {
       let lastFrame = performance.now();
       const animate = () => {
         if (disposed) return;
-        // Pause when not visible or tab hidden — saves FPS
-        if (!isVisible || document.hidden) {
+        // Pause when not visible, tab hidden, or actively scrolling — saves FPS
+        // Fixes jank when Lenis smooth-scroll and AsciiEffect both hit rAF
+        if (!isVisibleRef.current || document.hidden || isScrollingRef.current) {
           frameId = requestAnimationFrame(animate);
           return;
         }
@@ -227,7 +248,7 @@ export default function Logo3D({ className = "" }) {
         container.innerHTML = "";
       }
     };
-  }, [isVisible]);
+  }, []);
 
   // Theme switch without rebuilding — keeps rotation, just swaps colors
   useEffect(() => {
