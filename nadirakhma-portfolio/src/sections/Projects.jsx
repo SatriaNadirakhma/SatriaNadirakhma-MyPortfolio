@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronRight, ArrowRight } from "lucide-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
@@ -45,10 +45,13 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
+          className="group/link mt-3 inline-flex items-center gap-1 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
         >
           Visit project
-          <ChevronRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+          <span className="relative w-3.5 h-3.5 inline-block" aria-hidden="true">
+            <ChevronRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover/link:opacity-0 group-hover/link:translate-x-0.5" />
+            <ArrowRight className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-x-0" />
+          </span>
         </a>
       </div>
     </article>
