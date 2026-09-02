@@ -69,7 +69,6 @@ const Experience = () => {
       <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12 pb-0 overflow-hidden">
         <PlusCorners />
         <SectionHeader
-          label="Experience"
           title="My journey."
           description="Four chapters across engineering, journalism, and design — each one informing the next."
         />

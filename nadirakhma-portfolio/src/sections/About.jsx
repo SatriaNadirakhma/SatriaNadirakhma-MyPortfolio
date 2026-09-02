@@ -20,7 +20,6 @@ const About = () => {
             {/* Title - row 1, col 1 di desktop; urutan pertama di HP */}
             <div className="order-1 lg:col-start-1 lg:row-start-1 p-6 sm:p-8 lg:p-12">
               <SectionHeader
-                label="About"
                 title={
                   <>
                     Building digital products,{" "}
@@ -31,8 +30,8 @@ const About = () => {
             </div>
 
             {/* Foto + identitas - col 2, span 2 baris (full height) di desktop; urutan kedua di HP */}
-            <div className="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 border-b lg:border-b-0 lg:border-l border-gray-200 dark:border-white/[0.07] flex flex-col bg-white dark:bg-[#080808] min-h-[420px] lg:min-h-full">
-              <div className={`relative overflow-hidden flex-1 min-h-[240px] ${isDark ? "bg-neutral-950" : "bg-white"}`}>
+            <div className="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 border-b lg:border-b-0 lg:border-l border-gray-200 dark:border-white/[0.07] flex flex-col sm:flex-row lg:flex-col bg-white dark:bg-[#080808] min-h-[420px] lg:min-h-full">
+              <div className={`relative overflow-hidden flex-1 min-h-[240px] sm:min-h-full lg:min-h-[240px] ${isDark ? "bg-neutral-950" : "bg-white"}`}>
                 <AsciiArt
                   src={Profile1}
                   resolution={90}

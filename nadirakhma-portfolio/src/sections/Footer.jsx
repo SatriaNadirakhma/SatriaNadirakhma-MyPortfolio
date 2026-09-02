@@ -49,7 +49,7 @@ const Footer = () => {
       <Reveal><div className="max-w-7xl mx-auto py-12 sm:py-16">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
           <div className="max-w-xs">
-            <img src={Logo} alt="Nadi Rakhma" width="28" height="28" className="h-7 w-auto mb-3 dark:invert" />
+            <img src={Logo} alt="Nadi Rakhma" width="28" height="28" className="h-7 w-auto mb-3" />
             <p className="font-modern font-light text-gray-900 dark:text-white text-lg tracking-[-0.01em]">
               {SITE.shortName}
             </p>
