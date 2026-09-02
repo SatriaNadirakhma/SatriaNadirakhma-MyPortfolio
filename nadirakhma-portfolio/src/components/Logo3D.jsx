@@ -11,6 +11,21 @@ import logoWhite from "@assets/svg/nadi-white.svg?url";
 // A leading space keeps fully-unlit areas blank instead of printing a dot.
 const ASCII_CHARS = " .,-~:;=!*#$@";
 
+// AsciiEffect creates its own internal <canvas> and calls getImageData() every
+// frame (asciifyImage), which triggers Chrome's "willReadFrequently" perf
+// warning. We can't pass that option to AsciiEffect directly, so patch canvas
+// 2D context creation once, globally — purely a perf hint, no behavior change.
+if (typeof window !== "undefined" && !HTMLCanvasElement.prototype.__willReadFrequentlyPatched) {
+  const originalGetContext = HTMLCanvasElement.prototype.getContext;
+  HTMLCanvasElement.prototype.getContext = function (type, options) {
+    if (type === "2d") {
+      return originalGetContext.call(this, type, { willReadFrequently: true, ...options });
+    }
+    return originalGetContext.call(this, type, options);
+  };
+  HTMLCanvasElement.prototype.__willReadFrequentlyPatched = true;
+}
+
 export default function Logo3D({ className = "" }) {
   const containerRef = useRef(null);
   const { resolvedTheme } = useTheme();
