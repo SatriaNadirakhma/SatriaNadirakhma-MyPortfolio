@@ -2,7 +2,7 @@ import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
 import PlusCorners from "@components/PlusCorners";
-import { ArrowUpRight } from "lucide-react";
+import { ChevronRight, ArrowRight } from "lucide-react";
 
 import OranjiIcon from "@assets/collaborations/oranji.webp";
 import ItdecIcon from "@assets/collaborations/itdec.webp";
@@ -66,18 +66,19 @@ const ROWS = [
 const Experience = () => {
   return (
     <section id={SECTION_IDS.experience} className="px-5 sm:px-8">
-      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12 pb-0 overflow-hidden">
         <PlusCorners />
         <SectionHeader
+          label="Experience"
           title="My journey."
           description="Four chapters across engineering, journalism, and design — each one informing the next."
         />
 
-        <div className="flex flex-col">
+        <div className="-mx-6 sm:-mx-8 lg:-mx-12 -mb-6 sm:-mb-8 lg:-mb-12 mt-8 sm:mt-10 flex flex-col border-t border-gray-200 dark:border-white/[0.07] divide-y divide-gray-200 dark:divide-white/[0.07]">
           {ROWS.map((row) => (
             <div
               key={row.title}
-              className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 py-8 sm:py-10 border-t border-gray-200 dark:border-white/[0.07] first:border-t-0 first:pt-0"
+              className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 px-6 sm:px-8 lg:px-12 py-8 sm:py-10 bg-white dark:bg-white/[0.02]"
             >
               <img
                 src={row.src}
@@ -109,10 +110,13 @@ const Experience = () => {
                   href={row.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
+                  className="group/link mt-4 inline-flex items-center gap-1 text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-[4px]"
                 >
                   Visit
-                  <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+                  <span className="relative w-3.5 h-3.5 inline-block" aria-hidden="true">
+                    <ChevronRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover/link:opacity-0 group-hover/link:translate-x-0.5" />
+                    <ArrowRight className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-x-0" />
+                  </span>
                 </a>
               </div>
             </div>
