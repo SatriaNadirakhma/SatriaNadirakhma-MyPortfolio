@@ -1,8 +1,11 @@
+import { lazy, Suspense } from "react";
 import { motion } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
 import PlusCorners from "@components/PlusCorners";
 import { ArrowRight, Download, ExternalLink } from "lucide-react";
+
+const Logo3D = lazy(() => import("@components/Logo3D"));
 import cvATS from "@assets/pdf/cv-ats.pdf";
 
 const PORTFOLIO_URL = "https://drive.google.com/file/d/1fLRntV4Js0ywnQDJTb23QXyGjaBlDult/view";
@@ -36,14 +39,14 @@ const Hero = () => {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="relative max-w-7xl mx-auto w-full border border-gray-200 dark:border-white/[0.07] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col justify-center min-h-[60vh] overflow-hidden"
+        className="relative max-w-7xl mx-auto w-full border border-gray-200 dark:border-white/[0.07] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14 min-h-[60vh] overflow-hidden"
       >
         <PlusCorners />
         <motion.div
           variants={columnVariants}
           initial="hidden"
           animate="show"
-          className="relative z-10 flex flex-col"
+          className="relative z-10 flex flex-col flex-1 min-w-0"
         >
           {/* Availability line — a ledger-style status entry, not a badge:
               the site's one live signal, and its one ambient animation. */}
@@ -107,6 +110,19 @@ const Hero = () => {
               <ExternalLink aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
             </a>
           </motion.div>
+        </motion.div>
+
+        {/* Right column — 1:1 box housing the extruded, theme-aware 3D mark.
+            Order-first on mobile so it doesn't get buried below the CTAs. */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 order-first lg:order-none w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[380px] mx-auto lg:mx-0 shrink-0"
+        >
+          <Suspense fallback={<div className="w-full aspect-square bg-gray-100 dark:bg-white/[0.02] rounded-[4px] animate-pulse" />}>
+            <Logo3D />
+          </Suspense>
         </motion.div>
       </motion.div>
     </section>
