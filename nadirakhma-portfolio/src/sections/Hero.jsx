@@ -1,9 +1,9 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useRef } from "react";
 import { motion } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
-import PlusCorners from "@components/PlusCorners";
 import { ArrowRight, Download, ExternalLink } from "lucide-react";
+import AsciiTextSweep from "@components/AsciiTextSweep";
 
 const Logo3D = lazy(() => import("@components/Logo3D"));
 import cvATS from "@assets/pdf/cv-ats.pdf";
@@ -22,30 +22,72 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const Hero = () => {
+const INTERFACES_DELAY_MS = 2000;
+
+/**
+ * `startIntro` gates every entrance animation in this section. Hero is
+ * mounted from first paint (App.jsx only toggles `visibility` while the
+ * loader is up), so without this gate the whole entrance would already
+ * be finished by the time the loader swipes away and the section
+ * becomes visible. `startIntro` flips true the instant loading
+ * completes, so the reveal plays live underneath the loader's swipe-up
+ * exit instead of having already happened off-screen.
+ */
+const Hero = ({ startIntro = false }) => {
   const { lenis } = useLenis();
+  const sweepRef = useRef(null);
+  const introHandledRef = useRef(false);
+  const armedForHoverRef = useRef(false);
+  const introTimeoutRef = useRef(null);
 
   const handleExploreClick = (e) => {
     e.preventDefault();
     lenis?.scrollTo(`#${SECTION_IDS.projects}`, { offset: -60, duration: 1.3 });
   };
 
+  // Fires once, when the last staggered child (the CTA row) finishes
+  // entering. After a 2s pause, auto-plays the ascii sweep twice, then
+  // arms the word for hover-replay.
+  const handleIntroComplete = () => {
+    if (introHandledRef.current) return;
+    introHandledRef.current = true;
+    introTimeoutRef.current = setTimeout(() => {
+      sweepRef.current?.play(2);
+    }, INTERFACES_DELAY_MS);
+  };
+
+  const handleSweepSequenceEnd = () => {
+    armedForHoverRef.current = true;
+  };
+
+  const handleInterfacesEnter = () => {
+    if (!armedForHoverRef.current) return;
+    if (sweepRef.current?.isPlaying()) return;
+    armedForHoverRef.current = false;
+    sweepRef.current?.play(2);
+  };
+
+  const handleInterfacesLeave = () => {
+    // Re-arm on leave — next hover starts a fresh 2x sequence, even if
+    // the previous one is still mid-flight.
+    armedForHoverRef.current = true;
+  };
+
   return (
     <section
       id={SECTION_IDS.hero}
-      className="px-5 sm:px-8 pt-28 transition-colors duration-300"
+      className="px-5 sm:px-8 pt-28 transition-colors duration-300 border-b border-gray-300 dark:border-white/[0.14]"
     >
       <motion.div
         initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={startIntro ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="relative max-w-7xl mx-auto w-full border border-gray-200 dark:border-white/[0.07] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14 min-h-[60vh] overflow-hidden"
+        className="relative max-w-7xl mx-auto w-full border-x border-t border-gray-300 dark:border-white/[0.14] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14 min-h-[60vh] overflow-hidden"
       >
-        <PlusCorners />
         <motion.div
           variants={columnVariants}
           initial="hidden"
-          animate="show"
+          animate={startIntro ? "show" : "hidden"}
           className="relative z-10 flex flex-col flex-1 min-w-0"
         >
           {/* Availability line — a ledger-style status entry, not a badge:
@@ -59,17 +101,22 @@ const Hero = () => {
             </span>
           </motion.div>
 
-          {/* LCP element — plain h1, no motion initial hidden, so it paints before JS hydrates */}
-          <h1
+          <motion.h1
+            variants={itemVariants}
             className="font-modern font-light text-gray-900 dark:text-white leading-[1.04] tracking-[-0.025em] max-w-5xl"
             style={{ fontSize: "clamp(44px, 6.5vw, 78px)" }}
           >
             Crafting{" "}
-            <span className="font-modern italic font-semibold text-blue-600 dark:text-blue-400">
-              interfaces
-            </span>{" "}
+            <AsciiTextSweep
+              ref={sweepRef}
+              text="interfaces"
+              className="font-modern italic font-semibold text-blue-600 dark:text-blue-400 cursor-default"
+              onSequenceEnd={handleSweepSequenceEnd}
+              onMouseEnter={handleInterfacesEnter}
+              onMouseLeave={handleInterfacesLeave}
+            />{" "}
             that work beautifully.
-          </h1>
+          </motion.h1>
 
           <motion.p
             variants={itemVariants}
@@ -80,7 +127,11 @@ const Hero = () => {
             Open for collaborations and freelance work.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="mt-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
+          <motion.div
+            variants={itemVariants}
+            onAnimationComplete={handleIntroComplete}
+            className="mt-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3"
+          >
             <a
               href={`#${SECTION_IDS.projects}`}
               onClick={handleExploreClick}
@@ -116,7 +167,7 @@ const Hero = () => {
             Order-first on mobile so it doesn't get buried below the CTAs. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={startIntro ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 order-first lg:order-none w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[380px] mx-auto lg:mx-0 shrink-0"
         >

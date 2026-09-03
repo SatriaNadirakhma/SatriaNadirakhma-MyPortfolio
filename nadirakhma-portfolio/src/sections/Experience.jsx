@@ -65,15 +65,15 @@ const ROWS = [
  */
 const Experience = () => {
   return (
-    <section id={SECTION_IDS.experience} className="px-5 sm:px-8">
-      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12 pb-0 overflow-hidden">
+    <section id={SECTION_IDS.experience} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
+      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 pb-0">
         <PlusCorners />
         <SectionHeader
           title="My journey."
           description="Four chapters across engineering, journalism, and design — each one informing the next."
         />
 
-        <div className="-mx-6 sm:-mx-8 lg:-mx-12 -mb-6 sm:-mb-8 lg:-mb-12 mt-8 sm:mt-10 flex flex-col border-t border-gray-200 dark:border-white/[0.07] divide-y divide-gray-200 dark:divide-white/[0.07]">
+        <div className="-mx-6 sm:-mx-8 lg:-mx-12 -mb-6 sm:-mb-8 lg:-mb-12 mt-8 sm:mt-10 flex flex-col border-t border-gray-300 dark:border-white/[0.07] divide-y divide-gray-300 dark:divide-white/[0.07]">
           {ROWS.map((row) => (
             <div
               key={row.title}
@@ -83,7 +83,7 @@ const Experience = () => {
                 src={row.src}
                 alt={row.company}
                 loading="lazy"
-                className="h-12 w-12 shrink-0 rounded-[4px] border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.03] object-contain p-1.5"
+                className="h-12 w-12 shrink-0 rounded-[4px] border border-gray-300 dark:border-white/10 bg-white dark:bg-white/[0.03] object-contain p-1.5"
               />
 
               <div className="flex-1 min-w-0">

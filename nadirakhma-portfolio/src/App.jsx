@@ -24,7 +24,16 @@ const Github = lazy(() => import("@sections/Github"));
 const Playlist = lazy(() => import("@sections/Playlist"));
 const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage"));
 
-function Landing() {
+// Shared fade-in-from-top variant for eager (non-lazy) sections.
+// Repeats every time the section re-enters the viewport (scroll up or down).
+const fadeInFromTop = {
+  initial: { opacity: 0, y: -40 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { amount: 0.2 },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+
+function Landing({ heroReady = false }) {
   const location = useLocation();
   const { lenis } = useLenis();
 
@@ -59,16 +68,22 @@ function Landing() {
           className="relative"
         >
           <section id={SECTION_IDS.hero}>
-            <Hero />
+            <Hero startIntro={heroReady} />
           </section>
 
-          <section id={SECTION_IDS.collaborations}>
+          <motion.section
+            id={SECTION_IDS.collaborations}
+            {...fadeInFromTop}
+          >
             <Collaborations />
-          </section>
+          </motion.section>
 
-          <section id={SECTION_IDS.about}>
+          <motion.section
+            id={SECTION_IDS.about}
+            {...fadeInFromTop}
+          >
             <About />
-          </section>
+          </motion.section>
 
           <InView minHeight={500}>
             <Suspense fallback={null}>
@@ -118,9 +133,12 @@ function Landing() {
             </Suspense>
           </InView>
 
-          <section id={SECTION_IDS.connect}>
+          <motion.section
+            id={SECTION_IDS.connect}
+            {...fadeInFromTop}
+          >
             <Connect />
-          </section>
+          </motion.section>
           <Footer />
         </motion.main>
       </div>
@@ -160,7 +178,7 @@ function AppInner() {
       <div style={{ visibility: ready ? "visible" : "hidden" }}>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Landing heroReady={ready} />} />
           <Route
             path="/projects"
             element={

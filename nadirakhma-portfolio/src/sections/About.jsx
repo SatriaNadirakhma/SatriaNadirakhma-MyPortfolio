@@ -11,9 +11,9 @@ const About = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   return (
-    <section id={SECTION_IDS.about} className="px-5 sm:px-8">
+    <section id={SECTION_IDS.about} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
       <Reveal>
-        <div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px overflow-hidden">
+        <div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14]">
           <PlusCorners />
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] lg:grid-rows-[auto_auto] gap-0">
@@ -30,7 +30,7 @@ const About = () => {
             </div>
 
             {/* Foto + identitas - col 2, span 2 baris (full height) di desktop; urutan kedua di HP */}
-            <div className="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 border-b lg:border-b-0 lg:border-l border-gray-200 dark:border-white/[0.07] flex flex-col sm:flex-row lg:flex-col bg-white dark:bg-[#080808] min-h-[420px] lg:min-h-full">
+            <div className="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 border-b lg:border-b-0 lg:border-l border-gray-300 dark:border-white/[0.07] flex flex-col sm:flex-row lg:flex-col bg-white dark:bg-[#080808] min-h-[420px] lg:min-h-full">
               <div className={`relative overflow-hidden flex-1 min-h-[240px] sm:min-h-full lg:min-h-[240px] ${isDark ? "bg-neutral-950" : "bg-white"}`}>
                 <AsciiArt
                   src={Profile1}
@@ -43,7 +43,7 @@ const About = () => {
                 />
               </div>
 
-              <div className="grid grid-rows-3 divide-y divide-gray-200 dark:divide-white/[0.07] border-t sm:border-t-0 sm:border-l lg:border-l-0 lg:border-t border-gray-200 dark:border-white/[0.07] sm:flex-1 lg:flex-none">
+              <div className="grid grid-rows-3 divide-y divide-gray-300 dark:divide-white/[0.07] border-t sm:border-t-0 sm:border-l lg:border-l-0 lg:border-t border-gray-300 dark:border-white/[0.07] sm:flex-1 lg:flex-none">
                 <div className="p-4 sm:p-5 flex items-center justify-center text-center bg-white dark:bg-white/[0.02]">
                   <p className="font-modern font-semibold text-gray-900 dark:text-white text-sm sm:text-base leading-tight">
                     Satria Rakhmadani
@@ -80,7 +80,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 border-t border-gray-200 dark:border-white/[0.07] divide-y sm:divide-y-0 sm:divide-x divide-gray-200 dark:divide-white/[0.07]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 border-t border-gray-300 dark:border-white/[0.07] divide-y sm:divide-y-0 sm:divide-x divide-gray-300 dark:divide-white/[0.07]">
             {STATS.map((stat) => (
               <div key={stat.label} className="p-6 sm:p-8 text-center bg-white dark:bg-white/[0.02]">
                 <p className="font-modern font-light text-gray-900 dark:text-white text-4xl sm:text-5xl leading-none mb-2.5 tabular-nums">

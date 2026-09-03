@@ -53,7 +53,7 @@ const CertificateModal = ({ src, title, onClose }) => {
         className={`relative w-full max-w-2xl border rounded-[4px] overflow-hidden ${
           isDark
             ? "bg-[#0f0f0f] border-white/[0.07]"
-            : "bg-white border-gray-200"
+            : "bg-white border-gray-300"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
@@ -202,8 +202,8 @@ const ChampionCard = ({ title, event, description, image, certificate, link, yea
 
 const Champions = () => {
   return (
-    <section id={SECTION_IDS.champions} className="px-5 sm:px-8">
-      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+    <section id={SECTION_IDS.champions} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
+      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12">
         <PlusCorners />
         <SectionHeader
           title={

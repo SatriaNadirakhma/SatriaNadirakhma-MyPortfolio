@@ -16,7 +16,7 @@ const gradMap = {
 const Connect = () => {
   return (
     <section id={SECTION_IDS.connect} className="px-5 sm:px-8">
-      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px rounded-b-[4px] p-6 sm:p-8 lg:p-12">
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px rounded-b-[4px] p-6 sm:p-8 lg:p-12">
         <PlusCorners />
         <h2
           className="font-modern font-light text-gray-900 dark:text-white leading-[1.04] tracking-[-0.025em]"
@@ -52,7 +52,7 @@ const Connect = () => {
           </a>
         </div>
 
-        <div className="-mx-6 sm:-mx-8 lg:-mx-12 -mb-6 sm:-mb-8 lg:-mb-12 mt-10 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-t border-gray-200 dark:border-white/[0.07] divide-x divide-y sm:divide-y-0 divide-gray-200 dark:divide-white/[0.07] overflow-hidden rounded-b-[4px]">
+        <div className="-mx-6 sm:-mx-8 lg:-mx-12 -mb-6 sm:-mb-8 lg:-mb-12 mt-10 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-t border-gray-300 dark:border-white/[0.07] divide-x divide-y sm:divide-y-0 divide-gray-300 dark:divide-white/[0.07] overflow-hidden rounded-b-[4px]">
           {socialLinks.map((link) => {
             const grad = gradMap[link.name] || "from-gray-600 to-gray-800";
             return (
