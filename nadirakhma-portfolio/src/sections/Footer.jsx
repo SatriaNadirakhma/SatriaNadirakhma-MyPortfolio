@@ -45,7 +45,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="px-5 sm:px-8 bg-gray-50 dark:bg-white/[0.02] border-t border-gray-200 dark:border-white/[0.07] transition-colors duration-300">
+    <footer className="px-5 sm:px-8 bg-gray-50 dark:bg-white/[0.02] border-t border-gray-300 dark:border-white/[0.14] transition-colors duration-300">
       <Reveal><div className="max-w-7xl mx-auto py-12 sm:py-16">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
           <div className="max-w-xs">
@@ -91,7 +91,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 sm:mt-16 border-t border-gray-200 dark:border-white/[0.07] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 sm:mt-16 border-t border-gray-300 dark:border-white/[0.07] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs font-normal text-gray-500 dark:text-white/60 tabular-nums">
             &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>

@@ -70,8 +70,8 @@ const Projects = () => {
   const hasMore = allProjects.length > 6;
 
   return (
-    <section id={SECTION_IDS.projects} className="px-5 sm:px-8">
-      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px p-6 sm:p-8 lg:p-12">
+    <section id={SECTION_IDS.projects} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
+      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12">
         <PlusCorners />
         <SectionHeader
           title="Featured projects."
