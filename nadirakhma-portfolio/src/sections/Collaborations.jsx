@@ -1,5 +1,6 @@
 import { SECTION_IDS } from "@constants/index";
 import PlusCorners from "@components/PlusCorners";
+import Reveal from "@components/Reveal";
 
 import Alceena from "@assets/collaborations/alceena.webp";
 import Hmti from "@assets/collaborations/hmti.webp";
@@ -31,34 +32,36 @@ const Collaborations = () => {
 
   return (
     <section id={SECTION_IDS.collaborations} className="px-5 sm:px-8">
-      <div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] -mt-px">
-        <PlusCorners />
+      <Reveal>
+        <div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px">
+          <PlusCorners />
 
-        <div className="group overflow-hidden">
-          <div className="flex w-max animate-marquee">
-            {track.map((logo, i) => (
-              <a
-                key={`${logo.alt}-${i}`}
-                href={logo.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={logo.alt}
-                className="flex items-center justify-center shrink-0 w-36 sm:w-44 h-20 sm:h-24 border-r border-gray-200 dark:border-white/[0.07] px-6 sm:px-8"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  loading="lazy"
-                  decoding="async"
-                  width="80"
-                  height="32"
-                  className="h-8 sm:h-10 w-auto max-w-full object-contain opacity-100 transition-opacity duration-150"
-                />
-              </a>
-            ))}
+          <div className="group overflow-hidden">
+            <div className="flex w-max animate-marquee">
+              {track.map((logo, i) => (
+                <a
+                  key={`${logo.alt}-${i}`}
+                  href={logo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={logo.alt}
+                  className="flex items-center justify-center shrink-0 w-36 sm:w-44 h-20 sm:h-24 border-r border-gray-300 dark:border-white/[0.07] px-6 sm:px-8"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width="80"
+                    height="32"
+                    className="h-8 sm:h-10 w-auto max-w-full object-contain opacity-100 transition-opacity duration-150"
+                  />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };
