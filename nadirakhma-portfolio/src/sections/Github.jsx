@@ -5,7 +5,6 @@ import GithubCalendar from "@components/GithubCalendar";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
-import PlusCorners from "@components/PlusCorners";
 
 const GITHUB_USERNAME = "SatriaNadirakhma";
 
@@ -36,9 +35,8 @@ const Github = () => {
   );
 
   return (
-    <section id={SECTION_IDS.github} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
-      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12">
-        <PlusCorners />
+    <section id={SECTION_IDS.github} className="px-5 sm:px-8 ">
+      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
         <SectionHeader
           title="My GitHub contributions."
           description="A year of commits, read as a heat map — the quiet record of consistent building."

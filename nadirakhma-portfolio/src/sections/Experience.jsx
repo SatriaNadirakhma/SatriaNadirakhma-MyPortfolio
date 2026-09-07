@@ -1,7 +1,6 @@
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
-import PlusCorners from "@components/PlusCorners";
 import { ChevronRight, ArrowRight } from "lucide-react";
 
 import OranjiIcon from "@assets/collaborations/oranji.webp";
@@ -65,9 +64,8 @@ const ROWS = [
  */
 const Experience = () => {
   return (
-    <section id={SECTION_IDS.experience} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
-      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 pb-0">
-        <PlusCorners />
+    <section id={SECTION_IDS.experience} className="px-5 sm:px-8 ">
+      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 pb-0 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
         <SectionHeader
           title="My journey."
           description="Four chapters across engineering, journalism, and design — each one informing the next."

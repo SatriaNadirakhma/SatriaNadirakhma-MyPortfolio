@@ -1,5 +1,4 @@
 import { SECTION_IDS } from "@constants/index";
-import PlusCorners from "@components/PlusCorners";
 import Reveal from "@components/Reveal";
 
 import Alceena from "@assets/collaborations/alceena.webp";
@@ -33,8 +32,7 @@ const Collaborations = () => {
   return (
     <section id={SECTION_IDS.collaborations} className="px-5 sm:px-8">
       <Reveal>
-        <div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px">
-          <PlusCorners />
+        <div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
 
           <div className="group overflow-hidden">
             <div className="flex w-max animate-marquee">

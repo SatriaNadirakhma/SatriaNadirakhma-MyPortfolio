@@ -5,6 +5,7 @@ import { ErrorBoundary } from "@components/ErrorBoundary";
 import { LenisProvider, useLenis } from "@context/LenisContext";
 import ScrollToTop from "@components/ScrollToTop";
 import Sidebar from "@components/Sidebar";
+import TropicalTideBackground from "@components/background-gradient/TropicalTideBackground";
 import LoadingScreen from "@components/LoadingScreen";
 import InView from "@components/InView";
 import Hero from "@sections/Hero";
@@ -60,6 +61,8 @@ function Landing({ heroReady = false }) {
   return (
     <ErrorBoundary>
       <div className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300">
+        {/* Satu background Tropical Tide untuk satu halaman full — fixed di belakang semua section */}
+        <TropicalTideBackground aria-hidden="true" className="fixed inset-0 pointer-events-none" />
         <Sidebar />
         <motion.main
           initial={{ y: 30, opacity: 0 }}
@@ -78,12 +81,14 @@ function Landing({ heroReady = false }) {
             <Collaborations />
           </motion.section>
 
-          <motion.section
-            id={SECTION_IDS.about}
-            {...fadeInFromTop}
-          >
+          {/* About tanpa motion wrapper: entrance ditangani <Reveal/> di
+              dalamnya supaya keep di tempat saat di-scroll, sama seperti
+              section lazy (Experience, Projects, ...). motion.section dengan
+              whileInView berulang membuat section fade-out saat keluar
+              viewport dan replay saat kembali. */}
+          <section id={SECTION_IDS.about}>
             <About />
-          </motion.section>
+          </section>
 
           <InView minHeight={500}>
             <Suspense fallback={null}>

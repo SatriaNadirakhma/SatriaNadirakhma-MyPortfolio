@@ -2,7 +2,6 @@ import { Send, MessageCircle } from "lucide-react";
 import { socialLinks } from "@data/socialLinks";
 import { SITE, SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
-import PlusCorners from "@components/PlusCorners";
 
 const gradMap = {
   GitHub: "from-[#24292e] to-[#6e5494]",
@@ -16,8 +15,7 @@ const gradMap = {
 const Connect = () => {
   return (
     <section id={SECTION_IDS.connect} className="px-5 sm:px-8">
-      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px rounded-b-[4px] p-6 sm:p-8 lg:p-12">
-        <PlusCorners />
+      <Reveal><div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px rounded-b-[4px] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
         <h2
           className="font-modern font-light text-gray-900 dark:text-white leading-[1.04] tracking-[-0.025em]"
           style={{ fontSize: "clamp(40px, 6vw, 72px)" }}

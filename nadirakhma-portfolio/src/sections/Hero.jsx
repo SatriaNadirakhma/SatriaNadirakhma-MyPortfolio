@@ -76,13 +76,13 @@ const Hero = ({ startIntro = false }) => {
   return (
     <section
       id={SECTION_IDS.hero}
-      className="px-5 sm:px-8 pt-28 transition-colors duration-300 border-b border-gray-300 dark:border-white/[0.14]"
+      className="px-5 sm:px-8 pt-28 transition-colors duration-300 "
     >
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={startIntro ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="relative max-w-7xl mx-auto w-full border-x border-t border-gray-300 dark:border-white/[0.14] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14 min-h-[60vh] overflow-hidden"
+        className="relative max-w-7xl mx-auto w-full border-x border-t border-gray-300 dark:border-white/[0.14] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14 min-h-[60vh] overflow-hidden bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md"
       >
         <motion.div
           variants={columnVariants}

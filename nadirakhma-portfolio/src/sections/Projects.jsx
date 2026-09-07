@@ -5,7 +5,6 @@ import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
-import PlusCorners from "@components/PlusCorners";
 
 /**
  * Quiet project card: screenshot in a 1px frame (4px radius, no device
@@ -70,9 +69,8 @@ const Projects = () => {
   const hasMore = allProjects.length > 6;
 
   return (
-    <section id={SECTION_IDS.projects} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
-      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12">
-        <PlusCorners />
+    <section id={SECTION_IDS.projects} className="px-5 sm:px-8 ">
+      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
         <SectionHeader
           title="Featured projects."
           description="A selection of shipped work — web applications, landing pages, and design systems."
