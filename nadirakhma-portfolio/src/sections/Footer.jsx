@@ -2,7 +2,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "@assets/logo.png";
 import { SITE, SECTION_IDS } from "@constants/index";
 import { useLenis } from "@context/LenisContext";
-import Reveal from "@components/Reveal";
 import BackToTopButton from "@components/BackToTopButton";
 import { socialLinks } from "@data/socialLinks";
 
@@ -45,8 +44,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="px-5 sm:px-8 bg-gray-50 dark:bg-white/[0.02] border-t border-gray-300 dark:border-white/[0.14] transition-colors duration-300">
-      <Reveal><div className="max-w-7xl mx-auto py-12 sm:py-16">
+    <footer className="px-5 sm:px-8 border-t border-gray-300 dark:border-white/[0.14] transition-colors duration-300 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
+      {/* Tanpa Reveal: footer pendek di ujung halaman sehingga progress
+          scroll-linked Reveal tidak pernah mencapai 100% saat halaman mentok.
+          Footer selalu dirender statis final-state. */}
+      <div className="relative max-w-7xl mx-auto py-12 sm:py-16">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
           <div className="max-w-xs">
             <img src={Logo} alt="Nadi Rakhma" width="28" height="28" className="h-7 w-auto mb-3" />
@@ -103,7 +105,7 @@ const Footer = () => {
             <BackToTopButton />
           </div>
         </div>
-      </div></Reveal>
+      </div>
     </footer>
   );
 };

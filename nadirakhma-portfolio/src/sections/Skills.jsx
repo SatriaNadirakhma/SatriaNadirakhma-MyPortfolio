@@ -2,14 +2,12 @@ import { skillCategories } from "@data/skills";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
-import PlusCorners from "@components/PlusCorners";
 import SkillPill from "@components/SkillPill";
 
 const Skills = () => {
   return (
-    <section id={SECTION_IDS.skills} className="px-5 sm:px-8 border-b border-gray-300 dark:border-white/[0.14]">
-      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12">
-        <PlusCorners />
+    <section id={SECTION_IDS.skills} className="px-5 sm:px-8 ">
+      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
         <SectionHeader
           title="My skills."
           description="The working set — every linked tool goes to its official home."

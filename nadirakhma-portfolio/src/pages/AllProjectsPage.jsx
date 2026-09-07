@@ -4,9 +4,9 @@ import { ArrowLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { allProjects, projectFilters } from "@data/projects";
 import SectionHeader from "@components/SectionHeader";
-import PlusCorners from "@components/PlusCorners";
 import Reveal from "@components/Reveal";
 import Sidebar from "@components/Sidebar";
+import TropicalTideBackground from "@components/background-gradient/TropicalTideBackground";
 import Footer from "@sections/Footer";
 
 const Card = ({ title, description, image, link, icon: Icon, category, index = 0 }) => (
@@ -55,6 +55,8 @@ const AllProjectsPage = () => {
 
   return (
     <div className="min-h-screen bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300">
+      {/* Satu background Tropical Tide untuk satu halaman full — fixed di belakang semua konten */}
+      <TropicalTideBackground aria-hidden="true" className="fixed inset-0 pointer-events-none" />
       <Sidebar />
       <div className="px-5 sm:px-8 pt-28 pb-4">
         <Reveal>
@@ -72,8 +74,7 @@ const AllProjectsPage = () => {
 
       <section className="px-5 sm:px-8 pb-8 sm:pb-12">
         <Reveal>
-          <div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] rounded-[4px] p-6 sm:p-8 lg:p-12">
-            <PlusCorners />
+          <div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] rounded-[4px] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
             <SectionHeader
               title={
                 <>
