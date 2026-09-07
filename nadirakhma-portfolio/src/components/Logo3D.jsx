@@ -81,14 +81,18 @@ export default function Logo3D({ className = "" }) {
     let disposed = false;
     let lastTime = performance.now();
     let scene, camera, renderer, effect;
-    let group = null;
 
     const init = () => {
       if (disposed) return;
       setFailed(false);
 
-      const width = container.clientWidth || 1;
-      const height = container.clientHeight || 1;
+      // AsciiEffect sizes its readback grid as floor(size * resolution) —
+      // with resolution 0.18 any size below ~6px yields a 0 grid and the next
+      // getImageData() throws IndexSizeError. Clamp so init can never poison
+      // the grid; the real size is synced (and re-synced) by syncSize() below.
+      const MIN_GRID = 8;
+      const width = Math.max(container.clientWidth, MIN_GRID);
+      const height = Math.max(container.clientHeight, MIN_GRID);
 
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(32, width / height, 1, 5000);
@@ -124,6 +128,26 @@ export default function Logo3D({ className = "" }) {
       container.innerHTML = "";
       container.appendChild(effect.domElement);
       effectRef.current = effect;
+
+      // Keeps renderer + ascii grid matched to the container. Degenerate
+      // sizes are skipped instead of poisoning AsciiEffect, and layout
+      // changes the window 'resize' event would miss get re-synced here.
+      let lastW = 0;
+      let lastH = 0;
+      const syncSize = () => {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        if (w < MIN_GRID || h < MIN_GRID) return false;
+        if (w === lastW && h === lastH) return true;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+        effect.setSize(w, h);
+        lastW = w;
+        lastH = h;
+        return true;
+      };
+      syncSize();
 
       const url = isDark ? logoWhite : logoBlue;
       const color = isDark ? "#f5f7fb" : "#0055D4";
@@ -171,7 +195,6 @@ export default function Logo3D({ className = "" }) {
           camera.position.z = (fitRadius / Math.sin(halfFovRad)) * 1.25;
 
           scene.add(built);
-          group = built;
           groupRef.current = built;
         },
         undefined,
@@ -182,20 +205,17 @@ export default function Logo3D({ className = "" }) {
       );
 
       let lastFrame = performance.now();
+      let consecutiveErrors = 0;
       const animate = () => {
         if (disposed) return;
+        // Schedule the next frame FIRST — a throw below must never kill the loop
+        frameId = requestAnimationFrame(animate);
         // Pause when not visible, tab hidden, or actively scrolling — saves FPS
         // Fixes jank when Lenis smooth-scroll and AsciiEffect both hit rAF
-        if (!isVisibleRef.current || document.hidden || isScrollingRef.current) {
-          frameId = requestAnimationFrame(animate);
-          return;
-        }
+        if (!isVisibleRef.current || document.hidden || isScrollingRef.current) return;
         // Throttle to ~30fps for AsciiEffect (DOM-heavy)
         const now = performance.now();
-        if (now - lastFrame < 1000 / 30) {
-          frameId = requestAnimationFrame(animate);
-          return;
-        }
+        if (now - lastFrame < 1000 / 30) return;
         lastFrame = now;
         const delta = (now - lastTime) / 1000;
         lastTime = now;
@@ -205,18 +225,29 @@ export default function Logo3D({ className = "" }) {
           groupRef.current.rotation.y += delta * 0.28;
         }
 
-        effect.render(scene, camera);
-        frameId = requestAnimationFrame(animate);
+        // Skip frames while the container has (almost) no layout — rendering
+        // then would read a 0-size grid and throw IndexSizeError.
+        if (!syncSize()) return;
+
+        try {
+          effect.render(scene, camera);
+          consecutiveErrors = 0;
+        } catch (err) {
+          consecutiveErrors += 1;
+          if (consecutiveErrors === 1) console.warn("[Logo3D] frame render failed, retrying:", err);
+          if (consecutiveErrors > 60) {
+            // Persistent failure (~2s) — stop looping and show the fallback
+            // UI instead of throwing on every frame.
+            cancelAnimationFrame(frameId);
+            frameId = null;
+            if (!disposed) setFailed(true);
+          }
+        }
       };
       animate();
 
       const handleResize = () => {
-        const w = container.clientWidth || 1;
-        const h = container.clientHeight || 1;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-        effect.setSize(w, h);
+        syncSize();
       };
       window.addEventListener("resize", handleResize);
 
@@ -280,7 +311,9 @@ export default function Logo3D({ className = "" }) {
       // and also try to set the internal flag if available
       try {
         effectRef.current.invert = isDark;
-      } catch {}
+      } catch {
+        // invert flag is best-effort (AsciiEffect internal) — style color above already applied
+      }
     }
   }, [isDark]);
 
