@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useTheme } from "@context/ThemeContext";
-import { Trophy, ArrowUpRight, X, ZoomIn, ChevronRight, ArrowRight } from "lucide-react";
+import { Trophy, ArrowUpRight, Xmark as X, ZoomIn, NavArrowRight as ChevronRight, ArrowRight } from "iconoir-react";
 import { champions } from "@data/champions";
 import { SECTION_IDS } from "@constants/index";
 import { useScrollLock } from "@hooks/useScrollLock";

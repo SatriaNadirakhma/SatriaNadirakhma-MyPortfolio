@@ -1,4 +1,4 @@
-import { Send, MessageCircle } from "lucide-react";
+import { Send, ChatBubble as MessageCircle } from "iconoir-react";
 import { socialLinks } from "@data/socialLinks";
 import { SITE, SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";

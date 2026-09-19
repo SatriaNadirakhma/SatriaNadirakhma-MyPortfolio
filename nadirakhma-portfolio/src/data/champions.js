@@ -1,6 +1,6 @@
 import EFest from "@assets/image/efest.webp";
 import ITFest from "@assets/image/itfest.webp";
-import { Trophy } from "lucide-react";
+import { Trophy } from "iconoir-react";
 
 export const champions = [
   {

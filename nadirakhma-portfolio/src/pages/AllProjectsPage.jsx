@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowLeft, NavArrowRight as ChevronRight, ArrowRight } from "iconoir-react";
 import { motion } from "motion/react";
 import { allProjects, projectFilters } from "@data/projects";
 import SectionHeader from "@components/SectionHeader";

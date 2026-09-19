@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Satria Rakhmadani",
   shortName: "Nadi Rakhma",
-  url: "https://nadirakhma.vercel.app",
+  url: "https://nadirakhma-portfolio.vercel.app",
   location: "Malang, Indonesia",
   role: "Digital Designer & Front-End Developer",
   email: "satria.nadirakhma@gmail.com",
@@ -20,6 +20,7 @@ export const SECTION_IDS = {
   skills: "skills",
   github: "github",
   playlist: "playlist",
+  benefit: "benefit",
   connect: "connect",
 };
 

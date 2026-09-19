@@ -1,5 +1,5 @@
 import { memo, useMemo, useState, useEffect, useId, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { NavArrowLeft as ChevronLeft, NavArrowRight as ChevronRight } from "iconoir-react";
 import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────

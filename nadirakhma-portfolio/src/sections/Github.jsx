@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Github as GithubIcon } from "lucide-react";
+import { Github as GithubIcon } from "iconoir-react";
 import { useTheme } from "@context/ThemeContext";
 import GithubCalendar from "@components/GithubCalendar";
 import { SECTION_IDS } from "@constants/index";
