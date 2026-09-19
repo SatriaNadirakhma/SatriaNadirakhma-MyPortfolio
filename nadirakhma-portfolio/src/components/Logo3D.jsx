@@ -5,7 +5,6 @@ import { AsciiEffect } from "three/addons/effects/AsciiEffect.js";
 import { useTheme } from "@context/ThemeContext";
 import { useLenis } from "@context/LenisContext";
 import logoBlue from "@assets/svg/nadi-blue-gradient.svg?url";
-import logoWhite from "@assets/svg/nadi-white.svg?url";
 
 // Same ramp fetch uses (config: shading=.,-~:;=!*#$@), light -> heavy.
 // A leading space keeps fully-unlit areas blank instead of printing a dot.
@@ -30,6 +29,9 @@ export default function Logo3D({ className = "" }) {
   const containerRef = useRef(null);
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+  // Tracks latest theme for the deferred Three.js init (requestIdleCallback)
+  // so the initial glyph color is correct even on dark-mode first load.
+  const isDarkRef = useRef(isDark);
   const [failed, setFailed] = useState(false);
   const isVisibleRef = useRef(false);
   const isScrollingRef = useRef(false);
@@ -42,7 +44,9 @@ export default function Logo3D({ className = "" }) {
     const onScroll = () => {
       isScrollingRef.current = true;
       clearTimeout(scrollTimeoutRef.current);
-      scrollTimeoutRef.current = setTimeout(() => { isScrollingRef.current = false; }, 120);
+      scrollTimeoutRef.current = setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 120);
     };
     lenis.on("scroll", onScroll);
     return () => {
@@ -57,8 +61,10 @@ export default function Logo3D({ className = "" }) {
     const el = containerRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
-      { threshold: 0, rootMargin: "0px 0px -30% 0px" }
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0, rootMargin: "0px 0px -30% 0px" },
     );
     obs.observe(el);
     // Initially assume visible if already in viewport (hero is above fold)
@@ -98,7 +104,9 @@ export default function Logo3D({ className = "" }) {
       camera = new THREE.PerspectiveCamera(32, width / height, 1, 5000);
       camera.position.z = 900;
 
-      scene.add(new THREE.AmbientLight(0xffffff, isDark ? 0.4 : 0.55));
+      // Fixed lighting — part of the locked ascii context, so the raster
+      // is identical no matter which theme the page first loads in.
+      scene.add(new THREE.AmbientLight(0xffffff, 0.5));
       const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
       keyLight.position.set(220, 320, 420);
       scene.add(keyLight);
@@ -106,21 +114,29 @@ export default function Logo3D({ className = "" }) {
       fillLight.position.set(-200, -120, 180);
       scene.add(fillLight);
 
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: "low-power" });
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: false,
+        powerPreference: "low-power",
+      });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.setSize(width, height);
 
       // Lower resolution + fewer DOM nodes = major FPS win (was 0.22 → ~6.8k nodes, now 0.18 → ~4.6k)
       // alpha:true makes transparent background (alpha 0) render as invisible (opacity 0) instead of @@@
+      // invert is intentionally NOT passed: a fixed (non-inverted) ramp keeps
+      // the ascii context identical in both themes. Only colors adapt.
+      // color:false is intentional: glyphs inherit domElement.style.color
+      // (blue in light, white in dark). With color:true AsciiEffect would
+      // paint per-pixel RGB spans and ignore the CSS color entirely.
       effect = new AsciiEffect(renderer, ASCII_CHARS, {
         resolution: 0.18,
         scale: 1,
-        color: true,
+        color: false,
         alpha: true,
-        invert: isDark,
       });
       effect.setSize(width, height);
-      effect.domElement.style.color = isDark ? "#f5f7fb" : "#0055D4";
+      effect.domElement.style.color = isDarkRef.current ? "#ffffff" : "#2563eb";
       effect.domElement.style.backgroundColor = "transparent";
       effect.domElement.style.width = "100%";
       effect.domElement.style.height = "100%";
@@ -149,20 +165,21 @@ export default function Logo3D({ className = "" }) {
       };
       syncSize();
 
-      const url = isDark ? logoWhite : logoBlue;
-      const color = isDark ? "#f5f7fb" : "#0055D4";
-
+      // Single ascii theme: one SVG asset, one material, one ramp — locked
+      // regardless of light/dark. The scene raster (and therefore which
+      // glyph lands where) never changes between themes; only the glyph
+      // color below adapts.
       new SVGLoader().load(
-        url,
+        logoBlue,
         (data) => {
           if (disposed) return;
 
           const built = new THREE.Group();
           const box = new THREE.Box3();
           const material = new THREE.MeshStandardMaterial({
-            color,
-            metalness: isDark ? 0.15 : 0.4,
-            roughness: isDark ? 0.55 : 0.3,
+            color: "#3b82f6",
+            metalness: 0.4,
+            roughness: 0.3,
             side: THREE.DoubleSide,
           });
           materialRef.current = material;
@@ -201,7 +218,7 @@ export default function Logo3D({ className = "" }) {
         (err) => {
           console.error("[Logo3D] SVG load failed:", err);
           if (!disposed) setFailed(true);
-        }
+        },
       );
 
       let lastFrame = performance.now();
@@ -296,24 +313,14 @@ export default function Logo3D({ className = "" }) {
     };
   }, []);
 
-  // Theme switch without rebuilding — keeps rotation, just swaps colors
+  // Theme switch: only the glyph color adapts. The scene, material, SVG
+  // asset, and ramp stay exactly as initialized — the ascii context is
+  // the same artwork in both themes, just re-colored for contrast.
+  // Light = blue (#2563eb), dark = white (#ffffff).
   useEffect(() => {
-    if (groupRef.current && materialRef.current) {
-      const newColor = isDark ? "#f5f7fb" : "#0055D4";
-      materialRef.current.color.set(newColor);
-      materialRef.current.metalness = isDark ? 0.15 : 0.4;
-      materialRef.current.roughness = isDark ? 0.55 : 0.3;
-      materialRef.current.needsUpdate = true;
-    }
+    isDarkRef.current = isDark;
     if (effectRef.current) {
-      effectRef.current.domElement.style.color = isDark ? "#f5f7fb" : "#0055D4";
-      // AsciiEffect invert is set at creation; update via style filter as fallback
-      // and also try to set the internal flag if available
-      try {
-        effectRef.current.invert = isDark;
-      } catch {
-        // invert flag is best-effort (AsciiEffect internal) — style color above already applied
-      }
+      effectRef.current.domElement.style.color = isDark ? "#ffffff" : "#2563eb";
     }
   }, [isDark]);
 

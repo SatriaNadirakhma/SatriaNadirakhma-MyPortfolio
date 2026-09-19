@@ -1,4 +1,4 @@
-import { ArrowUp } from "lucide-react";
+import { ArrowUp } from "iconoir-react";
 import { useLenis } from "@context/LenisContext";
 
 /**

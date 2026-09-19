@@ -1,4 +1,4 @@
-import { ExternalLink, Music2 } from "lucide-react";
+import { OpenNewWindow as ExternalLink, MusicDoubleNote as Music2 } from "iconoir-react";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import Album1 from "@assets/album/album-1.webp";

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ChevronRight, ArrowRight } from "lucide-react";
+import { useMediaQuery } from "@hooks/useMediaQuery";
+import { ArrowUpRight, NavArrowRight as ChevronRight, ArrowRight } from "iconoir-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
@@ -21,12 +22,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
         aria-label={`Visit ${title}`}
         className="block overflow-hidden focus-visible:outline-none"
       >
-        <img
-          src={image}
-          alt={title}
-          className="w-full aspect-[4/3] object-cover"
-          loading="lazy"
-        />
+        <img src={image} alt={title} className="w-full aspect-[4/3] object-cover" loading="lazy" />
       </a>
 
       <div className="p-5 sm:p-6 flex flex-col items-start">
@@ -60,58 +56,64 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filtered =
-    activeFilter === "All"
-      ? allProjects
-      : allProjects.filter((p) => p.category === activeFilter);
+  // Mobile (<640px, below the `sm` breakpoint) shows only the 3 latest
+  // projects to keep the section compact; larger screens show up to 6.
+  // `allProjects` is ordered newest-first, so slicing from the front
+  // always yields the latest entries.
+  const isMobile = useMediaQuery("(max-width: 639px)");
 
-  const displayed = filtered.slice(0, 6);
+  const filtered =
+    activeFilter === "All" ? allProjects : allProjects.filter((p) => p.category === activeFilter);
+
+  const displayed = filtered.slice(0, isMobile ? 3 : 6);
   const hasMore = allProjects.length > 6;
 
   return (
     <section id={SECTION_IDS.projects} className="px-5 sm:px-8 ">
-      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
-        <SectionHeader
-          title="Featured projects."
-          description="A selection of shipped work — web applications, landing pages, and design systems."
-        >
-          <div className="flex gap-2 flex-wrap">
-            {projectFilters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-1.5 rounded-[4px] text-xs font-normal tracking-[0.08em] uppercase transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                  activeFilter === filter
-                    ? "bg-gray-900 text-white dark:bg-white dark:text-black"
-                    : "border border-gray-300 dark:border-white/15 text-gray-500 dark:text-white/35 hover:text-gray-900 dark:hover:text-white hover:border-gray-500 dark:hover:border-white/35"
-                }`}
-              >
-                {filter}
-              </button>
+      <Reveal>
+        <div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
+          <SectionHeader
+            title="Featured projects."
+            description="A selection of shipped work — web applications, landing pages, and design systems."
+          >
+            <div className="flex gap-2 flex-wrap">
+              {projectFilters.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`px-4 py-1.5 rounded-[4px] text-xs font-normal tracking-[0.08em] uppercase transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                    activeFilter === filter
+                      ? "bg-gray-900 text-white dark:bg-white dark:text-black"
+                      : "border border-gray-300 dark:border-white/15 text-gray-500 dark:text-white/35 hover:text-gray-900 dark:hover:text-white hover:border-gray-500 dark:hover:border-white/35"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </SectionHeader>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+            {displayed.map((project) => (
+              <ProjectCard key={project.title} {...project} />
             ))}
           </div>
-        </SectionHeader>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-          {displayed.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
+          {hasMore && (
+            <div className="mt-10 flex justify-center">
+              <Link to="/projects" className="btn-base btn-ghost">
+                See All Projects
+                <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          )}
+
+          <p className="mt-8 flex items-center gap-1.5 text-sm font-light text-gray-500 dark:text-white/60">
+            <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+            Every project opens its live build or case study in a new tab.
+          </p>
         </div>
-
-        {hasMore && (
-          <div className="mt-10 flex justify-center">
-            <Link to="/projects" className="btn-base btn-ghost">
-              See All Projects
-              <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        )}
-
-        <p className="mt-8 flex items-center gap-1.5 text-sm font-light text-gray-500 dark:text-white/60">
-          <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
-          Every project opens its live build or case study in a new tab.
-        </p>
-      </div></Reveal>
+      </Reveal>
     </section>
   );
 };

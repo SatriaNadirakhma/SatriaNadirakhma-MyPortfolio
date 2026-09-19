@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { SunLight as Sun, HalfMoon as Moon, Menu, Xmark as X } from "iconoir-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTheme } from "@context/ThemeContext";
 import { useLenis } from "@context/LenisContext";

@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { OpenNewWindow as ExternalLink } from "iconoir-react";
 
 /**
  * Quiet skill chip: bordered, no spotlight, no magnetic pull. Linked

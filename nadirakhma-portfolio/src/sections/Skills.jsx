@@ -3,29 +3,37 @@ import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
 import SkillPill from "@components/SkillPill";
+import MainStack from "@sections/MainStack";
 
 const Skills = () => {
   return (
     <section id={SECTION_IDS.skills} className="px-5 sm:px-8 ">
-      <Reveal><div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
-        <SectionHeader
-          title="My skills."
-          description="The working set — every linked tool goes to its official home."
-        />
+      <Reveal>
+        <div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
+          <SectionHeader
+            title="My skills."
+            description="The working set — every linked tool goes to its official home."
+          />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
-          {skillCategories.map((cat) => (
-            <div key={cat.label}>
-              <p className="section-label mb-4">{cat.label}</p>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <SkillPill key={skill.name} {...skill} />
-                ))}
+          <div className="mb-12 sm:mb-14 lg:mb-16">
+            <p className="section-label mb-4">Main stack</p>
+            <MainStack />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 border-t border-gray-300 dark:border-white/[0.07] pt-10 sm:pt-12">
+            {skillCategories.map((cat) => (
+              <div key={cat.label}>
+                <p className="section-label mb-4">{cat.label}</p>
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((skill) => (
+                    <SkillPill key={skill.name} {...skill} />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div></Reveal>
+      </Reveal>
     </section>
   );
 };

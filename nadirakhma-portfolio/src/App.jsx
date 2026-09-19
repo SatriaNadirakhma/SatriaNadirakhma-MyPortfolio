@@ -23,6 +23,7 @@ const Champions = lazy(() => import("@sections/Champions"));
 const Skills = lazy(() => import("@sections/Skills"));
 const Github = lazy(() => import("@sections/Github"));
 const Playlist = lazy(() => import("@sections/Playlist"));
+const Benefit = lazy(() => import("@sections/Benefit"));
 const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage"));
 
 // Shared fade-in-from-top variant for eager (non-lazy) sections.
@@ -134,6 +135,14 @@ function Landing({ heroReady = false }) {
             <Suspense fallback={null}>
               <section id={SECTION_IDS.playlist}>
                 <Playlist />
+              </section>
+            </Suspense>
+          </InView>
+
+          <InView minHeight={400}>
+            <Suspense fallback={null}>
+              <section id={SECTION_IDS.benefit}>
+                <Benefit />
               </section>
             </Suspense>
           </InView>

@@ -5,7 +5,7 @@ import K3SiantarTop from "@assets/image/k3.webp";
 import OranjixHMTI from "@assets/image/oranjixhmti.webp";
 import Alceena from "@assets/image/alceena.webp";
 import MitraBoost from "@assets/image/mitraboost.webp";
-import { Code, Palette } from "lucide-react";
+import { Code, Palette } from "iconoir-react";
 
 export const allProjects = [
   {

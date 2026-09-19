@@ -2,7 +2,7 @@ import { lazy, Suspense, useRef } from "react";
 import { motion } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
-import { ArrowRight, Download, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowDownRight, Download, DownloadCircle as FileDown, OpenNewWindow as ExternalLink, ArrowUpRight } from "iconoir-react";
 import AsciiTextSweep from "@components/AsciiTextSweep";
 
 const Logo3D = lazy(() => import("@components/Logo3D"));
@@ -10,16 +10,28 @@ import cvATS from "@assets/pdf/cv-ats.pdf";
 
 const PORTFOLIO_URL = "https://drive.google.com/file/d/1fLRntV4Js0ywnQDJTb23QXyGjaBlDult/view";
 
-// Single choreographed entrance: the whole hero arrives as one quiet
-// gesture — status line, headline, subhead, CTAs — each fading up 80ms
-// after the last. No loops, no parallax; this is the page's only motion.
+// Choreographed entrance: the card starts at full viewport height (100vh)
+// then shrinks to its resting size while the content (status line,
+// headline, subhead, CTAs) fades up staggered inside it. No loops, no
+// parallax; this is the page's only motion.
 const columnVariants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.45 } },
 };
 const itemVariants = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+};
+// Card shrink: full screen -> resting size, driven by `startIntro`.
+const cardInitial = { opacity: 0, y: 24, minHeight: "100vh" };
+const cardAnimate = (startIntro) =>
+  startIntro
+    ? { opacity: 1, y: 0, minHeight: "60vh" }
+    : cardInitial;
+const cardTransition = {
+  minHeight: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+  opacity: { duration: 0.7, ease: "easeOut" },
+  y: { duration: 1.0, ease: [0.22, 1, 0.36, 1] },
 };
 
 const INTERFACES_DELAY_MS = 2000;
@@ -76,12 +88,12 @@ const Hero = ({ startIntro = false }) => {
   return (
     <section
       id={SECTION_IDS.hero}
-      className="px-5 sm:px-8 pt-28 transition-colors duration-300 "
+      className="px-5 sm:px-8 pt-28 lg:pt-16 pb-10 lg:pb-12 transition-colors duration-300 lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
     >
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={startIntro ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        initial={cardInitial}
+        animate={cardAnimate(startIntro)}
+        transition={cardTransition}
         className="relative max-w-7xl mx-auto w-full border-x border-t border-gray-300 dark:border-white/[0.14] rounded-t-[4px] px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14 min-h-[60vh] overflow-hidden bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md"
       >
         <motion.div
@@ -135,30 +147,39 @@ const Hero = ({ startIntro = false }) => {
             <a
               href={`#${SECTION_IDS.projects}`}
               onClick={handleExploreClick}
-              className="btn-base btn-primary w-full sm:w-auto justify-center"
+              className="btn-base btn-primary w-full sm:w-auto justify-center group"
             >
               Explore my work
-              <ArrowRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+              <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+                <ArrowRight aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5" />
+                <ArrowDownRight aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
+              </span>
             </a>
 
             <a
               href={cvATS}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-base btn-ghost w-full sm:w-auto justify-center"
+              className="btn-base btn-ghost w-full sm:w-auto justify-center group"
             >
               Download CV
-              <Download aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+              <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+                <Download aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-y-0.5" />
+                <FileDown aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0" />
+              </span>
             </a>
 
             <a
               href={PORTFOLIO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-base btn-ghost w-full sm:w-auto justify-center"
+              className="btn-base btn-ghost w-full sm:w-auto justify-center group"
             >
               Design portfolio
-              <ExternalLink aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+              <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+                <ExternalLink aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+              </span>
             </a>
           </motion.div>
         </motion.div>
@@ -168,7 +189,7 @@ const Hero = ({ startIntro = false }) => {
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={startIntro ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 order-first lg:order-none w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[380px] mx-auto lg:mx-0 shrink-0"
         >
           <Suspense fallback={<div className="w-full aspect-square bg-gray-100 dark:bg-white/[0.02] rounded-[4px] animate-pulse" />}>

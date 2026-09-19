@@ -2,7 +2,7 @@ import { SECTION_IDS, STATS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import SectionHeader from "@components/SectionHeader";
 import Profile1 from "@assets/profile1.webp";
-import { MapPin } from "lucide-react";
+import { MapPin } from "iconoir-react";
 import { AsciiArt } from "@/components/ui/ascii-art";
 import { useTheme } from "@context/ThemeContext";
 

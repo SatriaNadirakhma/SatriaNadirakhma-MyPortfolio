@@ -7,11 +7,6 @@ import {
   FaNodeJs,
   FaBootstrap,
   FaLaravel,
-  FaRobot,
-  FaCode,
-  FaGithub,
-  FaBook,
-  FaSearch,
 } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import {
@@ -22,14 +17,30 @@ import {
   SiAdobeillustrator,
   SiAffinity,
   SiPostgresql,
-  SiOpenai,
-  SiGooglegemini,
   SiPhp,
   SiAstro,
   SiVercel,
-  SiPerplexity,
 } from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa6";
+// Brand icons for AI Tools — see https://lobehub.com/icons/skill.md
+// Mono (currentColor) for all, consistent with react-icons elsewhere:
+// inherits pill text color (gray → blue on hover).
+import {
+  OpenAI,
+  Gemini,
+  GeminiCLI,
+  Claude,
+  ClaudeCode,
+  DeepSeek,
+  Manus,
+  OpenCode,
+  GithubCopilot,
+  Kimi,
+  Cline,
+  Grok,
+  NotebookLM,
+  Perplexity,
+} from "@lobehub/icons";
 
 export const skillCategories = [
   {
@@ -65,20 +76,20 @@ export const skillCategories = [
   {
     label: "AI Tools",
     skills: [
-      { icon: SiOpenai,      name: "OpenAI",        url: "https://openai.com/" },
-      { icon: SiGooglegemini, name: "Gemini",       url: "https://gemini.google.com/" },
-      { icon: FaRobot,       name: "Gemini CLI",    url: "https://geminicli.com/" },
-      { icon: FaRobot,       name: "Claude",        url: "https://claude.ai/" },
-      { icon: FaCode,        name: "Claude Code",   url: "https://claude.ai/code" },
-      { icon: FaRobot,       name: "DeepSeek",      url: "https://www.deepseek.com/" },
-      { icon: FaRobot,       name: "Manus AI",      url: "https://manus.im/" },
-      { icon: FaCode,        name: "OpenCode",      url: "https://opencode.ai/" },
-      { icon: FaGithub,      name: "GitHub Copilot",url: "https://github.com/features/copilot" },
-      { icon: FaRobot,       name: "Kimi AI",       url: "https://www.kimi.com/" },
-      { icon: FaCode,        name: "Cline",         url: "https://cline.bot/" },
-      { icon: FaRobot,       name: "Grok",          url: "https://grok.com/" },
-      { icon: FaBook,        name: "NotebookLM",    url: "https://notebooklm.google.com/" },
-      { icon: SiPerplexity,  name: "Perplexity",    url: "https://www.perplexity.ai/" },
+      { icon: OpenAI,        name: "OpenAI",         url: "https://openai.com/" },
+      { icon: Gemini,        name: "Gemini",         url: "https://gemini.google.com/" },
+      { icon: GeminiCLI,     name: "Gemini CLI",     url: "https://geminicli.com/" },
+      { icon: Claude,        name: "Claude",         url: "https://claude.ai/" },
+      { icon: ClaudeCode,    name: "Claude Code",    url: "https://claude.ai/code" },
+      { icon: DeepSeek,      name: "DeepSeek",       url: "https://www.deepseek.com/" },
+      { icon: Manus,         name: "Manus AI",       url: "https://manus.im/" },
+      { icon: OpenCode,      name: "OpenCode",       url: "https://opencode.ai/" },
+      { icon: GithubCopilot, name: "GitHub Copilot", url: "https://github.com/features/copilot" },
+      { icon: Kimi,          name: "Kimi AI",        url: "https://www.kimi.com/" },
+      { icon: Cline,         name: "Cline",          url: "https://cline.bot/" },
+      { icon: Grok,          name: "Grok",           url: "https://grok.com/" },
+      { icon: NotebookLM,    name: "NotebookLM",     url: "https://notebooklm.google.com/" },
+      { icon: Perplexity,    name: "Perplexity",     url: "https://www.perplexity.ai/" },
     ],
   },
   {
