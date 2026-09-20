@@ -1,4 +1,4 @@
-import { Send, ChatBubble as MessageCircle } from "iconoir-react";
+import { Send, SendMail, ChatBubble as MessageCircle, ChatPlusIn } from "iconoir-react";
 import { socialLinks } from "@data/socialLinks";
 import { SITE, SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
@@ -34,8 +34,11 @@ const Connect = () => {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <a href={`mailto:${SITE.email}`} className="btn-base btn-primary">
-            <Send className="w-3.5 h-3.5" />
+          <a href={`mailto:${SITE.email}`} className="btn-base btn-primary group">
+            <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+              <Send aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <SendMail aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+            </span>
             Send email
           </a>
 
@@ -43,9 +46,12 @@ const Connect = () => {
             href="https://wa.me/6285335510121"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-base border border-[#25D366]/40 text-[#1dab54] hover:border-[#25D366]/70 hover:bg-[#25D366]/[0.06] dark:border-[#25D366]/30 dark:text-[#25D366] dark:hover:border-[#25D366]/60 dark:hover:bg-[#25D366]/10"
+            className="btn-base group border border-[#25D366]/40 text-[#1dab54] hover:border-[#25D366]/70 hover:bg-[#25D366]/[0.06] dark:border-[#25D366]/30 dark:text-[#25D366] dark:hover:border-[#25D366]/60 dark:hover:bg-[#25D366]/10"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
+            <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+              <MessageCircle aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ChatPlusIn aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+            </span>
             WhatsApp
           </a>
         </div>

@@ -1,4 +1,4 @@
-import { OpenNewWindow as ExternalLink, MusicDoubleNote as Music2 } from "iconoir-react";
+import { OpenNewWindow as ExternalLink, MusicDoubleNote as Music2, MusicDoubleNotePlus as MusicAdd, ArrowUpRight } from "iconoir-react";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
 import Album1 from "@assets/album/album-1.webp";
@@ -65,19 +65,25 @@ const Playlist = () => {
             href={PLAYLIST_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-base bg-red-600 text-white hover:bg-red-500 dark:bg-red-500 dark:hover:bg-red-400"
+            className="btn-base group bg-red-600 text-white hover:bg-red-500 dark:bg-red-500 dark:hover:bg-red-400"
           >
             Open in YouTube Music
-            <ExternalLink className="w-3.5 h-3.5" />
+            <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+              <ExternalLink aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+            </span>
           </a>
 
           <a
             href={PLAYLIST_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-base border border-orange-500/40 text-orange-600 hover:border-orange-500/70 hover:bg-orange-500/[0.04] dark:border-orange-400/30 dark:text-orange-400 dark:hover:border-orange-400/60 dark:hover:bg-orange-400/10"
+            className="btn-base group border border-orange-500/40 text-orange-600 hover:border-orange-500/70 hover:bg-orange-500/[0.04] dark:border-orange-400/30 dark:text-orange-400 dark:hover:border-orange-400/60 dark:hover:bg-orange-400/10"
           >
-            <Music2 className="w-3.5 h-3.5" />
+            <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+              <Music2 aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <MusicAdd aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+            </span>
             Add a track
           </a>
         </div>

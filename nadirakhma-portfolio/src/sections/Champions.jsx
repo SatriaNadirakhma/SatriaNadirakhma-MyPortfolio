@@ -132,6 +132,16 @@ const CertificateModal = ({ src, title, onClose }) => {
   );
 };
 
+/**
+ * Champion card: hover meniru Benefit ("What you get...") — outer box
+ * scale 1.02, inner content counter-scale 1/1.02 sehingga yang membesar
+ * hanya kotaknya, teks/icon tetap diam.
+ */
+const CARD_OUTER =
+  "group relative flex flex-col rounded-[4px] border border-[#e5edf5] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] overflow-hidden transition-all duration-150 ease-in-out hover:border-[#b9b9f9]/60 dark:hover:border-white/15 focus-within:border-[#b9b9f9]/60 dark:focus-within:border-white/25 motion-safe:hover:scale-[1.02] hover:z-10";
+const CARD_INNER =
+  "flex flex-col h-full w-full motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-in-out motion-safe:group-hover:scale-[0.9804]";
+
 const ChampionCard = ({ title, event, description, image, certificate, link, year }) => {
   const [certOpen, setCertOpen] = useState(false);
 
@@ -145,7 +155,8 @@ const ChampionCard = ({ title, event, description, image, certificate, link, yea
         />
       )}
 
-      <article className="group flex flex-col rounded-[4px] border border-[#e5edf5] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] overflow-hidden transition-colors duration-150 hover:border-[#b9b9f9]/60 dark:hover:border-white/15 focus-within:border-[#b9b9f9]/60 dark:focus-within:border-white/25">
+      <article className={CARD_OUTER}>
+        <div className={CARD_INNER}>
         <div className="relative overflow-hidden">
           <img
             src={image}
@@ -193,6 +204,7 @@ const ChampionCard = ({ title, event, description, image, certificate, link, yea
               </span>
             </a>
           </div>
+        </div>
         </div>
       </article>
     </>
