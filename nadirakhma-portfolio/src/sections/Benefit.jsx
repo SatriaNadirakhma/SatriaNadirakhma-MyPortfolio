@@ -57,10 +57,6 @@ const Benefit = () => {
                 className={`${CARD_INNER} relative p-8 sm:p-10 flex flex-col justify-between gap-10`}
               >
                 <div>
-                  <p className="section-label mb-4 flex items-center gap-2">
-                    <PenTool aria-hidden="true" focusable="false" className="w-3 h-3" />
-                    End-to-end delivery
-                  </p>
                   <p
                     className="font-modern font-light text-gray-900 dark:text-white leading-[1.05] tracking-[-0.02em]"
                     style={{ fontSize: "clamp(36px, 4vw, 56px)" }}
@@ -91,10 +87,6 @@ const Benefit = () => {
             <div className={`md:col-span-3 ${CARD_OUTER}`}>
               <div className={`${CARD_INNER} p-6 sm:p-8 flex flex-col justify-between gap-6`}>
                 <div>
-                  <p className="section-label mb-4 flex items-center gap-2">
-                    <Building2 aria-hidden="true" focusable="false" className="w-3 h-3" />
-                    Production experience
-                  </p>
                   <p className="text-xl sm:text-2xl font-light text-gray-900 dark:text-white leading-snug tracking-[-0.01em]">
                     Real products, real deadlines.
                   </p>

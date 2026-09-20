@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@hooks/useMediaQuery";
-import { ArrowUpRight, NavArrowRight as ChevronRight, ArrowRight } from "iconoir-react";
+import { ArrowUpRight, NavArrowRight as ChevronRight, ArrowRight, OpenNewWindow as ExternalLink } from "iconoir-react";
 import { allProjects, projectFilters } from "@data/projects";
 import { SECTION_IDS } from "@constants/index";
 import Reveal from "@components/Reveal";
@@ -10,11 +10,19 @@ import SectionHeader from "@components/SectionHeader";
 /**
  * Quiet project card: screenshot in a 1px frame (4px radius, no device
  * chrome, no parallax), then label, title, description and a text link.
- * Hover only shifts the frame color — the work speaks, not the effect.
+ * Hover meniru Benefit ("What you get..."): outer box scale 1.02,
+ * inner content counter-scale 1/1.02 sehingga yang membesar hanya
+ * kotaknya, teks/icon tetap diam.
  */
+const CARD_OUTER =
+  "group relative flex flex-col rounded-[4px] border border-[#e5edf5] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] overflow-hidden transition-all duration-150 ease-in-out hover:border-[#b9b9f9]/60 dark:hover:border-white/15 focus-within:border-[#b9b9f9]/60 dark:focus-within:border-white/25 motion-safe:hover:scale-[1.02] hover:z-10";
+const CARD_INNER =
+  "flex flex-col h-full w-full motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-in-out motion-safe:group-hover:scale-[0.9804]";
+
 const ProjectCard = ({ title, description, image, link, icon: Icon, category }) => {
   return (
-    <article className="group flex flex-col rounded-[4px] border border-[#e5edf5] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] overflow-hidden transition-colors duration-150 hover:border-[#b9b9f9]/60 dark:hover:border-white/15 focus-within:border-[#b9b9f9]/60 dark:focus-within:border-white/25">
+    <article className={CARD_OUTER}>
+      <div className={CARD_INNER}>
       <a
         href={link}
         target="_blank"
@@ -48,6 +56,7 @@ const ProjectCard = ({ title, description, image, link, icon: Icon, category }) 
             <ArrowRight className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-x-0" />
           </span>
         </a>
+      </div>
       </div>
     </article>
   );
@@ -101,9 +110,12 @@ const Projects = () => {
 
           {hasMore && (
             <div className="mt-10 flex justify-center">
-              <Link to="/projects" className="btn-base btn-ghost">
+              <Link to="/projects" className="btn-base btn-ghost group">
                 See All Projects
-                <ArrowUpRight aria-hidden="true" focusable="false" className="w-3.5 h-3.5" />
+                <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
+                  <ExternalLink aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+                </span>
               </Link>
             </div>
           )}
