@@ -161,14 +161,21 @@ export function AsciiArt({
         loading="lazy"
         decoding="async"
       />
-      {/* Reveal button - click to permanently reveal */}
+      {/* Reveal button - click to permanently reveal. Alert ala lampu
+          bahaya: outline pulse + cahaya gradient radial yang membesar,
+          berulang terus sampai tombol ditekan (tombol unmount = stop).
+          Hover mempercepat kedipan. */}
       {!revealed && (
         <button
           type="button"
           onClick={() => setRevealed(true)}
-          className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/70 backdrop-blur-sm border border-white/20 text-white text-xs tracking-wide px-4 py-2 hover:bg-black/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 cursor-pointer"
+          className="btn-reveal-alert group absolute bottom-3 left-1/2 -translate-x-1/2 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/70 backdrop-blur-sm border border-white/20 text-white text-xs tracking-wide px-4 py-2 hover:bg-black/80 hover:[animation-duration:0.9s] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 cursor-pointer"
         >
-          Reveal photo
+          <span
+            aria-hidden="true"
+            className="btn-reveal-alert-ring group-hover:[animation-duration:0.9s] pointer-events-none absolute inset-0 rounded-full"
+          />
+          <span className="relative">Reveal photo</span>
         </button>
       )}
     </div>
