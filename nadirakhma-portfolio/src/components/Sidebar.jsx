@@ -89,10 +89,25 @@ const Sidebar = () => {
     "text-sm font-normal text-gray-500 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors duration-150 cursor-pointer"
   );
 
+  // Hover toggle mem-preview ikon lawan (grammar diagonal Design Portfolio):
+  // dark Idle Sun -> hover Moon, light Idle Moon -> hover Sun.
+  const IdleThemeIcon = isDark ? Sun : Moon;
+  const HoverThemeIcon = isDark ? Moon : Sun;
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 dark:border-white/[0.07] bg-white/80 dark:bg-[#080808]/80 backdrop-blur-md transition-colors duration-300">
-        <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
+      {/* Lapis 1 — outer: floating, centered, mt-6 mulai lg.
+          `xl:container xl:mx-auto` ref → `xl:max-w-7xl xl:mx-auto` project. */}
+      <header className="fixed top-0 left-0 right-0 z-50 w-full flex-col items-center transition-colors duration-300 lg:mt-6 lg:flex xl:mx-auto xl:max-w-7xl">
+        {/* Lapis 2 — row: solid bar di mobile (`bg-ln-gray-900` ref →
+            theme-aware), transparan mulai lg. Pill selalu center:
+            `mac/xl:justify-stretch` ref sengaja tidak dipakai karena
+            menimpa justify-center dan menarik pill ke kiri. */}
+        <nav className="relative z-20 flex w-full items-center justify-center gap-8 bg-white/80 backdrop-blur-md dark:bg-[#080808]/80 lg:bg-transparent lg:[backdrop-filter:none] dark:lg:bg-transparent">
+          {/* Lapis 3 — pill: bar full-width di mobile, floating pill
+              (rounded + shadow `shadow-ln-xs` ref → `shadow-sm`,
+              `bg-ln-gray-0` ref → theme-aware) mulai lg. */}
+          <div className="relative z-10 flex h-16 w-full items-center justify-between gap-4 rounded-t-2xl bg-transparent px-4 lg:h-auto lg:w-auto lg:justify-start lg:gap-6 lg:rounded-xl lg:border lg:border-gray-200/60 lg:bg-white lg:p-[18px] lg:shadow-sm dark:lg:border-white/[0.07] dark:lg:bg-[#0d0d0d]">
           <a
             href={`#${SECTION_IDS.hero}`}
             onClick={(e) => {
@@ -111,7 +126,7 @@ const Sidebar = () => {
             <img src={Logo} alt="Nadi Rakhma" width="28" height="28" className="h-7 w-auto" />
           </a>
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden items-center gap-6 lg:flex">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.to;
               return (
@@ -131,29 +146,37 @@ const Sidebar = () => {
             })}
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden items-center gap-3 lg:flex">
             <button
               onClick={toggleTheme}
-              className="btn-base btn-ghost !p-0 w-8 h-8 shrink-0"
+              className="btn-base btn-ghost group !p-0 w-8 h-8 shrink-0"
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {isDark ? <Sun aria-hidden="true" focusable="false" className="w-4 h-4" /> : <Moon aria-hidden="true" focusable="false" className="w-4 h-4" />}
+              <span className="relative w-4 h-4 inline-block shrink-0" aria-hidden="true">
+                <IdleThemeIcon aria-hidden="true" focusable="false" className="absolute inset-0 w-4 h-4 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <HoverThemeIcon aria-hidden="true" focusable="false" className="absolute inset-0 w-4 h-4 opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
+              </span>
             </button>
             <a
               href={`mailto:${SITE.email}`}
-              className="btn-base btn-primary px-4 py-2 text-[13px] h-8"
+              className="btn-base btn-primary btn-hire-alert group relative px-4 py-2 text-[13px] h-8"
             >
-              Hire me
+              <span
+                aria-hidden="true"
+                className="btn-hire-alert-ring pointer-events-none absolute inset-0 rounded-[4px]"
+              />
+              <span className="relative">Hire me</span>
             </a>
           </div>
 
           <button
             onClick={() => setOpen(!open)}
-            className="p-2 rounded-[4px] text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors md:hidden"
+            className="p-2 rounded-[4px] text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-white/40 dark:hover:text-white dark:hover:bg-white/10 transition-colors lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
           >
             {open ? <X aria-hidden="true" focusable="false" className="w-5 h-5" /> : <Menu aria-hidden="true" focusable="false" className="w-5 h-5" />}
           </button>
+          </div>
         </nav>
       </header>
 
@@ -166,7 +189,7 @@ const Sidebar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-40 md:hidden bg-[#fafafa] dark:bg-[#080808]"
+            className="fixed inset-0 z-40 lg:hidden bg-[#fafafa] dark:bg-[#080808]"
           >
             <div className="flex h-full w-full flex-col justify-between gap-y-4 px-6 pt-24 pb-10">
               <div className="flex flex-col gap-y-1">
@@ -192,9 +215,13 @@ const Sidebar = () => {
               <div className="flex flex-col gap-3 pb-4">
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="btn-base btn-primary w-full"
+                  className="btn-base btn-primary btn-hire-alert group relative w-full"
                 >
-                  Hire me
+                  <span
+                    aria-hidden="true"
+                    className="btn-hire-alert-ring pointer-events-none absolute inset-0 rounded-[4px]"
+                  />
+                  <span className="relative">Hire me</span>
                 </a>
                 <button
                   onClick={() => { toggleTheme(); setOpen(false); }}
