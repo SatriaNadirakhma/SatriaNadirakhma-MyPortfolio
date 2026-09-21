@@ -34,6 +34,10 @@ const Collaborations = () => {
       <Reveal>
         <div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
 
+          <p className="border-b border-gray-300 dark:border-white/[0.07] px-6 py-4 text-center text-sm font-light tracking-[0.08em] text-gray-500 dark:text-white/40">
+            Collaborations and Upgrading Skills
+          </p>
+
           <div className="group overflow-hidden">
             <div className="flex w-max animate-marquee">
               {track.map((logo, i) => (

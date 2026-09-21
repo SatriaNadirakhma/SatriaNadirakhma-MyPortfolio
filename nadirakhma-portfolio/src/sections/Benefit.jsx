@@ -115,12 +115,12 @@ const Benefit = () => {
               <div
                 className={`${CARD_INNER} p-6 flex flex-col items-center justify-center text-center gap-2`}
               >
-                <Trophy
-                  aria-hidden="true"
-                  focusable="false"
-                  className="w-5 h-5 text-orange-500 dark:text-orange-400"
-                />
-                <p className="font-modern font-light text-gray-900 dark:text-white text-4xl leading-none tabular-nums">
+                <p className="flex items-center gap-2 font-modern font-light text-gray-900 dark:text-white text-4xl leading-none tabular-nums">
+                  <Trophy
+                    aria-hidden="true"
+                    focusable="false"
+                    className="w-6 h-6 text-orange-500 dark:text-orange-400"
+                  />
                   2
                 </p>
                 <p className="text-[10px] tracking-[0.2em] uppercase font-normal text-gray-500 dark:text-white/40">
@@ -134,9 +134,9 @@ const Benefit = () => {
 
             {/* Tertiary — collaborator */}
             <div className={`md:col-span-2 ${CARD_OUTER}`}>
-              <div className={`${CARD_INNER} p-6 flex items-center gap-4`}>
-                <div className="w-10 h-10 rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.03] text-gray-900 dark:text-white flex items-center justify-center shrink-0">
-                  <Users aria-hidden="true" focusable="false" className="w-4 h-4" />
+              <div className={`${CARD_INNER} p-6 flex flex-col items-center justify-center text-center gap-3`}>
+                <div className="w-12 h-12 rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.03] text-gray-900 dark:text-white flex items-center justify-center shrink-0">
+                  <Users aria-hidden="true" focusable="false" className="w-5 h-5" />
                 </div>
                 <div>
                   <p className="text-base font-normal text-gray-900 dark:text-white leading-snug">
