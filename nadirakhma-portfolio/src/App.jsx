@@ -26,15 +26,6 @@ const Playlist = lazy(() => import("@sections/Playlist"));
 const Benefit = lazy(() => import("@sections/Benefit"));
 const AllProjectsPage = lazy(() => import("@/pages/AllProjectsPage"));
 
-// Shared fade-in-from-top variant for eager (non-lazy) sections.
-// Repeats every time the section re-enters the viewport (scroll up or down).
-const fadeInFromTop = {
-  initial: { opacity: 0, y: -40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { amount: 0.2 },
-  transition: { duration: 0.6, ease: "easeOut" },
-};
-
 function Landing({ heroReady = false }) {
   const location = useLocation();
   const { lenis } = useLenis();
@@ -75,12 +66,15 @@ function Landing({ heroReady = false }) {
             <Hero startIntro={heroReady} />
           </section>
 
-          <motion.section
-            id={SECTION_IDS.collaborations}
-            {...fadeInFromTop}
-          >
+          {/* Collaborations tanpa motion wrapper: entrance ditangani
+              <Reveal/> di dalamnya supaya keep di tempat saat di-scroll.
+              motion.section + whileInView berulang (tanpa once) membuat
+              section fade-out (opacity 0, y -40) setiap keluar viewport —
+              termasuk saat scroll ke BAWAH ke section berikut — lalu replay
+              saat kembali. Itu bug yang dilaporkan di rail marquee. */}
+          <section id={SECTION_IDS.collaborations}>
             <Collaborations />
-          </motion.section>
+          </section>
 
           {/* About tanpa motion wrapper: entrance ditangani <Reveal/> di
               dalamnya supaya keep di tempat saat di-scroll, sama seperti
@@ -147,12 +141,12 @@ function Landing({ heroReady = false }) {
             </Suspense>
           </InView>
 
-          <motion.section
-            id={SECTION_IDS.connect}
-            {...fadeInFromTop}
-          >
+          {/* Connect juga tanpa motion wrapper — alasan sama: whileInView
+              berulang bikin section fade-out saat scroll ke bawah ke Footer.
+              Entrance ditangani <Reveal/> di dalamnya. */}
+          <section id={SECTION_IDS.connect}>
             <Connect />
-          </motion.section>
+          </section>
           <Footer />
         </motion.main>
       </div>
