@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
  * the DOM for new nodes and observes them as they appear.
  */
 export const useActiveSection = (sectionIds = [], options = {}) => {
-  const [activeId, setActiveId] = useState(sectionIds[0] ?? null);
+  // Awal null (bukan section pertama) supaya saat di Hero
+  // tidak ada nav yang aktif — mis. About tidak menyala di atas.
+  const [activeId, setActiveId] = useState(null);
 
   useEffect(() => {
     const observed = new Set();
@@ -46,6 +48,16 @@ export const useActiveSection = (sectionIds = [], options = {}) => {
     createObserver();
     observeAll();
 
+    // Saat masih di Hero / paling atas, paksa nonaktif semua —
+    // observer di atas hanya set saat ada section terlihat dan
+    // tidak pernah clear sendiri, jadi tanpa ini About akan
+    // tetap aktif walau user sudah scroll balik ke Hero.
+    const clearAtTop = () => {
+      if ((window.scrollY || 0) < 150) setActiveId(null);
+    };
+    clearAtTop();
+    window.addEventListener("scroll", clearAtTop, { passive: true });
+
     // Watch for lazy sections being mounted later (InView)
     const mo = new MutationObserver(() => observeAll());
     mo.observe(document.body, { childList: true, subtree: true });
@@ -56,6 +68,7 @@ export const useActiveSection = (sectionIds = [], options = {}) => {
     return () => {
       clearTimeout(t);
       mo.disconnect();
+      window.removeEventListener("scroll", clearAtTop);
       if (observer) observer.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

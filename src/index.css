@@ -155,6 +155,25 @@ html.dark {
   animation: hire-alert-ring 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* Gradient outline ring dengan interior BENAR-BENAR transparan (frame nav).
+   Dicat di ::before + mask-composite supaya yang terpotong hanya layer
+   background-nya — children (button/ikon) tidak ikut ke-mask dan interior
+   menampilkan background di belakangnya, bukan fill abu-abu. */
+.gradient-outline { position: relative; }
+.gradient-outline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 0.5px;
+  background: linear-gradient(180deg, #3a4048, #5c6672);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* Hire-me hover — alert yang SAMA dengan Reveal photo (gerakan identik),
    tapi warna biru mengikuti button primary. Hanya hidup saat hover:
    berulang selama hover, berhenti saat leave. */
