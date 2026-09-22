@@ -2,7 +2,7 @@ import { lazy, Suspense, useRef } from "react";
 import { motion } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
-import { ArrowRight, ArrowDownRight, Download, DownloadCircle as FileDown, OpenNewWindow as ExternalLink, ArrowUpRight } from "iconoir-react";
+import { ArrowDown, NavArrowDown, Download, DownloadCircle as FileDown, OpenNewWindow as ExternalLink, ArrowUpRight } from "iconoir-react";
 import AsciiTextSweep from "@components/AsciiTextSweep";
 
 const Logo3D = lazy(() => import("@components/Logo3D"));
@@ -151,8 +151,8 @@ const Hero = ({ startIntro = false }) => {
             >
               Explore my work
               <span className="relative w-3.5 h-3.5 inline-block shrink-0" aria-hidden="true">
-                <ArrowRight aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-x-0.5" />
-                <ArrowDownRight aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
+                <NavArrowDown aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 transition-all duration-200 group-hover:opacity-0 group-hover:translate-y-0.5" />
+                <ArrowDown aria-hidden="true" focusable="false" className="absolute inset-0 w-3.5 h-3.5 opacity-0 -translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0" />
               </span>
             </a>
 

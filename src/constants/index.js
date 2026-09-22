@@ -5,6 +5,9 @@ export const SITE = {
   location: "Malang, Indonesia",
   role: "Digital Designer & Front-End Developer",
   email: "satria.nadirakhma@gmail.com",
+  // Kalau true, button Hire Me di navbar pasang alert urgent always-on
+  // (reuse persis alert Reveal photo). Matikan saat tidak urgent.
+  urgentHire: true,
   description:
     "Building user-centered digital experiences through code and design for forward-thinking teams.",
 };
