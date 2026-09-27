@@ -10,7 +10,7 @@ const About = () => {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   return (
-    <section id={SECTION_IDS.about} className="px-5 sm:px-8 ">
+    <section id={SECTION_IDS.about} className="px-0 sm:px-8 ">
       <Reveal>
         <div className="relative max-w-7xl mx-auto border-x border-gray-300 dark:border-white/[0.14] bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
           <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] lg:grid-rows-[auto_auto] gap-0">

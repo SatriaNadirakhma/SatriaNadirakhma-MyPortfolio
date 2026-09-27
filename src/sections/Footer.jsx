@@ -44,11 +44,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="px-5 sm:px-8 border-t border-gray-300 dark:border-white/[0.14] transition-colors duration-300 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
+    <footer className="px-0 sm:px-8 border-t border-gray-300 dark:border-white/[0.14] transition-colors duration-300 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
       {/* Tanpa Reveal: footer pendek di ujung halaman sehingga progress
           scroll-linked Reveal tidak pernah mencapai 100% saat halaman mentok.
           Footer selalu dirender statis final-state. */}
-      <div className="relative max-w-7xl mx-auto py-12 sm:py-16">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-0 py-12 sm:py-16">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
           <div className="max-w-xs">
             <img src={Logo} alt="Nadi Rakhma" width="28" height="28" className="h-7 w-auto mb-3" />
