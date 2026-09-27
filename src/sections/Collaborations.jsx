@@ -30,7 +30,7 @@ const Collaborations = () => {
   const track = [...LOGOS, ...LOGOS];
 
   return (
-    <section id={SECTION_IDS.collaborations} className="px-5 sm:px-8">
+    <section id={SECTION_IDS.collaborations} className="px-0 sm:px-8">
       <Reveal>
         <div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
 

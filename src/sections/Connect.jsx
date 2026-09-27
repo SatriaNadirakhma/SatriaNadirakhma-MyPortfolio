@@ -14,7 +14,7 @@ const gradMap = {
 
 const Connect = () => {
   return (
-    <section id={SECTION_IDS.connect} className="px-5 sm:px-8">
+    <section id={SECTION_IDS.connect} className="px-0 sm:px-8">
       <Reveal><div className="relative max-w-7xl mx-auto border border-gray-300 dark:border-white/[0.14] -mt-px rounded-b-[4px] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
         <h2
           className="font-modern font-light text-gray-900 dark:text-white leading-[1.04] tracking-[-0.025em]"

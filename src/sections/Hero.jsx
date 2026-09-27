@@ -88,7 +88,7 @@ const Hero = ({ startIntro = false }) => {
   return (
     <section
       id={SECTION_IDS.hero}
-      className="px-5 sm:px-8 pt-28 lg:pt-16 pb-10 lg:pb-12 transition-colors duration-300 lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
+      className="px-0 sm:px-8 pt-[72px] sm:pt-28 lg:pt-16 pb-0 sm:pb-10 lg:pb-12 transition-colors duration-300 lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
     >
       <motion.div
         initial={cardInitial}

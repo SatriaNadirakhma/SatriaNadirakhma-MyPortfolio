@@ -58,7 +58,7 @@ const AllProjectsPage = () => {
       {/* Satu background Tropical Tide untuk satu halaman full — fixed di belakang semua konten */}
       <TropicalTideBackground aria-hidden="true" className="fixed inset-0 pointer-events-none" />
       <Sidebar />
-      <div className="px-5 sm:px-8 pt-28 pb-4">
+      <div className="px-0 sm:px-8 pt-28 pb-4">
         <Reveal>
           <div className="max-w-7xl mx-auto">
             <Link
@@ -72,7 +72,7 @@ const AllProjectsPage = () => {
         </Reveal>
       </div>
 
-      <section className="px-5 sm:px-8 pb-8 sm:pb-12">
+      <section className="px-0 sm:px-8 pb-8 sm:pb-12">
         <Reveal>
           <div className="relative max-w-7xl mx-auto border border-gray-200 dark:border-white/[0.07] rounded-[4px] p-6 sm:p-8 lg:p-12 bg-[#fafafa]/80 dark:bg-[#080808]/80 backdrop-blur-md">
             <SectionHeader
