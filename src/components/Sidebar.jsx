@@ -6,6 +6,7 @@ import { useTheme } from "@context/ThemeContext";
 import { useLenis } from "@context/LenisContext";
 import { useActiveSection } from "@hooks/useActiveSection";
 import { cn } from "@/lib/utils";
+import { REVEAL_SECTIONS_EVENT } from "@components/InView";
 import Logo from "@assets/logo.png";
 import { SITE, SECTION_IDS } from "@constants/index";
 
@@ -167,31 +168,53 @@ const Sidebar = () => {
     return true;
   }, [lenis]);
 
+  // Scroll yang juga menjangkau section lazy di dalam <InView> yang belum
+  // ter-mount: paksa render semuanya dulu, lalu scroll setelah target ada.
+  const scrollToSection = useCallback((id) => {
+    // Sheet mobile me-stop Lenis saat terbuka — scrollTo dalam keadaan
+    // stopped adalah no-op, jadi start + buka kunci overflow dulu.
+    lenis?.start();
+    document.body.style.overflow = "";
+    if (scrollToId(id)) return true;
+    window.dispatchEvent(new Event(REVEAL_SECTIONS_EVENT));
+    let attempts = 0;
+    const poll = () => {
+      if (scrollToId(id)) return;
+      // Chunk lazy butuh waktu fetch di jaringan lambat — beri hingga ~5 dtk.
+      if (attempts++ < 25) setTimeout(poll, 200);
+    };
+    setTimeout(poll, 120);
+    return true;
+  }, [lenis, scrollToId]);
+
   const handleNavClick = useCallback((sectionId) => {
-    setOpen(false);
     // Cross-page: from /projects back to landing
     if (location.pathname !== "/") {
+      setOpen(false);
+      lenis?.start();
+      document.body.style.overflow = "";
       routerNavigate(`/#${sectionId}`);
-      // Wait for route + lazy InView sections to mount
+      // Wait for route + lazy InView sections to mount (App-level hash
+      // effect juga me-retry + me-reveal; ini cadangan untuk chunk lambat).
+      window.dispatchEvent(new Event(REVEAL_SECTIONS_EVENT));
       let attempts = 0;
       const tryScroll = () => {
         if (scrollToId(sectionId)) return;
-        if (attempts++ < 12) setTimeout(tryScroll, 200);
+        window.dispatchEvent(new Event(REVEAL_SECTIONS_EVENT));
+        if (attempts++ < 25) setTimeout(tryScroll, 200);
       };
-      setTimeout(tryScroll, 150);
+      setTimeout(tryScroll, 250);
       return;
     }
-    // Same page — handle lazy sections not yet in DOM
-    if (!scrollToId(sectionId)) {
-      window.location.hash = sectionId;
-      let attempts = 0;
-      const poll = () => {
-        if (scrollToId(sectionId)) return;
-        if (attempts++ < 10) setTimeout(poll, 200);
-      };
-      setTimeout(poll, 300);
+    // Same page. Saat sheet mobile terbuka, tutup dulu lalu scroll setelah
+    // tutup (Lenis masih stopped + overlay masih menutup layar saat klik).
+    if (open) {
+      setOpen(false);
+      setTimeout(() => scrollToSection(sectionId), 80);
+      return;
     }
-  }, [lenis, location.pathname, routerNavigate, scrollToId]);
+    scrollToSection(sectionId);
+  }, [lenis, location.pathname, routerNavigate, scrollToId, scrollToSection, open]);
 
   // Hover toggle mem-preview ikon lawan (grammar diagonal Design Portfolio):
   // dark Idle Sun -> hover Moon, light Idle Moon -> hover Sun.

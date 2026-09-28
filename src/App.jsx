@@ -7,7 +7,7 @@ import ScrollToTop from "@components/ScrollToTop";
 import Sidebar from "@components/Sidebar";
 import TropicalTideBackground from "@components/background-gradient/TropicalTideBackground";
 import LoadingScreen from "@components/LoadingScreen";
-import InView from "@components/InView";
+import InView, { REVEAL_SECTIONS_EVENT } from "@components/InView";
 import Hero from "@sections/Hero";
 import About from "@sections/About";
 import Collaborations from "@sections/Collaborations";
@@ -43,7 +43,9 @@ function Landing({ heroReady = false }) {
         else el.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
-      if (attempts++ < 12) setTimeout(tryScroll, 200);
+      // Target kemungkinan section lazy yang belum mount — paksa render.
+      window.dispatchEvent(new Event(REVEAL_SECTIONS_EVENT));
+      if (attempts++ < 25) setTimeout(tryScroll, 200);
     };
     // Small delay to let lazy sections mount after route change
     const t = setTimeout(tryScroll, 150);
