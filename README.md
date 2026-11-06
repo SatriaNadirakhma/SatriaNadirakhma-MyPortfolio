@@ -1,4 +1,4 @@
-# Portfolio — Satria Rakhmadani
+# Portfolio by Nadi Rakhma
 
 Personal portfolio website for **Satria Rakhmadani (Nadi Rakhma)**, a Digital Designer & Front-End Developer based in Malang, Indonesia.
 
@@ -26,72 +26,6 @@ src/
 ├── App.jsx          # Root application component
 ├── main.jsx         # Application entry point
 └── index.css        # Global styles and Tailwind imports
-```
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js >= 18
-- npm or bun
-
-### Installation
-
-```bash
-npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-App runs at `http://localhost:5173`.
-
-### Build
-
-```bash
-npm run build
-npm run preview   # Preview production build locally
-```
-
-### Linting & Formatting
-
-```bash
-npm run lint          # Check for lint errors
-npm run lint:fix      # Auto-fix lint errors
-npm run format        # Format code with Prettier
-npm run format:check  # Check formatting
-```
-
-### Clean
-
-```bash
-npm run clean   # Remove dist directory
-```
-
-## Path Aliases
-
-The project uses path aliases configured in `jsconfig.json` and `vite.config.js`:
-
-| Alias         | Directory        |
-|---------------|------------------|
-| `@/`          | `./src/`         |
-| `@components/`| `./src/components/`|
-| `@sections/`  | `./src/sections/`|
-| `@data/`      | `./src/data/`    |
-| `@hooks/`     | `./src/hooks/`   |
-| `@utils/`     | `./src/utils/`   |
-| `@constants/` | `./src/constants/`|
-| `@assets/`    | `./src/assets/`  |
-
-## Environment Variables
-
-Copy `.env.example` to `.env` and configure as needed:
-
-```bash
-cp .env.example .env
 ```
 
 ## License

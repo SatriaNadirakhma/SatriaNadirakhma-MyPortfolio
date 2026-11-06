@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ErrorBoundary } from "@components/ErrorBoundary";
 import { LenisProvider, useLenis } from "@context/LenisContext";
 import ScrollToTop from "@components/ScrollToTop";
-import Sidebar from "@components/Sidebar";
+import NotchNav from "@components/NotchNav";
 import TropicalTideBackground from "@components/background-gradient/TropicalTideBackground";
 import LoadingScreen from "@components/LoadingScreen";
 import InView, { REVEAL_SECTIONS_EVENT } from "@components/InView";
@@ -57,7 +57,7 @@ function Landing({ heroReady = false }) {
       <div className="min-h-screen relative bg-[#fafafa] text-gray-900 dark:bg-[#080808] dark:text-gray-100 transition-colors duration-300">
         {/* Satu background Tropical Tide untuk satu halaman full — fixed di belakang semua section */}
         <TropicalTideBackground aria-hidden="true" className="fixed inset-0 pointer-events-none" />
-        <Sidebar />
+        <NotchNav />
         <motion.main
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
