@@ -27,8 +27,11 @@ import { SITE, SECTION_IDS } from "@constants/index";
    (md+), tiga notch terpisah di desktop (logo kiri, tablist tengah, aksi
    kanan) yang menempel di tepi dalam frame, dan satu island compact +
    dropdown di bawah `xl`. Stack site ini: motion/react, iconoir-react,
-   Lenis, scrollspy useActiveSection. Non-aktif tanpa efek hover; pill aktif
-   memakai gradient biru brand. */
+   Lenis, scrollspy useActiveSection. Non-aktif tanpa efek hover.
+   Warna & radius mengikuti design.md: state Active/Selected = gray-900 +
+   putih (light) / putih + hitam (dark), tanpa glow; tombol/pill aktif
+   `rounded-lg` (8px, skala "filter buttons"); sudut notch `rounded-2xl`
+   (16px) senada frame/cards. Aksen biru hanya untuk focus ring & CTA. */
 
 const NAV_ITEMS = [
   { label: "About", to: SECTION_IDS.about, Icon: User },
@@ -51,26 +54,38 @@ const NOTCH_SPRING = { type: "spring", stiffness: 400, damping: 30 };
    Tailwind. */
 const NOTCH_TONE = {
   light: {
-    // Light mode → notch PUTIH (soft: #ffffff di atas bg halaman #fafafa,
-    // beda halus seperti `bg-white` navbar lama — island tetap terlihat).
-    bg: "bg-white text-zinc-950",
+    // Notch = --color-surface (#ffffff) di atas --color-bg (#fafafa).
+    // Teks utama = --color-text-primary (gray-900 #111827); non-aktif =
+    // --color-text-secondary (gray-600 #4b5563, ~7.5:1 di atas putih).
+    bg: "bg-white text-gray-900",
     fill: "text-white",
-    muted: "text-zinc-500",
-    selected: "bg-blue-600/15 text-zinc-900",
-    check: "text-blue-600",
-    badge: "bg-zinc-200 text-zinc-700",
+    muted: "text-gray-600",
+    // Active / Selected (design.md): bg-gray-900 text-white.
+    pill: "bg-gray-900 group-hover:bg-gray-800",
+    pillText: "text-white",
+    selected: "bg-gray-900 text-white",
+    check: "text-white",
+    // Badge kecil = --color-border-subtle + text-secondary.
+    badge: "bg-gray-100 text-gray-600",
     bezel: "shadow-[0_0_0_100vmax_#ffffff]",
     backdrop: "bg-black/20",
   },
   dark: {
-    // Dark mode → notch HITAM (soft: #0d0d0d di atas bg halaman #080808,
-    // warna yang sama dipakai navbar lama `dark:lg:bg-[#0d0d0d]`).
-    bg: "bg-[#0d0d0d] text-zinc-50",
+    // Notch = --color-surface (rgba(255,255,255,.02)) yang sudah dikomposit
+    // di atas --color-bg (#080808) → #0d0d0d. Harus solid (bukan rgba) supaya
+    // wing & bezel menyatu tanpa tumpang-tindih transparansi.
+    // Non-aktif pakai white/60 (sama dengan .section-label di index.css):
+    // token --color-text-secondary (white/40) hanya ~3.9:1 di ukuran teks
+    // nav, di bawah AA.
+    bg: "bg-[#0d0d0d] text-white",
     fill: "text-[#0d0d0d]",
-    muted: "text-zinc-400",
-    selected: "bg-blue-500/15 text-white",
-    check: "text-blue-400",
-    badge: "bg-zinc-800 text-zinc-300",
+    muted: "text-white/60",
+    // Active / Selected (design.md): bg-white text-black.
+    pill: "bg-white group-hover:bg-gray-200",
+    pillText: "text-black",
+    selected: "bg-white text-black",
+    check: "text-black",
+    badge: "bg-white/[0.07] text-white/60",
     bezel: "shadow-[0_0_0_100vmax_#0d0d0d]",
     backdrop: "bg-black/40",
   },
@@ -256,11 +271,11 @@ export const NotchItem = forwardRef(
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         className={cn(
-          "group relative flex h-9 cursor-pointer items-center gap-2 rounded-full px-3.5 text-sm font-medium outline-none select-none",
+          "group relative flex h-9 cursor-pointer items-center gap-2 rounded-lg px-3.5 text-sm font-medium outline-none select-none",
           "focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1",
           // Idle: teks + ikon selalu terlihat, hanya beda intensitas warna.
           isActive
-            ? "font-semibold text-white"
+            ? cn("font-semibold", tone.pillText)
             : tone.muted,
           disabled && "cursor-not-allowed pointer-events-none opacity-40",
           className
@@ -271,7 +286,7 @@ export const NotchItem = forwardRef(
           <motion.span
             layoutId="notch-active-pill"
             transition={NOTCH_SPRING}
-            className="absolute inset-0 rounded-xl bg-[linear-gradient(0deg,#0055d4,#002f76)] shadow-[0_0_14px_rgba(59,130,246,0.35)] group-hover:brightness-110 motion-reduce:transition-none"
+            className={cn("absolute inset-0 rounded-lg transition-colors duration-150 motion-reduce:transition-none", tone.pill)}
           />
         )}
 
@@ -315,7 +330,7 @@ function NotchDropdownItem({ item, isSelected, onSelect }) {
       aria-selected={isSelected}
       onClick={() => onSelect(item.to)}
       className={cn(
-        "flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-xl px-3 py-2 text-left text-sm outline-none select-none",
+        "flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-lg px-3 py-2 text-left text-sm outline-none select-none",
         "focus-visible:ring-2 focus-visible:ring-blue-500",
         isSelected
           ? cn("font-semibold", tone.selected)
@@ -535,7 +550,7 @@ const NotchNav = () => {
       {/* ── 1. Desktop: notch logo (kiri) ── */}
       <aside
         aria-label="Brand logo notch"
-        className={cn("fixed top-2 left-2 z-50 hidden h-10 items-start rounded-br-[24px] px-5 select-none transition-colors duration-200 xl:flex", tone.bg)}
+        className={cn("fixed top-2 left-2 z-50 hidden h-10 items-start rounded-br-2xl px-5 select-none transition-colors duration-200 xl:flex", tone.bg)}
       >
         <NotchRightWing />
         <NotchCornerLeftWing />
@@ -543,7 +558,7 @@ const NotchNav = () => {
         <a
           href={`#${SECTION_IDS.hero}`}
           onClick={handleLogoClick}
-          className="flex h-9 shrink-0 cursor-pointer items-center rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          className="flex h-9 shrink-0 cursor-pointer items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           aria-label="Back to top"
         >
           <img
@@ -560,7 +575,7 @@ const NotchNav = () => {
       <header
         role="tablist"
         aria-orientation="horizontal"
-        className={cn("fixed top-2 left-1/2 z-50 hidden h-11 -translate-x-1/2 items-start rounded-b-[24px] px-4 select-none transition-colors duration-200 xl:flex", tone.bg)}
+        className={cn("fixed top-2 left-1/2 z-50 hidden h-11 -translate-x-1/2 items-start rounded-b-2xl px-4 select-none transition-colors duration-200 xl:flex", tone.bg)}
       >
         <NotchLeftWing />
         <NotchRightWing />
@@ -584,7 +599,7 @@ const NotchNav = () => {
       {/* ── 3. Desktop: notch aksi (kanan) ── */}
       <aside
         aria-label="Aksi pengguna notch"
-        className={cn("fixed top-2 right-2 z-50 hidden h-10 items-start rounded-bl-[24px] px-5 select-none transition-colors duration-200 xl:flex", tone.bg)}
+        className={cn("fixed top-2 right-2 z-50 hidden h-10 items-start rounded-bl-2xl px-5 select-none transition-colors duration-200 xl:flex", tone.bg)}
       >
         <NotchLeftWing />
         <NotchCornerRightWing />
@@ -592,7 +607,7 @@ const NotchNav = () => {
         <div className="flex h-9 items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >
             {isDark ? (
@@ -627,7 +642,7 @@ const NotchNav = () => {
       ──────────────────────────────────────────────────────────────── */}
       <div
         ref={containerRef}
-        className={cn("fixed top-0 left-1/2 z-50 flex w-auto max-w-[calc(100vw-1.5rem)] -translate-x-1/2 flex-col rounded-b-[24px] px-4 select-none transition-colors duration-200 md:top-2 xl:hidden", tone.bg)}
+        className={cn("fixed top-0 left-1/2 z-50 flex w-auto max-w-[calc(100vw-1.5rem)] -translate-x-1/2 flex-col rounded-b-2xl px-4 select-none transition-colors duration-200 md:top-2 xl:hidden", tone.bg)}
       >
         <NotchLeftWing />
         <NotchRightWing />
@@ -638,7 +653,7 @@ const NotchNav = () => {
           <a
             href={`#${SECTION_IDS.hero}`}
             onClick={handleLogoClick}
-            className="flex h-8 shrink-0 cursor-pointer items-center rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:h-9"
+            className="flex h-8 shrink-0 cursor-pointer items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:h-9"
             aria-label="Back to top"
           >
             <img
@@ -657,7 +672,7 @@ const NotchNav = () => {
             aria-haspopup="listbox"
             aria-label="Toggle navigation menu"
             onClick={() => setIsDropdownOpen((prev) => !prev)}
-            className="flex h-8 min-w-0 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-full px-2.5 text-xs font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 sm:text-sm md:h-9"
+            className="flex h-8 min-w-0 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 sm:text-sm md:h-9"
           >
             {activeItem?.Icon ? (
               <activeItem.Icon
@@ -685,7 +700,7 @@ const NotchNav = () => {
                 toggleTheme();
                 setIsDropdownOpen(false);
               }}
-              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDark ? (

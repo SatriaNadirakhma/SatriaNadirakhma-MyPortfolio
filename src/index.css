@@ -263,6 +263,23 @@ html.dark {
   }
 }
 
+/* ── Theme switch ─────────────────────────────────────────────────────
+   Dipasang ThemeContext di <html> hanya selama pergantian tema: semua
+   transisi per-elemen dimatikan supaya navbar, bezel, background, dan card
+   berganti PERSIS di frame yang sama (tidak ada yang telat/berbeda durasi).
+   Kehalusannya diambil alih crossfade View Transitions di bawah. */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms; /* design.md → Default: 300ms ease-in-out */
+  animation-timing-function: ease-in-out;
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: 'Geist Variable', sans-serif;
