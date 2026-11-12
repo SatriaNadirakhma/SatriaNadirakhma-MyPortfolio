@@ -1,9 +1,10 @@
-import { lazy, Suspense, useRef } from "react";
-import { motion } from "motion/react";
+import { lazy, Suspense, useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { useLenis } from "@context/LenisContext";
 import { SECTION_IDS } from "@constants/index";
 import { ArrowDown, NavArrowDown, Download, DownloadCircle as FileDown, OpenNewWindow as ExternalLink, ArrowUpRight } from "iconoir-react";
 import AsciiTextSweep from "@components/AsciiTextSweep";
+import LogoImmersiveView from "@components/LogoImmersiveView";
 
 const Logo3D = lazy(() => import("@components/Logo3D"));
 import cvATS from "@assets/pdf/cv-ats.pdf";
@@ -51,6 +52,8 @@ const Hero = ({ startIntro = false }) => {
   const introHandledRef = useRef(false);
   const armedForHoverRef = useRef(false);
   const introTimeoutRef = useRef(null);
+  // Fullscreen logo view — dibuka saat logo 3D di Hero ditekan
+  const [logoOpen, setLogoOpen] = useState(false);
 
   const handleExploreClick = (e) => {
     e.preventDefault();
@@ -192,11 +195,24 @@ const Hero = ({ startIntro = false }) => {
           transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 order-first lg:order-none w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[380px] mx-auto lg:mx-0 shrink-0"
         >
-          <Suspense fallback={<div className="w-full aspect-square bg-gray-100 dark:bg-white/[0.02] rounded-[4px] animate-pulse" />}>
-            <Logo3D />
-          </Suspense>
+          <button
+            type="button"
+            onClick={() => setLogoOpen(true)}
+            aria-label="Buka logo 3D ASCII dalam tampilan penuh"
+            className="block w-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa] dark:focus-visible:ring-offset-[#080808] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
+          >
+            <Suspense fallback={<div className="w-full aspect-square bg-gray-100 dark:bg-white/[0.02] rounded-[4px] animate-pulse" />}>
+              {/* paused saat view fullscreen terbuka — instance overlay yang render */}
+              <Logo3D paused={logoOpen} />
+            </Suspense>
+          </button>
         </motion.div>
       </motion.div>
+
+      {/* Fullscreen logo view — solid tema + pattern TropicalTide, logo di tengah */}
+      <AnimatePresence>
+        {logoOpen && <LogoImmersiveView onClose={() => setLogoOpen(false)} />}
+      </AnimatePresence>
     </section>
   );
 };
