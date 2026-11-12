@@ -25,7 +25,7 @@ if (typeof window !== "undefined" && !HTMLCanvasElement.prototype.__willReadFreq
   HTMLCanvasElement.prototype.__willReadFrequentlyPatched = true;
 }
 
-export default function Logo3D({ className = "" }) {
+export default function Logo3D({ className = "", paused = false }) {
   const containerRef = useRef(null);
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -36,7 +36,16 @@ export default function Logo3D({ className = "" }) {
   const isVisibleRef = useRef(false);
   const isScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef(null);
+  // External pause switch (prop) — dipakai mis. instance Hero saat view
+  // fullscreen logo terbuka, agar dua AsciiEffect tidak render bersamaan.
+  // Dibaca via ref di dalam rAF loop sehingga tidak perlu re-init scene.
+  const pausedRef = useRef(paused);
   const { lenis } = useLenis();
+
+  // Keep pausedRef in sync without tearing down the scene
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
 
   // Pause during active scroll — biggest jank fix (Lenis vs AsciiEffect both rAF)
   useEffect(() => {
@@ -137,6 +146,10 @@ export default function Logo3D({ className = "" }) {
       });
       effect.setSize(width, height);
       effect.domElement.style.color = isDarkRef.current ? "#ffffff" : "#2563eb";
+      // AsciiEffect hardcodes style.cursor = "default" — override agar kursor
+      // mengikuti konteks: pointer di Hero (dibungkus <button>), default
+      // di tempat lain (instance overlay fullscreen).
+      effect.domElement.style.cursor = "inherit";
       effect.domElement.style.backgroundColor = "transparent";
       effect.domElement.style.width = "100%";
       effect.domElement.style.height = "100%";
@@ -227,9 +240,10 @@ export default function Logo3D({ className = "" }) {
         if (disposed) return;
         // Schedule the next frame FIRST — a throw below must never kill the loop
         frameId = requestAnimationFrame(animate);
-        // Pause when not visible, tab hidden, or actively scrolling — saves FPS
-        // Fixes jank when Lenis smooth-scroll and AsciiEffect both hit rAF
-        if (!isVisibleRef.current || document.hidden || isScrollingRef.current) return;
+        // Pause when externally paused, not visible, tab hidden, or actively
+        // scrolling — saves FPS. Fixes jank when Lenis smooth-scroll and
+        // AsciiEffect both hit rAF
+        if (pausedRef.current || !isVisibleRef.current || document.hidden || isScrollingRef.current) return;
         // Throttle to ~30fps for AsciiEffect (DOM-heavy)
         const now = performance.now();
         if (now - lastFrame < 1000 / 30) return;
